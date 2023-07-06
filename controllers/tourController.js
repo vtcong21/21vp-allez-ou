@@ -9,7 +9,6 @@ const getAllTours = async (req, res) => {
     }
 };
 
-
 const createTour = async (req, res) => {
     try {
         const tourData = req.body;
@@ -68,15 +67,15 @@ const searchTours = async (req, res) =>{
 
 const getTourByCode = async (req, res) => {
     try {
-      const  code  = req.params;
-      const tour = await Tour.findOne({ code });
-      if (!tour) {
-        return res.status(404).json({ message: 'Tour not found' });
+        const { code } = req.params;
+        const tour = await Tour.findOne({ code });
+        if (!tour) {
+          return res.status(404).json({ message: 'Tour not found' });
+        }
+        res.status(200).json(tour);
+      } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
       }
-      res.status(200).json(tour);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
-    }
 };
 
 
