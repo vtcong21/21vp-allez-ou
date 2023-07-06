@@ -44,6 +44,9 @@ const tourSchema = new mongoose.Schema({
         }
     },  
     description: { type: String }
+},
+{
+    collection: 'tours'
 });
 const Tour = mongoose.model('Tour', tourSchema);
 module.exports = Tour;
