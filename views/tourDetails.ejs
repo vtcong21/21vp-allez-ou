@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tour Details</title>
+</head>
+<body>
+  <h1>Tour Details</h1>
+  <p>Name: <%= tour.name %></p>
+  <p>Code: <%= tour.code %></p>
+  <p>Start Place Code: <%= tour.start_place_code %></p>
+  <p>End Place Codes: <%= tour.end_place_code.join(', ') %></p>
+  <p>Price: <%= tour.price %></p>
+  <p>Date: <%= tour.date %></p>
+  <p>Time: <%= tour.time %></p>
+  <p>Remain Slots: <%= tour.remain_slots %></p>
+  <p>Number of Days: <%= tour.num_of_days %></p>
+  <p>Promo Discount: <%= tour.promo_discount %></p>
+  <p>Kid Discount: <%= tour.kid_discount %></p>
+  <p>Baby Discount: <%= tour.baby_discount %></p>
+  <p>Teen Discount: <%= tour.teen_discount %></p>
+  <p>Card Image URL: <%= tour.card_img_url %></p>
+  <p>Image URLs: <%= tour.img_url.join(', ') %></p>
+  <p>Transport: <%= tour.transport %></p>
+  <p>Food: <%= tour.food %></p>
+  <p>Hotel: <%= tour.hotel %></p>
+  <p>Schedule: <%= tour.schedule.join(', ') %></p>
+  <p>Schedule Detail: <%= tour.schedule_detail.join(', ') %></p>
+  <p>Description: <%= tour.description %></p>
+</body>
+</html>
