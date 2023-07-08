@@ -43,9 +43,9 @@ const searchTours = async (req, res) =>{
         if(startPlaceCode){
             query.where('start_place_code').equals(startPlaceCode);
         }
-        if(endPlaceCode){
+        if (endPlaceCode && endPlaceCode.length > 0) {
             query.where('end_place_code').in(endPlaceCode);
-        }
+          }
         if(numOfPeople){
             query.where('remain_slots').gte(numOfPeople);
         }
