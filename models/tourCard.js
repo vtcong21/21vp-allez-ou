@@ -1,16 +1,22 @@
 const mongoose = require('mongoose');
 
 const tourCardSchema = new mongoose.Schema({
-    name: { type: String },
-    code: { type: String },
-    start_place_code: { type: String },
-    end_place_code: [{ type: String }],
-    price: { type: Number },
-    promo_discount: { type: Number },
+    name: {type: String, require: true},
+    code: { type: String, require: true, unique: true },
+    start_place_code: { type: Number , require: true},
+    end_place_code: {
+        type: [{
+          type: Number,
+          required: true
+        }],
+        required: true
+    },
+    price: { type: Number, default: 0 },
     date: { type: Date },
     time: { type: String },
-    remain_slots: { type: Number },
-    num_of_days: { type: Number },
+    remain_slots: { type: Number, default: 0 },
+    num_of_days: { type: Number},
+    promo_discount: {type: Number, default: 0 },
     card_img_url: { type: String }
 },
 {

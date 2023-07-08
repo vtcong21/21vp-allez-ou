@@ -13,6 +13,7 @@
     "start": "nodemon --ext js,json,ejs app.js"
   },
   "devDependencies": {
+
     "nodemon": "^2.0.22"
   }
 }
