@@ -29,7 +29,7 @@ app.use(express.static('public'));
 // Routes
 app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
-app.use('/home', homeRoutes);
+app.use('/', homeRoutes);
 
 
 //này t test thử thôi, còn routes nhớ chia đàng hoàng

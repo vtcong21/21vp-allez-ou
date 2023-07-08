@@ -6,4 +6,4 @@ const getHomePage = (req, res) => {
       }
 };
 
-module.exports = getHomePage;
+module.exports = {getHomePage};
