@@ -15,4 +15,25 @@ window.addEventListener('scroll', () => {
     }
 });
 
+//Get tour
+
+// Lắng nghe sự kiện click trên thẻ a
+const links = document.querySelectorAll('.card-text__link');
+links.forEach(link => {
+  link.addEventListener('click', async (event) => {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a
+
+    const code = link.dataset.value; // Giá trị code bạn muốn truyền
+
+    axios.get(`/tours/${code}`)
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+  });
+});
+
+
 

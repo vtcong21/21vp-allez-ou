@@ -78,7 +78,7 @@ body{
 }
 
 .navbar-toggler-icon{
-    background-image: url('/assets//img/menu.png');
+    background-image: url('/img/home/menu.png');
     width: 3.5rem;
     height: 3.5rem;
 }
@@ -232,9 +232,7 @@ body{
     padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
 }
 
-.search-end-point{
-    
-}
+
 .search-button{
     width: 5.6rem;
     height: 5.6rem;

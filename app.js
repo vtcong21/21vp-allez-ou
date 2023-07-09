@@ -7,6 +7,7 @@ const connectDatabase = require('./config/database');
 const path = require('path');
 const ejs = require('ejs');
 
+
 // Load env var
 require('dotenv').config();
 const port = process.env.PORT;
