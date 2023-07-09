@@ -73,7 +73,8 @@ const getTourByCode = async (req, res) => {
           return res.status(404).json({ message: 'Tour not found' });
         }
         // res.status(200).json(tour);
-        res.render('tourInfo',{tour});
+        console.log(tour);
+        res.render('tourInfo',{tour:tour});
       } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
       }

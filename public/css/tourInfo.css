@@ -96,10 +96,14 @@ body{
 
 .carousel{
     width: 100%;
-    min-height: 258.75px;
+    height: 258.75px;
     object-fit: cover;
     border-radius: 22.5px;
     overflow: hidden;
+}
+.carousel-item img{
+    height: 258.75px;
+    object-fit: cover;
 }
 
 .tour-title{
