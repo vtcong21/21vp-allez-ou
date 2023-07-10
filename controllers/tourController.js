@@ -43,9 +43,9 @@ const searchTours = async (req, res) =>{
         if(startPlaceCode){
             query.where('start_place_code').equals(startPlaceCode);
         }
-        if(endPlaceCode){
+        if (endPlaceCode && endPlaceCode.length > 0) {
             query.where('end_place_code').in(endPlaceCode);
-        }
+          }
         if(numOfPeople){
             query.where('remain_slots').gte(numOfPeople);
         }
@@ -72,7 +72,7 @@ const getTourByCode = async (req, res) => {
         if (!tour) {
           return res.status(404).json({ message: 'Tour not found' });
         }
-        res.render('tourDetails', { tour });
+        res.render('home', { tour });
       } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
       }

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Tour Details</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <h1>Tour Details</h1>
@@ -27,4 +28,12 @@
   <p>Schedule Detail: <%= tour.schedule_detail.join(', ') %></p>
   <p>Description: <%= tour.description %></p>
 </body>
+<script>
+    const getData = () => {
+  axios.get('/tours').then(response => {
+    console.log(response);
+  });
+};
+getData();
+</script>
 </html>
