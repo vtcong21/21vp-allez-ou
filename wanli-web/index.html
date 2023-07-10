@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <div class="header-content">
+                <a class="logo" href="#">
+    
+                </a>
+                <div id="nav">
+                    <ul class="sub-nav left-nav">
+                        <li class="nav-button nav-button-active" onclick="navButtonActive(this)"><a href="#">Trang chủ</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Du lịch</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Tin tức</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Liên hệ</a></li>
+                    </ul>
+                    <ul class="sub-nav right-nav">
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Đăng nhập</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#" style="border: 1px solid #fff; border-radius: 6px; padding: 5.5px 13px">Đăng ký</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="slider" class="carousel slide" data-ride="carousel" data-interval="2000">
+            <ol class="carousel-indicators">
+                <li data-target="#slider" data-slide-to="0" class="active"></li>
+                <li data-target="#slider" data-slide-to="1"></li>
+                <li data-target="#slider" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item slide1 active">
+                    <div class="slider-content">
+                        <h1>HỒ HOÀN KIẾM</h1>
+                        <h2>HÀ NỘi</h2>
+                        <div class="slider-subcontent">
+                            <a href="#">Xem thêm về Hà Nội</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item slide2">
+                    <div class="slider-content">
+                        <h1>BÀ NÀ HILL</h1>
+                        <h2>ĐÀ NẴNG</h2>
+                        <div class="slider-subcontent">
+                            <a href="#">Xem thêm về Đà Nẵng</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item slide3">
+                    <div class="slider-content">
+                        <h1>HÒN THƠM</h1>
+                        <h2>PHÚ QUỐC</h2>
+                        <div class="slider-subcontent">
+                            <a href="#">Xem thêm về Phú Quốc</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#slider" data-slide="prev">
+            </a>
+            <a class="right carousel-control" href="#slider" data-slide="next">
+            </a>
+            <div class="slider-booking">
+                <div class="col">
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="./assets/img/location.png" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Điểm đi</div>
+                            <div class="block-row2">Hãy chọn điểm đi</div>
+                        </div>
+                    </div>
+                    <div class="block" style="margin-left: 48px; margin-right: 48px;"><img src="./assets/img/dir.png" alt=""></div>
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="./assets/img/location.png" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Điểm đến</div>
+                            <div class="block-row2">Hãy chọn điểm đến</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="block" style="width: 1.5px; height: 59px; background: rgba(110, 106, 142, 0.20);">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="./assets/img/calendar.png" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Ngày đi</div>
+                            <div class="block-row2">18/06/2023</div>
+                        </div>
+                    </div>
+                    <div class="block" style="width: 48px;"></div>
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="./assets/img/calendar.png" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Số ngày</div>
+                            <div class="block-row2">Tất cả</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="block">
+                        <img src="./assets/img/find.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="tour" class="content-section">
+                <h2 class="heading-section">TOUR NỔI BẬT</h2>
+                <div class="row3">
+                    <div class="col">
+                        <img src="./assets/img/tour.png" alt="">
+                        <div class="content">
+                            <div class="sub-content">
+                                <h3>25/06/2023 - 7N6Đ - Giờ đi: 17:45</h3>
+                                <h1>Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</h1>
+                            </div>
+                            <h2>10,990,000₫</h2>
+                            <div class="content-more"><a href="#">Xem thêm</a></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="./assets/img/tour.png" alt="">
+                        <div class="content">
+                            <div class="sub-content">
+                                <h3>25/06/2023 - 7N6Đ - Giờ đi: 17:45</h3>
+                                <h1>Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</h1>
+                            </div>
+                            <h2>10,990,000₫</h2>
+                            <div class="content-more"><a href="#">Xem thêm</a></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="./assets/img/tour.png" alt="">
+                        <div class="content">
+                            <div class="sub-content">
+                                <h3>25/06/2023 - 7N6Đ - Giờ đi: 17:45</h3>
+                                <h1>Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</h1>
+                            </div>
+                            <h2>10,990,000₫</h2>
+                            <div class="content-more"><a href="#">Xem thêm</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="explore" class="content-section">
+                <h2 class="heading-section">KHÁM PHÁ VIỆT NAM</h2>
+                <div class="row2">
+                    <img class="col1" src="./assets/img/northmap.png" alt="">
+                    <div class="col2">
+                        <div class="block">
+                            <img src="./assets/img/up.png" alt="">
+                        </div>
+                        <div class="block-content">
+                            <div class="block-content-title">MIỀN BẮC</div>
+                            <div style="height: 10px;"></div>
+                            <div class="block-content-para">Miền Bắc Việt Nam gồm Tây Bắc, Đông Bắc và đồng bằng Sông Hồng, là cái nôi văn hóa lịch sử hàng ngàn năm của Việt Nam. Thiên nhiên và cảnh đẹp hùng vĩ, 4 mùa xuân hạ thu đông, miền Bắc luôn là điểm hẹn hấp dẫn cho ta trở lại nhiều lần.</div>
+                        </div>
+                        <div class="block">
+                            <img src="./assets/img/down.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="favorite" class="content-section">
+                <h2 class="heading-section">ĐIỂM ĐẾN YÊU THÍCH</h2>
+                <div class="row3">
+                    <div class="col">
+                        <div class="sub-img col1">
+                            <div class="sub-col">
+                                <a href="#">Hà Nội</a>
+                            </div>
+                        </div>
+                        <div class="sub-content">
+                            Đã có 176,072 lượt khách
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-img col2">
+                            <div class="sub-col">
+                                <a href="#">Đà Nẵng</a>
+                            </div>
+                        </div>
+                        <div class="sub-content">
+                            Đã có 80,779 lượt khách
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="sub-img col3">
+                            <div class="sub-col">
+                                <a href="#">Phú Quốc</a>
+                            </div>
+                        </div>
+                        <div class="sub-content">
+                            Đã có 78,510 lượt khách
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="started" class="content-section">
+                <div class="container">
+                    <div class="col col1">
+
+                    </div>
+                    <div class="col col2">
+                        <div class="title">
+                            Bắt đầu hành trình của bạn ngay bây giờ! 
+                        </div>
+                        <div class="para">
+                            Hãy để chúng tôi dẫn bạn đến những thiên đường thiên nhiên tuyệt vời tại Việt Nam, và trải nghiệm những khoảnh khác đáng nhớ trong hành trình khám phá đất nước này.
+                            <br> <br>
+                            Với dịch vụ tuyệt vời mà chúng tôi mang lại:
+                            <div class="subpara">
+                                <div class="subpara-item">
+                                    <img src="./assets/img/like.png" alt="" class="icon">
+                                    <div class="item-name">
+                                        Sản phẩm
+                                    </div>
+                                    <div class="item-detail">
+                                        Đa dạng - chất lượng
+                                    </div>
+                                </div>
+                                <div class="subpara-item">
+                                    <img src="./assets/img/hand.png" alt="" class="icon">
+                                    <div class="item-name">
+                                        Giá cả
+                                    </div>
+                                    <div class="item-detail">
+                                        Luôn có mức giá tốt nhất
+                                    </div>
+                                </div>
+                                <div class="subpara-item">
+                                    <img src="./assets/img/call.png" alt="" class="icon">
+                                    <div class="item-name">
+                                        Hỗ trợ
+                                    </div>
+                                    <div class="item-detail">
+                                        Hotline (8h00-22h00)
+                                    </div>
+                                </div>
+                                <div class="subpara-item">
+                                    <img src="./assets/img/billing.png" alt="" class="icon">
+                                    <div class="item-name">
+                                        Thanh toán
+                                    </div>
+                                    <div class="item-detail">
+                                        An toàn & linh hoạt
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="footer-container">
+                <div class="col col1">
+                    <a class="logo" href="#"></a>
+                    <div class="content">
+                        <h1>ABCDEF TRAVEL</h1>
+                        <h3>ghi chú gì đó chưa có biết nên ghi đại vậy asds gfdsgsd a dsd gbd adsa asds asda fdf</h3>
+                    </div>
+                </div>
+                <div class="col col2">
+                    <div class="content">
+                        <h2>Thông tin liên hệ</h2>
+                        <h3>Địa chỉ: 257 Nguyễn Văn Cừ, Quận 5, TP.HCM <br>
+                            Điện thoại: 012 345 6789 <br>
+                            Email: 12345khoahoctunhien@gmail.com</h3>
+                        <div class="decor">
+                            <div class="decor-block"></div>
+                            <div class="decor-block"></div>
+                            <div class="decor-block"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col3">
+                    <div class="content">
+                        <h3><a href=""#>Trang chủ</a></h3>
+                        <h3><a href=""#>Du lịch</a></h3>
+                        <h3><a href=""#>Tin tức</a></h3>
+                        <h3><a href=""#>Liên hệ</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+        function navButtonActive(button) {
+            var buttons = document.getElementsByClassName("nav-button");
+            
+            for (var i = 0; i < buttons.length; i++) {
+                if(buttons[i].classList.contains("nav-button-active")) {
+                    buttons[i].classList.remove("nav-button-active");
+                }
+            }
+            button.classList.toggle("nav-button-active");
+        }
+    </script>
+</body>
+</html>
