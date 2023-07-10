@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Form Đăng Ký</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+        <script src="/js/script.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid center-form">
+            <div class="col-md-7 border-white">
+                <form style="padding-bottom: 6em;">
+                    <div class="form-group d-flex justify-content-between">
+                        <button type="button" class="btn btn-third-length" id="register">1 - Tài Khoản</button>
+                        <button type="button" class="btn btn-third-length" id="info">2 - Thông tin cá nhân</button>
+                        <button type="button" class="btn btn-third-length" id="bank-link">3 - Liên kết ngân hàng</button>
+                    </div>
+                    <div id="personal-info">
+                        <div class="form-group-name">
+                            <label for="name">Họ và Tên:</label>
+                            <input type="name" class="form-control" id="name" placeholder="Nhập tên" />
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Nhập email" />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="pwd">Mật khẩu:</label>
+                                <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" />
+                            </div>
+                            <div class="form-group col-md-6 pwd-confirm-wrapper">
+                                <label for="pwd_confirm" style="margin-left: 10%;">Xác nhận mật khẩu:</label>
+                                <input type="password" class="form-control" id="pwd_confirm" placeholder="Xác nhận mật khẩu" style="margin-left: 10%;" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container" id="btn-home-register">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <a href="#" class="btn btn-link btn-home"> < Trở về trang chủ</a>
+                </div>
+                <div class="col-6 text-center">
+                    <button type="button" class="btn btn-primary" onclick="loadNewForm()">Tiếp Theo</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function loadNewForm() {
+            var personalInfoDiv = document.getElementById("personal-info");
+            personalInfoDiv.innerHTML = "";
+            document.getElementById("register").style.fontWeight = "normal";
+            document.getElementById("register").style.backgroundColor = "#dadada"
+            document.getElementById("info").style.fontWeight = "900";
+            document.getElementById("info").style.backgroundColor = "#4b60ce";            
+            var formGroup = document.createElement("div");
+            formGroup.classList.add("form-group-name");
+            formGroup.innerHTML = `
+            
+                <div class="form-group-name" style="margin-left:0;padding-bottom:1.5em">
+  <div class="form-control-row">
+    <label for="gender">Giới tính:</label>
+  </div>
+  <div class="form-control-row">
+    <div class="form-control-inline">
+        <input type="radio" id="male" name="gender">
+      <label for="male">Nam</label>
+    </div>
+    <div class="form-control-inline">
+        <input type="radio" id="female" name="gender">
+
+      <label for="female">Nữ</label>
+    </div>
+    <div class="form-control-inline">
+        <input type="radio" id="other" name="gender">
+
+        <label for="other">Không muốn tiết lộ</label>
+                </div>
+            </div>
+            <label for="dob">Ngày sinh:</label>
+            <input type="date" class="form-control" id="dob" placeholder="Nhập ngày sinh" />
+            <label for="phone">Số điện thoại:</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại" />
+        </div>
+    `;
+            personalInfoDiv.appendChild(formGroup);
+            var btnHomeRegister = document.getElementById("btn-home-register");
+            btnHomeRegister.innerHTML = `
+        <div class="row" id="next1">
+            <div class="col-6 text-center">
+                <a href="#" class="btn btn-link btn-home"> < Trở về trang chủ</a>
+            </div>
+            <div class="col-6 text-center">
+                <button type="button" class="btn btn-primary" onclick="loadNewForm2()">Tiếp Theo</button>
+            </div>
+        </div>
+    `;
+        }
+
+        function loadNewForm2() {
+            var personalInfoDiv = document.getElementById("personal-info");
+            personalInfoDiv.innerHTML = "";
+            var formGroup = document.createElement("div");
+            document.getElementById("register").style.fontWeight = "normal";
+            document.getElementById("register").style.backgroundColor = "#dadada"
+            document.getElementById("info").style.backgroundColor = "#dadada"; 
+            document.getElementById("info").style.fontWeight = "normal";
+            document.getElementById("bank-link").style.backgroundColor="#4b60ce"   
+            formGroup.classList.add("form-group-name");
+            formGroup.innerHTML = `
+    <div class="form-group-name" style="margin-left:0;padding-bottom:1.5em">
+    <div>
+    <label for="bank">Chọn ngân hàng:</label>
+    </div>
+    <div>
+    <select class="select" id="bank" >
+    <option value="ACB">Ngân hàng ACB</option>
+    <option value="VCB">Ngân hàng Vietcombank</option>
+    <option value="MB">Ngân hàng MBBank</option>
+    <option value="Techcom">Ngân hàng Techcombank</option>
+</select>
+</div>
+        <label for="account_number">Số tài khoản:</label>
+        <input type="text" class="form-control" id="account_number" placeholder="Nhập số tài khoản" />
+        <label for="account_name">Tên chủ tài khoản:</label>
+        <input type="text" class="form-control" id="account_name" placeholder="Nhập tên chủ tài khoản" />
+    `;
+            personalInfoDiv.appendChild(formGroup);
+            var btnHomeRegister = document.getElementById("btn-home-register");
+            btnHomeRegister.innerHTML = `
+        <div class="row" id="next2">
+            <div class="col-6 text-center">
+                <a href="#" class="btn btn-link btn-home"> < Trở về trang chủ</a>
+            </div>
+            <div class="col-6 text-center">
+                <form id="register-form" action="/register" method="post">
+                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    `;
+        }
+    </script>
+</html>
