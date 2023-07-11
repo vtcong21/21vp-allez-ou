@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const tourCardRoutes = require('./routes/tourCardRoutes');
 const tourRoutes = require('./routes/tourRoutes');
 const homeRoutes = require('./routes/homeRoutes');
+const provinceRoutes = require('./routes/provinceRoutes');
 const connectDatabase = require('./config/database');
 const path = require('path');
 const ejs = require('ejs');
@@ -27,15 +28,14 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Routes
+app.use('/', homeRoutes);
 app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
-app.use('/', homeRoutes);
+app.use('/pronvices', provinceRoutes);
 
 
-//này t test thử thôi, còn routes nhớ chia đàng hoàng
-// app.use('/home', (req, res)=>{
-//   res.render('home');
-// })
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
