@@ -1,10 +1,15 @@
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
-const User = require("../models/user");
+const User = require('../models/user');
+const mailController = require('../controllers/mailController');
+
+
+const renderRegisterPage = (req, res) =>{
+  res.render('register');
+}
 
 const register = async (req, res) => {
   try {
-    const { fullName, email, password, gender, dateOfBirth, phoneNumber, bankName, accountNumber, accountHolderName} = req.body;
+    const { fullName, email, password, gender, dateOfBirth, phoneNumber} = req.body;
 
 
     const existingUser = await User.findOne({ email });
@@ -24,30 +29,12 @@ const register = async (req, res) => {
       gender,
       dateOfBirth,
       phoneNumber,
-      bankName,
-      accountNumber,
-      accountHolderName,
       verificationCode
     });
     await user.save();
+    await mailController.sendVerificationEmail(email, verificationCode);
 
-    // Send email with verification code
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-    const mailOptions = {
-      from: process.env.EMAIL_USERNAME,
-      to: email,
-      subject: "Verification Code",
-      text: `Your verification code is ${verificationCode}`,
-    };
-    await transporter.sendMail(mailOptions);
-
-    res.status(200).json({ message: "User created successfully" });
+    res.render('verify', { email });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -56,23 +43,64 @@ const register = async (req, res) => {
 
 const verify = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email, verificationCode } = req.body;
 
-    // Update user's status to verified
-    const user = await User.findOneAndUpdate(
-      { email },
-      { isVerified: true, verificationCode: null },
-      { new: true }
+    const user = await User.findOne(
+      { email }
     );
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid verification code' });
+    }
+
+    if (verificationCode !== user.verificationCode) {
+      await User.deleteOne({ email });
+      return res.status(400).json({ message: 'Incorrect verification code' });
+    }
+
+    user.isVerified = true;
+    user.verificationCode = undefined;
+    await user.save();
 
     res.status(200).json({ message: "User verified successfully" });
+    res.redirect('/login');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
+const renderLoginPage = (req, res) => {
+  res.render('login');
+};
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: 'Invalid email or password' });
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '12h' });
+
+    res.json({ token });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
 module.exports = {
+  renderLoginPage,
+  renderRegisterPage,
   register,
-  verify
+  verify,
+  login
 };
