@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+</head>
+<body>
+    <div id="header" class="header-background">
+        <div class="header-content">
+            <a class="logo" href="#">
+
+            </a>
+            <div id="nav">
+                <ul class="sub-nav left-nav">
+                    <li class="nav-button" onclick="navButtonActive(this); removeHeaderBackground()"><a href="#">Trang chủ</a></li>
+                    <li class="nav-button nav-button-active" onclick="navButtonActive(this)"><a href="#">Du lịch</a></li>
+                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Tin tức</a></li>
+                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Liên hệ</a></li>
+                </ul>
+                <ul class="sub-nav right-nav">
+                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Đăng nhập</a></li>
+                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#" style="border: 1px solid #fff; border-radius: 6px; padding: 5.5px 13px">Đăng ký</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="travel">
+        <div class="path">
+            Du lịch / Du lịch miền Bắc
+        </div>
+        <div class="travel-content">
+            <div class="filter">
+                <div class="title">
+                    BỘ LỌC
+                </div>
+                <div class="sub-filter select-box">
+                    <div class="sub-filter-name">
+                        <div class="sep-line"></div>
+                        <div class="name">Số ngày</div>
+                        <div class="sep-line"></div>
+                    </div>
+                    <div class="sub-filter-option">
+                        <label class="f-option">1-3 ngày
+                            <input type="radio" checked="checked" name="f1-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">4-7 ngày
+                            <input type="radio" checked="checked" name="f1-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">8-14 ngày
+                            <input type="radio" checked="checked" name="f1-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">trên 14 ngày
+                            <input type="radio" checked="checked" name="f1-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="sub-filter">
+                    <div class="sub-filter-name">
+                        <div class="sep-line"></div>
+                        <div class="name">Số người</div>
+                        <div class="sep-line"></div>
+                    </div>
+                    <div class="sub-filter-option">
+                        <label class="f-option">1 người
+                            <input type="radio" checked="checked" name="f2-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">2 người
+                            <input type="radio" checked="checked" name="f2-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">3-6 người
+                            <input type="radio" checked="checked" name="f2-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="f-option">trên 7 người
+                            <input type="radio" checked="checked" name="f2-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="sub-filter">
+                    <div class="sub-filter-name">
+                        <div class="sep-line"></div>
+                        <div class="name">Ngân sách</div>
+                        <div class="sep-line"></div>
+                    </div>
+                    <div class="sub-filter-slider">
+                        <div id="f-price-slider"></div>
+                        <div class="f-price-range">
+                            <p>
+                                <span id="f-price-min"></span> - <span id="f-price-max"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="listtour">
+                <script id = "list-traveltour" type="x-handlebars-template">
+                    {{#each this}}
+                        <div class="col" data-index="{{id}}">
+                            <img src="{{image}}" alt="">
+                            <div class="content">
+                                <div class="sub-content">
+                                    <h3>{{detail.time}}</h3>
+                                    <h1>{{detail.place}}</h1>
+                                </div>
+                                <h2>{{detail.price}}</h2>
+                                <div class="content-more"><a href="#">Xem thêm</a></div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </script>
+                <div class="row2">
+                    
+                </div>
+                <div class="page-control">
+                    <div class="page-button" onclick="previousPage()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
+                            <path d="M7.21044 0.841675L0.894653 7.03363L7.21044 13.4733" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div id="page-info"></div>
+                    <div class="page-button" onclick="nextPage()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
+                            <path d="M0.736945 13.4733L7.05273 7.28132L0.736946 0.841687" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="footer-container">
+            <div class="col col1">
+                <a class="logo" href="#"></a>
+                <div class="content">
+                    <h1>ABCDEF TRAVEL</h1>
+                    <h3>ghi chú gì đó chưa có biết nên ghi đại vậy asds gfdsgsd a dsd gbd adsa asds asda fdf</h3>
+                </div>
+            </div>
+            <div class="col col2">
+                <div class="content">
+                    <h2>Thông tin liên hệ</h2>
+                    <h3>Địa chỉ: 257 Nguyễn Văn Cừ, Quận 5, TP.HCM <br>
+                        Điện thoại: 012 345 6789 <br>
+                        Email: 12345khoahoctunhien@gmail.com</h3>
+                    <div class="decor">
+                        <div class="decor-block"></div>
+                        <div class="decor-block"></div>
+                        <div class="decor-block"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col3">
+                <div class="content">
+                    <h3><a href=""#>Trang chủ</a></h3>
+                    <h3><a href=""#>Du lịch</a></h3>
+                    <h3><a href=""#>Tin tức</a></h3>
+                    <h3><a href=""#>Liên hệ</a></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
