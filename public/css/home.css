@@ -705,7 +705,7 @@ footer{
     .nav-item{
         display: flex;
     }
-    .nav-item a{
+    .nav-item a, .nav-item button{
         margin: auto;
     }
     .navbar-text__bordered{
@@ -725,6 +725,11 @@ footer{
     .card-price{
         font-size: 1.2rem;
         line-height: 1.6rem;
+    }
+    .modal-dialog {
+        max-width: var(--bs-modal-width);
+        margin-right: auto;
+        margin-left: auto;
     }
 }
 
