@@ -1,16 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const tourCardRoutes = require('./routes/tourCardRoutes');
-const tourRoutes = require('./routes/tourRoutes');
-const homeRoutes = require('./routes/homeRoutes');
-const connectDatabase = require('./config/database');
 const path = require('path');
-const ejs = require('ejs');
 
 
 // Load env var
 require('dotenv').config();
 const port = process.env.PORT;
+// Configuration
+const connectDatabase = require('./config/database');
+const tourCardRoutes = require('./routes/tourCardRoutes');
+const tourRoutes = require('./routes/tourRoutes');
+const homeRoutes = require('./routes/homeRoutes');
+const provinceRoutes = require('./routes/provinceRoutes');
+const authRoutes = require('./routes/authRoutes');
+
+
 
 // Create express app
 const app = express();
@@ -28,15 +32,12 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Routes
+app.use('/', homeRoutes);
 app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
-app.use('/', homeRoutes);
+app.use('/pronvices', provinceRoutes);
+app.use('/auth', authRoutes);
 
-
-//này t test thử thôi, còn routes nhớ chia đàng hoàng
-// app.use('/home', (req, res)=>{
-//   res.render('home');
-// })
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

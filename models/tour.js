@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const tourSchema = new mongoose.Schema({
     name: {type: String, require: true},
     code: { type: String, require: true, unique: true },
-    start_place_code: { type: Number , require: true},
+    start_place_code: { type: String , require: true},
     end_place_code: {
         type: [{
-          type: Number,
+          type: String,
           required: true
         }],
         required: true
@@ -42,8 +42,7 @@ const tourSchema = new mongoose.Schema({
             },// bao nhiêu ngày đi (num_of_days) thì mảng có bấy nhiêu phần tử
             message: 'Schedule length must be equal to num_of_days',
         }
-    },  
-    description: { type: String }
+    }  
 },
 {
     collection: 'tours'
