@@ -16,6 +16,14 @@ window.addEventListener('scroll', () => {
 });
 
 
+// login 
 
+const loginButton = document.getElementById('login__button');
 
+function getInfoLogin()
+{
+    const email = document.getElementById('login__email').value;
+    const pwd = document.getElementById('login__password').value;
+    console.log(email, pwd);
+}
 
