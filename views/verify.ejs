@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify Email</title>
+</head>
+<body>
+  <h1>Verify Your Email</h1>
+  <form action="/auth/verify" method="POST">
+    <label>
+      Email:
+      <input type="email" name="email" value="<%= email %>" readonly>
+    </label>
+    <br>
+    <label>
+      Verification Code:
+      <input type="text" name="verificationCode" required>
+    </label>
+    <br>
+    <button type="submit">Verify</button>
+  </form>
+</body>
+</html>
