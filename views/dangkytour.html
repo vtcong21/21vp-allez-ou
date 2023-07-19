@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+        <title>Đặt tour</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/dangkytour.css" />
+        <script src="/js/dangkytour.js">
+
+        </script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 information">
+                    <h4 style="font-weight: bold; text-decoration: underline;">Thông tin khách hàng</h4>
+                    <p>Thông tin người đại diện</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr style="border-width: 0px;">
+                                        <td style="border-width: 0px;">
+                                            <form name="info">
+                                                <div class="form-group row first-group">
+                                                    <div class="col-md-6">
+                                                        <label for="ho-ten" class="form-label">Họ và tên</label>
+                                                        <input type="text" class="form-control" id="ho-ten" placeholder="Nhập họ và tên" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="so-dien-thoai" class="form-label">Số điện thoại</label>
+                                                        <input type="tel" class="form-control" id="so-dien-thoai" placeholder="Nhập só điện thoại" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row second-group">
+                                                    <div class="col-md-6">
+                                                        <label for="dia-chi" class="form-label">Địa chỉ</label>
+                                                        <input type="text" class="form-control" id="dia-chi" placeholder="Nhập địa chỉ thường trú" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="email" placeholder="Nhập email" />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p style="font-weight: bolder;" >Số lượng hành khách</p>
+                    <div class="form-group row amountofpeople1">
+                        <div class="col-md-6">
+                            <div class="wrapper">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.2rem;">Người Lớn</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 12 tuổi trở lên)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="input-group">
+                                        <button class="minus-button" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity">0</div>
+                                        <button class="plus-button" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 treem">
+                            <div class="wrapper">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.2rem;"> Trẻ em</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 5 - 11 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="input-group">
+                                        <button class="minus-button2" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity2">0</div>
+                                        <button class="plus-button2" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row amountofpeople2">
+                        <div class="col-md-6">
+                            <div class="wrapper">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.2rem;">Trẻ nhỏ</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 2 - 4 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="input-group">
+                                        <button class="minus-button3" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity3">0</div>
+                                        <button class="plus-button3" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 embe">
+                            <div class="wrapper">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.2rem;"> Em bé</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(dưới 2 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="input-group">
+                                        <button class="minus-button4" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity4">0</div>
+                                        <button class="plus-button4" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 2em; font-weight: bolder;" >Thông tin các hành khách</p>
+
+                    <div class="information-nguoilon1">
+                        <p style="font-weight: bolder;">Người Lớn</p>
+                        <table class="table table-bordered2">
+                            <tbody>
+                                <tr style="border-width: 0px;">
+                                    <td style="border-width: 0px; padding-top: 0;">
+                                        <form name="information-nguoilon">
+                                            <div class="form-group row first-group1" style="padding-top: 0;">
+                                                <div class="col-md-5 col-5">
+                                                    <label for="ho-ten" class="form-label">Họ và tên:</label>
+                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                </div>
+                                                <div class="col-md-3 col-3">
+                                                    <label for="gender" class="form-label">Giới tính:</label>
+                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                </div>
+                                                <div class="col-md-4 col-4">
+                                                    <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
+                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                </div>
+                                            </div>
+											<div class="form-group row first-group2" style="padding-top: 0;">
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="information-nguoilon2">
+                        <p style="font-weight: bolder;">Trẻ em</p>
+                        <table class="table table-bordered2">
+                            <tbody>
+                                <tr style="border-width: 0px;">
+                                    <td style="border-width: 0px; padding-top: 0;">
+                                        <form name="information-nguoilon">
+                                            <div class="form-group row first-group3" style="padding-top: 0;">
+                                                <div class="col-md-5">
+                                                    <label for="ho-ten" class="form-label">Họ và tên:</label>
+                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="gender" class="form-label">Giới tính:</label>
+                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
+                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                </div>
+                                            </div>
+											<div class="form-group row first-group4" style="padding-top: 0;">
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="information-nguoilon3">
+                        <p style="font-weight: bolder;">Trẻ nhỏ</p>
+                        <table class="table table-bordered2">
+                            <tbody>
+                                <tr style="border-width: 0px;">
+                                    <td style="border-width: 0px; padding-top: 0;">
+                                        <form name="information-nguoilon">
+                                            <div class="form-group row first-group5" style="padding-top: 0;">
+                                                <div class="col-md-5">
+                                                    <label for="ho-ten" class="form-label">Họ và tên:</label>
+                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="gender" class="form-label">Giới tính:</label>
+                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
+                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                </div>
+                                            </div>
+											<div class="form-group row first-group6" style="padding-top: 0;">
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="information-nguoilon4">
+                        <p style="font-weight: bolder;">Em bé</p>
+                        <table class="table table-bordered2">
+                            <tbody>
+                                <tr style="border-width: 0px;">
+                                    <td style="border-width: 0px; padding-top: 0;">
+                                        <form name="information-nguoilon">
+                                            <div class="form-group row first-group7" style="padding-top: 0;">
+                                                <div class="col-md-5">
+                                                    <label for="ho-ten" class="form-label">Họ và tên:</label>
+                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label for="gender" class="form-label">Giới tính:</label>
+                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
+                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                </div>
+                                            </div>
+											<div class="form-group row first-group8" style="padding-top: 0;">
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> 
+                <div class="col-md-4"> 
+                    <div class="row">
+                        <div class="col-md-12 information-tour">
+                            <div style="text-align: center;"> 
+                                <label for="information-tour" style="text-decoration: underline;" >Thông tin chuyến đi</label>
+
+                            </div>
+                            <div style="text-align: center;"> 
+                                <img src="https://via.placeholder.com/350x200" class="img-fluid" />
+
+                            </div>
+                            <div class="name-tour"> 
+                                Hà Nội - Sa Pa _ Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tình Cốc - Tràng An - Bái Đính
+                            </div>
+                            <div class="detail-information"> 
+                                <p class="code-tour">Code Tour: </p> 
+                                <p class="khoihanh">Khởi Hành: </p>
+                                <p class="noikhoihanh">Nơi Khởi Hành:</p> 
+                                <p class="choconnhan">Chỗ còn nhận:</p>
+                            </div> 
+                            <div style="display: flex; justify-content: center;align-items: center;"> 
+                                <hr>
+                            </div>
+                            <div class="total">  
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.2rem;">Người Lớn</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 12 tuổi trở lên)</p> 
+                                </div>                   
+                                <div class="right-col"> 
+                                <div class="quantity-display"style="font-size: 1.2rem;">0</div>
+                                </div>    
+                            </div>
+                            <div class="total2"> 
+                                <div class="left-col">  
+                                    <label for="nguoilon" style="font-size: 1.2rem;"> Trẻ em</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 5 - 11 tuổi)</p>
+                                </div>  
+                                <div class="right-col"> 
+                                    <div class="quantity-display2"style="font-size: 1.2rem;">0</div>
+                                </div>
+                            </div>
+                            <div class="total3"> 
+                                <div class="left-col">  
+                                    <label for="nguoilon" style="font-size: 1.2rem;">Trẻ nhỏ</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 2 - 4 tuổi)</p>
+                                </div>  
+                                <div class="right-col"> 
+                                    <div class="quantity-display3"style="font-size: 1.2rem;">0</div>
+                                </div>
+                            </div>
+                            <div class="total4"> 
+                                <div class="left-col">  
+                                    <label for="nguoilon" style="font-size: 1.2rem;"> Em bé</label>
+                                    <p style="font-style: italic; font-size: 0.8rem;">(dưới 2 tuổi)</p>
+                                </div>  
+                                <div class="right-col"> 
+                                    <div class="quantity-display4"style="font-size: 1.2rem;">0</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center;align-items: center;"> 
+                                <hr>
+                            </div>
+                            <div class="total6"> 
+                                <div class="left-col"> 
+                                    <label for="nguoilon" style="font-size: 1.2rem;"> TỔNG CỘNG:</label>
+                                </div> 
+                                <div class="right-col">
+                                    <div class="total5"style="font-size: 1.2rem;">0</div>
+                                </div>
+
+                            </div> 
+                            <div class="button-order">  
+                                <button id="button-order-btn" >ĐẶT NGAY</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

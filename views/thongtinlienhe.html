@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Thông tin liên hệ</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/css/thongtinlienhe.css" />
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+        <style>  
+        body { 
+            background-color: #ddd;
+            font-family: 'Nunito';
+        }
+        h2 { 
+            text-decoration: underline wavy;
+        }
+              
+            .white-table {
+              background-color: #fff;
+              padding: 20px;
+              border: 1px solid #ddd;
+            }
+            .float-right{ 
+                float: right;
+            }
+</style>
+    </head>
+    <body>
+        <div class="container mt-5">
+          <div class="row">
+            <div class="col-md-6 order-md-first white-table order-sm-last">
+              <table>
+                <form>
+                  <div class="form-group ">
+                    <label for="name">Họ và tên</label>
+                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên của bạn">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email của bạn">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại của bạn">
+                  </div>
+                  <div class="form-group">
+                    <label for="tour-code">Mã tour liên quan</label>
+                    <input type="text" class="form-control" id="tour-code" placeholder="Nhập mã tour liên quan (nếu có)">
+                  </div>
+                  <div class="form-group">
+                    <label for="message">Ghi chú</label>
+                    <textarea class="form-control" id="message" rows="5" placeholder="Nhập ghi chú của bạn"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary float-right">Gửi</button>
+                </form>
+              </table>
+            </div>
+            <div class="col-md-6 order-md-last order-sm-first">
+              <h2>Thông tin liên hệ</h2>
+              <p>Để có thể đáp ứng được các yêu cầu và các ý kiến đóng góp của quý vị một cách nhanh chóng xin liên hệ.</p>
+            </div>
+          </div>
+        </div>
+            
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      </body>
+    </html>
