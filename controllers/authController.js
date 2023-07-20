@@ -1,4 +1,5 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const mailController = require('../controllers/mailController');
 
@@ -44,7 +45,7 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
-
+    
     const user = await User.findOne(
       { email }
     );
@@ -61,7 +62,7 @@ const verify = async (req, res) => {
     user.verificationCode = undefined;
     await user.save();
 
-    res.status(200).json({ message: "User verified successfully" });
+    //res.status(200).json({ message: "User verified successfully" });
     res.redirect('/login');
   } catch (error) {
     console.log(error);
@@ -87,8 +88,8 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '12h' });
-
+    const token = jwt.sign({ userId: user._id , userRole: user.isAdmin}, process.env.SECRET_KEY, { expiresIn: '24h' });
+    console.log('Token sent');
     res.json({ token });
   } catch (error) {
     console.error('Error during login:', error);
