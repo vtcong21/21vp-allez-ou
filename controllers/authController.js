@@ -2,11 +2,12 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const mailController = require('../controllers/mailController');
+const path = require('path');
 
 
 const renderRegisterPage = (req, res) =>{
-  res.render('register');
-}
+  const htmlPath = path.join(__dirname, '..', 'views', 'project.html');
+  res.sendFile(htmlPath);}
 
 const register = async (req, res) => {
   try {

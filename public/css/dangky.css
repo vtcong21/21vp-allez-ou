@@ -201,6 +201,21 @@ label[for="pwd_confirm"] {
     border-radius: 20px;
     font-size: 1.6rem;
 }
+.container{ 
+    padding: 0;
+}
+.btn-primary2{ 
+    padding: 0.3em;
+    padding-right: 2em;
+    padding-left: 2em;
+    color: #ffffff; 
+    margin-top: 1em;
+    margin-right: 11em;
+    background-color: #4b60ce;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.6rem;
+}
 @media screen and (max-width: 767px) {
     .btn-primary {
         margin-left: 0;

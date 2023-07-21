@@ -156,7 +156,7 @@ form[name="information-nguoilon"] {
 } 
 .information-tour{ 
     background-color: #ffffff; 
-    border-radius: 10px;
+    border-radius: 22.5px;
 }
 .name-tour { 
     text-align: left; 
@@ -197,4 +197,8 @@ hr:not([size]){
     form[name="information-nguoilon"] {
         padding: 0;
     }
+}
+.total,.total2,.total3,.total4,.total6{ 
+    padding-left: 2em;
+     padding-right: 2em;
 }

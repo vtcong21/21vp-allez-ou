@@ -95,7 +95,7 @@ col2.classList.add("col-md-3", "col-3");
 var input2 = document.createElement("input");
 input2.type = "text";
 input2.classList.add("form-control");
-input2.placeholder = "Nhập giới tính";
+input2.placeholder = "Nam/Nữ";
 input2.id = "gender-" + quantity;
 col2.appendChild(input2);
 
@@ -202,7 +202,7 @@ form.appendChild(firstGroup4);
 }
 
 var col1 = document.createElement("div");
-col1.classList.add("col-md-5");
+col1.classList.add("col-md-5","col-5");
 
 var input1 = document.createElement("input");
 input1.type = "text";
@@ -212,17 +212,17 @@ input1.id = "ho-ten-" + quantity;
 col1.appendChild(input1);
 
 var col2 = document.createElement("div");
-col2.classList.add("col-md-3");
+col2.classList.add("col-md-3","col-3");
 
 var input2 = document.createElement("input");
 input2.type = "text";
 input2.classList.add("form-control");
-input2.placeholder = "Nhập giới tính";
+input2.placeholder = "Nam/Nữ";
 input2.id = "gender-" + quantity;
 col2.appendChild(input2);
 
 var col3 = document.createElement("div");
-col3.classList.add("col-md-4");
+col3.classList.add("col-md-4","col-4");
 
 var input3 = document.createElement("input");
 input3.type = "date";
@@ -337,7 +337,7 @@ form.appendChild(firstGroup6);
 }
 
 var col1 = document.createElement("div");
-col1.classList.add("col-md-5");
+col1.classList.add("col-md-5","col-5");
 
 var input1 = document.createElement("input");
 input1.type = "text";
@@ -347,17 +347,17 @@ input1.id = "ho-ten-" + quantity;
 col1.appendChild(input1);
 
 var col2 = document.createElement("div");
-col2.classList.add("col-md-3");
+col2.classList.add("col-md-3","col-3");
 
 var input2 = document.createElement("input");
 input2.type = "text";
 input2.classList.add("form-control");
-input2.placeholder = "Nhập giới tính";
+input2.placeholder = "Nam/Nữ";
 input2.id = "gender-" + quantity;
 col2.appendChild(input2);
 
 var col3 = document.createElement("div");
-col3.classList.add("col-md-4");
+col3.classList.add("col-md-4","col-4");
 
 var input3 = document.createElement("input");
 input3.type = "date";
@@ -459,7 +459,7 @@ form.appendChild(firstGroup8);
 }
 
 var col1 = document.createElement("div");
-col1.classList.add("col-md-5");
+col1.classList.add("col-md-5","col-5");
 
 var input1 = document.createElement("input");
 input1.type = "text";
@@ -469,17 +469,17 @@ input1.id = "ho-ten-" + quantity;
 col1.appendChild(input1);
 
 var col2 = document.createElement("div");
-col2.classList.add("col-md-3");
+col2.classList.add("col-md-3","col-3");
 
 var input2 = document.createElement("input");
 input2.type = "text";
 input2.classList.add("form-control");
-input2.placeholder = "Nhập giới tính";
+input2.placeholder = "Nam/Nữ";
 input2.id = "gender-" + quantity;
 col2.appendChild(input2);
 
 var col3 = document.createElement("div");
-col3.classList.add("col-md-4");
+col3.classList.add("col-md-4","col-4");
 
 var input3 = document.createElement("input");
 input3.type = "date";
