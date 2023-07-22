@@ -26,19 +26,19 @@
 
 
 // login 
-function submitLoginForm() {
-    // Ngăn chặn hành vi mặc định của form khi người dùng nhấn nút "ĐĂNG NHẬP"
-    event.preventDefault();
+// function submitLoginForm() {
+//     // Ngăn chặn hành vi mặc định của form khi người dùng nhấn nút "ĐĂNG NHẬP"
+//     event.preventDefault();
 
-    // Lấy dữ liệu từ form
-    const email = document.getElementById('register__email').value;
-    const password = document.getElementById('register__password').value;
+//     // Lấy dữ liệu từ form
+//     const email = document.getElementById('register__email').value;
+//     const password = document.getElementById('register__password').value;
 
-    // Tạo một object chứa dữ liệu để gửi đến server
-    const formData = {
-        email: email,
-        password: password
-    };
+//     // Tạo một object chứa dữ liệu để gửi đến server
+//     const formData = {
+//         email: email,
+//         password: password
+//     };
 
 //     // Sử dụng Axios để gửi yêu cầu POST
 //     axios.post('/auth/login', formData)
