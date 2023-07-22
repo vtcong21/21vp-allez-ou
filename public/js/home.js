@@ -42,11 +42,6 @@ function submitLoginForm() {
     const email = document.getElementById('register__email').value;
     const password = document.getElementById('register__password').value;
 
-    // Tạo một object chứa dữ liệu để gửi đến server
-    const formData = {
-        email: email,
-        password: password
-    };
     fetch('/auth/login', {
         method: 'POST',
         headers: {
