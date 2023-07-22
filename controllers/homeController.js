@@ -2,13 +2,9 @@ const User = require('../models/user');
 
 const getHomePage = async (req, res) => {
   try {
-   
-    if (req.userId && req.userRole) {
-      const user = await User.findById(req.userId).select('fullName email dateOfBirth');
-      res.render('home', { user });
-    } else {
-      res.render('home');
-    }
+    const user = await User.findById(req.userId).select('fullName email dateOfBirth');
+    console.log(user);
+    res.render('home', { user });
   } catch (error) {
     console.error('Error getting user information:', error);
     res.status(500).send('Internal Server Error');
