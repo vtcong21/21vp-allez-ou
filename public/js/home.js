@@ -40,34 +40,34 @@ function submitLoginForm() {
         password: password
     };
 
-    // Sử dụng Axios để gửi yêu cầu POST
-    axios.post('/auth/login', formData)
-        .then(response => {
-            // Xử lý phản hồi từ server sau khi POST thành công
-            const token = response.data.token;
-            console.log('Token:', token);
-            localStorage.setItem('token', token);
-            // Gọi phương thức GET để render trang chủ sau khi đăng nhập thành công
-            axios.get('/', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            .then(homeResponse => {
-                const user = homeResponse.data;
-                const html = document.documentElement;
-                html.innerHTML = user;
-            })
-            .catch(homeError => {
-                // Xử lý lỗi nếu có khi GET trang chủ
-                console.error('Lỗi khi gọi phương thức GET trang chủ:', homeError);
-            });
-        })
-        .catch(error => {
-            // Xử lý lỗi nếu có khi POST đăng nhập
-            console.error('Đăng nhập thất bại:', error);
-        });
-}
+//     // Sử dụng Axios để gửi yêu cầu POST
+//     axios.post('/auth/login', formData)
+//         .then(response => {
+//             // Xử lý phản hồi từ server sau khi POST thành công
+//             const token = response.data.token;
+//             console.log('Token:', token);
+//             localStorage.setItem('token', token);
+//             // Gọi phương thức GET để render trang chủ sau khi đăng nhập thành công
+//             axios.get('/', {
+//                 headers: {
+//                     Authorization: `Bearer ${token}`
+//                 }
+//             })
+//             .then(homeResponse => {
+//                 const user = homeResponse.data;
+//                 const html = document.documentElement;
+//                 html.innerHTML = user;
+//             })
+//             .catch(homeError => {
+//                 // Xử lý lỗi nếu có khi GET trang chủ
+//                 console.error('Lỗi khi gọi phương thức GET trang chủ:', homeError);
+//             });
+//         })
+//         .catch(error => {
+//             // Xử lý lỗi nếu có khi POST đăng nhập
+//             console.error('Đăng nhập thất bại:', error);
+//         });
+// }
 
-// responsive navbar 
+// // responsive navbar 
 
