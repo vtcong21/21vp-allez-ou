@@ -1,0 +1,13 @@
+footer{
+    background: #0D0C1B;
+}
+
+.footer__text, .footer__text a{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    color: #FFFFFF;
+    text-decoration: none;
+}

@@ -1,4 +1,5 @@
 const Tour = require('../models/tour');
+const User = require('../models/user');
 
 const getAllTours = async (req, res) => {
     try {
@@ -68,11 +69,13 @@ const searchTours = async (req, res) =>{
 const getTourByCode = async (req, res) => {
     try {
         const { code } = req.params;
+        const user = await User.findById(req.userId).select('fullName email dateOfBirth');
         const tour = await Tour.findOne({ code });
         if (!tour) {
           return res.status(404).json({ message: 'Tour not found' });
         }
-        res.render('home', { tour });
+        console.log(tour);
+        res.render('tourInfo',{tour, user});
       } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
       }

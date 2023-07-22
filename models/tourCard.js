@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const tourCardSchema = new mongoose.Schema({
     name: {type: String, require: true},
     code: { type: String, require: true, unique: true },
-    start_place_code: { type: Number , require: true},
+    start_place_code: { type: String , require: true},
     end_place_code: {
         type: [{
-          type: Number,
+          type: String,
           required: true
         }],
         required: true

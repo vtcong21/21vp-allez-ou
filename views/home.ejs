@@ -10,50 +10,19 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script defer src="/js/home.js"></script>
+        <script defer src="/js/login.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
         <link rel="stylesheet" href="/css/home.css" />
-        <title>Document</title>
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <title>Allez Où</title>
     </head>
     <body>
         <header>
             <!--Navbar-->
-            <nav class="navbar navbar-expand-sm fixed-top py-2 navbar-scrolled">
-                <div class="container-fluid navbar-container p-0">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="navbar-left">
-                                <img src="/img/home/60x60.png" />
-                            </li>
-                            <li class="nav-item d-flex navbar-left">
-                                <a class="nav-link active navbar-text navbar-text__hightlight m-auto" aria-current="page" href="#">TRANG CHỦ</a>
-                            </li>
-                            <li class="nav-item d-flex navbar-left">
-                                <a class="nav-link active navbar-text m-auto" aria-current="page" href="#">DU LỊCH</a>
-                            </li>
-                            <li class="nav-item d-flex navbar-left">
-                                <a class="nav-link active navbar-text m-auto" aria-current="page" href="#">TIN TỨC</a>
-                            </li>
-                            <li class="nav-item d-flex navbar-left">
-                                <a class="nav-link active navbar-text m-auto" aria-current="page" href="#">LIÊN HỆ</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active navbar-text" aria-current="page" href="#">ĐĂNG NHẬP</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active navbar-text navbar-text__bordered" aria-current="page" href="#">ĐĂNG KÝ</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <%- include('partials/navbar') %>
             <!--Carousel-->
             <div id="carouselExampleInterval" class="carousel slide position-relative carousel-container" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -84,7 +53,7 @@
                                 <div class="icon-bg d-flex m-auto">
                                     <img src="/img/home/location.png" class="location-icon m-auto" />
                                 </div>
-                                <div class="search-start  d-flex flex-column">
+                                <div class="search-start d-flex flex-column">
                                     <h3>Điểm đến</h3>
                                     <select class="form-select search-end-point" aria-label="Default select example">
                                         <option class="form-option">Hãy chọn điểm đến</option>
@@ -102,7 +71,7 @@
                                     <div class="icon-bg d-flex m-auto">
                                         <img src="/img/home/calendar.png" class="location-icon m-auto" />
                                     </div>
-                                    <div class="search-start  d-flex flex-column">
+                                    <div class="search-start d-flex flex-column">
                                         <h3>Ngày đi</h3>
                                         <input class="form-control form__start-date" type="date" />
                                     </div>
@@ -111,7 +80,7 @@
                                     <div class="icon-bg d-flex m-auto">
                                         <img src="/img/home/calendar.png" class="location-icon m-auto" />
                                     </div>
-                                    <div class="search-start  d-flex flex-column">
+                                    <div class="search-start d-flex flex-column">
                                         <h3>Số ngày</h3>
                                         <select class="form-select" aria-label="Default select example">
                                             <option class="form-option">Tất cả</option>
@@ -180,7 +149,7 @@
                                     <p class="mb-0">25/06/2023 - 7N6Đ - Giờ đi: 17:45</p>
                                 </div>
                                 <div class="card-text">
-                                    <a href="#">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
+                                    <a class="card-text__link" data-value="A001" href="/tours/A001">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
                                 </div>
                                 <div class="d-flex mt-4 justify-content-between card-price-container">
                                     <div class="card-price">
@@ -199,7 +168,7 @@
                                     <p class="mb-0">25/06/2023 - 7N6Đ - Giờ đi: 17:45</p>
                                 </div>
                                 <div class="card-text">
-                                    <a href="#">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
+                                    <a class="card-text__link" data-value="B001" href="/tours/B001">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
                                 </div>
                                 <div class="d-flex mt-4 justify-content-between card-price-container">
                                     <div class="card-price">
@@ -218,7 +187,7 @@
                                     <p class="mb-0">25/06/2023 - 7N6Đ - Giờ đi: 17:45</p>
                                 </div>
                                 <div class="card-text">
-                                    <a href="#">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
+                                    <a class="card-text__link" data-value="C001" href="/tours/C001">Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính</a>
                                 </div>
                                 <div class="d-flex mt-4 justify-content-between card-price-container">
                                     <div class="card-price">
@@ -266,7 +235,7 @@
         </div>
         <!--Bắt đầu hành trình-->
         <div class="container start-journey p-5">
-            <img src="/img/home/shoian.png" class="start-journey__img" />
+            <img src="/img/home/hoian.png" class="start-journey__img" />
             <div class="start-journey__text">
                 <h3>
                     Bắt đầu hành trình <br />
@@ -311,74 +280,6 @@
             </div>
         </div>
         <!--Footer-->
-        <footer class="text-center text-lg-start mt-5">
-            <!-- Grid container -->
-            <div class="container p-4">
-                <!--Grid row-->
-                <div class="row">
-                    <!--Grid column-->
-                    <div class="col-sm-4 mb-4 mb-sm-0 footer__text">
-                        <h5 class="text-uppercase">Links</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-sm-4 mb-4 mb-sm-0 footer__text">
-                        <h5>Thông tin liên hệ</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!">Địa chỉ: 257 Nguyễn Văn Cừ, Quận 5, TP.HCM</a>
-                            </li>
-                            <li>
-                                <a href="#!">Điện thoại: 012 345 6789</a>
-                            </li>
-                            <li>
-                                <a href="#!">Email: 12345khoahoctunhien@gmail.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-sm-4 mb-4 mb-sm-0 footer__text">
-                        <h5 class="text-uppercase"></h5>
-
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!">Trang chủ</a>
-                            </li>
-                            <li>
-                                <a href="#!">Du lịch</a>
-                            </li>
-                            <li>
-                                <a href="#!">Tin tức</a>
-                            </li>
-                            <li>
-                                <a href="#!">Liên hệ</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid column-->
-                </div>
-                <!--Grid row-->
-            </div>
-            <!-- Grid container -->
-        </footer>
+        <%- include('partials/footer') %>
     </body>
 </html>
