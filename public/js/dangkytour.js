@@ -1,4 +1,4 @@
-	var quantity = 0;
+	var quantity = 1;
     var quantityDisplay = 0;
     
 document.addEventListener("DOMContentLoaded", function () {
@@ -527,6 +527,27 @@ firstGroup8.appendChild(col3);
                   else if (!emailInput.value.match(emailPattern)) {
                     alert('Email không hợp lệ. Vui lòng nhập lại email đúng định dạng!');
                   }
+                  console.log('Họ và tên:', hoTenInput.value);
+console.log('Số điện thoại:', soDienThoaiInput.value);
+console.log('Địa chỉ:', diaChiInput.value);
+console.log('Email:', emailInput.value);
+console.log('Giới tính:', genderInput.value);
+console.log('Họ tên 1:', hoten1Input.value);
+console.log('Ngày sinh:', ngaysinhInput.value);
+function clearLocalStorage() {
+    localStorage.clear();
+  }
+localStorage.setItem('hoTen', hoTenInput.value);
+localStorage.setItem('soDienThoai', soDienThoaiInput.value);
+localStorage.setItem('diaChi', diaChiInput.value);
+localStorage.setItem('email', emailInput.value);
+localStorage.setItem('gender', genderInput.value);
+localStorage.setItem('hoten1', hoten1Input.value);
+localStorage.setItem('ngaysinh', ngaysinhInput.value);
                 };
+                
               }
-            });
+});
+              
+   
+            
