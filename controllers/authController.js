@@ -63,7 +63,7 @@ const verify = async (req, res) => {
     await user.save();
 
     //res.status(200).json({ message: "User verified successfully" });
-    res.redirect('/login');
+    res.redirect('/auth/login');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -90,7 +90,8 @@ const login = async (req, res) => {
 
     const token = jwt.sign({ userId: user._id , userRole: user.isAdmin}, process.env.SECRET_KEY, { expiresIn: '24h' });
     console.log('Token sent');
-    res.status(200).json({ token, redirectUrl: '/' });
+    res.cookie('token', token);
+    res.redirect('/');
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
