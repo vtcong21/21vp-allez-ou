@@ -38,9 +38,9 @@ function submitLoginForm() {
     // Ngăn chặn hành vi mặc định của form khi người dùng nhấn nút "ĐĂNG NHẬP"
     event.preventDefault();
 
-    // Lấy dữ liệu từ form
-    const email = document.getElementById('register__email').value;
-    const password = document.getElementById('register__password').value;
+//     // Lấy dữ liệu từ form
+//     const email = document.getElementById('register__email').value;
+//     const password = document.getElementById('register__password').value;
 
     fetch('/auth/login', {
         method: 'POST',

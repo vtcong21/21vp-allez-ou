@@ -97,12 +97,16 @@ const login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-
+const logout = (req, res) =>{
+  res.clearCookie('token');
+  res.redirect('/');
+}
 
 module.exports = {
   renderLoginPage,
   renderRegisterPage,
   register,
   verify,
-  login
+  login,
+  logout
 };
