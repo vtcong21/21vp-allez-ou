@@ -6,15 +6,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-        <title>Đặt tour</title>
+        <title>Allez Où</title>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <link rel="stylesheet" href="/css/dangkytour.css" />
-        <script src="/js/dangkytour.js">
-
-        </script>
+        <script src="/js/dangkytour.js"></script>
     </head>
-
+    <%- include('partials/navbar') %>
     <body>
         <div class="container">
             <div class="row">
@@ -55,13 +56,13 @@
                             </table>
                         </div>
                     </div>
-                    <p style="font-weight: bolder;" >Số lượng hành khách</p>
+                    <p style="font-weight: bolder;">Số lượng hành khách</p>
                     <div class="form-group row amountofpeople1">
                         <div class="col-md-6">
                             <div class="wrapper">
                                 <div class="left-col">
-                                    <label for="nguoilon" style="font-size: 1.2rem;">Người Lớn</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 12 tuổi trở lên)</p>
+                                    <label for="nguoilon" style="font-size: 1.92rem;">Người Lớn</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 12 tuổi trở lên)</p>
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
@@ -75,8 +76,8 @@
                         <div class="col-md-6 treem">
                             <div class="wrapper">
                                 <div class="left-col">
-                                    <label for="nguoilon" style="font-size: 1.2rem;"> Trẻ em</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 5 - 11 tuổi)</p>
+                                    <label for="nguoilon" style="font-size: 1.92rem;"> Trẻ em</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 5 - 11 tuổi)</p>
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
@@ -92,8 +93,8 @@
                         <div class="col-md-6">
                             <div class="wrapper">
                                 <div class="left-col">
-                                    <label for="nguoilon" style="font-size: 1.2rem;">Trẻ nhỏ</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 2 - 4 tuổi)</p>
+                                    <label for="nguoilon" style="font-size: 1.92rem;">Trẻ nhỏ</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 2 - 4 tuổi)</p>
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
@@ -107,8 +108,8 @@
                         <div class="col-md-6 embe">
                             <div class="wrapper">
                                 <div class="left-col">
-                                    <label for="nguoilon" style="font-size: 1.2rem;"> Em bé</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(dưới 2 tuổi)</p>
+                                    <label for="nguoilon" style="font-size: 1.92rem;"> Em bé</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(dưới 2 tuổi)</p>
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
@@ -120,7 +121,7 @@
                             </div>
                         </div>
                     </div>
-                    <p style="margin-top: 2em; font-weight: bolder;" >Thông tin các hành khách</p>
+                    <p style="margin-top: 2em; font-weight: bolder;">Thông tin các hành khách</p>
 
                     <div class="information-nguoilon1">
                         <p style="font-weight: bolder;">Người Lớn</p>
@@ -143,8 +144,7 @@
                                                     <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
-											<div class="form-group row first-group2" style="padding-top: 0;">
-                                            </div>
+                                            <div class="form-group row first-group2" style="padding-top: 0;"></div>
                                         </form>
                                     </td>
                                 </tr>
@@ -172,8 +172,7 @@
                                                     <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
-											<div class="form-group row first-group4" style="padding-top: 0;">
-                                            </div>
+                                            <div class="form-group row first-group4" style="padding-top: 0;"></div>
                                         </form>
                                     </td>
                                 </tr>
@@ -201,8 +200,7 @@
                                                     <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
-											<div class="form-group row first-group6" style="padding-top: 0;">
-                                            </div>
+                                            <div class="form-group row first-group6" style="padding-top: 0;"></div>
                                         </form>
                                     </td>
                                 </tr>
@@ -230,88 +228,84 @@
                                                     <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
-											<div class="form-group row first-group8" style="padding-top: 0;">
-                                            </div>
+                                            <div class="form-group row first-group8" style="padding-top: 0;"></div>
                                         </form>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                </div> 
-                <div class="col-md-4"> 
+                </div>
+                <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12 information-tour">
-                            <div style="text-align: center;"> 
-                                <label for="information-tour" style="text-decoration: underline;" >Thông tin chuyến đi</label>
-
+                            <div style="text-align: center;">
+                                <label for="information-tour" style="text-decoration: underline;">Thông tin chuyến đi</label>
                             </div>
-                            <div style="text-align: center;"> 
+                            <div style="text-align: center;">
                                 <img src="https://via.placeholder.com/350x200" class="img-fluid" />
-
                             </div>
-                            <div class="name-tour"> 
+                            <div class="name-tour">
                                 Hà Nội - Sa Pa _ Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tình Cốc - Tràng An - Bái Đính
                             </div>
-                            <div class="detail-information"> 
-                                <p class="code-tour">Code Tour: </p> 
-                                <p class="khoihanh">Khởi Hành: </p>
-                                <p class="noikhoihanh">Nơi Khởi Hành:</p> 
+                            <div class="detail-information">
+                                <p class="code-tour">Code Tour:</p>
+                                <p class="khoihanh">Khởi Hành:</p>
+                                <p class="noikhoihanh">Nơi Khởi Hành:</p>
                                 <p class="choconnhan">Chỗ còn nhận:</p>
-                            </div> 
-                            <div style="display: flex; justify-content: center;align-items: center;"> 
-                                <hr>
                             </div>
-                            <div class="total">  
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <hr />
+                            </div>
+                            <div class="total">
                                 <div class="left-col">
-                                    <label for="nguoilon" style="font-size: 1.2rem;">Người Lớn</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 12 tuổi trở lên)</p> 
-                                </div>                   
-                                <div class="right-col"> 
-                                <div class="quantity-display"style="font-size: 1.2rem;">0</div>
-                                </div>    
-                            </div>
-                            <div class="total2"> 
-                                <div class="left-col">  
-                                    <label for="nguoilon" style="font-size: 1.2rem;"> Trẻ em</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 5 - 11 tuổi)</p>
-                                </div>  
-                                <div class="right-col"> 
-                                    <div class="quantity-display2"style="font-size: 1.2rem;">0</div>
+                                    <label for="nguoilon" style="font-size: 1.92rem;">Người Lớn</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 12 tuổi trở lên)</p>
                                 </div>
-                            </div>
-                            <div class="total3"> 
-                                <div class="left-col">  
-                                    <label for="nguoilon" style="font-size: 1.2rem;">Trẻ nhỏ</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(từ 2 - 4 tuổi)</p>
-                                </div>  
-                                <div class="right-col"> 
-                                    <div class="quantity-display3"style="font-size: 1.2rem;">0</div>
-                                </div>
-                            </div>
-                            <div class="total4"> 
-                                <div class="left-col">  
-                                    <label for="nguoilon" style="font-size: 1.2rem;"> Em bé</label>
-                                    <p style="font-style: italic; font-size: 0.8rem;">(dưới 2 tuổi)</p>
-                                </div>  
-                                <div class="right-col"> 
-                                    <div class="quantity-display4"style="font-size: 1.2rem;">0</div>
-                                </div>
-                            </div>
-                            <div style="display: flex; justify-content: center;align-items: center;"> 
-                                <hr>
-                            </div>
-                            <div class="total6"> 
-                                <div class="left-col"> 
-                                    <label for="nguoilon" style="font-size: 1.2rem;"> TỔNG CỘNG:</label>
-                                </div> 
                                 <div class="right-col">
-                                    <div class="total5"style="font-size: 1.2rem;">0</div>
+                                    <div class="quantity-display" style="font-size: 1.92rem;">0</div>
                                 </div>
-
-                            </div> 
-                            <div class="button-order">  
-                                <button id="button-order-btn" >ĐẶT NGAY</button>
+                            </div>
+                            <div class="total2">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.92rem;"> Trẻ em</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 5 - 11 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="quantity-display2" style="font-size: 1.92rem;">0</div>
+                                </div>
+                            </div>
+                            <div class="total3">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.92rem;">Trẻ nhỏ</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(từ 2 - 4 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="quantity-display3" style="font-size: 1.92rem;">0</div>
+                                </div>
+                            </div>
+                            <div class="total4">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.92rem;"> Em bé</label>
+                                    <p style="font-style: italic; font-size: 1.28rem;">(dưới 2 tuổi)</p>
+                                </div>
+                                <div class="right-col">
+                                    <div class="quantity-display4" style="font-size: 1.92rem;">0</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <hr />
+                            </div>
+                            <div class="total6">
+                                <div class="left-col">
+                                    <label for="nguoilon" style="font-size: 1.92rem;"> TỔNG CỘNG:</label>
+                                </div>
+                                <div class="right-col">
+                                    <div class="total5" style="font-size: 1.92rem;">0</div>
+                                </div>
+                            </div>
+                            <div class="button-order">
+                                <button id="button-order-btn">ĐẶT NGAY</button>
                             </div>
                         </div>
                     </div>
@@ -320,4 +314,6 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
     </body>
+    <%- include('partials/footer') %>
+    <script src="/js/login.js"></script>
 </html>

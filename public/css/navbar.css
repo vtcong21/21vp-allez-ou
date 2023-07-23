@@ -250,6 +250,9 @@ html{
     background-color: #3D53C0;
 }
 
+.bg-transparent{
+    border-color: transparent !important;
+}
 @media only screen and (max-width: 576px){
     .navbar-container{
         margin: 0;
