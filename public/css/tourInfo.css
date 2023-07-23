@@ -15,65 +15,6 @@ body{
     font-size: 1.6rem;
 }
 
-.navbar{
-    background: #0D0C1B;
-}
-
-.navbar-container{
-    margin: 0 13.7rem;
-}
-
-.navbar-left{
-    margin-right: 3.6rem;
-}
-
-.navbar-text{
-    font-family: 'Nunito', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.1rem;
-    line-height: 1.1rem;
-    color: #FFFFFF !important;
-    margin-right: 4rem;
-    border-radius: 7px;
-}
-
-.navbar-text__hightlight{
-    font-weight: 800;
-    background: #F14868;
-    border-radius: 7px;
-}
-
-.navbar-text:hover{
-    font-weight: 800;
-    background: #F14868;
-    opacity: 0.75;
-    border-radius: 7px;
-}
-
-.navbar-text__bordered{
-    border: 0.05rem solid #FFFFFF;
-    border-radius: 5.05285px;
-}
-
-.navbar-toggler-icon{
-    background-image: url('/assets//img/menu.png');
-    width: 3.5rem;
-    height: 3.5rem;
-}
-
-.navbar-toggler{
-    padding: 0 6px;
-    border: none !important;
-}
-
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-    outline: none !important;
-    box-shadow: none;
-}
-
 .link-text p a{
     font-family: 'Nunito';
     font-style: italic;
@@ -294,20 +235,6 @@ body{
     margin-bottom: 3em;
 }
 
-footer{
-    background: #0D0C1B;
-    margin:0 ;
-}
-.footer__text, .footer__text a{
-    font-family: 'Nunito';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.2rem;
-    line-height: 2rem;
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
 .tour-banner{
     background: rgba(255, 255, 255, 0.9);
     border-radius: 22.5px;
@@ -411,30 +338,6 @@ footer{
     background: #FDE2E7;
 }
 @media only screen and (max-width: 576px) {
-    .navbar-container{
-        margin: 0;
-        min-height: 4rem;
-    }
-    .navbar{
-        width: 100vw;
-    }
-    .card-price-container{
-        margin-top: 0.7em !important;
-    }
-    .navbar-left{
-        margin-right: 0;
-    }
-    .nav-item{
-        display: flex;
-    }
-    .nav-item a{
-        margin: auto;
-    }
-    .navbar-text__bordered{
-        border: none;
-    }
-
-    
     .body__container{
         margin: 0 1rem
     }
