@@ -48,7 +48,7 @@ function generateTravelTour(data){
 $(function(){
     $.getJSON("traveltour.json", function( data ) {
 		listTravelTour = data;
-		limPage = Math.floor((listTravelTour.length + contentPerPage - 1) / contentPerPage);
+		limPage = Math.ceil(listTravelTour.length / contentPerPage);
 		generateTravelTour(data);
 	});
 })

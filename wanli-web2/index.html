@@ -13,27 +13,71 @@
 </head>
 <body>
     <div id="header" class="header-background">
-        <div class="header-content">
-            <a class="logo" href="#">
-
-            </a>
-            <div id="nav">
-                <ul class="sub-nav left-nav">
-                    <li class="nav-button" onclick="navButtonActive(this); removeHeaderBackground()"><a href="#">Trang chủ</a></li>
-                    <li class="nav-button nav-button-active" onclick="navButtonActive(this)"><a href="#">Du lịch</a></li>
-                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Tin tức</a></li>
-                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Liên hệ</a></li>
-                </ul>
-                <ul class="sub-nav right-nav">
-                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Đăng nhập</a></li>
-                    <li class="nav-button" onclick="navButtonActive(this)"><a href="#" style="border: 1px solid #fff; border-radius: 6px; padding: 5.5px 13px">Đăng ký</a></li>
-                </ul>
+        <div class="header-container">
+            <div class="header-content">
+                <div id="nav">
+                    <ul class="sub-nav left-nav">
+                        <li class="nav-button" onclick="navButtonActive(this); removeHeaderBackground()"><a href="#">Trang chủ</a></li>
+                        <li class="nav-button nav-button-active" onclick="navButtonActive(this)"><a href="#">Du lịch</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Tin tức</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Liên hệ</a></li>
+                    </ul>
+                    <ul class="sub-nav right-nav">
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#">Đăng nhập</a></li>
+                        <li class="nav-button" onclick="navButtonActive(this)"><a href="#" style="border: 1px solid #fff; border-radius: 6px; padding: 5.5px 13px">Đăng ký</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header-booking">
+                <div class="booking-info">
+                    <div class="col">
+                        <div class="block">
+                            <div class="block-col1">
+                                <img src="./assets/img/location.svg" alt="">
+                            </div>
+                            <div class="block-col2">
+                                <div class="block-row1">Điểm đi</div>
+                                <div class="block-row2">TP.Hồ Chí Minh</div>
+                            </div>
+                        </div>
+                        <div class="block" style="margin-left: 48px; margin-right: 48px;"><img src="./assets/img/dir.svg" alt=""></div>
+                        <div class="block">
+                            <div class="block-col1">
+                                <img src="./assets/img/location.svg" alt="">
+                            </div>
+                            <div class="block-col2">
+                                <div class="block-row1">Điểm đến</div>
+                                <div class="block-row2">Hà Nội</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 8px;"></div>
+                <div class="booking-info">
+                    <div class="col">
+                        <div class="block">
+                            <div class="block-col1">
+                                <img src="./assets/img/calendar.svg" alt="">
+                            </div>
+                            <div class="block-col2">
+                                <div class="block-row1">Ngày đi</div>
+                                <div class="block-row2">18/06/2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 20px;"></div>
+                <div>
+                    <img src="./assets/img/find.png" alt="">
+                </div>
             </div>
         </div>
     </div>
     <div id="travel">
         <div class="path">
-            Du lịch / Du lịch miền Bắc
+            <a href="#">Du lịch</a>
+            /
+            <a href="#">Du lịch miền Bắc</a>
         </div>
         <div class="travel-content">
             <div class="filter">
@@ -107,6 +151,17 @@
                 </div>
             </div>
             <div class="listtour">
+                <div class="tour-sort">
+                    <div class="sort-block">
+                        <div class="sort-block-content">Ngày khởi hành</div>
+                        <img src="./assets/img/up-arrow.svg" alt="">
+                    </div>
+                    <div style="width: 15px; display: inline-block;"></div>
+                    <div class="sort-block">
+                        <div class="sort-block-content">Giá tiền</div>
+                        <img src="./assets/img/down-arrow.svg" alt="">
+                    </div>
+                </div>
                 <script id = "list-traveltour" type="x-handlebars-template">
                     {{#each this}}
                         <div class="col" data-index="{{id}}">
