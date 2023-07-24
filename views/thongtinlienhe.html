@@ -1,77 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Thông tin liên hệ</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+    <title>Thông tin liên hệ</title> 
+    <link rel="stylesheet" href="thongtinlienhe.css" />
+    <script src="thongtinlienhe.js"> </script>
+    
+</head>
+<body>
+    <div class="container"> 
+        <div class="row"> 
+        <div class="col-md-4 thongtinlienhe ">
+            <h1>Thông tin liên hệ</h1> 
+            <p>Để có thể đáp ứng được các yêu cầu và các ý kiến đóng góp của quý vị một cách nhanh chóng xin vui lòng liên hệ</p>
+            <h2>Điện thoại </h2> 
+            <p>(84-28) 38 xxx xxx (20 lines)</p>
+            <h2>Email</h2> 
+            <p>abctravel@gmail.com - abctravel.asia@gmail.com (English support)</p>
+            <h2>Nơi làm việc</h2>
+            <p>227 Nguyễn Văn Cừ, Phường 4, Quận 5, Tp. Hồ Chí Minh</p>
+            <div style="text-align: center;"> 
+                <img src="https://via.placeholder.com/248x260" class="img-fluid" style="width: 100%;" />
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="/css/thongtinlienhe.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
-        <style>  
-        body { 
-            background-color: #ddd;
-            font-family: 'Nunito';
-        }
-        h2 { 
-            text-decoration: underline wavy;
-        }
-              
-            .white-table {
-              background-color: #fff;
-              padding: 20px;
-              border: 1px solid #ddd;
-            }
-            .float-right{ 
-                float: right;
-            }
-</style>
-    </head>
-    <body>
-        <div class="container mt-5">
-          <div class="row">
-            <div class="col-md-6 order-md-first white-table order-sm-last">
-              <table>
-                <form>
-                  <div class="form-group ">
-                    <label for="name">Họ và tên</label>
-                    <input type="text" class="form-control" id="name" placeholder="Nhập họ và tên của bạn">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Nhập địa chỉ email của bạn">
-                  </div>
-                  <div class="form-group">
-                    <label for="phone">Số điện thoại</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại của bạn">
-                  </div>
-                  <div class="form-group">
-                    <label for="tour-code">Mã tour liên quan</label>
-                    <input type="text" class="form-control" id="tour-code" placeholder="Nhập mã tour liên quan (nếu có)">
-                  </div>
-                  <div class="form-group">
-                    <label for="message">Ghi chú</label>
-                    <textarea class="form-control" id="message" rows="5" placeholder="Nhập ghi chú của bạn"></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary float-right">Gửi</button>
-                </form>
-              </table>
             </div>
-            <div class="col-md-6 order-md-last order-sm-first">
-              <h2>Thông tin liên hệ</h2>
-              <p>Để có thể đáp ứng được các yêu cầu và các ý kiến đóng góp của quý vị một cách nhanh chóng xin liên hệ.</p>
-            </div>
-          </div>
+        </div> 
+        <div class="col-md-8 input"> 
+            <table class="table table-bordered">
+                <tbody>
+                    <tr style="border-width: 0px;">
+                        <td style="border-width: 0px;">
+                            <form name="info">
+                                <div class="first-group"> 
+                                    <label for="name">Họ và tên </label> 
+                                    <input class="form-control" type="text" id="name" placeholder="Nhập họ tên" >
+
+                                </div> 
+                                <div class="row second-group">
+                                    <div class="col-md-7"> 
+                                        <label for="email">Email</label>
+                                        <input class="form-control" type="text" id="email" placeholder="Nhập địa chỉ mail" >
+
+                                    </div> 
+                                    <div class="col-md-5" >  
+                                        <label for="sdt">Số điện thoại</label>
+                                        <input class="form-control" type="text" id="sdt" placeholder="Nhập số điện thoại" >
+
+                                    </div>
+                                </div>
+                                <div class="third-group"> 
+                                    <label for="matour">Mã tour liên quan </label> 
+                                    <input class="form-control" type="text" id="name" placeholder="Nhập mã tour" >
+                                    <p>Bạn muốn chúng tui lưu ý điều gì không?</p>
+                                    <label for="tieu-de" >Tiêu đề</label> 
+                                    <input class="form-control" type="text" id="tieu-de" placeholder="Nhập tiêu đề của bạn" >
+                                    <label for="noi-dung">Nội dung</label>
+                                    <input class="form-control" type="text" id="noi-dung" placeholder="Nhập nội dung bạn muốn chúng tui lưu ý" >
+                                </div>
+                                <div class="fourth-group">
+                                    <button id="button-guingay" onclick="saveToLocalStorage()">GỬI NGAY</button>                                     
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
-            
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-      </body>
-    </html>
+        </div>
+    </div>
+</body>
+</html>
