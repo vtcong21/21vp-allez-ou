@@ -14,7 +14,7 @@ const tourRoutes = require('./routes/tourRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const provinceRoutes = require('./routes/provinceRoutes');
 const authRoutes = require('./routes/authRoutes');
-
+// const testroute = require ('./routes/testroute');
 
 
 // Create express app
@@ -39,6 +39,9 @@ app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
 app.use('/pronvices', provinceRoutes);
 app.use('/auth', authRoutes);
+// app.use('/test',testroute);
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

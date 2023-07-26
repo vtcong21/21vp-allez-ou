@@ -130,25 +130,24 @@ function loadNewForm2() {
     document.getElementById("info").style.backgroundColor = "#dadada"; 
     document.getElementById("info").style.fontWeight = "normal";
     document.getElementById("bank-link").style.backgroundColor="#4b60ce"
-    document.getElementById("bank-link").style.fontWeight="900";   
-    formGroup.classList.add("form-group-name");
+    document.getElementById("bank-link").style.fontWeight="900";  
+    formGroup.classList.add("form-group");
     formGroup.innerHTML = `
-<div class="form-group-name" style="margin-left:0;padding-bottom:1.5em">
-<div>
-<label for="bank">Chọn ngân hàng:</label>
-</div>
-<div>
-<select class="select" id="bank" >
-<option value="ACB">Ngân hàng ACB</option>
-<option value="VCB">Ngân hàng Vietcombank</option>
-<option value="MB">Ngân hàng MBBank</option>
-<option value="Techcom">Ngân hàng Techcombank</option>
-</select>
-</div>
-<label for="account_number">Số tài khoản:</label>
-<input type="text" class="form-control" id="account_number" placeholder="Nhập số tài khoản" />
-<label for="account_name">Tên chủ tài khoản:</label>
-<input type="text" class="form-control" id="account_name" placeholder="Nhập tên chủ tài khoản" />
+<div class="form-group-name" style="text-align: center; margin-left:0">
+<label for="confirm-account" id="confirm-account" style="font-family: Montserrat; font-weight: 800; font-size:2.5rem">XÁC THỰC TÀI KHOẢN</label>
+    <p style="color: #6E6A8E;">Vui lòng nhập 6 sổ đã được gửi đến</p>
+    <div id="cheemail"></div>
+    <input type="text" style="margin-top:1em;padding: 0.5em 6em;border-radius: 5.25px; border: 1.5px solid #B9B9B9;" id="confirm-account1">
+    <div id="myformrow" class="form-row" style="margin-top:1em" > 
+        <div class="col-md-6 col-6" style=" padding:0"  >
+            <p id="resend-code" style=" padding:0 " > 
+                Vẫn chưa nhận được mã?
+            </p>
+            </div>
+        <div class="col-md-6 col-6" style="text-align: left; padding:0 "> 
+            <button type="button" style="border: 0; padding: 0; background-color:#ffffff ;color: #4F6CFF;">Gửi lại mã</button>
+        </div> 
+    </div>
 `;
     personalInfoDiv.appendChild(formGroup);
     var btnHomeRegister = document.getElementById("btn-home-register");
@@ -159,12 +158,41 @@ function loadNewForm2() {
     </div>
     <div class="col-6 text-center">
     <form id="register-form" action="/register" method="post">
-    <button type="submit" class="btn btn-primary">Đăng ký</button>
+    <button type="submit" class="btn btn-primary">Hoàn tất</button>
 </form>
     </div>
 </div>
 `;
-}
+var resendCode = document.getElementById("resend-code");
+var confirmaccount = document.getElementById("confirm-account");
+var confirmaccount1 = document.getElementById("confirm-account1");
+var formrow1 = document.getElementById("myformrow");
+    if (window.innerWidth < 576) {
+        resendCode.style.marginLeft = "1em";
+        confirmaccount.style.fontSize = "2rem"; 
+        confirmaccount.style.paddingTop="3em";
+        confirmaccount1.style.padding ="0.5em 4.5em";
+        formrow1.style.marginLeft="1.2em";
+        formrow1.style.paddingBottom="3em";
+    } else {
+        resendCode.style.marginLeft = "15.73em";
+    }
+
+// Lấy giá trị email từ localStorage
+let email = localStorage.getItem("email");
+
+let atIndex = email.indexOf("@");
+let prefix = email.substring(0, atIndex);
+let postfix = email.substring(atIndex);
+let maskedEmail = "*".repeat(prefix.length - 4) + prefix.slice(-4) + postfix;
+
+// Gán giá trị email đã được che vào phần tử có id "cheemail"
+let cheemailElement = document.getElementById("cheemail");
+if (cheemailElement) {
+  cheemailElement.innerHTML = maskedEmail;
+} else {
+  console.error("Cannot find element with id 'cheemail'");
+}}
     
     const registerForm = document.getElementById("register-form");
 
@@ -277,7 +305,19 @@ function loadNewForm2() {
         localStorage.setItem("password", document.getElementById("pwd").value);
       }
       function SaveValues2(){
-        localStorage.setItem("gender", document.querySelector('input[name="gender"]:checked').value);
+        // Lấy các phần tử radio button
+// Lấy giá trị của radio button từ localStorage
+let gender = localStorage.getItem("gender");
+
+// Kiểm tra nếu giá trị không là null thì hiển thị nó trong console log
+if (gender !== null) {
+  console.log(gender);
+} else {
+  console.log("Không có giá trị được lưu trữ trong localStorage");
+}
+
+// Kiểm tra giá trị của radio button được lưu trong localStorage
+console.log(localStorage.getItem("gender")); 
         localStorage.setItem("dob", document.getElementById("dob").value);
         localStorage.setItem("phone", document.getElementById("phone").value);
       }

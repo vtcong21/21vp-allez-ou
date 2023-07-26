@@ -60,8 +60,9 @@ function logOut(){
    .catch(error => console.error('Error during login:', error));
  }
  
- const loginButton = document.querySelector('button[type="submit"]');
+ const loginButton = document.getElementById('login-btn');
  loginButton.addEventListener('click', function(event) {
+  console.log('done');
    event.preventDefault(); 
    login();
  });
