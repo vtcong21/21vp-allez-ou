@@ -1,21 +1,9 @@
 const User = require('../models/user');
 
-// const getHomePage = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-//     console.log(user);
-//     const dateOfBirth = user.dateOfBirth.toISOString().slice(0, 10);
-//     res.render('home', { user: { ...user, dateOfBirth } });
-//   } catch (error) {
-//     console.error('Error getting user information:', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
 
 const getHomePage = async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    console.log(user);
 
     if (user) {
       // Kiểm tra dateOfBirth có giá trị hợp lệ không
