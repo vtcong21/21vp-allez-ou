@@ -1,0 +1,145 @@
+:root{
+    font-size: 62.5%;
+}
+html{
+    box-sizing: border-box;
+}
+*{
+    margin: 0;
+}
+.wrapper{
+    background-color: #FFF;
+}
+.button-toggle-menu img{
+    width: 25px;
+    height: 25px;
+}
+.button-toggle-menu{
+    width: 40px;
+    height: 40px;
+}
+.menu-title{
+    color: #000;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.my-0{
+    color: #000;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+h6 .my-0{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.side-nav-link span{
+    color: #FFF;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.leftside-menu {
+    border-radius: 0px 68px 0px 0px;
+    background: #2C2B41;
+    padding: 1.5em;
+}
+
+.topbar{
+    background: #FFF;
+    box-shadow: 0px 1px 9px 0px rgba(0, 0, 0, 0.14);
+}
+
+.topbar::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5%;
+    height: 70px;
+    width: 80px;
+    background-color: #FFF;
+}
+
+.content-page{
+    background: linear-gradient(0deg, #E9ECF9 0%, #E9ECF9 100%), #FFF;
+}
+
+.side-nav-item a span, .side-nav-second-level li a{
+    color: rgba(255, 255, 255, 0.30);
+    font-family: Nunito;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.active-page span{
+    color: #FFF !important;
+}
+
+.side-nav-item a img, .log-out img{
+    width: 16px;
+    height: 16px;
+    margin-right: 1.5rem;
+}
+
+.account-user-avatar img{
+    width: 30px;
+    height: 30px;
+}
+
+.account-user-avatar:hover{
+    cursor: pointer;
+}
+
+.log-out{
+    position: absolute;
+    top: 80%;
+    left: 25%;
+}
+
+.log-out p{
+    color: #FFF;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+}
+
+.nav-user{
+    background-color: #FFF;
+    margin: 0;
+    border: none;
+    cursor: auto;
+}
+
+.nav-user img{
+    cursor: default;
+}
+
+.navbar-custom{
+    padding: 0;
+}
+.logo-lg img{
+    width: 43px;
+    height: 43px;
+}
+.logo .logo-light{
+    background: none;
+}
+@media only screen and (max-width: 576px){
+    .topbar::before{
+        display: none;
+    }
+    .topbar{
+        padding: 0 1em !important;
+    }
+}

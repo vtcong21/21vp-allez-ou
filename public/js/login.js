@@ -31,10 +31,22 @@ function logOut(){
  }
  
  function handleLoginResponse(response) {
-   const { redirectUrl } = response;
-   // Chuyển hướng đến trang (url này trong controller)
-   window.location.href = redirectUrl;
- }
+  if (response && response.redirectUrl) {
+    const { redirectUrl } = response;
+    // Chuyển hướng đến trang (url này trong controller)
+    window.location.href = redirectUrl;
+  } else {
+    // Xử lý khi không có đối tượng response hoặc không có thuộc tính redirectUrl
+    // Ví dụ:
+    alert('Có lỗi trong quá trình đăng nhập hoặc không có đường dẫn chuyển hướng.');
+  }
+}
+
+//  function handleLoginResponse(response) {
+//    const { redirectUrl } = response;
+//    // Chuyển hướng đến trang (url này trong controller)
+//    window.location.href = redirectUrl;
+//  }
  
  function login() {
    const email = document.getElementsByName('email')[0].value;

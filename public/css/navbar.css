@@ -82,8 +82,8 @@ html{
     height: 40px;
 }
 .cart-logo{
-    width: 31px;
-    height: 31px;
+    width: 30px  !important;
+    height: 30px  !important;
     margin-right: 2em;
 }
 .acc-info__container{
