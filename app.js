@@ -39,7 +39,11 @@ app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
 app.use('/pronvices', provinceRoutes);
 app.use('/auth', authRoutes);
-
+//test
+app.get('/test', (req, res)=>{
+  
+  res.render('usersList', {user: null});
+})
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
