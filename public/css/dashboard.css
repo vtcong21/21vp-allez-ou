@@ -1,0 +1,84 @@
+.content-page{
+    padding: 3.375em 2.5em;
+}
+
+.frame{
+    background-color: #FFF;
+    border-radius: 16.498px;
+    padding: 1em 1.5em;
+}
+.frame img{
+    width: 25px;
+    height: 25px;
+}
+
+.title{
+    color: #9F9EB9;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.revenue h3{
+    color: #000;
+    font-family: Nunito;
+    font-size: 2.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.revenue h1{
+    color: #9F9EB9;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.decrease{
+    color: #EA1D1D;
+}
+
+.increase{
+    color: #0C8C20;
+}
+
+.top-tour img{
+    width: 50px;
+    height: 29px;
+    object-fit: cover;
+}
+
+.top-tour a{
+    width: 35ch;
+    color: #000;
+    font-family: Nunito;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+
+
+.top-tour p{
+    color: #4F6CFF;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.grey-line{
+    margin: 1.5em 0;
+    border-top: 1.8px solid rgba(159, 158, 185, 0.25);
+}
+
+.blue-square{
+    border-radius: 4px;
+    background: rgba(79, 108, 255, 0.50);
+    width: 25px;
+    height: 25px;
+}
