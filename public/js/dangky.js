@@ -1,3 +1,11 @@
+
+// Hàm xóa hết dữ liệu trong localStorage
+function clearLocalStorage() {
+    localStorage.clear();
+  }
+  
+  // Gọi hàm clearLocalStorage() khi trang web được tải lên
+  window.addEventListener('load', clearLocalStorage);
 function loadNewForm3() {
     // Xóa nội dung phần tử "personal-info"
     var personal = document.getElementById("personal-info");
@@ -78,34 +86,31 @@ function loadNewForm() {
 </div>
 <div class="form-control-row">
 <div class="form-control-inline">
-<input type="radio" id="male" name="gender">
+<input type="radio" value="male" id="male" name="gender">
 <label for="male">Nam</label>
 </div>
 <div class="form-control-inline">
-<input type="radio" id="female" name="gender">
+<input type="radio" value="female" id="female" name="gender">
 
 <label for="female">Nữ</label>
 </div>
 <div class="form-control-inline">
-<input type="radio" id="other" name="gender">
+<input type="radio" value="other" id="other" name="gender">
 
 <label for="other">Không muốn tiết lộ</label>
         </div>
-    </div>
+</div> 
     <label for="dob">Ngày sinh:</label>
     <input type="date" class="form-control" id="dob" placeholder="Nhập ngày sinh" />
     <label for="phone">Số điện thoại:</label>
     <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại" />
 </div>
 `;
+
     personalInfoDiv.appendChild(formGroup);
     LoadFormValues2();
         document.getElementById("dob").value = localStorage.getItem("dob");
         document.getElementById("phone").value = localStorage.getItem("phone");
-        var genderInput = document.querySelector(`input[name="gender"][value="${localStorage.getItem("gender")}"]`);
-if (genderInput) {
-    genderInput.checked = true;
-}
     var btnHomeRegister = document.getElementById("btn-home-register");
     btnHomeRegister.innerHTML = `
 <div class="row" id="next1">
@@ -113,12 +118,25 @@ if (genderInput) {
     <button type="button" class="btn btn-primary2" onclick="loadNewForm3()">Quay lại</button>
     </div>
     <div class="col-6 text-center">
-    <button type="button" class="btn btn-primary" onclick="if (validateForm2()) { SaveValues2(); loadNewForm2(); }">Tiếp Theo</button>
+    <button type="button" class="btn btn-primary" onclick="if (validateForm2()) {getinfo(); SaveValues2(); loadNewForm2();  }">Tiếp Theo</button>
     </div>
 </div>
 `;
-}
 
+}
+function getinfo(){ 
+    var gender=document.getElementsByName('gender'); 
+    var genders=''; 
+    for (var i=0;i<gender.length;i++) {
+        if(gender[i].checked==true){ 
+            genders=gender[i].value;
+        }
+    }
+    console.log(gender);
+    console.log(genders);
+    localStorage.setItem('gender', genders);
+
+}
 
 function loadNewForm2() {
     
@@ -196,37 +214,29 @@ if (cheemailElement) {
     
     const registerForm = document.getElementById("register-form");
 
-    registerForm.addEventListener("submit", (e) => {
-        e.preventDefault();
+    // registerForm.addEventListener("submit", (e) => {
+    //     e.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("pwd").value;
-        const gender = document.querySelector('input[name="gender"]:checked').value;
-        const dob = document.getElementById("dob").value;
-        const phone = document.getElementById("phone").value;
-        const bank = document.getElementById("bank").value;
-        const accountNumber = document.getElementById("account_number").value;
-        const accountName = document.getElementById("account_name").value;
+    //     const name = document.getElementById("name").value;
+    //     const email = document.getElementById("email").value;
+    //     const password = document.getElementById("pwd").value;
+    //     const dob = document.getElementById("dob").value;
+    //     const phone = document.getElementById("phone").value;
 
-        axios.post("/register", {
-            name,
-            email,
-            password,
-            gender,
-            dob,
-            phone,
-            bank,
-            accountNumber,
-            accountName,
-        })
-        .then((response) => {
-            console.log(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    });
+    //     axios.post("/register", {
+    //         name,
+    //         email,
+    //         password,
+    //         dob,
+    //         phone,
+    //     })
+    //     .then((response) => {
+    //         console.log(response.data);
+    //     })
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+    // });
 
     function validateForm() {
         var nameField = document.getElementById("name");
@@ -281,23 +291,6 @@ if (cheemailElement) {
         }
         return true;
     }
-    function validateForm3() {
-        var accountNumberInput = document.getElementById("account_number");
-        var accountNameInput = document.getElementById("account_name");
-        if (accountNumberInput.value === "" || accountNameInput.value === "") {
-            alert("Vui lòng điền đầy đủ thông tin số tài khoản và tên chủ tài khoản!");
-            return false;
-        }
-        return true;
-    }
-    document.getElementById("register-form").addEventListener("submit", function(event) {
-        if (!validateForm3()) {
-            event.preventDefault(); 
-            alert("Vui lòng nhập đầy đủ thông tin!"); 
-        } else {
-            document.getElementById("register-form").submit(); 
-        }
-    });
 
       function SaveValues1(){
         localStorage.setItem("name", document.getElementById("name").value);
@@ -305,19 +298,6 @@ if (cheemailElement) {
         localStorage.setItem("password", document.getElementById("pwd").value);
       }
       function SaveValues2(){
-        // Lấy các phần tử radio button
-// Lấy giá trị của radio button từ localStorage
-let gender = localStorage.getItem("gender");
-
-// Kiểm tra nếu giá trị không là null thì hiển thị nó trong console log
-if (gender !== null) {
-  console.log(gender);
-} else {
-  console.log("Không có giá trị được lưu trữ trong localStorage");
-}
-
-// Kiểm tra giá trị của radio button được lưu trong localStorage
-console.log(localStorage.getItem("gender")); 
         localStorage.setItem("dob", document.getElementById("dob").value);
         localStorage.setItem("phone", document.getElementById("phone").value);
       }
@@ -326,22 +306,21 @@ console.log(localStorage.getItem("gender"));
         document.getElementById("email").value = localStorage.getItem("email");
         document.getElementById("pwd").value = localStorage.getItem("password");
       }
-      function LoadFormValues2(){
-        var genderInput = document.querySelector(`input[name="gender"][value="${localStorage.getItem("gender")}"]`);
-        if (genderInput) {
-            genderInput.checked = true;
-        }        
+      function LoadFormValues2(){ 
         document.getElementById("dob").value = localStorage.getItem("dob");
         document.getElementById("phone").value = localStorage.getItem("phone");
-      }
-      function SaveValues3(){ 
-        localStorage.setItem("bank", document.getElementById("bank").value);
-        localStorage.setItem("accountNumber", document.getElementById("account_number").value);
-        localStorage.setItem("accountName", document.getElementById("account_name").value);
-      }
-      function LoadFormValues3(){
-        document.getElementById("bank").value = localStorage.getItem("bank");
-        document.getElementById("account_number").value = localStorage.getItem("accountNumber");
-        document.getElementById("account_name").value = localStorage.getItem("accountName");
-      }
+    
+        // Lấy giá trị của các ô input radio trong localStorage
+        var gender = localStorage.getItem("gender");
+
+    // Gán giá trị của các ô input radio tương ứng
+    if (gender === "male") {
+        document.getElementById("male").checked = true;
+    } else if (gender === "female") {
+        document.getElementById("female").checked = true;
+    } else if (gender === "other") {
+        document.getElementById("other").checked = true;
+    }
+    }
+
      
