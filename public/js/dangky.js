@@ -176,7 +176,7 @@ function loadNewForm2() {
     </div>
     <div class="col-6 text-center">
     <form id="register-form" action="/register" method="post">
-    <button type="submit" class="btn btn-primary">Hoàn tất</button>
+    <button type="submit" class="btn btn-primary" onclick="if (finish()) {registerUser(formData)}" >Hoàn tất</button>
 </form>
     </div>
 </div>
@@ -211,32 +211,38 @@ if (cheemailElement) {
 } else {
   console.error("Cannot find element with id 'cheemail'");
 }}
-    
-    const registerForm = document.getElementById("register-form");
-
-    // registerForm.addEventListener("submit", (e) => {
-    //     e.preventDefault();
-
-    //     const name = document.getElementById("name").value;
-    //     const email = document.getElementById("email").value;
-    //     const password = document.getElementById("pwd").value;
-    //     const dob = document.getElementById("dob").value;
-    //     const phone = document.getElementById("phone").value;
-
-    //     axios.post("/register", {
-    //         name,
-    //         email,
-    //         password,
-    //         dob,
-    //         phone,
-    //     })
-    //     .then((response) => {
-    //         console.log(response.data);
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    // });
+function finish() {
+    const confirmAccountField = document.getElementById("confirm-account1");
+    var checkOTP = /^\d{6}$/;
+    if (confirmAccountField.value === "") {
+      alert("Hãy nhập mã OTP 6 số được gửi đến email!");
+      return loadNewForm2(); 
+    } 
+    else if (!checkOTP.test(confirmAccountField.value)) { 
+        alert("OTP gồm 6 số được gửi đến email! OTP bạn nhập vào không đúng")
+        return loadNewForm2();
+    }
+  
+    return true;
+  }
+  function registerUser(formData) {
+    axios.post("/register", formData)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  const formData = {
+    name: localStorage.getItem('name'),
+    email: localStorage.getItem('email'), 
+    pwd: localStorage.getItem('pwd'),
+    dob: localStorage.getItem('dob'),
+    phone: localStorage.getItem('phone'),
+    gender: localStorage.getItem('gender')
+  };
+  
 
     function validateForm() {
         var nameField = document.getElementById("name");
@@ -244,6 +250,7 @@ if (cheemailElement) {
           alert("Vui lòng nhập họ và tên!");
           return false;
         }
+       
       
         var emailField = document.getElementById("email");
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
