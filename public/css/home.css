@@ -368,6 +368,7 @@ body{
     text-align: center;
 }
 
+
 @media only screen and (max-width: 576px) {
     .fav-place__card{
         padding: 0 0;
