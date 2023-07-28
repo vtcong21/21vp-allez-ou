@@ -39,10 +39,12 @@ app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
 app.use('/pronvices', provinceRoutes);
 app.use('/auth', authRoutes);
-//test
+
+
+//test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
-  
-  res.render('usersList', {user: null});
+  //localhost:5000/test
+  res.render('usersList');
 })
 
 app.listen(port, () => {
