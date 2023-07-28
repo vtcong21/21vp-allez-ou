@@ -9,7 +9,7 @@ const tourSchema = new mongoose.Schema({
   name: { type: String, required: true },
   code: { type: String, required: true, unique: true },
   start_place_code: { type: String, required: true },
-  end_places_code: {
+  end_place_codes: {
     type: [{
       type: String,
       required: true
@@ -19,7 +19,8 @@ const tourSchema = new mongoose.Schema({
   price: { type: Number, default: 0 },
   date: { type: Date },
   time: { type: String },
-  remain_slots: { type: Number, default: 0 },
+  slots: {type: Number, default: 0},// số slot ban đầu
+  remain_slots: { type: Number, default: 0 }, //số slot còn lại
   num_of_days: { type: Number },
   promo_discount: { type: Number, default: 0 },
   kid_discount: { type: Number, default: 0.5 },

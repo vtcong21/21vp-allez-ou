@@ -5,12 +5,14 @@ const cartItemSchema = new mongoose.Schema({
     tickets: [
         {
             type: { type: String, required: true },
-            quantity: { type: Number, default: 0 },
-            price: { type: Number, default: 0 },
+            fullName: { type: String, required: true },
+            gender: { type: String, enum: ['Male', 'Female', 'Undefined'], required: true },
+            dateOfBirth: { type: Date, required: true },
+            price: { type: Number, default: 0 }
         }
     ],
     totalPrice: { type: Number, default: 0 }
-});
+}); 
 
 const userSchema = new mongoose.Schema({
     fullName: { type: String, required: true },
@@ -23,7 +25,8 @@ const userSchema = new mongoose.Schema({
     isAdmin: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
-    isBlocked: { type: Boolean, default: false }
+    dateCreate: {type: Date, default: Date.now},
+    // isBlocked: { type: Boolean, default: false }
 });
 
 const User = mongoose.model('User', userSchema);
