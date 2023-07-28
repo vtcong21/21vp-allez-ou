@@ -171,7 +171,7 @@ body{
 .search-button{
     width: 5.6rem;
     height: 5.6rem;
-    border-radius: 15.7928px;
+    border-radius: 16px !important;
 }
 
 

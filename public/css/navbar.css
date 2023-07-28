@@ -82,8 +82,13 @@ html{
     height: 40px;
 }
 .cart-logo{
+<<<<<<< HEAD
     width: 25px !important;
     height: 25px !important;
+=======
+    width: 30px  !important;
+    height: 30px  !important;
+>>>>>>> vdpvu21
     margin-right: 2em;
 }
 .acc-info__container{

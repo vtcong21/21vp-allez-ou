@@ -43,6 +43,12 @@ app.use('/auth', authRoutes);
 
 
 
+//test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
+app.get('/test', (req, res)=>{
+  //localhost:5000/test
+  res.render('usersList');
+})
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
