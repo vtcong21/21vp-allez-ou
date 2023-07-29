@@ -2,135 +2,165 @@
     {
         "id": 1,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 12990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 2,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/01/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-01-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 19990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 3,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/01/2023 - 7N6Đ - Giờ đi: 07:45",
+            "date": "2023-01-25",
+            "time": "07:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 4,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 11990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 5,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 15990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 6,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 16990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 7,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 14990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 8,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 13990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 9,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 18990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 10,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10000000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 11,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 12,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 13,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 14,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     },
     {
         "id": 15,
         "detail": {
-            "time": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "timeline": "25/06/2023 - 7N6Đ - Giờ đi: 17:45",
+            "date": "2023-06-25",
+            "time": "17:45",
             "place": "Hà Nội - Sapa - Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tịnh Cốc - Tràng An - Bái Đính",
-            "price": "10,990,000₫" 
+            "price": 10990000 
         },
         "image": "assets/img/tour.png"
     }

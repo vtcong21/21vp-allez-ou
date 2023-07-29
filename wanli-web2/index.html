@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>Du lịch</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -152,14 +152,14 @@
             </div>
             <div class="listtour">
                 <div class="tour-sort">
-                    <div class="sort-block">
+                    <div class="sort-block" onclick="sortButtonActive1(this)">
                         <div class="sort-block-content">Ngày khởi hành</div>
                         <img src="./assets/img/up-arrow.svg" alt="">
                     </div>
                     <div style="width: 15px; display: inline-block;"></div>
-                    <div class="sort-block">
+                    <div class="sort-block" onclick="sortButtonActive2(this)">
                         <div class="sort-block-content">Giá tiền</div>
-                        <img src="./assets/img/down-arrow.svg" alt="">
+                        <img src="./assets/img/up-arrow.svg" alt="">
                     </div>
                 </div>
                 <script id = "list-traveltour" type="x-handlebars-template">
@@ -168,7 +168,7 @@
                             <img src="{{image}}" alt="">
                             <div class="content">
                                 <div class="sub-content">
-                                    <h3>{{detail.time}}</h3>
+                                    <h3>{{detail.timeline}}</h3>
                                     <h1>{{detail.place}}</h1>
                                 </div>
                                 <h2>{{detail.price}}</h2>

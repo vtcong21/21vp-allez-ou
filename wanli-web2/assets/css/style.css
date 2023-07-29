@@ -490,6 +490,7 @@ li {
     background-color: #6E6A8E;
     border-radius: 24px;
     padding: 4px 14px;
+    cursor: pointer;
 }
 
 #travel .listtour .tour-sort .sort-block .sort-block-content {
