@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="css/client.css">
+<div class="table-responsive  table-custom">
+    <table class="table align-middle position-relative mb-0 table-striped table-borderless">
+        <thead class="align-middle">
+            <tr>
+                <th>Khách hàng</th>
+                <th>ID</th>
+                <th>Giới tính</th>
+                <th>Ngày tạo tài khoản</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for( let index = 0; index < 10; index++ ) { %>
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
+                            <div class="ms-3">
+                                <p class="fw-bold mb-1 name">Vũ Nguyễn Xuân Uyên</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">21126088</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">Nam</p>
+                    </td>
+                    <td>
+                        <p class="fw-normal mb-1">20/10/2019</p>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-end">
+                            <a onclick="copyTolipBoard('0918363125')"><img src="img/admin/users-role/paper-plane.png"></a>
+                            <a onclick="copyTolipBoard('0918363125')"><img src="img/admin/users-role/phone-call-1.png"></a>
+                            <a><img src="img/admin/users-role/eye-1.png"></a>
+                        </div>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+<script defer src="js/client.js"></script>
