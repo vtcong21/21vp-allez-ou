@@ -13954,7 +13954,9 @@ fieldset:disabled .btn {
   height: var(--ct-logo-lg-height);
 }
 .logo-sm img {
-  height: var(--ct-logo-sm-height);
+    margin-left: 0;
+    height: 22px;
+    width: 22px;
 }
 .logo {
   display: block;
@@ -14096,8 +14098,13 @@ html[data-sidenav-user="true"] .leftbar-user {
   font-size: calc(var(--ct-menu-item-font-size) * 1.18);
 }
 .side-nav .menu-arrow:before {
-  content: "\f0142";
-  font-family: "Material Design Icons";
+  content: "";
+  border: solid rgba(255, 255, 255, 0.30);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 }
 .side-nav .badge {
   margin-top: calc(var(--ct-menu-item-font-size) * 0.25);
@@ -14257,6 +14264,15 @@ html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
   display: none;
 }
 html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
+.log-out{
+  display: none !important;
+}
+
+html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
+.side-logo{
+  margin-left: 0;
+}
+html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
   .wrapper
   .navbar-custom {
   z-index: 1005;
@@ -14266,7 +14282,7 @@ html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
 html[data-sidenav-size="condensed"]:not([data-layout="topnav"])
   .wrapper
   .leftside-menu {
-  position: absolute;
+  /* position: absolute; */
   width: var(--ct-leftbar-width-sm);
   min-width: var(--ct-leftbar-width-sm);
   border-radius: inherit;
