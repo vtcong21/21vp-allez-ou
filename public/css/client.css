@@ -75,12 +75,37 @@ td:last-child{
     border-radius: 0 11px 11px 0;
 }
 
-a img{
+.client-icon{
     width: 11px;
     height: 11px;
     margin-left: 0.8em;
 }
+/* modal */
+.card{
+    width: 295px;
+    padding: 0;
+}
+.client-info{
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0.8em 1em 0.5em;
+}
+.client-info p{
+    margin: 0;
+}
 
+.client-ava{
+    width: 94px;
+    height: 94px;
+    margin-bottom: 1.5em;
+}
+
+#modal-grey-line{
+    border-bottom: 1px solid rgba(110, 106, 142, 0.25);
+}
 @media only screen and (max-width: 576px) {
     th:first-child::before{
         display: none;
