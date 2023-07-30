@@ -1,0 +1,380 @@
+:root {
+    font-size: 62.5%;
+}
+body {
+    background-image: url(/img/dangnhap.png);
+    background-size: cover;
+    font-family: "Nunito";
+    font-size: 1.6rem;
+}
+.border-white {
+    border-radius: 17px;
+    margin-top: 8vw;
+    background-color: #ffffff;
+    padding: 0%;
+    font-size: 1.6rem;
+    align-items: center;
+
+    box-shadow: 0px 0.45vw 1.425vw rgba(0, 0, 0, 0.19);
+}
+@media screen and (max-width: 767px) {
+    .border-white {
+        font-size: 1.2rem;
+        margin-top: 10em;
+        max-width: 80%;
+    }
+} 
+#register{
+    background-color: #4b60ce; 
+    font-weight: 900;
+}
+.inside-form {
+    padding-top: 4.5em;
+}
+.center-form {
+    display: flex;
+    border-radius: 17px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-bottom: 0%;
+    margin-bottom: 0.5em;
+    justify-content: center;
+    align-items: center;
+}
+.select{
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    border: 2px solid #dadada;
+    border-radius: 5px;
+    padding-right: 46%;
+}
+
+.form-control {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    max-width: 75%;
+    font-size: 1.5rem;
+    border: 2px solid #dadada;
+    border-radius: 5px;
+    color: black;
+}
+@media screen and (max-width: 767px) {
+    #resend-code {
+        margin-left: 0;
+    }
+}
+#resend-code{ 
+    margin-left: 15.75em;
+}
+.form-control-pwd,
+#pwd_confirm,
+#pwd {
+    width: 50%;
+    max-width: calc(100% / 0.8 * 0.5);
+}
+@media screen and (max-width: 767px) {
+    .form-control {
+        max-width: 90%;
+    }
+    .select{
+        max-width: 90%;
+
+    }
+}
+
+
+
+
+.form-group {
+    font-weight: bold;
+}
+.btn-register,
+.btn-info,
+.btn-bank-link {
+    background-color: #dadada;
+    border: none;
+    font-family: "Nunito";
+    font-weight: bold;
+    font-size: 1.6rem;
+    cursor: pointer;
+    width: calc(100% / 3);
+}
+.form-group-name {
+    margin-left: 20%;
+    font-weight: bold;
+}
+@media screen and (max-width: 767px) {
+    .form-group-name {
+        margin-left: 10%;
+    }
+}
+label[for="email"] {
+    margin-top: 0.5em;
+}
+label[for="pwd"] {
+    margin-left: 40%;
+    margin-top: 0.5em;
+}
+label[for="pwd_confirm"] {
+    margin-top: 0.5em;
+}
+#pwd {
+    margin-left: 40%;
+}
+@media screen and (max-width: 767px) {
+    #pwd {
+        margin-left: 10%;
+        width: 81%;
+        max-width: 100% !important;
+    }
+    label[for="pwd"] {
+        margin-left: 10%;
+    }
+    #pwd_confirm {
+        margin-left: 10%;
+        width: 81%;
+        max-width: 100% !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #pwd_confirm {
+        margin-left: 3.5em;
+    }
+}
+@media screen and (max-width: 767px) {
+    .pwd-confirm-wrapper input[type="password"] {
+        margin-left: 15vw;
+    }
+}
+@media screen and (max-width: 767px) {
+    .pwd-confirm-wrapper label[for="pwd_confirm"] {
+        margin-left: 15vw;
+    }
+}
+@media screen and (min-width: 767px) {
+    .pwd-confirm-wrapper label[for="pwd_confirm"] {
+        margin-left: 3.5em;
+    }
+}
+
+.btn:hover {
+    background-color: #4b60ce;
+    color: #ffffff;
+}
+.btn-third-length {
+    color: #ffffff;
+    background-color: #dadada;
+    width: 100%;
+    font-size: 1.6rem;
+    border-color: none !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+@media screen and (max-width: 767px) {
+    .btn-third-length {
+        font-size: 1.2rem;
+    }
+}
+
+#register {
+    border-top-left-radius: 17px;
+}
+#bank-link {
+    border-top-right-radius: 17px;
+}
+.row {
+    margin-bottom: 25vw;
+}
+.btn-home {
+    margin-right: 17vw;
+    font-size: 1.6rem;
+}
+@media screen and (max-width: 767px) {
+    .btn-home {
+        margin-right: 0;
+    }
+}
+.btn-primary {
+    padding: 0.3em;
+    padding-right: 2em;
+    padding-left: 2em;
+    background-color: #4b60ce;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.6rem;
+}
+.container{ 
+    padding: 0;
+}
+.btn-primary2{ 
+    padding: 0.3em;
+    padding-right: 2em;
+    padding-left: 2em;
+    margin-left: 1em;
+    color: #ffffff; 
+    margin-top: 1em;
+    margin-right: 11em;
+    background-color: #4b60ce;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.6rem;
+}
+@media screen and (max-width: 767px) {
+    .btn-primary {
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #btn-home-register {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #btn-home-register .btn {
+        margin-top: 1em;
+        margin-left: 2em;
+        margin-right: 0 !important;
+    }
+}
+
+#btn-home-register .btn-home {
+    margin-top: 1em;
+    margin-right: 8em;
+}
+@media screen and (max-width: 767px) {
+    #btn-home-register .btn-home {
+        margin-right: 0em;
+        margin-top: 0em;
+        margin-left: 1.1em;
+    }
+    #btn-home-register .btn-home:hover {
+        background-color: none !important;
+        padding: 0;
+        border: 0;
+    }
+}
+
+#btn-home-register .btn-primary {
+    margin-top: 1em;
+    margin-left: 10em;
+}
+@media screen and (max-width: 767px) {
+    #btn-home-register .btn-primary {
+        margin-left: 0em;
+        margin-top: 1em;
+        margin-right: 3.4em !important;
+    }
+    label [for="pwd_confirm"] {
+        margin-top: 0;
+    }
+}
+@media screen and (max-width: 767px) {
+    .form-group {
+        margin-bottom: 0em;
+    }
+}
+@media screen and (max-width: 767px) {
+    .btn-primary {
+        padding: 0.3em;
+        padding-right: 2em;
+        padding-left: 2em;    }
+}
+#personal-info{ 
+    margin-top: 5em;
+}
+.form-control-row {
+display: flex;
+align-items: center;
+}
+
+
+.form-control-inline {
+display: inline-block;
+margin-right: 7.5em;
+} 
+@media screen and (max-width:767px) { 
+    .form-control-inline{ 
+        margin-right: 1em;
+    }     
+}
+
+.form-control-inline label {
+display: inline-block;
+margin-right: 6px;
+vertical-align: middle;
+align-items: center;
+
+}
+.form-control-inline input[type="radio"] { 
+margin-right: 5px;
+order: -1; 
+} 
+@media  screen and (max-width:767px) { 
+    .form-control-inline input[type="radio"]
+    { 
+        margin-right: 0;
+    }
+}
+#dob { 
+    margin-bottom: 1em;
+}
+@media screen and (max-width: 767px) {
+   .select#bank{ 
+    padding-right: 30%;
+   } 
+  }
+@media screen and (max-width:767px) { 
+    .row#next1{ 
+        margin-bottom: 100px;
+    }
+    
+}
+@media screen and (max-width:767px) { 
+    .row#next2{ 
+        margin-bottom: 100px;
+    }
+    
+}
+@media screen and (max-width:767px) { 
+    
+    #phone {
+        margin-bottom: 6.5vw;
+    }
+}
+@media (max-width: 767px) {
+    .form-group-name label[for="gender"] {
+      margin-top: 6.5vw;
+    }
+  }
+@media screen and (max-width:767px) {
+    .form-group-name label[for="bank"]
+    { 
+        margin-top: 6.5vw;
+    }
+
+}
+@media screen and (max-width:767px) {
+    .form-group-name #account_name{ 
+        margin-bottom: 10vw;
+    }
+}
+.form-group-name label[for="account_number"]
+{ 
+    margin-top: 0.5vw;
+    margin-bottom: 0;
+}
+.form-group-name label[for="account_name"]
+{ 
+    margin-top: 0.5vw;
+    margin-bottom: 0;
+}
+.form-group-name #account_name{ 
+    margin-bottom: 0vw;
+}
