@@ -504,7 +504,11 @@ firstGroup8.appendChild(col3);
             document.addEventListener('DOMContentLoaded', function() {
               const orderButton = document.getElementById('button-order-btn');
               console.log(orderButton); // Kiểm tra xem orderButton có tồn tại và là một phần tử HTML hợp lệ không
-            
+              clearLocalStorage();
+              function clearLocalStorage() {
+                localStorage.clear();
+              }
+
               if (orderButton) {
                 orderButton.onclick = () => {
                   const hoTenInput = document.getElementById('ho-ten');
@@ -520,13 +524,17 @@ firstGroup8.appendChild(col3);
                    if (!hoTenInput.value || !soDienThoaiInput.value || !diaChiInput.value || !emailInput.value || !genderInput.value ||
                     !hoten1Input.value||!ngaysinhInput.value) {
                     alert('Vui lòng điền đầy đủ thông tin!');
+                    return false; 
                   }
                   else if (!soDienThoaiInput.value.match(soDienThoaiPattern)) {
-                    alert('Số điện thoại không hợp lệ. Vui lòng nhập lại số điện thoại đúng định dạng!');
+                    alert('Số điện thoại không hợp lệ. Vui lòng nhập lại số điện thoại đúng định dạng!'); 
+                    return false;
                   } 
                   else if (!emailInput.value.match(emailPattern)) {
                     alert('Email không hợp lệ. Vui lòng nhập lại email đúng định dạng!');
+                    return false; 
                   }
+                  
                   console.log('Họ và tên:', hoTenInput.value);
 console.log('Số điện thoại:', soDienThoaiInput.value);
 console.log('Địa chỉ:', diaChiInput.value);
@@ -534,20 +542,29 @@ console.log('Email:', emailInput.value);
 console.log('Giới tính:', genderInput.value);
 console.log('Họ tên 1:', hoten1Input.value);
 console.log('Ngày sinh:', ngaysinhInput.value);
-function clearLocalStorage() {
-    localStorage.clear();
-  }
-localStorage.setItem('hoTen', hoTenInput.value);
+const button = document.getElementById('button-order-btn');
+button.dataset.bsTarget = '#exampleModalToggle';
+
+
+  // Lưu giá trị total vào LocalStorage với key là "totalValue"
+  var totalDiv = document.querySelector(".total5");
+  var totalValue = totalDiv.textContent;
+  localStorage.setItem("totalValue", totalValue);
+  localStorage.setItem('hoTen', hoTenInput.value);
 localStorage.setItem('soDienThoai', soDienThoaiInput.value);
 localStorage.setItem('diaChi', diaChiInput.value);
 localStorage.setItem('email', emailInput.value);
 localStorage.setItem('gender', genderInput.value);
 localStorage.setItem('hoten1', hoten1Input.value);
 localStorage.setItem('ngaysinh', ngaysinhInput.value);
+
+
                 };
                 
               }
 });
+
+
               
    
             
