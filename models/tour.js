@@ -32,7 +32,7 @@ const tourSchema = new mongoose.Schema({
   babyDiscount: { type: Number, default: 0.7 },
   teenDiscount: { type: Number, default: 0.1 },
   cardImgUrl: { type: String },
-  imgUrlr: [{ type: String }],
+  imgUrls: [{ type: String }],
   transport: { type: String },
   food: { type: String },
   hotel: { type: String },
