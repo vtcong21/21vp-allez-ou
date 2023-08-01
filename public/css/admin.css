@@ -88,6 +88,7 @@ h6 .my-0{
     width: 16px;
     height: 16px;
     margin-right: 1.5rem;
+    margin-left: 0;
 }
 
 .account-user-avatar img{
@@ -135,6 +136,28 @@ h6 .my-0{
 .logo .logo-light{
     background: none;
 }
+.ri-close-fill:before {
+    /* content: url("/img/home/60x60.png");
+    background-size: 10px 10px; */
+    content: "";
+    background-image: url("/img/admin/close10px.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 14px 14px;
+    display: block;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border: 1px solid transparent;
+}
+
+
+.button-close-fullsidebar{
+    position: absolute;
+    top: 5%;
+    left: 80.5%;
+}
+
 @media only screen and (max-width: 576px){
     .topbar::before{
         display: none;

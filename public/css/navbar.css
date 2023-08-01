@@ -82,13 +82,8 @@ html{
     height: 40px;
 }
 .cart-logo{
-<<<<<<< HEAD
-    width: 25px !important;
-    height: 25px !important;
-=======
     width: 30px  !important;
     height: 30px  !important;
->>>>>>> vdpvu21
     margin-right: 2em;
 }
 .acc-info__container{
@@ -257,6 +252,11 @@ html{
 
 .bg-transparent{
     border-color: transparent !important;
+}
+
+.nav-logo{
+    width: 50px;
+    height: 50px;
 }
 @media only screen and (max-width: 576px){
     .navbar-container{
