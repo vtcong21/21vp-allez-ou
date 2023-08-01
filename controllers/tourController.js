@@ -42,19 +42,19 @@ const searchTours = async (req, res) =>{
         const {startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice} = req.query;
         const query = Tour.find();
         if(startPlaceCode){
-            query.where('start_place_code').equals(startPlaceCode);
+            query.where('startPlace').equals(startPlaceCode);
         }
         if (endPlaceCode && endPlaceCode.length > 0) {
-            query.where('end_place_code').in(endPlaceCode);
+            query.where('endPlaces').in(endPlaceCode);
           }
         if(numOfPeople){
-            query.where('remain_slots').gte(numOfPeople);
+            query.where('remainSlots').gte(numOfPeople);
         }
         if(travelDate){
             query.where('date').equals(travelDate);
         }
         if (numOfDays) {
-            query.where('num_of_days').equals(numOfDays);
+            query.where('numOfDays').equals(numOfDays);
         }
         if (minPrice && maxPrice) {
             query.where('price').gte(minPrice).lte(maxPrice);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    tour: { type: mongoose.Schema.Types.ObjectId, ref: 'Tour'},
+    tourCode: { type: mongoose.Schema.Types.ObjectId, ref: 'Tour'},
     tickets: [
         {
             type: { type: String, required: true },

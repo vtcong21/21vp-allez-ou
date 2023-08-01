@@ -12,7 +12,7 @@ const monthlyRevenueSchema = new mongoose.Schema({
 });
 
 const dashboardSchema = new mongoose.Schema({
-  systemPaymentAccount: { type: mongoose.Schema.Types.ObjectId, ref: 'PaymentAccount', required: true },
+  systemPaymentAccountId: { type: mongoose.Schema.Types.ObjectId, ref: 'PaymentAccount', required: true },
   dailyRevenue: [dailyRevenueSchema],
   monthlyRevenue: [monthlyRevenueSchema],
 });

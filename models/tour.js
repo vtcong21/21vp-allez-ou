@@ -5,13 +5,18 @@ const dayScheduleSchema = new mongoose.Schema({
   schedule_detail: { type: String }
 });
 
+const provinceSchema= new mongoose.Schema({
+  code: {type: String, require : true, unique : true},
+  name: {type: String}
+});
+
 const tourSchema = new mongoose.Schema({
   name: { type: String, required: true },
   code: { type: String, required: true, unique: true },
-  start_place_code: { type: String, required: true },
-  end_place_codes: {
+  startPlace: { type: provinceSchema, required: true },
+  endPlaces: {
     type: [{
-      type: String,
+      type: provinceSchema,
       required: true
     }],
     required: true
@@ -19,15 +24,15 @@ const tourSchema = new mongoose.Schema({
   price: { type: Number, default: 0 },
   date: { type: Date },
   time: { type: String },
-  slots: {type: Number, default: 0},// số slot ban đầu
-  remain_slots: { type: Number, default: 0 }, //số slot còn lại
-  num_of_days: { type: Number },
-  promo_discount: { type: Number, default: 0 },
-  kid_discount: { type: Number, default: 0.5 },
-  baby_discount: { type: Number, default: 0.7 },
-  teen_discount: { type: Number, default: 0.1 },
-  card_img_url: { type: String },
-  img_url: [{ type: String }],
+  slots: {type: Number},
+  remainSlots: { type: Number, default: 0 },
+  numOfDdays: { type: Number},
+  promoDiscount: { type: Number, default: 0 },
+  kidDiscount: { type: Number, default: 0.5 },
+  babyDiscount: { type: Number, default: 0.7 },
+  teenDiscount: { type: Number, default: 0.1 },
+  cardImgUrl: { type: String },
+  imgUrlr: [{ type: String }],
   transport: { type: String },
   food: { type: String },
   hotel: { type: String },
