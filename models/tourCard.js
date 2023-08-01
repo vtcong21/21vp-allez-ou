@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const provinceSchema = new mongoose.Schema({
-    code: { type: String, require: true, unique: true },
+    code: { type: String, require: true},
     name: { type: String }
 });
 
