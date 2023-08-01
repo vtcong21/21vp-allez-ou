@@ -9,7 +9,7 @@ const tourCardSchema = new mongoose.Schema({
     name: { type: String, require: true },
     code: { type: String, require: true, unique: true },
     startPlace: { type: provinceSchema, required: true },
-    end_places: {
+    endPlaces: {
         type: [{
             type: provinceSchema,
             required: true
