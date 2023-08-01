@@ -17,5 +17,5 @@ const dashboardSchema = new mongoose.Schema({
   monthlyRevenue: [monthlyRevenueSchema],
 });
 
-const Dashboard = mongoose.model('Dashboard', dashboardSchema);
+const Dashboard = mongoose.model('Dashboard', dashboardSchema, 'dashboard');
 module.exports = Dashboard;

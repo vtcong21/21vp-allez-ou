@@ -15,5 +15,5 @@ const paymentAccountSchema = new mongoose.Schema({
     paymentHistory: [{ type: billSchema}]
 });
 
-const PaymentAccount = mongoose.model('PaymentAccount', paymentAccountSchema);
+const PaymentAccount = mongoose.model('PaymentAccount', paymentAccountSchema, 'payment-accounts');
 module.exports = PaymentAccount;
