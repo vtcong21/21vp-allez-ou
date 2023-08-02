@@ -44,7 +44,7 @@ app.use('/auth', authRoutes);
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
   //localhost:5000/test
-  res.render('dangkytour');
+  res.render('dangkytour', {user: null});
 })
 
 app.listen(port, () => {
