@@ -6,16 +6,18 @@ const dailyRevenueSchema = new mongoose.Schema({
 });
 
 const monthlyRevenueSchema = new mongoose.Schema({
+  dailyRevenue: {
+    type: [{dailyRevenueSchema}]
+  },
   month: { type: Number, required: true },
   year: { type: Number, required: true },
   revenue: { type: Number, default: 0 },
 });
 
 const dashboardSchema = new mongoose.Schema({
-  systemPaymentAccount: { type: mongoose.Schema.Types.ObjectId, ref: 'PaymentAccount', required: true },
-  dailyRevenue: [dailyRevenueSchema],
-  monthlyRevenue: [monthlyRevenueSchema],
+  systemPaymentAccountId: { type: mongoose.Schema.Types.ObjectId, ref: 'PaymentAccount', required: true },
+  monthlyRevenue: [monthlyRevenueSchema]
 });
 
-const Dashboard = mongoose.model('Dashboard', dashboardSchema);
+const Dashboard = mongoose.model('Dashboard', dashboardSchema, 'dashboard');
 module.exports = Dashboard;

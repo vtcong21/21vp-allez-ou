@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 
+const provinceSchema = new mongoose.Schema({
+    code: { type: String, require: true},
+    name: { type: String }
+});
+
 const tourCardSchema = new mongoose.Schema({
     name: { type: String, require: true },
     code: { type: String, require: true, unique: true },
-    start_place_code: { type: String, required: true },
-    end_places_code: {
+    startPlace: { type: provinceSchema, required: true },
+    endPlaces: {
         type: [{
-            type: String,
+            type: provinceSchema,
             required: true
         }],
         required: true
@@ -14,10 +19,10 @@ const tourCardSchema = new mongoose.Schema({
     price: { type: Number, default: 0 },
     date: { type: Date },
     time: { type: String },
-    remain_slots: { type: Number, default: 0 },
-    num_of_days: { type: Number },
-    promo_discount: { type: Number, default: 0 },
-    card_img_url: { type: String }
+    remainSlots: { type: Number, default: 0 },
+    numOfDdays: { type: Number },
+    promoDiscount: { type: Number, default: 0 },
+    cardImgUrl: { type: String }
 },
     {
         collection: 'tours'
