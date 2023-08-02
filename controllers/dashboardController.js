@@ -46,7 +46,7 @@ const searchMonthlyRevenuesByYear = async (req, res) => {
 const getProfitPercentageThisMonth = async (req, res) => {
     try {
         const currentYear = new Date().getFullYear();
-        const currentMonth = new Date().getMonth() + 1; 
+        const currentMonth = new Date().getMonth() + 1;
         const dashboard = await Dashboard.findOne();
 
         if (!dashboard) {
@@ -70,37 +70,35 @@ const getProfitPercentageThisMonth = async (req, res) => {
 
         res.status(200).json(profitPercentage);
     } catch (err) {
-        throw new Error('Error in compute percentage: ' + err.message);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
 
 
 const getRevenueLast7Days = async (req, res) => {
-  const dashboard = await Dashboard.findOne();
-  const monthlyRevenue = dashboard.monthlyRevenue;
-
-  const currentDate = new Date();
-  let last7DaysRevenue = [];
-  let daysCount = 0;
-
-  for (let i = monthlyRevenue.length - 1; i >= 0 && daysCount < 7; i--) {
-    const monthly = monthlyRevenue[i];
-    const dailyRevenue = monthly.dailyRevenue;
-
-    for (let j = dailyRevenue.length - 1; j >= 0 && daysCount < 7; j--) {
-      const daily = dailyRevenue[j];
-
-      if (currentDate - daily.date >= 86400000 * (7 - daysCount) && currentDate - daily.date < 86400000 * (8 - daysCount)) { 
-        last7DaysRevenue.push(daily.revenue);
-        daysCount++;
-      }
+    try {
+        const dashboard = await Dashboard.findOne();
+        let last7DaysRevenue = [];
+        let daysCount = 0;
+        for (let i = dashboard.monthlyRevenue.length - 1; i >= 0 && daysCount < 7; i--) {
+            const monthly = dashboard.monthlyRevenue[i];
+            const dailyRevenue = monthly.dailyRevenue;
+            for (let j = dailyRevenue.length - 1; j >= 0 && daysCount < 7; j--) {
+                const daily = dailyRevenue[j];
+                last7DaysRevenue.push(daily);
+                daysCount++;
+                console.log(daily);
+            }
+        }
+        res.status(200).json({ last7DaysRevenue });
+    } catch (error) {
+        console.error('Error in get 7 days revenue:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-  }
-
-  res.status(200).json(last7DaysRevenue);
 }
 
-module.exports ={
+
+module.exports = {
     getMonthlyRevenuesThisYear,
     getProfitPercentageThisMonth,
     searchMonthlyRevenuesByYear,
