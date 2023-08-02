@@ -53,7 +53,7 @@ function compareEvents(event1, event2) {
 function sortButtonActive1(button) {
 	sortButtonState2 = 0;
 	sortButtonState1 = (sortButtonState1 + 1) % 3;
-	var images = document.querySelectorAll("#travel .listtour .tour-sort .sort-block img");
+	var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
 	for(var i = 0; i < images.length; i++) {
 		images[i].src = "./assets/img/up-arrow.svg";
 	}
@@ -62,7 +62,7 @@ function sortButtonActive1(button) {
 	if(sortButtonState1 == 2) image.src = "./assets/img/down-arrow.svg";
 	else image.src = "./assets/img/up-arrow.svg";
 
-	var sortButtons = document.querySelectorAll("#travel .listtour .tour-sort .sort-block");
+	var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
 	for(var i = 0; i < sortButtons.length; i++) {
 		sortButtons[i].style.backgroundColor = '#6E6A8E';
 	}
@@ -85,7 +85,7 @@ function sortButtonActive1(button) {
 function sortButtonActive2(button) {
 	sortButtonState1 = 0;
 	sortButtonState2 = (sortButtonState2 + 1) % 3;
-	var images = document.querySelectorAll("#travel .listtour .tour-sort .sort-block img");
+	var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
 	for(var i = 0; i < images.length; i++) {
 		images[i].src = "./assets/img/up-arrow.svg";
 	}
@@ -94,7 +94,7 @@ function sortButtonActive2(button) {
 	if(sortButtonState2 == 2) image.src = "./assets/img/down-arrow.svg";
 	else image.src = "./assets/img/up-arrow.svg";
 
-	var sortButtons = document.querySelectorAll("#travel .listtour .tour-sort .sort-block");
+	var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
 	for(var i = 0; i < sortButtons.length; i++) {
 		sortButtons[i].style.backgroundColor = '#6E6A8E';
 	}
@@ -109,6 +109,17 @@ function sortButtonActive2(button) {
 		listTravelTour.sort((travel1, travel2) => travel2.detail.price - travel1.detail.price);
 	}
 	generateTravelTour(listTravelTour);
+}
+
+function findButtonActive(button) {
+	if(window.innerWidth <= 900) {
+		var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
+		if (filter.style.display === 'none') {
+			filter.style.display = 'block';
+		} else {
+			filter.style.display = 'none';
+		}
+	}
 }
 
 function generateTravelTour(data){
@@ -157,19 +168,21 @@ function nextPage() {
 	}
 }
 
-var priceSlider = document.getElementById('f-price-slider');
-var priceMin = document.getElementById('f-price-min');
-var priceMax = document.getElementById('f-price-max');
+var priceSlider = document.getElementsByClassName('f-price-slider');
+var priceMin = document.getElementsByClassName('f-price-min');
+var priceMax = document.getElementsByClassName('f-price-max');
 
-noUiSlider.create(priceSlider, {
-	start: [2000000, 11000000], 
-	connect: true,
-	range: {
-		'min': 0,
-		'max': 20000000
-	},
-	step: 1000000
-});
+for(var i = 0; i < priceSlider.length; i++) {
+	noUiSlider.create(priceSlider[i], {
+		start: [2000000, 11000000], 
+		connect: true,
+		range: {
+			'min': 0,
+			'max': 20000000
+		},
+		step: 1000000
+	});
+}
 
 function formatPrice(price) {
 	var parts = price.toString().split(".");
@@ -177,11 +190,25 @@ function formatPrice(price) {
 	return parts.join(".");
 }
 
-priceSlider.noUiSlider.on('update', function (values, handle) {
-	if (handle === 0) {
-		priceMin.innerHTML = formatPrice(Math.round(values[0]));
-	}
-	if (handle === 1) {
-		priceMax.innerHTML = formatPrice(Math.round(values[1]));
-	}
-});
+for(var i = 0; i < priceSlider.length; i++) {
+	priceSlider[i].noUiSlider.on('update', (function (index) {
+		return function (values, handle) {
+			if (handle === 0) {
+				priceMin[index].innerHTML = formatPrice(Math.round(values[0]));
+			}
+			if (handle === 1) {
+				priceMax[index].innerHTML = formatPrice(Math.round(values[1]));
+			}
+		};
+	})(i));
+}
+
+function toggleFilterVisibility() {
+  var filterElement = document.querySelector('#travel .travel-container .travel-content .filter-screen');
+  if (window.innerWidth > 900) {
+    filterElement.style.display = 'none'; 
+  }
+}
+
+window.addEventListener('load', toggleFilterVisibility);
+window.addEventListener('resize', toggleFilterVisibility);

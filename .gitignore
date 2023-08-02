@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 /note.md
+=======
+.env
+node_modules/
+>>>>>>> dev

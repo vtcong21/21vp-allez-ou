@@ -1,0 +1,204 @@
+.root {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: "Nunito";
+}
+
+.container {
+    margin-top: 10em;
+}
+
+table.table-bordered {
+    background-color: #ffffff;
+    padding-bottom: 10em;
+    border-radius: 10px;
+}
+table.table-bordered2 {
+    margin-top: 2%;
+    background-color: #ffffff;
+    padding-bottom: 10em;
+    border-radius: 10px;
+}
+
+table tr {
+    border-width: 0;
+}
+
+.first-group {
+    padding-top: 0.5em;
+}
+
+.second-group {
+    padding-bottom: 2em;
+}
+
+.form-label {
+    margin-top: 1em;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
+
+.form-control {
+    border: 1px solid rgba(110, 106, 142, 0.35);
+    border-radius: 6px;
+}
+
+form[name="info"] {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+form[name="information-nguoilon"] {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+.information{ 
+    padding-top: 0.8em;
+}
+
+.wrapper {
+    padding-left: 5%;
+    border-radius: 10px;
+    padding-right: 5%;
+    padding-top: 0.7em;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.total{ 
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+}
+.total2{ 
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+} 
+.total3{ 
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+} 
+.total4{ 
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+}
+.total6{ 
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    display: flex;
+    justify-content: space-between;
+}
+.button-order{  
+    margin: 2em 0;
+    text-align: center;
+} 
+#button-order-btn{ 
+    background-color: #4f6cff; 
+    border-radius: 15px; 
+    border: none; 
+    color: #ffffff;
+    box-shadow: none; 
+    padding: 0.5em 8.4em;
+    font-weight: bolder;
+}
+
+.amountofpeople2 {
+    margin-top: 2em;
+}
+
+.input-group {
+    margin-top: 0.8em;
+}
+
+.minus-button,
+.plus-button,
+.minus-button2,
+.plus-button2,
+.minus-button3,
+.plus-button3,
+.minus-button4,
+.plus-button4 {
+    border-radius: 50%;
+    padding: 0 8px;
+}
+
+.minus-button,
+.minus-button2,
+.minus-button3,
+.minus-button4 {
+    margin-right: 0.5em;
+}
+
+.quantity,
+.quantity2,
+.quantity3,
+.quantity4 {
+    margin-right: 0.5em;
+    font-size: larger;
+}
+.nguoilon {
+    background-color: #ffffff;
+}
+.col-md-5 {
+    padding-bottom: 1em;
+} 
+.information-tour{ 
+    background-color: #ffffff; 
+    border-radius: 22.5px;
+}
+.name-tour { 
+    text-align: left; 
+    font-weight: bold;
+    margin: 10px 2em;
+}
+label[for="information-tour"]{ 
+    font-size: large;
+    font-weight: bolder;
+    padding: 1em 0;
+}
+label[for="nguoilon"]{ 
+    font-weight: bolder;
+}
+.code-tour,.khoihanh,.noikhoihanh,.choconnhan{ 
+    margin-bottom: 0;
+}
+.detail-information{ 
+    margin-left: 2em;
+} 
+
+hr {
+    width: 13em;
+    font-weight: bolder;
+    text-align: center;
+}
+hr:not([size]){ 
+    height: 2px;
+}
+@media screen and (max-width:576px) { 
+    .treem{ 
+        margin-top: 2em;
+    }
+    .embe{
+        margin-top: 2em;
+    } 
+   
+    form[name="information-nguoilon"] {
+        padding: 0;
+    }
+}
+.total,.total2,.total3,.total4,.total6{ 
+    padding-left: 2em;
+     padding-right: 2em;
+}
