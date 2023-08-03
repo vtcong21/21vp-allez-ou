@@ -22,8 +22,12 @@ function getCookie(name) {
 
 // xoá tài khoản (phần này làm sao để lúc bấm cái nút "XÓA" trong modal thì lấy được cái userId nhé, k rõ fe)-----------------------------------------------------------------------------------
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+let userId = null;
+function getUserId(event){
+    userId = event.currentTarget.getAttribute("data-id");
+}
 confirmDeleteButton.addEventListener("click", function () {
-    const userId = this.getAttribute("data-id");
+    console.log(userId);
     const token = getCookie('token');
     //     if (!token) return; 
 
@@ -42,7 +46,6 @@ confirmDeleteButton.addEventListener("click", function () {
         });
 });
 //------------------------------------------------------------------------------------------------------------
-
 
 
 // load danh sách acc admin từ server và render -------------------------------------------------------------
@@ -121,7 +124,7 @@ function makeUserRow(user) {
             </td>
             <td>
                 <div class="d-flex justify-content-end">
-                    <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><img src="img/admin/admins-role/trash-bin.png" /></a>
+                    <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="${user._id}" onclick="getUserId(event)"><img src="img/admin/admins-role/trash-bin.png" /></a>
                 </div>
             </td>
         </tr>
