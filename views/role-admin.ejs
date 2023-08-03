@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="css/role-admin.css">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="/css/role-admin.css">
+
+
+
 <div class="d-flex justify-content-end container-create-btn">
     <button class="create-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Tạo</button>
 </div>
@@ -13,26 +17,6 @@
             </tr>
         </thead>
         <tbody>
-            <% for( let index = 0; index < 10; index++ ) { %>
-                <tr>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
-                            <div class="ms-3">
-                                <p class="fw-bold mb-1 name">Vũ Nguyễn Xuân Uyên</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="fw-normal mb-1">21126088</p>
-                    </td>
-                    <td>
-                        <div class="d-flex justify-content-end">
-                            <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"><img src="img/admin/admins-role/trash-bin.png" /></a>
-                        </div>
-                    </td>
-                </tr>
-            <% } %>
         </tbody>
     </table>
 </div>
@@ -50,20 +34,25 @@
                             <form id="registrationForm">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Họ tên</label>
-                                    <input type="text" class="form-control" id="name" required placeholder="Nhập địa họ tên" />
+                                    <input type="text" class="form-control" id="name" required
+                                        placeholder="Nhập địa họ tên" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required placeholder="Nhập địa chỉ email" />
+                                    <input type="email" class="form-control" id="email" required
+                                        placeholder="Nhập địa chỉ email" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Mật khẩu</label>
-                                    <input type="password" class="form-control" id="password" required placeholder="Nhập mật khẩu" />
+                                    <input type="password" class="form-control" id="password" required
+                                        placeholder="Nhập mật khẩu" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="verifyPassword" class="form-label">Xác nhận mật khẩu</label>
-                                    <input type="password" class="form-control" id="verifyPassword" required placeholder="Nhập lại mật khẩu" />
-                                    <div id="passwordMismatch" class="text-danger d-none">Mật khẩu và xác nhận mật khẩu không khớp.</div>
+                                    <input type="password" class="form-control" id="verifyPassword" required
+                                        placeholder="Nhập lại mật khẩu" />
+                                    <div id="passwordMismatch" class="text-danger d-none">Mật khẩu và xác nhận mật khẩu
+                                        không khớp.</div>
                                 </div>
                                 <button type="submit" class="submit-btn" id="submitButton">Tạo</button>
                             </form>
@@ -75,7 +64,8 @@
     </div>
 </div>
 <!-- Modal Xác nhận Xóa -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -92,3 +82,4 @@
         </div>
     </div>
 </div>
+<script src="/js/role-admin.js"></script>

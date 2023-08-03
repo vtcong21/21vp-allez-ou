@@ -4,6 +4,11 @@ const adminController = require('../controllers/adminController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 
+
+// render trang admin
+router.get('/'
+    // , authMiddleware.adminMiddleware
+    , adminController.renderAdminPage);
 // trả mảng client
 router.get('/getClientList'
     // , authMiddleware.adminMiddleware

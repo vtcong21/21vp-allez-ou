@@ -1,4 +1,19 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+
+
+const renderAdminPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', {user});
+        }
+    } catch (error){
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
 const getClientList = async (req, res) => {
     try {
@@ -70,4 +85,4 @@ const deleteAdminAccount = async (req, res) => {
 
 
 
-module.exports = { getAdminList, getClientList,  createAdminAccount, deleteAdminAccount}
+module.exports = { getAdminList, getClientList, createAdminAccount, deleteAdminAccount, renderAdminPage }
