@@ -209,3 +209,6 @@ hr:not([size]){
     padding-left: 2em;
      padding-right: 2em;
 }
+#exampleModalToggle{ 
+    font-family: 'Nunito';
+}

@@ -65,7 +65,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity"style="font-weight: 800;">1</div>
+                                        <div class="quantity" style="font-weight: 800;">1</div>
                                         <button class="plus-button" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button3" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity3" style="font-weight: 800;"  >0</div>
+                                        <div class="quantity3" style="font-weight: 800;">0</div>
                                         <button class="plus-button3" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button4" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity4"style="font-weight: 800;">0</div>
+                                        <div class="quantity4" style="font-weight: 800;">0</div>
                                         <button class="plus-button4" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -303,41 +303,45 @@
                                 </div>
                             </div>
                             <div class="button-order">
-                                <button id="button-order-btn" data-bs-toggle="modal"  role="button">ĐẶT NGAY</button>
-                                                        </div>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <button id="button-order-btn">ĐẶT NGAY</button>
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
                                 <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Thanh toán</h2>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="total6" style="padding-left: 0.6em; padding-right: 0.5em;padding-top: 1em; ">
+                                            <div class="left-col">
+                                                <label for="nguoilon" style="font-weight: normal;"> Tổng hóa đơn:</label>
+                                            </div>
+                                            <div class="right-col">
+                                                <div class="total5" style="font-size: 1.92rem;">0</div>
+                                            </div>
+                                        </div>
+                                        <div class="modalfooter">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                      Show a second modal and hide this one with the button below.
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                              <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Hide this modal and show the first with the button below.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                      Hide this modal and show the first with the button below.
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                           </div>
+                            </div>
                         </div>
                     </div>
                 </div>
