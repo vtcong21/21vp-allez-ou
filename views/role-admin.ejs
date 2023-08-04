@@ -65,8 +65,7 @@
     </div>
 </div>
 <!-- Modal Xác nhận Xóa -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -78,9 +77,22 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary modal-delete-btn" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger modal-delete-btn" id="confirmDeleteButton">Xóa</button>
+                <button type="button" class="btn btn-danger modal-delete-btn" id="confirmDeleteButton" target="#confirmDeleteModal" data-bs-toggle="modal">Xóa</button>
             </div>
         </div>
     </div>
 </div>
 <script src="/js/role-admin.js"></script>
+<script>
+    // Lấy modal thông qua id
+    const confirmDeleteModal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
+
+    // Bắt sự kiện click của nút xóa
+    const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+    confirmDeleteButton.addEventListener("click", function () {
+        // Thực hiện hành động xóa tại đây (nếu cần)
+        
+        // Ẩn modal khi đã xóa hoặc không thực hiện xóa
+        confirmDeleteModal.hide();
+    });
+</script>
