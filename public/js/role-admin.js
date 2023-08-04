@@ -3,6 +3,7 @@ const passwordInput = document.getElementById("password");
 const verifyPasswordInput = document.getElementById("verifyPassword");
 const passwordMismatchMessage = document.getElementById("passwordMismatch");
 
+
 form.addEventListener("submit", function (event) {
     if (passwordInput.value !== verifyPasswordInput.value) {
         event.preventDefault(); // Ngăn form được gửi đi
@@ -43,6 +44,7 @@ confirmDeleteButton.addEventListener("click", function () {
             loadUsers();
         })
         .catch((error) => {
+            confirmDeleteModal.hide();
             console.error("Error:", error);
         });
 });
@@ -98,13 +100,14 @@ document.getElementById("registrationForm").addEventListener("submit", function 
         .then((response) => {
             console.log(response.data);
             loadUsers();
-            var myModalEl = document.getElementById('registrationModal');
-            var modal = bootstrap.Modal.getInstance(myModalEl)
-            modal.hide();
+            $('#registrationModal').modal('hide');
+            
+            // modal.hide();
             // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe
         })
         .catch((error) => {
             console.error("Error creating admin account:", error);
+            $('#registrationModal').modal('hide');
         });
 });
 // ----------------------------------------------------------------------------------------------
