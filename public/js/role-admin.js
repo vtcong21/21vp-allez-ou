@@ -51,31 +51,99 @@ confirmDeleteButton.addEventListener("click", function () {
 //------------------------------------------------------------------------------------------------------------
 
 // load danh sách acc admin từ server và render -------------------------------------------------------------
-function loadUsers() {
-    const token = getCookie("token");
-    //     if (!token) return;
+// function loadUsers() {
+//     const token = getCookie("token");
+//     //     if (!token) return;
 
+//     axios
+//         .get(
+//             "/admin/getAdminList"
+//             // , { headers: { Authorization: `Bearer ${token}` } }
+//         )
+//         .then((response) => {
+//             const users = response.data;
+//             console.log(response.date);
+//             const tbody = document.querySelector(".table tbody");
+//             tbody.innerHTML = "";
+//             users.forEach((user) => {
+//                 const row = makeUserRow(user);
+//                 tbody.insertAdjacentHTML("beforeend", row);
+//             });
+//         })
+//         .catch((error) => {
+//             console.error("Error fetching user data:", error);
+//         });
+// }
+document.addEventListener("DOMContentLoaded", loadUsers);
+//-----------------------------------------------------------------------------------------------------------
+
+const itemsPerPage = 10;
+let currentPage = 1;
+
+function loadUsers() {
     axios
-        .get(
-            "/admin/getAdminList"
-            // , { headers: { Authorization: `Bearer ${token}` } }
-        )
+        .get("/admin/getAdminList")
         .then((response) => {
             const users = response.data;
-            console.log(response.date);
-            const tbody = document.querySelector(".table tbody");
-            tbody.innerHTML = "";
-            users.forEach((user) => {
-                const row = makeUserRow(user);
-                tbody.insertAdjacentHTML("beforeend", row);
-            });
+            const totalPages = Math.ceil(users.length / itemsPerPage);
+            displayUsers(users, totalPages);
+            displayPagination(totalPages);
         })
         .catch((error) => {
             console.error("Error fetching user data:", error);
         });
 }
-document.addEventListener("DOMContentLoaded", loadUsers);
-//-----------------------------------------------------------------------------------------------------------
+
+function displayUsers(users, totalPages) {
+    const tbody = document.querySelector(".table tbody");
+    tbody.innerHTML = "";
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const usersToShow = users.slice(startIndex, endIndex);
+    console.log(usersToShow);
+    usersToShow.forEach((user) => {
+        const row = makeUserRow(user);
+        tbody.insertAdjacentHTML("beforeend", row);
+    });
+}
+
+function displayPagination(totalPages) {
+    const pagination = document.getElementById("pagination");
+pagination.innerHTML = "";
+
+// Tạo liên kết "Previous"
+const previousLink = `<li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous" onclick="changePage('previous')">
+                              <span aria-hidden="true">&laquo;</span>
+                            </a>
+                          </li>`;
+pagination.insertAdjacentHTML("beforeend", previousLink);
+
+// Tạo liên kết cho từng trang
+for (let i = 1; i <= totalPages; i++) {
+    const liClass = i === currentPage ? "page-item active" : "page-item";
+    const link = `<li class="${liClass}">
+                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>`;
+    pagination.insertAdjacentHTML("beforeend", link);
+}
+
+// Tạo liên kết "Next"
+const nextLink = `<li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next" onclick="changePage('next')">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>`;
+pagination.insertAdjacentHTML("beforeend", nextLink);
+
+}
+
+function changePage(page) {
+    currentPage = page;
+    loadUsers();
+}
+
 
 // tạo tài khoản mới, render dòng user mới tương ứng ------------------------------------------------------------
 document.getElementById("registrationForm").addEventListener("submit", function (event) {
