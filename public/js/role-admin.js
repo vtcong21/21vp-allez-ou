@@ -22,20 +22,26 @@ function getCookie(name) {
 
 // xoá tài khoản (phần này làm sao để lúc bấm cái nút "XÓA" trong modal thì lấy được cái userId nhé, k rõ fe)-----------------------------------------------------------------------------------
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
-let userId = null;
-function getUserId(event){
-    userId = event.currentTarget.getAttribute("data-id");
+let adminId = null;
+function getUserId(event) {
+    adminId = event.currentTarget.getAttribute("data-id");
 }
 confirmDeleteButton.addEventListener("click", function () {
-    console.log(userId);
+    console.log(adminId);
     const token = getCookie('token');
     //     if (!token) return; 
 
-    axios.delete(`/admin/deleteAdminAccount/${userId}`
-         // , { headers: { Authorization: `Bearer ${token}` } }
+    axios.delete(`/admin/deleteAdminAccount`
+        , {
+            // headers: { Authorization: `Bearer ${token}` } ,
+            data: {
+                adminId: adminId
+            }
+        }
+
     )
         .then((response) => {
-            
+
             console.log(response.data);
             const confirmDeleteModal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
             confirmDeleteModal.hide();
@@ -61,7 +67,7 @@ function loadUsers() {
             console.log(response.date);
             const tbody = document.querySelector('.table tbody');
             tbody.innerHTML = '';
-            users.forEach(user =>{
+            users.forEach(user => {
                 const row = makeUserRow(user);
                 tbody.insertAdjacentHTML('beforeend', row);
             });
@@ -84,7 +90,7 @@ document.getElementById("registrationForm").addEventListener("submit", function 
 
     if (password !== verifyPassword) {
         document.getElementById("passwordMismatch").classList.remove("d-none");
-        return; 
+        return;
     }
 
     axios.post('/admin/createAdminAccount', {
@@ -92,16 +98,16 @@ document.getElementById("registrationForm").addEventListener("submit", function 
         email: email,
         password: password
     })
-    .then(response => {
-        console.log(response.data);
-        loadUsers();
-        // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe 
-    })
-    .catch(error => {
-        
-        console.error('Error creating admin account:', error);
-       
-    });
+        .then(response => {
+            console.log(response.data);
+            loadUsers();
+            // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe 
+        })
+        .catch(error => {
+
+            console.error('Error creating admin account:', error);
+
+        });
 });
 // ----------------------------------------------------------------------------------------------
 

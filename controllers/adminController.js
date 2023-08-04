@@ -65,13 +65,13 @@ const createAdminAccount = async (req, res) => {
 
 const deleteAdminAccount = async (req, res) => {
     try {
-        const { userId } = req.body;
-        const user = await User.findById(userId);
+        const { adminId } = req.body;
+        const user = await User.findById(adminId);
         if (!user) {
             return res.status(404).json({ message: 'Cannot find account' });
         }
         if (user.isAdmin) {
-            await User.findByIdAndRemove(userId);
+            await User.findByIdAndRemove(adminId);
             return res.status(200).json({ message: 'Completed' });
         } else {
             return res.status(403).json({ message: 'Account is not admin' });
