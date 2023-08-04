@@ -10,7 +10,6 @@ form.addEventListener("submit", function (event) {
     }
 });
 
-
 // lấy cúc ki, gửi request gì cũng phải gửi kèm, tạm thời comment ---------------------------------------------------
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -18,7 +17,6 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(";").shift();
 }
 //--------------------------------------------------------------------------------------------------
-
 
 // xoá tài khoản (phần này làm sao để lúc bấm cái nút "XÓA" trong modal thì lấy được cái userId nhé, k rõ fe)-----------------------------------------------------------------------------------
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
@@ -28,20 +26,17 @@ function getUserId(event) {
 }
 confirmDeleteButton.addEventListener("click", function () {
     console.log(adminId);
-    const token = getCookie('token');
-    //     if (!token) return; 
+    const token = getCookie("token");
+    //     if (!token) return;
 
-    axios.delete(`/admin/deleteAdminAccount`
-        , {
+    axios
+        .delete(`/admin/deleteAdminAccount`, {
             // headers: { Authorization: `Bearer ${token}` } ,
             data: {
-                adminId: adminId
-            }
-        }
-
-    )
+                adminId: adminId,
+            },
+        })
         .then((response) => {
-
             console.log(response.data);
             const confirmDeleteModal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
             confirmDeleteModal.hide();
@@ -53,30 +48,31 @@ confirmDeleteButton.addEventListener("click", function () {
 });
 //------------------------------------------------------------------------------------------------------------
 
-
 // load danh sách acc admin từ server và render -------------------------------------------------------------
 function loadUsers() {
-    const token = getCookie('token');
-    //     if (!token) return; 
+    const token = getCookie("token");
+    //     if (!token) return;
 
-    axios.get('/admin/getAdminList'
-        // , { headers: { Authorization: `Bearer ${token}` } }
-    )
-        .then(response => {
+    axios
+        .get(
+            "/admin/getAdminList"
+            // , { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((response) => {
             const users = response.data;
             console.log(response.date);
-            const tbody = document.querySelector('.table tbody');
-            tbody.innerHTML = '';
-            users.forEach(user => {
+            const tbody = document.querySelector(".table tbody");
+            tbody.innerHTML = "";
+            users.forEach((user) => {
                 const row = makeUserRow(user);
-                tbody.insertAdjacentHTML('beforeend', row);
+                tbody.insertAdjacentHTML("beforeend", row);
             });
         })
-        .catch(error => {
-            console.error('Error fetching user data:', error);
+        .catch((error) => {
+            console.error("Error fetching user data:", error);
         });
 }
-document.addEventListener('DOMContentLoaded', loadUsers);
+document.addEventListener("DOMContentLoaded", loadUsers);
 //-----------------------------------------------------------------------------------------------------------
 
 // tạo tài khoản mới, render dòng user mới tương ứng ------------------------------------------------------------
@@ -92,26 +88,26 @@ document.getElementById("registrationForm").addEventListener("submit", function 
         document.getElementById("passwordMismatch").classList.remove("d-none");
         return;
     }
-
-    axios.post('/admin/createAdminAccount', {
-        fullName: name,
-        email: email,
-        password: password
-    })
-        .then(response => {
+    console.log("sent");
+    axios
+        .post("/admin/createAdminAccount", {
+            fullName: name,
+            email: email,
+            password: password,
+        })
+        .then((response) => {
             console.log(response.data);
             loadUsers();
-            // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe 
+            var myModalEl = document.getElementById('registrationModal');
+            var modal = bootstrap.Modal.getInstance(myModalEl)
+            modal.hide();
+            // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe
         })
-        .catch(error => {
-
-            console.error('Error creating admin account:', error);
-
+        .catch((error) => {
+            console.error("Error creating admin account:", error);
         });
 });
 // ----------------------------------------------------------------------------------------------
-
-
 
 // này tạo hàng trong cái ô admin acc-----------------------------------------------------------------------------------------------
 function makeUserRow(user) {
