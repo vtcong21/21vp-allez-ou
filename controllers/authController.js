@@ -92,7 +92,11 @@ const login = async (req, res) => {
     // console.log('Token sent');
     res.cookie('token', token);
     res.status(200).json({ redirectUrl: '/' });
-    // res.redirect('/');
+    // if (user.isAdmin === 1) {
+    //   return res.redirect('/admin');
+    // } else {
+    //   return res.redirect('/');
+    // }
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
