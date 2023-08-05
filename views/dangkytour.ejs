@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-        <title>Allez Où</title>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-        <link rel="stylesheet" href="/css/dangkytour.css" />
-        <script src="/js/dangkytour.js"></script>
-    </head>
-    <%- include('partials/navbar') %>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <title>Allez Où</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/dangkytour.css" />
+    <script src="/js/dangkytour.js"></script>
+</head>
+<%- include('partials/navbar') %>
+
     <body>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 information">
                     <h4 style="font-weight: bold; text-decoration: underline;">Thông tin khách hàng</h4>
-                    <p>Thông tin người đại diện</p>
+                    <p> Thông tin người đại diện</p>
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table table-bordered">
@@ -30,21 +33,26 @@
                                                 <div class="form-group row first-group">
                                                     <div class="col-md-6">
                                                         <label for="ho-ten" class="form-label">Họ và tên</label>
-                                                        <input type="text" class="form-control" id="ho-ten" placeholder="Nhập họ và tên" />
+                                                        <input type="text" class="form-control" id="ho-ten"
+                                                            placeholder="Nhập họ và tên" />
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label for="so-dien-thoai" class="form-label">Số điện thoại</label>
-                                                        <input type="tel" class="form-control" id="so-dien-thoai" placeholder="Nhập só điện thoại" />
+                                                        <label for="so-dien-thoai" class="form-label">Số điện
+                                                            thoại</label>
+                                                        <input type="tel" class="form-control" id="so-dien-thoai"
+                                                            placeholder="Nhập só điện thoại" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group row second-group">
                                                     <div class="col-md-6">
                                                         <label for="dia-chi" class="form-label">Địa chỉ</label>
-                                                        <input type="text" class="form-control" id="dia-chi" placeholder="Nhập địa chỉ thường trú" />
+                                                        <input type="text" class="form-control" id="dia-chi"
+                                                            placeholder="Nhập địa chỉ thường trú" />
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="email" class="form-label">Email</label>
-                                                        <input type="email" class="form-control" id="email" placeholder="Nhập email" />
+                                                        <input type="email" class="form-control" id="email"
+                                                            placeholder="Nhập email" />
                                                     </div>
                                                 </div>
                                             </form>
@@ -54,6 +62,7 @@
                             </table>
                         </div>
                     </div>
+
                     <p style="font-weight: bolder;">Số lượng hành khách</p>
                     <div class="form-group row amountofpeople1">
                         <div class="col-md-6">
@@ -64,9 +73,11 @@
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
-                                        <button class="minus-button" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity"style="font-weight: 800;">1</div>
-                                        <button class="plus-button" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                        <button class="minus-button"
+                                            style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity" style="font-weight: 800;">1</div>
+                                        <button class="plus-button"
+                                            style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -79,9 +90,11 @@
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
-                                        <button class="minus-button2" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <button class="minus-button2"
+                                            style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
                                         <div class="quantity2" style="font-weight: 800;">0</div>
-                                        <button class="plus-button2" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                        <button class="plus-button2"
+                                            style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -96,9 +109,11 @@
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
-                                        <button class="minus-button3" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity3" style="font-weight: 800;"  >0</div>
-                                        <button class="plus-button3" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                        <button class="minus-button3"
+                                            style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity3" style="font-weight: 800;">0</div>
+                                        <button class="plus-button3"
+                                            style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,9 +126,11 @@
                                 </div>
                                 <div class="right-col">
                                     <div class="input-group">
-                                        <button class="minus-button4" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity4"style="font-weight: 800;">0</div>
-                                        <button class="plus-button4" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
+                                        <button class="minus-button4"
+                                            style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
+                                        <div class="quantity4" style="font-weight: 800;">0</div>
+                                        <button class="plus-button4"
+                                            style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -131,15 +148,18 @@
                                             <div class="form-group row first-group1" style="padding-top: 0;">
                                                 <div class="col-md-5 col-5">
                                                     <label for="ho-ten" class="form-label">Họ và tên:</label>
-                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                    <input type="text" class="form-control" id="ho-ten1"
+                                                        placeholder="Nhập họ và tên" />
                                                 </div>
                                                 <div class="col-md-3 col-3">
                                                     <label for="gender" class="form-label">Giới tính:</label>
-                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                    <input type="text" class="form-control" id="gender"
+                                                        placeholder="Nam/Nữ" />
                                                 </div>
                                                 <div class="col-md-4 col-4">
                                                     <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
-                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                    <input type="date" class="form-control" id="ngay-sinh"
+                                                        placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
                                             <div class="form-group row first-group2" style="padding-top: 0;"></div>
@@ -159,15 +179,18 @@
                                             <div class="form-group row first-group3" style="padding-top: 0;">
                                                 <div class="col-md-5 col-5">
                                                     <label for="ho-ten" class="form-label">Họ và tên:</label>
-                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                    <input type="text" class="form-control" id="ho-ten1"
+                                                        placeholder="Nhập họ và tên" />
                                                 </div>
                                                 <div class="col-md-3 col-3">
                                                     <label for="gender" class="form-label">Giới tính:</label>
-                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                    <input type="text" class="form-control" id="gender"
+                                                        placeholder="Nam/Nữ" />
                                                 </div>
                                                 <div class="col-md-4 col-4">
                                                     <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
-                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                    <input type="date" class="form-control" id="ngay-sinh"
+                                                        placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
                                             <div class="form-group row first-group4" style="padding-top: 0;"></div>
@@ -187,15 +210,18 @@
                                             <div class="form-group row first-group5" style="padding-top: 0;">
                                                 <div class="col-md-5 col-5">
                                                     <label for="ho-ten" class="form-label">Họ và tên:</label>
-                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                    <input type="text" class="form-control" id="ho-ten1"
+                                                        placeholder="Nhập họ và tên" />
                                                 </div>
                                                 <div class="col-md-3 col-3">
                                                     <label for="gender" class="form-label">Giới tính:</label>
-                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                    <input type="text" class="form-control" id="gender"
+                                                        placeholder="Nam/Nữ" />
                                                 </div>
                                                 <div class="col-md-4 col-4">
                                                     <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
-                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                    <input type="date" class="form-control" id="ngay-sinh"
+                                                        placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
                                             <div class="form-group row first-group6" style="padding-top: 0;"></div>
@@ -215,15 +241,18 @@
                                             <div class="form-group row first-group7" style="padding-top: 0;">
                                                 <div class="col-md-5 col-5">
                                                     <label for="ho-ten" class="form-label">Họ và tên:</label>
-                                                    <input type="text" class="form-control" id="ho-ten1" placeholder="Nhập họ và tên" />
+                                                    <input type="text" class="form-control" id="ho-ten1"
+                                                        placeholder="Nhập họ và tên" />
                                                 </div>
                                                 <div class="col-md-3 col-3">
                                                     <label for="gender" class="form-label">Giới tính:</label>
-                                                    <input type="text" class="form-control" id="gender" placeholder="Nam/Nữ" />
+                                                    <input type="text" class="form-control" id="gender"
+                                                        placeholder="Nam/Nữ" />
                                                 </div>
                                                 <div class="col-md-4 col-4">
                                                     <label for="ngay-sinh" class="form-label">Ngày sinh:</label>
-                                                    <input type="date" class="form-control" id="ngay-sinh" placeholder="Nhập ngày sinh" />
+                                                    <input type="date" class="form-control" id="ngay-sinh"
+                                                        placeholder="Nhập ngày sinh" />
                                                 </div>
                                             </div>
                                             <div class="form-group row first-group8" style="padding-top: 0;"></div>
@@ -240,7 +269,7 @@
                             <div id="tour-title">
 
                             </div>
-                           
+
                             <div style="display: flex; justify-content: center; align-items: center;">
                                 <hr />
                             </div>
@@ -292,47 +321,55 @@
                                 </div>
                             </div>
                             <div class="button-order">
-                                <button id="button-order-btn" data-bs-toggle="modal"  role="button">ĐẶT NGAY</button>
-                                                        </div>
-                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <button id="button-order-btn" data-bs-toggle="modal" role="button">ĐẶT NGAY</button>
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                                aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Show a second modal and hide this one with the button below.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                                                data-bs-toggle="modal" data-bs-dismiss="modal">Open second
+                                                modal</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                      Show a second modal and hide this one with the button below.
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                              <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true"
+                                aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Hide this modal and show the first with the button below.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle"
+                                                data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                      Hide this modal and show the first with the button below.
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                           </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
     </body>
     <%- include('partials/footer') %>
+
 </html>

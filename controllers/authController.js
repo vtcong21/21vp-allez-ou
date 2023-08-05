@@ -6,7 +6,7 @@ const path = require('path');
 
 
 const renderRegisterPage = (req, res) => {
- res.render('register');
+  res.render('register');
 }
 
 const register = async (req, res) => {
@@ -63,8 +63,9 @@ const verify = async (req, res) => {
     user.verificationCode = undefined;
     await user.save();
 
-    res.status(200).json({ message: "User verified successfully" });
-    // res.redirect('/auth/login');
+    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '24h' });
+    res.cookie('token', token);
+    res.redirect('/');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
