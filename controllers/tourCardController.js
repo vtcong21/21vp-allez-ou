@@ -57,14 +57,38 @@ const getTourCardByCode = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
 const getRandom3TourCards = async (req, res) => {
   try {
     const currentDate = new Date();
-    const tourCards = await TourCard.find({ date: { $gte: currentDate } }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl')
-      .limit(3);
-      
-    res.status(200).json(tourCards);
+    currentDate.setHours(0, 0, 0, 0);
+    
+    const randomTourCards = await TourCard.aggregate([
+      {
+        $match: {
+          date: { $gte: currentDate },
+          isHidden: false,
+        },
+      },
+      { $sample: { size: 3 } },
+      {
+        $project: {
+          _id: 0,
+          name: 1,
+          code: 1,
+          startPlace: 1,
+          endPlaces: 1,
+          price: 1,
+          promoDiscount: 1,
+          date: 1,
+          time: 1,
+          remainSlots: 1,
+          numOfDays: 1,
+          cardImgUrl: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json(randomTourCards);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
