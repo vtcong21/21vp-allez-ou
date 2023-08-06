@@ -206,7 +206,7 @@ body{
 }
 
 .card-img{
-    min-height: 163px;
+    height: 163px;
     border-radius: 0;
 }
 
@@ -225,6 +225,12 @@ body{
     color: #6E6A8E;
 }
 
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-text a{
     font-family: 'Nunito';
     font-style: normal;
@@ -233,6 +239,10 @@ body{
     line-height: 1.6rem;
     color: #000000 ;
     text-decoration: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .card-price{
