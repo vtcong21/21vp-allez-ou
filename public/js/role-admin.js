@@ -76,72 +76,82 @@ confirmDeleteButton.addEventListener("click", function () {
 // }
 document.addEventListener("DOMContentLoaded", loadUsers);
 //-----------------------------------------------------------------------------------------------------------
-
-const itemsPerPage = 10;
+const itemsPerPage = 9;
 let currentPage = 1;
+let totalItems = 0;
 
 function loadUsers() {
-    axios
-        .get("/admin/getAdminList")
-        .then((response) => {
-            const users = response.data;
-            const totalPages = Math.ceil(users.length / itemsPerPage);
-            displayUsers(users, totalPages);
-            displayPagination(totalPages);
-        })
-        .catch((error) => {
-            console.error("Error fetching user data:", error);
-        });
-}
-
-function displayUsers(users, totalPages) {
-    const tbody = document.querySelector(".table tbody");
-    tbody.innerHTML = "";
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const usersToShow = users.slice(startIndex, endIndex);
-    console.log(usersToShow);
-    usersToShow.forEach((user) => {
-        const row = makeUserRow(user);
-        tbody.insertAdjacentHTML("beforeend", row);
+  axios
+    .get("/admin/getAdminList")
+    .then((response) => {
+      const users = response.data;
+      totalItems = users.length; // Lưu lại số lượng users cho phân trang
+      displayUsers(users);
+      displayPagination(totalItems);
+    })
+    .catch((error) => {
+      console.error("Error fetching user data:", error);
     });
 }
 
-function displayPagination(totalPages) {
-    const pagination = document.getElementById("pagination");
-pagination.innerHTML = "";
+function displayUsers(users) {
+  const tbody = document.querySelector(".table tbody");
+  tbody.innerHTML = "";
 
-// Tạo liên kết "Previous"
-const previousLink = `<li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous" onclick="changePage('previous')">
-                              <span aria-hidden="true">&laquo;</span>
-                            </a>
-                          </li>`;
-pagination.insertAdjacentHTML("beforeend", previousLink);
-
-// Tạo liên kết cho từng trang
-for (let i = 1; i <= totalPages; i++) {
-    const liClass = i === currentPage ? "page-item active" : "page-item";
-    const link = `<li class="${liClass}">
-                      <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
-                    </li>`;
-    pagination.insertAdjacentHTML("beforeend", link);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const usersToShow = users.slice(startIndex, endIndex);
+  usersToShow.forEach((user) => {
+    const row = makeUserRow(user);
+    tbody.insertAdjacentHTML("beforeend", row);
+  });
 }
 
-// Tạo liên kết "Next"
-const nextLink = `<li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next" onclick="changePage('next')">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>`;
-pagination.insertAdjacentHTML("beforeend", nextLink);
+function displayPagination(totalItems) {
+  const pagination = document.getElementById("pagination");
+  pagination.innerHTML = "";
 
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // Tạo liên kết "Previous"
+  const previousLink = `<li class="page-item">
+                          <a class="page-link custom-prev-next" href="#" aria-label="Previous" onclick="changePage('previous')">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>`;
+  pagination.insertAdjacentHTML("beforeend", previousLink);
+
+  // Tạo liên kết cho từng trang
+  for (let i = 1; i <= totalPages; i++) {
+    const liClass = i === currentPage ? "page-item active" : "page-item";
+    const link = `<li class="${liClass}">
+                    <a class="page-link custom-page-link" href="#" onclick="changePage(${i})">${i}</a>
+                  </li>`;
+    pagination.insertAdjacentHTML("beforeend", link);
+  }
+
+  // Tạo liên kết "Next"
+  const nextLink = `<li class="page-item">
+                      <a class="page-link custom-prev-next" href="#" aria-label="Next" onclick="changePage('next')">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>`;
+  pagination.insertAdjacentHTML("beforeend", nextLink);
 }
 
 function changePage(page) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  if (page === "previous") {
+    currentPage = Math.max(1, currentPage - 1);
+  } else if (page === "next") {
+    currentPage = Math.min(totalPages, currentPage + 1);
+  } else {
     currentPage = page;
-    loadUsers();
+  }
+
+  loadUsers(); // Gọi hàm load dữ liệu mới dựa vào trang hiện tại (currentPage) và itemsPerPage
+  displayPagination(totalItems); // Hiển thị lại phân trang
 }
 
 
@@ -169,9 +179,11 @@ document.getElementById("registrationForm").addEventListener("submit", function 
             console.log(response.data);
             loadUsers();
             $('#registrationModal').modal('hide');
-            
-            // modal.hide();
-            // sao tạo r modal k tắt?? sửa hay chỉnh sao đi k rõ fe
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("verifyPassword").value = "";
+            document.getElementById("passwordMismatch").classList.add("d-none");
         })
         .catch((error) => {
             console.error("Error creating admin account:", error);
@@ -193,10 +205,12 @@ function makeUserRow(user) {
                 </div>
             </td>
             <td>
-                <p class="fw-normal mb-1">${String(user._id)}</p>
+                <div class="d-flex align-items-center">
+                    <p class="fw-normal my-1">${String(user._id)}</p>
+                </div>
             </td>
             <td>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end my-1">
                     <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="${user._id}" onclick="getUserId(event)"><img src="img/admin/admins-role/trash-bin.png" /></a>
                 </div>
             </td>
