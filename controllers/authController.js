@@ -5,13 +5,13 @@ const mailController = require('../controllers/mailController');
 const path = require('path');
 
 
-const renderRegisterPage = (req, res) =>{
-  const htmlPath = path.join(__dirname, '..', 'views', 'project.html');
-  res.sendFile(htmlPath);}
+const renderRegisterPage = (req, res) => {
+ res.render('register');
+}
 
 const register = async (req, res) => {
   try {
-    const { fullName, email, password, gender, dateOfBirth, phoneNumber} = req.body;
+    const { fullName, email, password, gender, dateOfBirth, phoneNumber } = req.body;
 
 
     const existingUser = await User.findOne({ email });
@@ -36,7 +36,7 @@ const register = async (req, res) => {
     await user.save();
     await mailController.sendVerificationEmail(email, verificationCode);
 
-    res.render('verify', { email });
+    res.status(200).json({ message: "Registration successful", email });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -46,7 +46,7 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
-    
+
     const user = await User.findOne(
       { email }
     );
@@ -63,8 +63,8 @@ const verify = async (req, res) => {
     user.verificationCode = undefined;
     await user.save();
 
-    //res.status(200).json({ message: "User verified successfully" });
-    res.redirect('/auth/login');
+    res.status(200).json({ message: "User verified successfully" });
+    // res.redirect('/auth/login');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -89,7 +89,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id , userRole: user.isAdmin}, process.env.SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '24h' });
     // console.log('Token sent');
     res.cookie('token', token);
     res.status(200).json({ redirectUrl: '/' });
@@ -99,7 +99,7 @@ const login = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-const logout = (req, res) =>{
+const logout = (req, res) => {
   res.clearCookie('token');
   res.redirect('/');
 }

@@ -14,7 +14,8 @@ const tourRoutes = require('./routes/tourRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const provinceRoutes = require('./routes/provinceRoutes');
 const authRoutes = require('./routes/authRoutes');
-
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // Create express app
 const app = express();
@@ -38,13 +39,15 @@ app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
 app.use('/pronvices', provinceRoutes);
 app.use('/auth', authRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/admin', adminRoutes);
 
 
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
   //localhost:5000/test
-  res.render('dangkytour');
+  res.render('dangkytour', {user: null});
 })
 
 app.listen(port, () => {

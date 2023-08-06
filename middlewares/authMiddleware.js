@@ -12,7 +12,7 @@ const authenticateToken = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     req.userId = decodedToken.userId;
     req.userRole = decodedToken.userRole;
-    
+
     next();
   } catch (error) {
     console.error('Error validating token:', error);
@@ -20,4 +20,31 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-module.exports = { authenticateToken };
+const adminMiddleware = (req, res, next) => {
+  const token = req.cookies.token;
+  if (!token) {
+    // res.clearCookie('token');
+    // return res.redirect("/").cookie('token', token);
+    next();
+  }
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    req.userId = decodedToken.userId;
+    req.userRole = decodedToken.userRole;
+    if (req.userRole == 1) {
+      // res.clearCookie('token');
+      // return res.redirect("/").cookie('token', token);
+      next();
+    }
+
+    next();
+
+  } catch (error) {
+    console.error('Error validating token:', error);
+    res.status(401).json({ message: 'Invalid token' });
+  }
+
+}
+
+
+module.exports = { authenticateToken, adminMiddleware };

@@ -40,16 +40,16 @@
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="<%= tour.img_url[0]%>" class="d-block w-100" alt="..." />
+                                    <img src="<%= tour.imgUrls[0]%>" class="d-block w-100" alt="..." />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="<%= tour.img_url[1]%>" class="d-block w-100" alt="..." />
+                                    <img src="<%= tour.imgUrls[1]%>" class="d-block w-100" alt="..." />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="<%= tour.img_url[2]%>" class="d-block w-100" alt="..." />
+                                    <img src="<%= tour.imgUrls[2]%>" class="d-block w-100" alt="..." />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="<%= tour.img_url[3]%>" class="d-block w-100" alt="..." />
+                                    <img src="<%= tour.imgUrls[3]%>" class="d-block w-100" alt="..." />
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -87,11 +87,11 @@
                     </div>
                     <div class="container mt-5 tour-schedule">
                         <h3 class="tour-schedule__title mb-5">Lịch trình</h3>
-                        <% for(let i = 0; i < tour.schedule.length; i++) { %>
+                        <% for(let i = 0; i < tour.schedules.length; i++) { %>
                             <div class="tour-schedule-date">
-                                <h3 class="tour-schedule-date__title"><%= tour.schedule[i] %></h3>
+                                <h3 class="tour-schedule-date__title"><%= tour.schedules[i].name %></h3>
                                 <p class="tour-schedule-date__text">
-                                    <%- tour.schedule_detail[i].replace("<br>","<br><br>") %>
+                                    <%- tour.schedules[i].schedule_detail.replace("<br>","<br><br>") %>
                                 </p>
                             </div>
                         <% } %>
@@ -99,16 +99,16 @@
                     <div class="container mt-3 d-sm-none mb-5">
                         <h3 class="tour-schedule__title mb-5">Lịch trình</h3>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <% for(let i = 0; i < tour.schedule.length; i++) { %>
+                            <% for(let i = 0; i < tour.schedules.length; i++) { %>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#date1" aria-expanded="true" >
-                                          <%- tour.schedule[i] %>
+                                          <%- tour.schedules[i].name %>
                                       </button>
                                     </h2>
                                     <div id="date1" class="accordion-collapse collapse show">
                                       <div class="accordion-body">
-                                        <%- tour.schedule_detail[i].replace("<br>","<br><br>") %>
+                                        <%- tour.schedules[i].schedule_detail[i].replace("<br>","<br><br>") %>
                                       </div>
                                     </div>
                                   </div>
@@ -127,7 +127,7 @@
                                     <h3 class="m-auto">Thời gian</h3>
                                 </div>
                                 <div class="d-flex">
-                                    <p class="m-auto"><%= tour.schedule.length %> ngày <%= tour.schedule.length - 1%>  đêm</p>
+                                    <p class="m-auto"><%= tour.schedules.length %> ngày <%= tour.schedules.length - 1%>  đêm</p>
                                 </div>
                             </div>
                             <div class="tour-icon d-flex flex-column justify-content-around">
@@ -182,21 +182,21 @@
                                     <p class="tour-table-price__type">Trẻ em</p>
                                     <p class="tour-table-price__age">(Từ 5-11 tuổi)</p>
                                 </div>
-                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.baby_discount)).toLocaleString()%>đ</p>
+                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.babyDiscount)).toLocaleString()%>đ</p>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
                                 <div class="d-flex flex-column">
                                     <p class="tour-table-price__type">Trẻ nhỏ</p>
                                     <p class="tour-table-price__age">(Từ 2-4 tuổi)</p>
                                 </div>
-                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.kid_discount)).toLocaleString()%>đ</p>
+                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.kidDiscount)).toLocaleString()%>đ</p>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
                                 <div class="d-flex flex-column">
                                     <p class="tour-table-price__type">Em bé</p>
                                     <p class="tour-table-price__age">(dưới 2 tuổi)</p>
                                 </div>
-                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.teen_discount)).toLocaleString()%>đ</p>
+                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.teenDiscount)).toLocaleString()%>đ</p>
                             </div>
                         </div>
                         <div class="d-flex mt-4">
@@ -206,12 +206,12 @@
                     <div class="tour-review mb-4 order-sm-3">
                         <h3 class="tour-review__title mb-5">Tổng quan chuyến đi</h3>
                         <div class="tour-review__container">
-                            <% for(let i = 0; i < tour.schedule.length; i++) { %>
+                            <% for(let i = 0; i < tour.schedules.length; i++) { %>
                                 <div class="position-relative">
                                     <div class="tour-review__circle d-flex">
                                         <p class="m-auto"><%= i + 1 %></p>
                                     </div>
-                                    <p class="tour-review__text"><%- tour.schedule[i]  %></p>
+                                    <p class="tour-review__text"><%- tour.schedules[i].name  %></p>
                                 </div>
                             <% } %>
                         </div>

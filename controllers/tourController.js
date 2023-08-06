@@ -36,36 +36,51 @@ const deleteTour = async (req, res) => {
     }
 };
 
-
-const searchTours = async (req, res) =>{
-    try{
-        const {startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice} = req.query;
-        const query = Tour.find();
-        if(startPlaceCode){
-            query.where('start_place_code').equals(startPlaceCode);
-        }
-        if (endPlaceCode && endPlaceCode.length > 0) {
-            query.where('end_place_code').in(endPlaceCode);
-          }
-        if(numOfPeople){
-            query.where('remain_slots').gte(numOfPeople);
-        }
-        if(travelDate){
-            query.where('date').equals(travelDate);
-        }
-        if (numOfDays) {
-            query.where('num_of_days').equals(numOfDays);
-        }
-        if (minPrice && maxPrice) {
-            query.where('price').gte(minPrice).lte(maxPrice);
-        }
-        const results = await query.exec();
-        res.status(200).json(results);
-    }catch(error){
-        res.status(500).json({ error: 'Internal server error' });
+const searchTours = async (req, res) => {
+    try {
+      const {
+        startPlaceCode,
+        endPlaceCode,
+        numOfPeople,
+        numOfDays,
+        travelDate,
+        minPrice,
+        maxPrice,
+      } = req.query;
+  
+      const query = Tour.find();
+  
+      if (startPlaceCode) {
+        query.where('startPlace.code').equals(startPlaceCode);
+      }
+  
+      if (endPlaceCode && endPlaceCode.length > 0) {
+        query.where('endPlaces.code').in(endPlaceCode);
+      }
+  
+      if (numOfPeople) {
+        query.where('remainSlots').gte(numOfPeople);
+      }
+  
+      if (travelDate) {
+        query.where('date').equals(new Date(travelDate));
+      }
+  
+      if (numOfDays) {
+        query.where('numOfDays').equals(numOfDays);
+      }
+  
+      if (minPrice && maxPrice) {
+        query.where('price').gte(minPrice).lte(maxPrice);
+      }
+  
+      const results = await query.exec();
+      res.status(200).json(results);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
     }
-};
-
+  };
+  
 const getTourByCode = async (req, res) => {
     try {
         const { code } = req.params;
@@ -75,7 +90,8 @@ const getTourByCode = async (req, res) => {
           return res.status(404).json({ message: 'Tour not found' });
         }
         console.log(tour);
-        res.render('tourInfo',{tour, user});
+        res.status(200).json(tour);
+        // res.render('tourInfo',{tour, user});
       } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
       }
