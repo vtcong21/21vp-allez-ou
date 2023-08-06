@@ -10,7 +10,13 @@ html{
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
 }
-
+.carousel-item {
+	transition: -webkit-transform 0.05s ease;
+	transition: transform 0.05s ease;
+	transition: transform 0.05s ease, -webkit-transform 0.05s ease;
+	-webkit-backface-visibility: visible;
+	        backface-visibility: visible;
+}
 body{
     background-color: #F5F5F5;
     font-size: 1.6rem;
@@ -200,7 +206,7 @@ body{
 }
 
 .card-img{
-    min-height: 163px;
+    height: 163px;
     border-radius: 0;
 }
 
@@ -219,6 +225,12 @@ body{
     color: #6E6A8E;
 }
 
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-text a{
     font-family: 'Nunito';
     font-style: normal;
@@ -227,6 +239,10 @@ body{
     line-height: 1.6rem;
     color: #000000 ;
     text-decoration: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
 }
 
 .card-price{
