@@ -2,8 +2,6 @@
 <html lang="en">
     <head>
         <%- include('partials/head') %>
-        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/tourInfo.js"></script>
         <script defer src="/js/login.js"></script>
         <link rel="stylesheet" href="/css/tourInfo.css" />
     </head>
@@ -96,7 +94,7 @@
                                     </h2>
                                     <div id="date1" class="accordion-collapse collapse show">
                                       <div class="accordion-body">
-                                        <%- tour.schedules[i].schedule_detail[i].replace("<br>","<br><br>") %>
+                                        <%- tour.schedules[i].schedule_detail.replace("<br>","<br><br>") %>
                                       </div>
                                     </div>
                                   </div>
@@ -211,3 +209,5 @@
         <%- include('partials/footer') %>
     </body>
 </html>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="/js/tourInfo.js"></script>
