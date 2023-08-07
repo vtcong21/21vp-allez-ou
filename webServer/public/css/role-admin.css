@@ -1,0 +1,210 @@
+.content-page{
+    padding: 3.375em 2.5em;
+}
+
+th{
+    color: #6E6A8E;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: uppercase;
+    background: none;
+    white-space: nowrap;
+}
+
+thead{
+    background-color: #E9ECF9;
+}
+
+tbody{
+    border: none;
+}
+
+th td{
+    padding: 15px;
+}
+
+
+td p{
+    color: #6E6A8E;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+tbody{
+    border: none;
+}
+
+thead{
+    height: 60px;
+}
+
+
+.name{
+    white-space: nowrap;
+}
+
+td:first-child {
+    padding: 1em 2.5em;     
+    border-radius: 11px 0 0 11px;
+}
+
+td:last-child{
+    padding: 1em 2.5em;     
+    border-radius: 0 11px 11px 0;
+}
+
+a img{
+    width: 11px;
+    height: 11px;
+    margin-left: 0.5em;
+    cursor: pointer;
+}
+
+
+.create-btn{
+    width: 71px;
+    height: 27px;
+    border-radius: 10px;
+    background: #F05876;
+    border: none;
+    color: #FFF;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.container-create-btn{
+    border-bottom: 2px solid #CBCDDF;
+    padding-bottom: 1em;
+}
+/* Modal */
+.card{
+    width: 295px;
+    padding: 0;
+}
+.create-admin{
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin: 0.8em 1em 0.5em;
+}
+.client-info p{
+    margin: 0;
+}
+
+.client-ava{
+    width: 94px;
+    height: 94px;
+    margin-bottom: 1.5em;
+}
+
+#modal-grey-line{
+    border-bottom: 1px solid rgba(110, 106, 142, 0.25);
+}
+
+.client-info__name, .modal-title{
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.client-modal-icon a img{
+    width: 17px;
+    height: 17px;
+    margin-right: 1em;
+}
+
+.client-info__body{
+    border-top: 1px solid rgba(110, 106, 142, 0.25);
+}
+
+.client-info__title, .modal-body{
+    color: #6E6A8E;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.client-info__data{
+    color: #000;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.card-body{
+    padding: 2.25rem 32px 32px;
+}
+.form-label{
+    color: #000;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.form-control{
+    color: #D4D2DD;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.text-danger{
+    font-size: 1.2rem;
+
+}
+.submit-btn{
+    width: 100%;
+    height: 30px;
+    border-radius: 6px;
+    background: #F14868;
+    border:none;
+    color: #FFF;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+.btn-danger{
+    font-size: 1.5rem;
+}
+.btn-secondary{
+    font-size: 1.5rem;
+}
+.modal-delete-btn{
+    width: 46px;
+    height: 33px;
+}
+.pagination-container {
+    max-width: 200px; /* Điều chỉnh kích thước container cho phân trang */
+    margin: 1.2em auto; /* Canh giữa theo chiều ngang */
+  }
+.custom-page-link{
+    border-radius: 3px;
+}
+
+.custom-prev-next{
+    border: none;
+    background-color: #e9ecf9;
+}
+
+.custom-prev-next:hover{
+    border: none;
+    background-color: #e9ecf9;
+}
+  
+@media only screen and (max-width: 576px) {
+    thead {
+        border-bottom: 2px solid #CBCDDF;
+    }
+}
