@@ -67,3 +67,46 @@ function formatNumberWithCommas(number) {
   }
     
   getRandomTour();
+  getAllProvince() 
+
+  async function getAllProvince() {
+    try {
+      const response = await axios.get('/provinces');
+  
+      if (response.status === 200) {
+        const provinces = response.data;
+        displayProvinces(provinces);
+      } else {
+        throw new Error('Lỗi khi gửi yêu cầu đến API');
+      }
+    } catch (error) {
+      console.error('Đã xảy ra lỗi:', error.message);
+    }
+  }
+
+  function displayProvinces(provinces)
+  {
+      const startPoint = document.getElementById('startPoint');
+      const endPoint = document.getElementById('endPoint');
+      startPoint.innerHTML ="";
+      endPoint.innerHTML ="";
+
+      const chooseStartPoint = '<option class="form-option">Hãy chọn điểm đi</option>';
+      const chooseEndPoint = '<option class="form-option">Hãy chọn điểm đến</option>';
+
+      startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
+      endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
+
+      provinces.forEach(province => {
+        const provinceSelection = makeProvinceSelection(province);
+        startPoint.insertAdjacentHTML('beforeend', provinceSelection);
+        endPoint.insertAdjacentHTML('beforeend', provinceSelection);
+      });
+  }
+
+  function makeProvinceSelection(province)
+  {
+      return `
+        <option class="form-option" value="${province.code}">${province.name}</option>
+      `
+  }
