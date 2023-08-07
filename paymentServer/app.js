@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const accountRoutes = require("./routes/accountRoutes");
+
+
 
 // Load env var
 require("dotenv").config();
@@ -24,7 +27,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // Routes
-
+app.use('/accounts', accountRoutes);
 
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
