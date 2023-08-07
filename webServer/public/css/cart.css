@@ -1,0 +1,133 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding-bottom: 10px;
+}
+
+h5 a {
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+a:hover { color: #4F6CFF; }
+
+.max-width-h5 {
+    max-width: 600px; 
+    margin: 0 auto; 
+    line-height: 1.2rem;
+}
+
+.truncate-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; 
+}
+@media (max-width: 575.98px) {
+    h5 a {
+        font-size: 0.9rem;
+    }
+    .max-width-h5 {
+        line-height: 0.9rem;
+    }
+}
+
+.extra {
+    font-size: 0.8rem;
+    padding: 2px;
+}
+
+.price {
+    /* color: #4F6CFF; */
+    color:#F14868;
+    font-weight: 800;
+}
+
+.btn {
+    font-size: 0.8rem;
+}
+
+.btn-danger {
+    background-color: #F14868;
+    border-color: #F14868;
+    border-radius: 20px;
+    color: white;
+    padding-left: 26px;
+    padding-right: 26px;
+}
+
+.btn-danger:hover {
+    background-color: #E14461;
+    color: white;
+}
+
+.btn-link {
+    color: #6e6a8eb9;
+    padding-left: 0;
+}
+
+.btn-link:hover{
+    color: #E14461;
+}
+
+.nav-tabs {
+    border-radius: 10px;
+    background: #e9ecef;
+    border-bottom: 0 solid transparent;
+}
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav-tabs .nav-item {
+    margin: 0.4rem;
+}
+
+.nav-item a {
+    border-radius: 8px !important;
+    color: #9b99a7;
+    font-size: 1rem;
+    font-weight: 600;
+}
+#active-btn  {
+    color: #4F6CFF;
+}
+.nav-link:hover {
+    color: #4F6CFF;
+}
+
+@media (max-width: 575px) {
+    .nav-tabs, h3 {
+      display: none; 
+    }
+} 
+
+.dropdown-toggle {
+    border: 3px solid #4F6CFF;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4F6CFF;
+    margin-bottom: 40px;
+}
+.dropdown-toggle:hover {
+    border: 3px solid #3753DD;
+    color: #3753DD;
+}
+
+  
+@media (min-width: 575px) {
+    .dropdown {
+      display: none;
+    }
+}
+  
