@@ -27,7 +27,11 @@ const getHomePage = async (req, res) => {
       }
     } else {
       // Nếu không có user, render view EJS với dữ liệu user là null
+<<<<<<< HEAD:controllers/homeController.js
+      res.render('dangkytour', { user: null });
+=======
       res.render('home', { user: null });
+>>>>>>> fda9fe5a21114d862808eaf9351c85128adfc30a:webServer/controllers/homeController.js
     }
   } catch (error) {
     console.error('Error getting user information:', error);

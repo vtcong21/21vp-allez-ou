@@ -49,6 +49,8 @@ table tr {
 .form-control {
     border: 1px solid rgba(110, 106, 142, 0.35);
     border-radius: 6px;
+    padding: 1rem 0.75rem; 
+    font-size: 1.5rem;
 }
 
 form[name="info"] {
@@ -206,4 +208,7 @@ hr:not([size]){
 .total,.total2,.total3,.total4,.total6{ 
     padding-left: 2em;
      padding-right: 2em;
+}
+#exampleModalToggle{ 
+    font-family: 'Nunito';
 }

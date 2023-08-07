@@ -2,19 +2,19 @@
 // Hàm xóa hết dữ liệu trong localStorage
 function clearLocalStorage() {
     localStorage.clear();
-  }
-  
-  // Gọi hàm clearLocalStorage() khi trang web được tải lên
-  window.addEventListener('load', clearLocalStorage);
+}
+
+// Gọi hàm clearLocalStorage() khi trang web được tải lên
+window.addEventListener('load', clearLocalStorage);
 function loadNewForm3() {
     // Xóa nội dung phần tử "personal-info"
     var personal = document.getElementById("personal-info");
     personal.innerHTML = "";
 
     // Tạo các phần tử input và label cho biểu mẫu
-    var personalInfoDiv = document.getElementById("personal-info"); 
-    var formGroup = document.createElement("div"); 
-    formGroup.classList.add("form-group"); 
+    var personalInfoDiv = document.getElementById("personal-info");
+    var formGroup = document.createElement("div");
+    formGroup.classList.add("form-group");
 
     formGroup.innerHTML = `
         <div class="form-group-name">
@@ -58,12 +58,12 @@ function loadNewForm3() {
     `;
 
     // Thiết lập kiểu hiển thị cho các tab
-    document.getElementById("register").style.backgroundColor="#4b60ce";
-    document.getElementById("register").style.fontWeight="900";
-    document.getElementById("info").style.backgroundColor="#dadada";
-    document.getElementById("info").style.fontWeight="normal";
-    document.getElementById("bank-link").style.backgroundColor="#dadada";
-    document.getElementById("bank-link").style.fontWeight="normal";
+    document.getElementById("register").style.backgroundColor = "#4b60ce";
+    document.getElementById("register").style.fontWeight = "900";
+    document.getElementById("info").style.backgroundColor = "#dadada";
+    document.getElementById("info").style.fontWeight = "normal";
+    document.getElementById("bank-link").style.backgroundColor = "#dadada";
+    document.getElementById("bank-link").style.fontWeight = "normal";
 }
 function loadNewForm() {
     console.log("Hàm loadNewForm() đã được gọi.");
@@ -73,9 +73,9 @@ function loadNewForm() {
     document.getElementById("register").style.fontWeight = "normal";
     document.getElementById("register").style.backgroundColor = "#dadada"
     document.getElementById("info").style.fontWeight = "900";
-    document.getElementById("info").style.backgroundColor = "#4b60ce"; 
-    document.getElementById("bank-link").style.backgroundColor="#dadada"
-   
+    document.getElementById("info").style.backgroundColor = "#4b60ce";
+    document.getElementById("bank-link").style.backgroundColor = "#dadada"
+
     var formGroup = document.createElement("div");
     formGroup.classList.add("form-group-name");
     formGroup.innerHTML = `
@@ -86,18 +86,18 @@ function loadNewForm() {
 </div>
 <div class="form-control-row">
 <div class="form-control-inline">
-<input type="radio" value="male" id="male" name="gender">
-<label for="male">Nam</label>
+<input type="radio" value="Male" id="Male" name="gender">
+<label for="Male">Nam</label>
 </div>
 <div class="form-control-inline">
-<input type="radio" value="female" id="female" name="gender">
+<input type="radio" value="Female" id="Female" name="gender">
 
-<label for="female">Nữ</label>
+<label for="Female">Nữ</label>
 </div>
 <div class="form-control-inline">
-<input type="radio" value="other" id="other" name="gender">
+<input type="radio" value="Undefined" id="Undefined" name="gender">
 
-<label for="other">Không muốn tiết lộ</label>
+<label for="Undefined">Không muốn tiết lộ</label>
         </div>
 </div> 
     <label for="dob">Ngày sinh:</label>
@@ -109,8 +109,8 @@ function loadNewForm() {
 
     personalInfoDiv.appendChild(formGroup);
     LoadFormValues2();
-        document.getElementById("dob").value = localStorage.getItem("dob");
-        document.getElementById("phone").value = localStorage.getItem("phone");
+    document.getElementById("dob").value = localStorage.getItem("dob");
+    document.getElementById("phone").value = localStorage.getItem("phone");
     var btnHomeRegister = document.getElementById("btn-home-register");
     btnHomeRegister.innerHTML = `
 <div class="row" id="next1">
@@ -118,18 +118,18 @@ function loadNewForm() {
     <button type="button" class="btn btn-primary2" onclick="loadNewForm3()">Quay lại</button>
     </div>
     <div class="col-6 text-center">
-    <button type="button" class="btn btn-primary" onclick="if (validateForm2()) {getinfo(); SaveValues2(); loadNewForm2();  }">Tiếp Theo</button>
+    <button type="button" class="btn btn-primary" onclick="if (validateForm2()) {getinfo(); SaveValues2(); registerUser();  }">Tiếp Theo</button>
     </div>
 </div>
 `;
 
 }
-function getinfo(){ 
-    var gender=document.getElementsByName('gender'); 
-    var genders=''; 
-    for (var i=0;i<gender.length;i++) {
-        if(gender[i].checked==true){ 
-            genders=gender[i].value;
+function getinfo() {
+    var gender = document.getElementsByName('gender');
+    var genders = '';
+    for (var i = 0; i < gender.length; i++) {
+        if (gender[i].checked == true) {
+            genders = gender[i].value;
         }
     }
     console.log(gender);
@@ -139,16 +139,16 @@ function getinfo(){
 }
 
 function loadNewForm2() {
-    
+
     var personalInfoDiv = document.getElementById("personal-info");
     personalInfoDiv.innerHTML = "";
     var formGroup = document.createElement("div");
     document.getElementById("register").style.fontWeight = "normal";
     document.getElementById("register").style.backgroundColor = "#dadada"
-    document.getElementById("info").style.backgroundColor = "#dadada"; 
+    document.getElementById("info").style.backgroundColor = "#dadada";
     document.getElementById("info").style.fontWeight = "normal";
-    document.getElementById("bank-link").style.backgroundColor="#4b60ce"
-    document.getElementById("bank-link").style.fontWeight="900";  
+    document.getElementById("bank-link").style.backgroundColor = "#4b60ce"
+    document.getElementById("bank-link").style.fontWeight = "900";
     formGroup.classList.add("form-group");
     formGroup.innerHTML = `
 <div class="form-group-name" style="text-align: center; margin-left:0">
@@ -175,159 +175,178 @@ function loadNewForm2() {
         <button type="button" class="btn btn-primary2" onclick="loadNewForm()">Quay lại</button>
     </div>
     <div class="col-6 text-center">
-    <form id="register-form" action="/register" method="post">
-    <button type="submit" class="btn btn-primary" onclick="if (finish()) {registerUser(formData)}" >Hoàn tất</button>
-</form>
+    <button type="button" class="btn btn-primary" onclick="if (finish()) {sendVerificationCodeToServer()}" >Hoàn tất</button>
     </div>
 </div>
 `;
-var resendCode = document.getElementById("resend-code");
-var confirmaccount = document.getElementById("confirm-account");
-var confirmaccount1 = document.getElementById("confirm-account1");
-var formrow1 = document.getElementById("myformrow");
+    var resendCode = document.getElementById("resend-code");
+    var confirmaccount = document.getElementById("confirm-account");
+    var confirmaccount1 = document.getElementById("confirm-account1");
+    var formrow1 = document.getElementById("myformrow");
     if (window.innerWidth < 576) {
         resendCode.style.marginLeft = "1em";
-        confirmaccount.style.fontSize = "2rem"; 
-        confirmaccount.style.paddingTop="3em";
-        confirmaccount1.style.padding ="0.5em 4.5em";
-        formrow1.style.marginLeft="1.2em";
-        formrow1.style.paddingBottom="3em";
+        confirmaccount.style.fontSize = "2rem";
+        confirmaccount.style.paddingTop = "3em";
+        confirmaccount1.style.padding = "0.5em 4.5em";
+        formrow1.style.marginLeft = "1.2em";
+        formrow1.style.paddingBottom = "3em";
     } else {
         resendCode.style.marginLeft = "15.73em";
     }
 
-// Lấy giá trị email từ localStorage
-let email = localStorage.getItem("email");
+    // Lấy giá trị email từ localStorage
+    let email = localStorage.getItem("email");
 
-let atIndex = email.indexOf("@");
-let prefix = email.substring(0, atIndex);
-let postfix = email.substring(atIndex);
-let maskedEmail = "*".repeat(prefix.length - 4) + prefix.slice(-4) + postfix;
+    let atIndex = email.indexOf("@");
+    let prefix = email.substring(0, atIndex);
+    let postfix = email.substring(atIndex);
+    let maskedEmail = "*".repeat(prefix.length - 4) + prefix.slice(-4) + postfix;
 
-// Gán giá trị email đã được che vào phần tử có id "cheemail"
-let cheemailElement = document.getElementById("cheemail");
-if (cheemailElement) {
-  cheemailElement.innerHTML = maskedEmail;
-} else {
-  console.error("Cannot find element with id 'cheemail'");
-}}
+    // Gán giá trị email đã được che vào phần tử có id "cheemail"
+    let cheemailElement = document.getElementById("cheemail");
+    if (cheemailElement) {
+        cheemailElement.innerHTML = maskedEmail;
+    } else {
+        console.error("Cannot find element with id 'cheemail'");
+    }
+}
 function finish() {
     const confirmAccountField = document.getElementById("confirm-account1");
     var checkOTP = /^\d{6}$/;
     if (confirmAccountField.value === "") {
-      alert("Hãy nhập mã OTP 6 số được gửi đến email!");
-      return loadNewForm2(); 
-    } 
-    else if (!checkOTP.test(confirmAccountField.value)) { 
+        alert("Hãy nhập mã OTP 6 số được gửi đến email!");
+        return loadNewForm2();
+    }
+    else if (!checkOTP.test(confirmAccountField.value)) {
         alert("OTP gồm 6 số được gửi đến email! OTP bạn nhập vào không đúng")
         return loadNewForm2();
     }
-  
-    return true;
-  }
-  function registerUser(formData) {
-    axios.post("/register", formData)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  const formData = {
-    name: localStorage.getItem('name'),
-    email: localStorage.getItem('email'), 
-    pwd: localStorage.getItem('pwd'),
-    dob: localStorage.getItem('dob'),
-    phone: localStorage.getItem('phone'),
-    gender: localStorage.getItem('gender')
-  };
-  
 
-    function validateForm() {
-        var nameField = document.getElementById("name");
-        if (nameField.value == "") {
-          alert("Vui lòng nhập họ và tên!");
-          return false;
-        }
-       
-      
-        var emailField = document.getElementById("email");
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(emailField.value)) {
-          alert("Địa chỉ email không hợp lệ!");
-          return false;
-        }
-      
-        var passwordField = document.getElementById("pwd");
-        if (passwordField.value == "") {
-          alert("Vui lòng nhập mật khẩu!");
-          return false;
-        }
-      
-        var passwordConfirmField = document.getElementById("pwd_confirm");
-        if (passwordField.value != passwordConfirmField.value) {
-          alert("Xác nhận mật khẩu không khớp!");
-          return false;
-        }
-            return true;
-      }
-      function validateForm2() {
-        var genderInputs = document.querySelectorAll('input[name="gender"]');
-        var genderChecked = false;
-        for (var i = 0; i < genderInputs.length; i++) {
-            if (genderInputs[i].checked) {
-                genderChecked = true;
-                break;
-            }
-        }
-        if (!genderChecked) {
-            alert("Vui lòng chọn giới tính!");
-            return false;
-        }
-        var dobInput = document.getElementById("dob");
-        if (dobInput.value === "") {
-            alert("Vui lòng nhập ngày sinh!");
-            return false;
-        }
-        var phoneInput = document.getElementById("phone");
-        var phoneRegex = /^\d{10}$/;
-        if (!phoneRegex.test(phoneInput.value)) {
-            alert("Vui lòng nhập số điện thoại đúng định dạng (10 số)!");
-            return false;
-        }
-        return true;
+    return true;
+}
+
+
+
+async function registerUser() {
+    try {
+        const formData = {
+            fullName: localStorage.getItem('name'),
+            email: localStorage.getItem('email'),
+            password: localStorage.getItem('password'),
+            dateOfBirth: localStorage.getItem('dob'),
+            phoneNumber: localStorage.getItem('phone'),
+            gender: localStorage.getItem('gender')
+        };
+        console.log(formData);
+        await axios.post("/auth/register", formData);
+        console.log("request sent");
+        loadNewForm2();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+async function sendVerificationCodeToServer() {
+    try {
+        const code = document.getElementById("confirm-account1").value;
+        const verificationData = {
+            email: localStorage.getItem("email"),
+            verificationCode: code
+        };
+        console.log(verificationData);
+        const response = await axios.post("/auth/verify", verificationData);
+        console.log(response.data);
+        window.location.href = "/auth/login";
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+function validateForm() {
+    var nameField = document.getElementById("name");
+    if (nameField.value == "") {
+        alert("Vui lòng nhập họ và tên!");
+        return false;
     }
 
-      function SaveValues1(){
-        localStorage.setItem("name", document.getElementById("name").value);
-        localStorage.setItem("email", document.getElementById("email").value);
-        localStorage.setItem("password", document.getElementById("pwd").value);
-      }
-      function SaveValues2(){
-        localStorage.setItem("dob", document.getElementById("dob").value);
-        localStorage.setItem("phone", document.getElementById("phone").value);
-      }
-      function LoadFormValues1(){ 
-        document.getElementById("name").value = localStorage.getItem("name");
-        document.getElementById("email").value = localStorage.getItem("email");
-        document.getElementById("pwd").value = localStorage.getItem("password");
-      }
-      function LoadFormValues2(){ 
-        document.getElementById("dob").value = localStorage.getItem("dob");
-        document.getElementById("phone").value = localStorage.getItem("phone");
-    
-        // Lấy giá trị của các ô input radio trong localStorage
-        var gender = localStorage.getItem("gender");
+
+    var emailField = document.getElementById("email");
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailField.value)) {
+        alert("Địa chỉ email không hợp lệ!");
+        return false;
+    }
+
+    var passwordField = document.getElementById("pwd");
+    if (passwordField.value == "") {
+        alert("Vui lòng nhập mật khẩu!");
+        return false;
+    }
+
+    var passwordConfirmField = document.getElementById("pwd_confirm");
+    if (passwordField.value != passwordConfirmField.value) {
+        alert("Xác nhận mật khẩu không khớp!");
+        return false;
+    }
+    return true;
+}
+function validateForm2() {
+    var genderInputs = document.querySelectorAll('input[name="gender"]');
+    var genderChecked = false;
+    for (var i = 0; i < genderInputs.length; i++) {
+        if (genderInputs[i].checked) {
+            genderChecked = true;
+            break;
+        }
+    }
+    if (!genderChecked) {
+        alert("Vui lòng chọn giới tính!");
+        return false;
+    }
+    var dobInput = document.getElementById("dob");
+    if (dobInput.value === "") {
+        alert("Vui lòng nhập ngày sinh!");
+        return false;
+    }
+    var phoneInput = document.getElementById("phone");
+    var phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(phoneInput.value)) {
+        alert("Vui lòng nhập số điện thoại đúng định dạng (10 số)!");
+        return false;
+    }
+    return true;
+}
+
+function SaveValues1() {
+    localStorage.setItem("name", document.getElementById("name").value);
+    localStorage.setItem("email", document.getElementById("email").value);
+    localStorage.setItem("password", document.getElementById("pwd").value);
+}
+function SaveValues2() {
+    localStorage.setItem("dob", document.getElementById("dob").value);
+    localStorage.setItem("phone", document.getElementById("phone").value);
+}
+function LoadFormValues1() {
+    document.getElementById("name").value = localStorage.getItem("name");
+    document.getElementById("email").value = localStorage.getItem("email");
+    document.getElementById("pwd").value = localStorage.getItem("password");
+}
+function LoadFormValues2() {
+    document.getElementById("dob").value = localStorage.getItem("dob");
+    document.getElementById("phone").value = localStorage.getItem("phone");
+
+    // Lấy giá trị của các ô input radio trong localStorage
+    var gender = localStorage.getItem("gender");
 
     // Gán giá trị của các ô input radio tương ứng
-    if (gender === "male") {
-        document.getElementById("male").checked = true;
-    } else if (gender === "female") {
-        document.getElementById("female").checked = true;
-    } else if (gender === "other") {
-        document.getElementById("other").checked = true;
+    if (gender === "Male") {
+        document.getElementById("Male").checked = true;
+    } else if (gender === "Female") {
+        document.getElementById("Female").checked = true;
+    } else if (gender === "Undefined") {
+        document.getElementById("Undefined").checked = true;
     }
-    }
+}
 
-     
