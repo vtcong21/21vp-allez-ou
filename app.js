@@ -14,6 +14,7 @@ const tourRoutes = require('./routes/tourRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 const provinceRoutes = require('./routes/provinceRoutes');
 const authRoutes = require('./routes/authRoutes');
+const tourSearch = require('./routes/tourSearchRoutes');
 
 
 
@@ -39,6 +40,7 @@ app.use('/tourCards', tourCardRoutes);
 app.use('/tours', tourRoutes);
 app.use('/pronvices', provinceRoutes);
 app.use('/auth', authRoutes);
+app.use('/tourSearch', tourSearch);
 
 
 app.listen(port, () => {
