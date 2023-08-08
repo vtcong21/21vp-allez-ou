@@ -263,7 +263,7 @@
     </footer>
     <script>
         let currentPage = <%= currentPage %>;
-        const limitPage = <%= limitPage %>;
+        let limitPage = <%= limitPage %>;
         const contentPerPage = <%= contentPerPage %>;
         const pageInfo = document.getElementById('page-info');
 
@@ -321,9 +321,9 @@
             }
         }
 
-        function renderTravelTour() {
+        function renderTravelTour(listData) {
             const listElement = document.getElementById('travel-tour');
-            listElement.innerHTML = listTravelTour.map(
+            listElement.innerHTML = listData.map(
                 (item, i) => {
                     return `<div class="col ${i < currentPage * contentPerPage || i >= (currentPage + 1) * contentPerPage ? 'hidden' : ''}">
                         <img src=${item.cardImgUrl} alt="">
@@ -367,7 +367,7 @@
                 listTravelTour.sort(compareEvents);
                 listTravelTour.reverse();
             }
-            renderTravelTour();
+            renderTravelTour(listTravelTour);
         }
 
         function sortButtonActive2(button) {
@@ -396,29 +396,8 @@
             else if(sortButtonState2 == 2) {
                 listTravelTour.sort((travel1, travel2) => travel2.price - travel1.price);
             }
-            renderTravelTour();
+            renderTravelTour(listTravelTour);
         }
-
-        function findButtonActive(button) {
-            if(window.innerWidth <= 900) {
-                var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
-                if (filter.style.display === 'none') {
-                    filter.style.display = 'block';
-                } else {
-                    filter.style.display = 'none';
-                }
-            }
-        }
-
-        function toggleFilterVisibility() {
-            var filterElement = document.querySelector('#travel .travel-container .travel-content .filter-screen');
-            if (window.innerWidth > 900) {
-                filterElement.style.display = 'none'; 
-            }
-        }
-
-        window.addEventListener('load', toggleFilterVisibility);
-        window.addEventListener('resize', toggleFilterVisibility);
 
         var priceSlider = document.getElementsByClassName('f-price-slider');
         var priceMin = document.getElementsByClassName('f-price-min');
@@ -435,6 +414,38 @@
                 step: 1000000
             });
         }
+
+        function filterActive() {
+          listTravelTour = listTravelTour.filter(item => item.price >= priceSlider[0].noUiSlider.get()[0] && item.price <= priceSlider[0].noUiSlider.get()[1]);
+          currentPage = 0;
+          limitPage = Math.ceil(listTravelTour.length / contentPerPage);
+          pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
+          renderTravelTour(listTravelTour);
+        }
+
+        function findButtonActive(button) {
+            if(window.innerWidth <= 900) {
+                var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
+                if (filter.style.display === 'none') {
+                    filter.style.display = 'block';
+                } else {
+                    filter.style.display = 'none';
+                }
+            }
+            else {
+              filterActive();
+            }
+        }
+
+        function toggleFilterVisibility() {
+            var filterElement = document.querySelector('#travel .travel-container .travel-content .filter-screen');
+            if (window.innerWidth > 900) {
+                filterElement.style.display = 'none'; 
+            }
+        }
+
+        window.addEventListener('load', toggleFilterVisibility);
+        window.addEventListener('resize', toggleFilterVisibility);
 
         function formatPrice(price) {
             var parts = price.toString().split(".");
