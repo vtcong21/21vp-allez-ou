@@ -1,11 +1,11 @@
-const PaymentAccount = require('../models/paymentAccount');
 const mongoose = require('mongoose');
+const PaymentAccount = require('../models/paymentAccount');
+
 
 const sendMoney = async (req, res) => {
     try {
         const { senderAccountId, recipientAccountId, amount, itemId } = req.body;
         const transferAmount = parseInt(amount);
-       
         const senderAccount = await PaymentAccount.findById(senderAccountId);
        
         const recipientAccount = await PaymentAccount.findById(recipientAccountId);
@@ -65,4 +65,30 @@ const getPaymentHistory = async(req, res) =>{
     }   
 }
 
-module.exports = {sendMoney, getPaymentHistory};
+const getTodayPaymentHistory = async (req, res) => {
+    try {
+        const { accountId } = req.body;
+        const account = await PaymentAccount.findById(accountId);
+       
+        if (!account) {
+            return res.status(404).json({ error: 'Payment account not found' });
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const todayPaymentHistory = account.paymentHistory.filter((bill) => {
+            return bill.paymentDate >= today && bill.paymentDate < tomorrow;
+        });
+        
+        res.status(200).json({ paymentHistory: todayPaymentHistory });
+    } catch (error) {
+        console.error('get today\'s payment history error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }   
+}
+
+
+module.exports = {sendMoney, getPaymentHistory, getTodayPaymentHistory};

@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
 const accountRoutes = require("./routes/accountRoutes");
 
 
@@ -21,6 +22,7 @@ connectDatabase();
 
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
