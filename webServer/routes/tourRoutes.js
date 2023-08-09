@@ -4,24 +4,41 @@ const tourController = require('../controllers/tourController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 
+// tìm kiếm tour
 router.get('/search'
-// , authMiddleware.authenticateToken
-, tourController.searchTours);
+    , tourController.searchTours);
+
+// trả về toàn bộ tour
 router.get('/'
-    // ,authMiddleware.authenticateToken
     , tourController.getAllTours);
+
+// trả về tour ẩn, quyền admin
+router.get('/hiddentTours'
+    , authMiddleware.requireAdminRole
+    , tourController.getHiddenTours);
+
+
+// tạo tour, admin mới được tạo
 router.post('/'
-// , authMiddleware.authenticateToken
-, tourController.createTour);
+    , authMiddleware.requireAdminRole
+    , tourController.createTour);
+
+// render trang tour search
+router.get('/toursSearchPage'
+    , tourController.getTourSearchPage);
+
+
+// lấy data tour
 router.get('/tourData/:code'
-    // , authMiddleware.authenticateToken
     , tourController.getTourInfoData);
+
+// xóa tour, admin mới được xóa
 router.delete('/:code'
-// , authMiddleware.authenticateToken
-, tourController.deleteTour);
+    , authMiddleware.requireAdminRole
+    , tourController.deleteTour);
+
+// render trang tour info
 router.get('/:code'
-    // ,authMiddleware.authenticateToken
     , tourController.getTourByCode);
 
 module.exports = router;
-

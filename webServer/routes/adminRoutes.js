@@ -3,27 +3,25 @@ const router = express.Router();
 const adminController = require('../controllers/adminController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-
-
 // render trang admin
 router.get('/'
-    // , authMiddleware.adminMiddleware
+     , authMiddleware.requireAdminRole
     , adminController.renderAdminPage);
 // trả mảng client
 router.get('/getClientList'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.getClientList);
-// trả manrg user
+// trả manrg admin
 router.get('/getAdminList'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.getAdminList);
 // tạo acc admin
 router.post('/createAdminAccount'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.createAdminAccount);
 // xóa acc admin
 router.delete('/deleteAdminAccount'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.deleteAdminAccount);
 
 module.exports = router;
