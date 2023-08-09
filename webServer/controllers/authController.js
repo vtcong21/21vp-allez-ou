@@ -46,7 +46,6 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
-
     const user = await User.findOne(
       { email }
     );
