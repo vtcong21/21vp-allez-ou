@@ -2,6 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const cors = require('cors');
+const accountRoutes = require("./routes/accountRoutes");
+
+
 
 // Load env var
 require("dotenv").config();
@@ -18,13 +22,14 @@ connectDatabase();
 
 
 // Middleware
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 
 // Routes
-
+app.use('/accounts', accountRoutes);
 
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test

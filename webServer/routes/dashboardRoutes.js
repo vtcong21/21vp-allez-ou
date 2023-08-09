@@ -7,7 +7,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 // trả mảng doanh thu tất cả các tháng trong năm
 router.get('/getMonthlyRevenuesThisYear'
     // , authMiddleware.adminMiddleware
-    , dashboardController.getMonthlyRevenuesThisYear);
+    , dashboardController.updateRevenue);
 // trả % lợi nhuận tháng này so với tháng trước
 router.get('/getProfitPercentageThisMonth'
     // , authMiddleware.adminMiddleware
