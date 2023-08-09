@@ -16,6 +16,7 @@ const provinceRoutes = require("./routes/provinceRoutes");
 const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const tourSearch = require('./routes/tourSearchRoutes');
 
 
 
@@ -45,7 +46,7 @@ app.use('/provinces', provinceRoutes);
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/admin', adminRoutes);
-
+app.use('/tourSearch', tourSearch);
 
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test

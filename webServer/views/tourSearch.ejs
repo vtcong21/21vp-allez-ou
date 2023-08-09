@@ -81,19 +81,19 @@
                         </div>
                         <div class="sub-filter-option">
                             <label class="f-option">1-3 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" checked="checked" value="option1" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">4-7 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" checked="checked" value="option2" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">8-14 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" checked="checked" value="option3" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 14 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" checked="checked" value="option4" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -106,19 +106,19 @@
                         </div>
                         <div class="sub-filter-option">
                             <label class="f-option">1 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" checked="checked" value="option1" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">2 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" checked="checked" value="option2" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">3-6 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" checked="checked" value="option3" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 7 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" checked="checked" value="option4" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -225,19 +225,7 @@
                         </div>
                     </div>
                     <div id = "travel-tour" class="row2">
-                        <% for(var i = 0; i < listTravel.length; i++) { %>
-                          <div class="col <% if (i < currentPage * contentPerPage || i >= (currentPage + 1) * contentPerPage) { %>hidden<% } %>">
-                            <img src=<%= listTravel[i].cardImgUrl %> alt="">
-                            <div class="content">
-                                <div class="sub-content">
-                                    <h3><%= listTravel[i].date %> - <%= listTravel[i].numOfDays %>N<%= listTravel[i].numOfDays %>Đ - Giờ đi: <%= listTravel[i].time %></h3>
-                                    <h1><%= listTravel[i].name %></h1>
-                                </div>
-                                <h2><%= listTravel[i].priceformat %></h2>
-                                <div class="content-more"><a href="#">Xem thêm</a></div>
-                            </div>
-                          </div>
-                        <% } %>
+                        
                     </div>
                     <div class="page-control">
                         <div class="page-button" onclick="previousPage()" style="cursor: pointer;">
@@ -245,7 +233,7 @@
                                 <path d="M7.21044 0.841675L0.894653 7.03363L7.21044 13.4733" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div id="page-info"><%= currentPage + 1 %> / <%= limitPage %></div>
+                        <div id="page-info"></div>
                         <div class="page-button" onclick="nextPage()" style="cursor: pointer;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
                                 <path d="M0.736945 13.4733L7.05273 7.28132L0.736946 0.841687" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
@@ -261,210 +249,6 @@
     <footer>
       <%- include('partials/footer') %>
     </footer>
-    <script>
-        let currentPage = <%= currentPage %>;
-        let limitPage = <%= limitPage %>;
-        const contentPerPage = <%= contentPerPage %>;
-        const pageInfo = document.getElementById('page-info');
-
-        function previousPage() {
-            if (currentPage > 0) {
-                const listPageElements = document.querySelectorAll('#travel-tour .col');
-                for(var i = currentPage * contentPerPage; i < Math.min((currentPage + 1) * contentPerPage, listPageElements.length); i++) {
-                    listPageElements[i].classList.add('hidden');
-                }
-                currentPage--;
-                for(var i = currentPage * contentPerPage; i < Math.min((currentPage + 1) * contentPerPage, listPageElements.length); i++) {
-                    listPageElements[i].classList.remove('hidden');
-                }
-                pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
-            }
-        }
-
-        function nextPage() {
-            if (currentPage + 1 < limitPage) {
-                const listPageElements = document.querySelectorAll('#travel-tour .col');
-                for(var i = currentPage * contentPerPage; i < Math.min((currentPage + 1) * contentPerPage, listPageElements.length); i++) {
-                    listPageElements[i].classList.add('hidden');
-                }
-                currentPage++;
-                for(var i = currentPage * contentPerPage; i < Math.min((currentPage + 1) * contentPerPage, listPageElements.length); i++) {
-                    listPageElements[i].classList.remove('hidden');
-                }
-                pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
-            }
-        }
-        
-        // ----------------------------------------------------
-
-        let sortButtonState1 = 0;
-        let sortButtonState2 = 0;
-        var listTravelTour = <%- JSON.stringify(listTravel) %>;
-        function compareEvents(event1, event2) {
-            const date1 = new Date(event1.date);
-            const date2 = new Date(event2.date);
-            const time1 = event1.time;
-            const time2 = event2.time;
-
-            if (date1 < date2) {
-                return -1;
-            } else if (date1 > date2) {
-                return 1;
-            } else {
-                if (time1 < time2) {
-                return -1;
-                } else if (time1 > time2) {
-                return 1;
-                } else {
-                return 0;
-                }
-            }
-        }
-
-        function renderTravelTour(listData) {
-            const listElement = document.getElementById('travel-tour');
-            listElement.innerHTML = listData.map(
-                (item, i) => {
-                    return `<div class="col ${i < currentPage * contentPerPage || i >= (currentPage + 1) * contentPerPage ? 'hidden' : ''}">
-                        <img src=${item.cardImgUrl} alt="">
-                        <div class="content">
-                            <div class="sub-content">
-                                <h3>${item.date} - ${item.numOfDays}N${item.numOfDays}Đ - Giờ đi: ${item.time}</h3>
-                                <h1>${item.name}</h1>
-                            </div>
-                            <h2>${item.priceformat}</h2>
-                            <div class="content-more"><a href="#">Xem thêm</a></div>
-                        </div>
-                    </div>`;
-                }
-            ).join("");
-        }
-
-        function sortButtonActive1(button) {
-            sortButtonState2 = 0;
-            sortButtonState1 = (sortButtonState1 + 1) % 3;
-            var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
-            for(var i = 0; i < images.length; i++) {
-                images[i].src = "/img/tourSearch/up-arrow.svg";
-            }
-
-            var image = button.querySelector('img');
-            if(sortButtonState1 == 2) image.src = "/img/tourSearch/down-arrow.svg";
-            else image.src = "/img/tourSearch/up-arrow.svg";
-
-            var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
-            for(var i = 0; i < sortButtons.length; i++) {
-                sortButtons[i].style.backgroundColor = '#6E6A8E';
-            }
-
-            if(sortButtonState1 == 0) button.style.backgroundColor = '#6E6A8E';
-            else button.style.backgroundColor = '#F14868';
-
-            if(sortButtonState1 == 1) {
-                listTravelTour.sort(compareEvents);
-            }
-            else if(sortButtonState1 == 2) {
-                listTravelTour.sort(compareEvents);
-                listTravelTour.reverse();
-            }
-            renderTravelTour(listTravelTour);
-        }
-
-        function sortButtonActive2(button) {
-            sortButtonState1 = 0;
-            sortButtonState2 = (sortButtonState2 + 1) % 3;
-            var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
-            for(var i = 0; i < images.length; i++) {
-                images[i].src = "/img/tourSearch/up-arrow.svg";
-            }
-
-            var image = button.querySelector('img');
-            if(sortButtonState2 == 2) image.src = "/img/tourSearch/down-arrow.svg";
-            else image.src = "/img/tourSearch/up-arrow.svg";
-
-            var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
-            for(var i = 0; i < sortButtons.length; i++) {
-                sortButtons[i].style.backgroundColor = '#6E6A8E';
-            }
-
-            if(sortButtonState2 == 0) button.style.backgroundColor = '#6E6A8E';
-            else button.style.backgroundColor = '#F14868';
-
-            if(sortButtonState2 == 1) {
-                listTravelTour.sort((travel1, travel2) => travel1.price - travel2.price);
-            }
-            else if(sortButtonState2 == 2) {
-                listTravelTour.sort((travel1, travel2) => travel2.price - travel1.price);
-            }
-            renderTravelTour(listTravelTour);
-        }
-
-        var priceSlider = document.getElementsByClassName('f-price-slider');
-        var priceMin = document.getElementsByClassName('f-price-min');
-        var priceMax = document.getElementsByClassName('f-price-max');
-
-        for(var i = 0; i < priceSlider.length; i++) {
-            noUiSlider.create(priceSlider[i], {
-                start: [2000000, 11000000], 
-                connect: true,
-                range: {
-                    'min': 0,
-                    'max': 20000000
-                },
-                step: 1000000
-            });
-        }
-
-        function filterActive() {
-          listTravelTour = listTravelTour.filter(item => item.price >= priceSlider[0].noUiSlider.get()[0] && item.price <= priceSlider[0].noUiSlider.get()[1]);
-          currentPage = 0;
-          limitPage = Math.ceil(listTravelTour.length / contentPerPage);
-          pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
-          renderTravelTour(listTravelTour);
-        }
-
-        function findButtonActive(button) {
-            if(window.innerWidth <= 900) {
-                var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
-                if (filter.style.display === 'none') {
-                    filter.style.display = 'block';
-                } else {
-                    filter.style.display = 'none';
-                }
-            }
-            else {
-              filterActive();
-            }
-        }
-
-        function toggleFilterVisibility() {
-            var filterElement = document.querySelector('#travel .travel-container .travel-content .filter-screen');
-            if (window.innerWidth > 900) {
-                filterElement.style.display = 'none'; 
-            }
-        }
-
-        window.addEventListener('load', toggleFilterVisibility);
-        window.addEventListener('resize', toggleFilterVisibility);
-
-        function formatPrice(price) {
-            var parts = price.toString().split(".");
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-            return parts.join(".");
-        }
-
-        for(var i = 0; i < priceSlider.length; i++) {
-            priceSlider[i].noUiSlider.on('update', (function (index) {
-                return function (values, handle) {
-                    if (handle === 0) {
-                        priceMin[index].innerHTML = formatPrice(Math.round(values[0]));
-                    }
-                    if (handle === 1) {
-                        priceMax[index].innerHTML = formatPrice(Math.round(values[1]));
-                    }
-                };
-            })(i));
-        }
-    </script>
 </body>
 </html>
+<script defer src="/js/tourSearch.js"></script>
