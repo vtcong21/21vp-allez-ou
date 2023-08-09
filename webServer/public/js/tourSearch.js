@@ -189,6 +189,13 @@ for(var i = 0; i < priceSlider.length; i++) {
     });
 }
 
+function filterDelete() {
+    if(filter == {}) return;
+    filter = {};
+    loadData();
+    renderPage();
+}
+
 function filterActive() {
     filter = {};
     if(sortButtonState[0] != 0) filter.sort = ["date", sortButtonState[0]];

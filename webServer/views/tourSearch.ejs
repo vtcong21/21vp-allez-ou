@@ -140,6 +140,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="sep-line"></div>
+                    <div class="sub-filter">
+                        <div class="sub-filter-confirm">
+                            <button class="sub-filter-button" onclick="findButtonActive(), filterDelete()">Xóa bộ lọc</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="filter-screen" style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 3; background-color: rgba(0, 0, 0, 0.3);">
                     <div class="filter mobile-filter">
@@ -209,6 +215,7 @@
                         <div class="sub-filter">
                             <div class="sub-filter-confirm">
                                 <button class="sub-filter-button" onclick="findButtonActive()">Hủy</button>
+                                <button class="sub-filter-button" onclick="findButtonActive(), filterDelete()">Xóa bộ lọc</button>
                                 <button class="sub-filter-button" onclick="findButtonActive(), filterActive()">Áp dụng</button>
                             </div>
                         </div>
