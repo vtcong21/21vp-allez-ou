@@ -412,18 +412,18 @@ header .booking-info .block .block-col2 .block-row2 {
   font-weight: 700;
 }
 
-#travel .travel-container .listtour .page-control {
+#page-control {
   padding-top: 55px;
   padding-bottom: 112px;
   display: flex;
   justify-content: center;
 }
 
-#travel .travel-container .listtour .page-control .page-button {
+#page-control .page-button {
   cursor: pointer;
 }
 
-#travel .travel-container .listtour .page-control #page-info {
+#page-control #page-info {
   padding: 0 32px;
   height: fit-content;
   color: #000;

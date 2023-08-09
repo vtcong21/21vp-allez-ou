@@ -113,14 +113,24 @@ function compareEvents(event1, event2) {
 function renderPage() {
     listTravelCurrent = listTravel.slice(currentPage * contentPerPage, (currentPage + 1) * contentPerPage);
     const travelTour = document.getElementById('travel-tour');
+    const pageInfo = document.getElementById('page-info');
+    var buttons = document.querySelectorAll("#page-control .page-button");
     travelTour.innerHTML = "";
-  
+
+    if(listTravelCurrent.length == 0) {
+        for(var i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+        } 
+        pageInfo.innerHTML = "Không tìm thấy kết quả";
+        return;
+    }
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].style.display = "block";
+    } 
     listTravelCurrent.forEach(travel => {
         const card = cardTravelTour(travel);
         travelTour.insertAdjacentHTML('beforeend', card);
     });
-
-    const pageInfo = document.getElementById('page-info');
     pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
 }
 
@@ -196,7 +206,7 @@ function filterActive() {
     renderPage();
 }
 
-function findButtonActive(button) {
+function findButtonActive() {
     if(window.innerWidth <= 900) {
         var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
         if (filter.style.display === 'none') {

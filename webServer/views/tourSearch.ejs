@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="sep-block" style="width: 20px;"></div>
-        <div class="find-filter" onclick="findButtonActive(this)" style="cursor: pointer;">
+        <div class="find-filter" onclick="findButtonActive()" style="cursor: pointer;">
             <img src="/img/tourSearch/find.png" alt="">
         </div>
     </div>
@@ -193,12 +193,12 @@
                             </div>
                             <div class="sub-filter-sort">
                                 <div class="tour-sort">
-                                    <div class="sort-block" onclick="sortButtonActive1(this)" style="display: block;">
+                                    <div class="sort-block" onclick="sortButtonActive(this, 0)" style="display: block;">
                                         <div class="sort-block-content">Ngày khởi hành</div>
                                         <img src="/img/tourSearch/up-arrow.svg" alt="">
                                     </div>
                                     <div style="height: 11px; display: block;"></div>
-                                    <div class="sort-block" onclick="sortButtonActive2(this)" style="display: block;">
+                                    <div class="sort-block" onclick="sortButtonActive(this, 1)" style="display: block;">
                                         <div class="sort-block-content">Giá tiền</div>
                                         <img src="/img/tourSearch/up-arrow.svg" alt="">
                                     </div>
@@ -208,8 +208,8 @@
                         <div class="sep-line"></div>
                         <div class="sub-filter">
                             <div class="sub-filter-confirm">
-                                <button class="sub-filter-button" onclick="findButtonActive(this)">Hủy</button>
-                                <button class="sub-filter-button" onclick="findButtonActive(this)">Áp dụng</button>
+                                <button class="sub-filter-button" onclick="findButtonActive()">Hủy</button>
+                                <button class="sub-filter-button" onclick="findButtonActive(), filterActive()">Áp dụng</button>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                     <div id = "travel-tour" class="row2">
                         
                     </div>
-                    <div class="page-control">
+                    <div id="page-control">
                         <div class="page-button" onclick="previousPage()" style="cursor: pointer;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
                                 <path d="M7.21044 0.841675L0.894653 7.03363L7.21044 13.4733" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
