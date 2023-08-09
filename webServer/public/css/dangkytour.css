@@ -117,7 +117,7 @@ form[name="information-nguoilon"] {
     border: none; 
     color: #ffffff;
     box-shadow: none; 
-    padding: 0.5em 8.4em;
+    padding: 0.5em 6.5em;
     font-weight: bolder;
 }
 
@@ -211,4 +211,18 @@ hr:not([size]){
 }
 #exampleModalToggle{ 
     font-family: 'Nunito';
+}
+.tonghanhkhach{ 
+    font-weight: bold;
+    margin-left: 1.2em;
+}
+.total5{ 
+    font-weight: bold;
+    color: red;
+}
+.tongcong{ 
+    font-weight: bold;
+}
+#phuongthuc{ 
+    font-weight: bold
 }

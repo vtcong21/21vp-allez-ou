@@ -46,3 +46,7 @@ line-height: normal;
     background-color: #4CAF50;
     color: white;
 }
+.pagination-container {
+    max-width: 200px; /* Điều chỉnh kích thước container cho phân trang */
+    margin: 1.2em auto; /* Canh giữa theo chiều ngang */
+  }

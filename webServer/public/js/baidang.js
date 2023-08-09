@@ -1,4 +1,4 @@
- // Lấy giá trị float-end
+//  // Lấy giá trị float-end
 //  var floatEnd = document.getElementById('floatValue').textContent;
     
 //  // Lấy giá trị floatEnd và chuyển đổi thành phần số
@@ -13,7 +13,7 @@
 //  // Set giá trị width trong style của progress-bar
 //  var progressBar = document.getElementById('progressBar');
 //  progressBar.style.width = widthValue + "%";
-// // Khai báo biến global để lưu trữ danh sách tour và số trang hiện tại
+// Khai báo biến global để lưu trữ danh sách tour và số trang hiện tại
 let tourDataList = [];
 let currentPage = 1;
 
@@ -21,7 +21,7 @@ async function fetchTourInformation() {
     try {
         const response = await axios.get('/tours');
         tourDataList = response.data;
-
+        totaltours=tourDataList.length;
         renderTourPage(currentPage);
     } catch (error) {
         console.log(error);
@@ -89,25 +89,62 @@ function renderTourPage(page) {
 
 function renderPagination() {
     const totalPages = Math.ceil(tourDataList.length / 12);
-
-    // Xóa các thẻ button phân trang cũ trước khi tạo lại
-    const paginationContainer = document.getElementById('pagination');
-
-    // Tạo các thẻ button phân trang
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+    const previousLink = `<li class="page-item">
+                          <a class="page-link custom-prev-next" href="#" aria-label="Previous" onclick="changePage('previous')">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>`;
+    pagination.insertAdjacentHTML("beforeend", previousLink);
     for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.classList.add('page-button');
-        pageButton.textContent = i;
+        const liClass = i === currentPage ? "page-item active" : "page-item";
+        const link = `<li class="${liClass}">
+                        <a class="page-link custom-page-link" href="#" onclick="changePage(${i})">${i}</a>
+                      </li>`;
+        pagination.insertAdjacentHTML("beforeend", link);
+      }
+      const nextLink = `<li class="page-item">
+                      <a class="page-link custom-prev-next" href="#" aria-label="Next" onclick="changePage('next')">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>`;
+  pagination.insertAdjacentHTML("beforeend", nextLink);
+    // Xóa các thẻ button phân trang cũ trước khi tạo lại
+    // const paginationContainer = document.querySelector('#pagination');
+    // paginationContainer.innerHTML = '';
 
-        // Đặt lắng nghe sự kiện khi nhấp vào button phân trang
-        pageButton.addEventListener('click', () => {
-            currentPage = i;
-            renderTourPage(currentPage);
-        });
+    // // Tạo các thẻ button phân trang
+    // for (let i = 1; i <= totalPages; i++) {
+    //     const pageButton = document.createElement('button');
+    //     pageButton.classList.add('page-button');
+    //     pageButton.textContent = i;
 
-        paginationContainer.appendChild(pageButton);
-    }
+    //     // Đặt lắng nghe sự kiện khi nhấp vào button phân trang
+    //     pageButton.addEventListener('click', () => {
+    //         currentPage = i;
+    //         renderTourPage(currentPage);
+    //     });
+
+    //     paginationContainer.appendChild(pageButton);
+    // }
 }
+function changePage(page) {
+    const totalPages = Math.ceil(tourDataList.length / 12);
+  
+    if (page === "previous") {
+      currentPage = Math.max(1, currentPage - 1);
+    } else if (page === "next") {
+      currentPage = Math.min(totalPages, currentPage + 1);
+    } else {
+      currentPage = page;
+    }
+  
+    renderTourPage(currentPage);
+  
+    // Hiển thị lại phân trang
+    renderPagination();
+  }
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchTourInformation();
