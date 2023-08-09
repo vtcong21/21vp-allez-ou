@@ -1,0 +1,13 @@
+<% for(var i = 0; i < listTravel.length; i++) { %>
+  <div class="col">
+    <img src=<%= listTravel[i].cardImgUrl %> alt="">
+    <div class="content">
+        <div class="sub-content">
+            <h3><%= listTravel[i].date %> - <%= listTravel[i].numOfDays %>N<%= listTravel[i].numOfDays %>Đ - Giờ đi: <%= listTravel[i].time %></h3>
+            <h1><%= listTravel[i].name %></h1>
+        </div>
+        <h2><%= listTravel[i].priceformat %></h2>
+        <div class="content-more"><a href="#">Xem thêm</a></div>
+    </div>
+  </div>
+<% } %>
