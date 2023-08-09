@@ -4,6 +4,7 @@ const getTourSearchPage = async (req, res) => {
   try {
     const response = await axios.get('http://localhost:5000/tourCards'); 
     const listTravel = response.data;
+    console.log(listTravel);
     const contentPerPage = 10;
     for(var i = 0; i < listTravel.length; i++) {
       listTravel[i].priceformat = listTravel[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";

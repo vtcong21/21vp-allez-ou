@@ -262,7 +262,8 @@
       <%- include('partials/footer') %>
     </footer>
     <script>
-        let currentPage = <%= currentPage %>;
+        let currentPage = '<%= currentPage %>';
+        console.log(currentPage);
         let limitPage = <%= limitPage %>;
         const contentPerPage = <%= contentPerPage %>;
         const pageInfo = document.getElementById('page-info');

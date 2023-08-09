@@ -52,7 +52,11 @@ app.use('/tourSearch', tourSearch);
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
   //localhost:5000/test
+<<<<<<< HEAD
   res.render('admin', {user: {
+=======
+  res.render('dangkytour', {user: {
+>>>>>>> eae388e2914eac590487fa306fa80c19e075db62
     fullName: 'Hello Kong ne',
     _id: '123456'
   }});
