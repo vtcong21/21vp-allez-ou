@@ -12,7 +12,6 @@ const authenticateToken = (req, res, next) => {
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
     req.userId = decodedToken.userId;
     req.userRole = decodedToken.userRole;
-
     next();
   } catch (error) {
     console.error('Error validating token:', error);

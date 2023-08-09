@@ -1,4 +1,70 @@
 const Dashboard = require('../models/dashboard');
+const axios = require('axios');
+const cron = require('node-cron');
+
+const updateRevenue = async (req, res) => {
+    try {
+        const response = await axios.get('http://127.0.0.1:5001/accounts/getTodayPaymentHistory', { accountId: '64b79fc6896f214f7aae7ddc' });
+        const paymentHistory = response.data.paymentHistory;
+        console.log(paymentHistory);
+        // // Lấy ngày hôm nay
+        // const today = new Date();
+        // //const day = today.getDate();
+        // const month = today.getMonth() + 1;
+        // const year = today.getFullYear();
+
+        // //const accountId = mongoose.Types.ObjectId('64b79fc6896f214f7aae7ddc');
+
+        // let dashboard = await Dashboard.findOne();
+        // if (!dashboard) {
+        //     return res.status(404).json({ message: 'Cannot find dashboard' });
+        // }
+
+
+        // const currentMonth = dashboard.monthlyRevenue.find(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
+        // if (!currentMonth) {
+        //     dashboard.monthlyRevenue.push({
+        //         month: month,
+        //         year: year,
+        //         dailyRevenue: [],
+        //         revenue: 0,
+        //     });
+        // }
+
+        // // Tìm tháng hiện tại
+        // const currentMonthIndex = dashboard.monthlyRevenue.findIndex(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
+
+        // // Cập nhật dailyRevenue cho ngày hôm nay
+        // dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push({
+        //     date: today,
+        //     revenue: paymentHistory.reduce((total, history) => total + history.amount, 0),
+        // });
+
+        // // Tính tổng doanh thu trong tháng
+        // const monthRevenue = dashboard.monthlyRevenue[currentMonthIndex];
+        // monthRevenue.revenue = monthRevenue.dailyRevenue.reduce((total, daily) => total + daily.revenue, 0);
+
+        // // Lưu thay đổi vào database
+        // await dashboard.save();
+
+        //console.log('Updated revenue at', today);
+    } catch (error) {
+        console.error('Error updating revenue:', error.message);
+    }
+};
+
+// // Lên lịch chạy công việc cập nhật doanh thu vào lúc 0:00 hàng ngày
+// cron.schedule('35 18 * * *', () => {
+//     updateRevenue();
+// });
+
+
+
+
+
+
+
+
 
 const getMonthlyRevenuesThisYear = async (req, res) => {
     try {
@@ -102,5 +168,6 @@ module.exports = {
     getMonthlyRevenuesThisYear,
     getProfitPercentageThisMonth,
     searchMonthlyRevenuesByYear,
-    getRevenueLast7Days
+    getRevenueLast7Days, 
+    updateRevenue
 }
