@@ -87,7 +87,7 @@ const getTourByCode = async (req, res) => {
         const user = await User.findById(req.userId).select('fullName email dateOfBirth');
         const tour = await Tour.findOne({ code });
         if (!tour) {
-          return res.status(404).json({ message: 'Tour not found' });
+          return res.status(404).json({ message: 'Danh' });
         }
         console.log(tour);
         res.render('tourInfo',{tour, user});
