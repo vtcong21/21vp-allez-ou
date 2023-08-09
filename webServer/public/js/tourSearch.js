@@ -201,12 +201,20 @@ function filterActive() {
     if(sortButtonState[0] != 0) filter.sort = ["date", sortButtonState[0]];
     else if(sortButtonState[1] != 0) filter.sort = ["price", sortButtonState[1]];
 
-    filter.budget = [priceSlider[0].noUiSlider.get()[0], priceSlider[0].noUiSlider.get()[1]];
+    var sliderIndex = (window.innerWidth > 900) ? 0 : 1;
+    filter.budget = [priceSlider[sliderIndex].noUiSlider.get()[0], priceSlider[sliderIndex].noUiSlider.get()[1]];
 
-    const check1 = document.querySelector('input[name="f1-radio"]:checked');
+    var check1;
+    var check2;
+    if (window.innerWidth > 900) {
+        check1 = document.querySelector('input[name="f1-radio"]:checked');
+        check2 = document.querySelector('input[name="f2-radio"]:checked');
+    }
+    else {
+        check1 = document.querySelector('.f1-dropbox');
+        check2 = document.querySelector('.f2-dropbox');
+    }
     filter.numday = check1.value;
-
-    const check2 = document.querySelector('input[name="f2-radio"]:checked');
     filter.slot = check2.value;
 
     loadData();
