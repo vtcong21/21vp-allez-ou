@@ -6,14 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/css/tourSearch.css">
     <link rel="stylesheet" href="/css/footer.css">
     <title>Du lịch</title>
+    <script defer src="/js/tourSearch.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
-
     <header>
       <div class="header-booking">
         <div class="booking-info option-select">
@@ -85,15 +87,15 @@
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">4-7 ngày
-                                <input type="radio" checked="checked" value="option2" name="f1-radio">
+                                <input type="radio" value="option2" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">8-14 ngày
-                                <input type="radio" checked="checked" value="option3" name="f1-radio">
+                                <input type="radio" value="option3" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 14 ngày
-                                <input type="radio" checked="checked" value="option4" name="f1-radio">
+                                <input type="radio" value="option4" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -110,15 +112,15 @@
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">2 người
-                                <input type="radio" checked="checked" value="option2" name="f2-radio">
+                                <input type="radio" value="option2" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">3-6 người
-                                <input type="radio" checked="checked" value="option3" name="f2-radio">
+                                <input type="radio" value="option3" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 7 người
-                                <input type="radio" checked="checked" value="option4" name="f2-radio">
+                                <input type="radio" value="option4" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -214,12 +216,12 @@
                 </div>
                 <div class="listtour">
                     <div class="tour-sort">
-                        <div class="sort-block" onclick="sortButtonActive1(this)">
+                        <div class="sort-block" onclick="sortButtonActive(this, 0)">
                             <div class="sort-block-content">Ngày khởi hành</div>
                             <img src="/img/tourSearch/up-arrow.svg" alt="">
                         </div>
                         <div style="width: 15px; display: inline-block;"></div>
-                        <div class="sort-block" onclick="sortButtonActive2(this)">
+                        <div class="sort-block" onclick="sortButtonActive(this, 1)">
                             <div class="sort-block-content">Giá tiền</div>
                             <img src="/img/tourSearch/up-arrow.svg" alt="">
                         </div>
@@ -251,4 +253,3 @@
     </footer>
 </body>
 </html>
-<script defer src="/js/tourSearch.js"></script>

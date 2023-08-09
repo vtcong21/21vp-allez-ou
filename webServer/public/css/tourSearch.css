@@ -160,7 +160,7 @@ header .booking-info .block .block-col2 .block-row2 {
 }
 
 #travel .travel-container .travel-content .filter .sep-line {
-  width: inherit;
+  width: 100%;
   height: 1px;
   border: 1.263px solid #D3D2DB;
   background-color: #D3D2DB;

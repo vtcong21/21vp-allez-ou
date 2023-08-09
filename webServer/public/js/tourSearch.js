@@ -1,53 +1,157 @@
-let currentPage = 0;
+
+const contentPerPage = 10;
+
+let response = null;
 let filter = {};
 
-function renderPage(page, filter = {}) {
-    $.ajax({
-        url: "/tourSearch/filter",
-        method: "GET",
-        data: {
-          page: page,
-          filter: filter
-        },
-        success: function(data) {
-            $("#travel-tour").html(data.travelTour);
-            $("#page-info").html(data.pageInfo);
-        },
-        error: function(err) {
-            console.error("Error:", err);
-        }
-    });
+var listTravel;
+var currentPage;
+var limitPage;
+
+getAPIResponse();
+
+async function getAPIResponse() {
+    try {
+        response = await axios.get("/tourCards");
+        loadData();
+        renderPage();
+    }
+    catch (error) {
+        console.error("Error:", error);
+    }
 }
 
-renderPage(currentPage, filter);
+function loadData() {
+    listTravel = response.data;
+    for(const key in filter) {
+        if(key == "budget") {
+            listTravel = listTravel.filter(item => item.price >= parseInt(filter[key][0]) && item.price <= parseInt(filter[key][1]));
+        }
+        else if(key == "sort") {
+            if(filter[key][0] == "price") {
+                if(filter[key][1] == "1") listTravel.sort((travel1, travel2) => travel1.price - travel2.price);
+                else listTravel.sort((travel1, travel2) => travel2.price - travel1.price);
+            }
+            else {
+                listTravel.sort(compareEvents);
+                if(filter[key][1] == "2") listTravel.reverse();
+            }
+        }
+        else if(key == "numday") {
+            if(filter[key] == "option1") {
+                listTravel = listTravel.filter(item => item.numOfDays >= 1 && item.numOfDays <= 3);
+            }
+            else if(filter[key] == "option2") {
+                listTravel = listTravel.filter(item => item.numOfDays >= 4 && item.numOfDays <= 7);
+            }
+            else if(filter[key] == "option3") {
+                listTravel = listTravel.filter(item => item.numOfDays >= 8 && item.numOfDays <= 14);
+            }
+            else {
+                listTravel = listTravel.filter(item => item.numOfDays >= 14);
+            }
+        }
+        else if(key == "slot") {
+            if(filter[key] == "option1") {
+
+            }
+            else if(filter[key] == "option2") {
+
+            }
+            else if(filter[key] == "option3") {
+
+            }
+            else {
+
+            }
+        }
+    }
+    for(var i = 0; i < listTravel.length; i++) {
+        listTravel[i].priceformat = listTravel[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
+    }
+    currentPage = 0;
+    limitPage = Math.ceil(listTravel.length / contentPerPage);
+}
+
+function cardTravelTour(travel) {
+    return `
+    <div class="col">
+        <img src="${travel.cardImgUrl}" alt="">
+        <div class="content">
+            <div class="sub-content">
+                <h3>${travel.date} - ${travel.numOfDays}N${travel.numOfDays - 1}Đ - Giờ đi: ${travel.time}</h3>
+                <h1>${travel.name}</h1>
+            </div>
+            <h2>${travel.priceformat}</h2>
+            <div class="content-more"><a href="#">Xem thêm</a></div>
+        </div>
+    </div>
+    `;
+}
+
+function compareEvents(event1, event2) {
+    const date1 = new Date(event1.date);
+    const date2 = new Date(event2.date);
+    const time1 = event1.time;
+    const time2 = event2.time;
+
+    if (date1 < date2) {
+        return -1;
+    } else if (date1 > date2) {
+        return 1;
+    } else {
+        if (time1 < time2) {
+        return -1;
+        } else if (time1 > time2) {
+        return 1;
+        } else {
+        return 0;
+        }
+    }
+}
+
+function renderPage() {
+    listTravelCurrent = listTravel.slice(currentPage * contentPerPage, (currentPage + 1) * contentPerPage);
+    const travelTour = document.getElementById('travel-tour');
+    travelTour.innerHTML = "";
+  
+    listTravelCurrent.forEach(travel => {
+        const card = cardTravelTour(travel);
+        travelTour.insertAdjacentHTML('beforeend', card);
+    });
+
+    const pageInfo = document.getElementById('page-info');
+    pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
+}
 
 function previousPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    renderPage(currentPage, filter);
-  }
+    if (currentPage > 0) {
+        currentPage--;
+        renderPage();
+    }
 }
 
 function nextPage() {
-  currentPage++;
-  renderPage(currentPage, filter);
+    if(currentPage + 1 < limitPage) {
+        currentPage++;
+        renderPage();
+    }
 }
 
 // ----------------------------------------------------
 
-let sortButtonState1 = 0;
-let sortButtonState2 = 0;
+let sortButtonState = [0, 0];
 
-function sortButtonActive1(button) {
-    sortButtonState2 = 0;
-    sortButtonState1 = (sortButtonState1 + 1) % 3;
+function sortButtonActive(button, index) {
+    sortButtonState[1 - index] = 0;
+    sortButtonState[index] = (sortButtonState[index] + 1) % 3;
     var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
     for(var i = 0; i < images.length; i++) {
         images[i].src = "/img/tourSearch/up-arrow.svg";
     }
 
     var image = button.querySelector('img');
-    if(sortButtonState1 == 2) image.src = "/img/tourSearch/down-arrow.svg";
+    if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
     else image.src = "/img/tourSearch/up-arrow.svg";
 
     var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
@@ -55,28 +159,7 @@ function sortButtonActive1(button) {
         sortButtons[i].style.backgroundColor = '#6E6A8E';
     }
 
-    if(sortButtonState1 == 0) button.style.backgroundColor = '#6E6A8E';
-    else button.style.backgroundColor = '#F14868';
-}
-
-function sortButtonActive2(button) {
-    sortButtonState1 = 0;
-    sortButtonState2 = (sortButtonState2 + 1) % 3;
-    var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
-    for(var i = 0; i < images.length; i++) {
-        images[i].src = "/img/tourSearch/up-arrow.svg";
-    }
-
-    var image = button.querySelector('img');
-    if(sortButtonState2 == 2) image.src = "/img/tourSearch/down-arrow.svg";
-    else image.src = "/img/tourSearch/up-arrow.svg";
-
-    var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
-    for(var i = 0; i < sortButtons.length; i++) {
-        sortButtons[i].style.backgroundColor = '#6E6A8E';
-    }
-
-    if(sortButtonState2 == 0) button.style.backgroundColor = '#6E6A8E';
+    if(sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
     else button.style.backgroundColor = '#F14868';
 }
 
@@ -97,19 +180,20 @@ for(var i = 0; i < priceSlider.length; i++) {
 }
 
 function filterActive() {
-  filter = {};
-  if(sortButtonState1 != 0) filter.sort = ["date", sortButtonState1];
-  else if(sortButtonState2 != 0) filter.sort = ["price", sortButtonState2];
+    filter = {};
+    if(sortButtonState[0] != 0) filter.sort = ["date", sortButtonState[0]];
+    else if(sortButtonState[1] != 0) filter.sort = ["price", sortButtonState[1]];
 
-  filter.budget = [priceSlider[0].noUiSlider.get()[0], priceSlider[0].noUiSlider.get()[1]];
+    filter.budget = [priceSlider[0].noUiSlider.get()[0], priceSlider[0].noUiSlider.get()[1]];
 
-  const check1 = document.querySelector('input[name="f1-radio"]:checked');
-  filter.numday = check1.value;
+    const check1 = document.querySelector('input[name="f1-radio"]:checked');
+    filter.numday = check1.value;
 
-  const check2 = document.querySelector('input[name="f2-radio"]:checked');
-  filter.slot = check2.value;
+    const check2 = document.querySelector('input[name="f2-radio"]:checked');
+    filter.slot = check2.value;
 
-  renderPage(0, filter);
+    loadData();
+    renderPage();
 }
 
 function findButtonActive(button) {
