@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 // render trang admin
 router.get('/'
-     , authMiddleware.requireAdminRole
+    , authMiddleware.requireAdminRole
     , adminController.renderAdminPage);
 // trả mảng client
 router.get('/getClientList'
@@ -23,5 +23,9 @@ router.post('/createAdminAccount'
 router.delete('/deleteAdminAccount'
     , authMiddleware.requireAdminRole
     , adminController.deleteAdminAccount);
+// trang dashboard
+router.get('/dashboard'
+    , authMiddleware.requireAdminRole
+    , adminController.deleteAdminAccount)
 
 module.exports = router;

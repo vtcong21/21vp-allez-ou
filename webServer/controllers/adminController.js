@@ -7,9 +7,9 @@ const renderAdminPage = async (req, res) => {
         if (!req.userRole) res.render('error');
         else {
             const user = await User.findById(req.userId).select('_id fullName');
-            res.render('admin', {user});
+            res.render('admin', { user });
         }
-    } catch (error){
+    } catch (error) {
         console.error('Error getting user information:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -82,7 +82,18 @@ const deleteAdminAccount = async (req, res) => {
     }
 };
 
-
+const getDashboardPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
 
 module.exports = { getAdminList, getClientList, createAdminAccount, deleteAdminAccount, renderAdminPage }

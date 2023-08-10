@@ -158,6 +158,10 @@ h6 .my-0{
     left: 80.5%;
 }
 
+.logOut{
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 576px){
     .topbar::before{
         display: none;
