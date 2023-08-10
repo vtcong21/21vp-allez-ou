@@ -13,9 +13,8 @@ const register = async (req, res) => {
   try {
     const { fullName, email, password, gender, dateOfBirth, phoneNumber } = req.body;
 
-
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    if (existingUser && existingUser.isVerified) {
       return res.status(409).json({ message: "User already exists" });
     }
 
@@ -23,6 +22,7 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+    const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
 
     const user = new User({
       fullName,
@@ -31,7 +31,8 @@ const register = async (req, res) => {
       gender,
       dateOfBirth,
       phoneNumber,
-      verificationCode
+      verificationCode,
+      verificationCodeExpiration
     });
     await user.save();
     await mailController.sendVerificationEmail(email, verificationCode);
@@ -46,24 +47,27 @@ const register = async (req, res) => {
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
+    const user = await User.findOne({ email });
 
-    const user = await User.findOne(
-      { email }
-    );
     if (!user) {
       return res.status(400).json({ message: 'Invalid verification code' });
     }
 
     if (verificationCode !== user.verificationCode) {
-      await User.deleteOne({ email });
+      if (user.verificationCodeExpiration < new Date()) {
+        //await User.deleteOne({ email });
+        return res.status(400).json({ message: 'Incorrect verification code (expired)' });
+      }
+
       return res.status(400).json({ message: 'Incorrect verification code' });
     }
 
     user.isVerified = true;
     user.verificationCode = undefined;
+    user.verificationCodeExpiration = undefined;
     await user.save();
 
-    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
     res.cookie('token', token);
     res.redirect('/');
   } catch (error) {
@@ -72,14 +76,49 @@ const verify = async (req, res) => {
   }
 };
 
-const renderLoginPage = (req, res) => {
-  res.render('login');
+const resendVerificationCode = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: 'User is already verified' });
+    }
+
+    if (user.verificationCodeExpiration >= new Date()) {
+      return res.status(400).json({ message: 'Verification code is still valid' });
+    }
+
+    const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+    const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
+
+    user.verificationCode = verificationCode;
+    user.verificationCodeExpiration = verificationCodeExpiration;
+    await user.save();
+
+    await mailController.sendVerificationEmail(email, verificationCode);
+
+    res.status(200).json({ message: 'New verification code sent' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
+
+
+
+// const renderLoginPage = (req, res) => {
+//   res.render('login');
+// };
 
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
@@ -90,15 +129,18 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
     // console.log('Token sent');
     res.cookie('token', token);
-    res.status(200).json({ redirectUrl: '/' });
-    // if (user.isAdmin === 1) {
-    //   return res.redirect('/admin');
-    // } else {
-    //   return res.redirect('/');
-    // }
+    
+    
+    if (user.isAdmin === true) {
+      res.status(200).json({ redirectUrl: '/admin' });
+    } else {
+      res.status(200).json({ redirectUrl: '/' });
+    }
+
+    
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -110,10 +152,10 @@ const logout = (req, res) => {
 }
 
 module.exports = {
-  renderLoginPage,
   renderRegisterPage,
   register,
   verify,
+  resendVerificationCode,
   login,
   logout
 };

@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener("DOMContentLoaded", () => {
     async function fetchTourInformation(code) {
         try {
-            const response = await axios.get(`/tours/${code}`);
+            const response = await axios.get(`/tours/tourData/${code}`);
             const tourData = response.data;
             //remainSlots = tourData.remainSlots;
             localStorage.setItem('remainSlots', tourData.remainSlots);
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <label for="information-tour" style="text-decoration: underline;">Thông tin chuyến đi</label>
                 </div>
                 <div style="text-align: center;">
-                    <img src="${tourData.CardImgUrl}" class="img-fluid" />
+                    <img src="${tourData.cardImgUrl}" class="img-fluid" />
                 </div>
                 <div class="name-tour">
                     ${tourData.name}

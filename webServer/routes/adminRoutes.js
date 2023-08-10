@@ -3,27 +3,42 @@ const router = express.Router();
 const adminController = require('../controllers/adminController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-
-
-// render trang admin
+// render trang dashboard
 router.get('/'
-    // , authMiddleware.adminMiddleware
-    , adminController.renderAdminPage);
+    , authMiddleware.requireAdminRole
+    , adminController.renderDashboardPage);
+// render trang order
+router.get('/orders'
+    , authMiddleware.requireAdminRole
+    , adminController.renderOrderPage);
+// render trang tours
+router.get('/tours'
+    , authMiddleware.requireAdminRole
+    , adminController.renderTourPage);
+// render trang client
+router.get('/client'
+    , authMiddleware.requireAdminRole
+    , adminController.renderClientPage);
+// render trang adminRole
+router.get('/admin-role'
+    , authMiddleware.requireAdminRole
+    , adminController.renderAdminRolePage);
 // trả mảng client
 router.get('/getClientList'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.getClientList);
-// trả manrg user
+// trả manrg admin
 router.get('/getAdminList'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.getAdminList);
 // tạo acc admin
 router.post('/createAdminAccount'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.createAdminAccount);
 // xóa acc admin
 router.delete('/deleteAdminAccount'
-    // , authMiddleware.adminMiddleware
+    , authMiddleware.requireAdminRole
     , adminController.deleteAdminAccount);
+
 
 module.exports = router;

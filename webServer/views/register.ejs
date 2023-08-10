@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Allez Où</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <%- include('partials/head') %>
         <link rel="stylesheet" href="/css/dangky.css" />
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="/js/dangky.js"></script>
     </head>
     <body>
@@ -56,24 +46,4 @@
             </div>
         </div>
     </body>
-    <!-- <script>
-        window.onload = function () {
-            var nameInput = document.createElement("input");
-            nameInput.setAttribute("id", "name");
-            nameInput.setAttribute("type", "text");
-            document.body.appendChild(nameInput);
-
-            var emailInput = document.createElement("input");
-            emailInput.setAttribute("id", "email");
-            emailInput.setAttribute("type", "email");
-            document.body.appendChild(emailInput);
-
-            var pwdInput = document.createElement("input");
-            pwdInput.setAttribute("id", "pwd");
-            pwdInput.setAttribute("type", "password");
-            document.body.appendChild(pwdInput);
-
-            LoadFormValues1();
-            SaveValues1();
-        }; -->
 </html>
