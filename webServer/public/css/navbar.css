@@ -46,6 +46,12 @@ html{
     border-radius: 7px;
 }
 
+.navbar-active{
+    font-weight: 800;
+    background: #F14868;
+    border-radius: 7px;
+}
+
 .navbar-text:hover{
     font-weight: 800;
     background: #F14868;

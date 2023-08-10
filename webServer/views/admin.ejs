@@ -30,7 +30,7 @@
                     <!-- Topbar Brand Logo -->
                     <div class="logo-topbar">
                         <!-- Logo light -->
-                        <a href="index.html" class="logo-light">
+                        <a href="/admin" class="logo-light">
                             <span class="logo-lg">
                                 <img src="/img/logo.png" alt="logo">
                             </span>
@@ -40,7 +40,7 @@
                         </a>
 
                         <!-- Logo Dark -->
-                        <a href="index.html" class="logo-dark">
+                        <a href="/admin" class="logo-dark">
                             <span class="logo-lg">
                                 <img src="/img/logo.png" alt="dark logo">
                             </span>
@@ -99,7 +99,7 @@
         <!-- ========== Left Sidebar Start ========== -->
         <div class="leftside-menu">
             <!-- Brand Logo Light -->
-            <a href="index.html" class="logo logo-light">
+            <a href="/admin" class="logo logo-light">
                 <span class="logo-lg">
                     <img src="/img/logo.png" alt="logo">
                 </span>
@@ -109,7 +109,7 @@
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="index.html" class="logo logo-dark">
+            <a href="/admin" class="logo logo-dark">
                 <span class="logo-lg">
                     <img src="/img/logo.png" alt="dark logo">
                 </span>
@@ -132,7 +132,7 @@
             <div class="h-100" id="leftside-menu-container" data-simplebar>
                 <!-- Leftbar User -->
                 <div class="leftbar-user">
-                    <a href="pages-profile.html">
+                    <a href="/admin">
                         <img src="/img/60x60.png" alt="user-image" height="42" class="rounded-circle shadow-sm">
                         <span class="leftbar-user-name mt-2">Dominic Keller</span>
                     </a>
@@ -141,7 +141,7 @@
                 <!--- Sidemenu -->
                 <ul class="side-nav">
                     <li class="side-nav-item">
-                        <a href="apps-chat.html" class="side-nav-link <%= title === 'dashboard' ? 'active-page' : '' %>">
+                        <a href="/admin" class="side-nav-link <%= title === 'dashboard' ? 'active-page' : '' %>">
                             <img src="/img/admin/dashboard.png" alt="" class="side-logo">
                             <span> Thống kê </span>
                         </a>
@@ -156,10 +156,10 @@
                         <div class="collapse" id="tour">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="apps-ecommerce-products.html" class="<%= title === 'tours'  ? 'activeSecondLevel' : '' %>">Bài đăng</a>
+                                    <a href="/admin/tours" class="<%= title === 'tours'  ? 'activeSecondLevel' : '' %>">Bài đăng</a>
                                 </li>
                                 <li>
-                                    <a href="apps-ecommerce-products-details.html" class="<%= title === 'orders'  ? 'activeSecondLevel' : '' %>">Đơn hàng</a>
+                                    <a href="/admin/orders" class="<%= title === 'orders'  ? 'activeSecondLevel' : '' %>">Đơn hàng</a>
                                 </li>
                             </ul>
                         </div>
@@ -174,10 +174,10 @@
                         <div class="collapse" id="role">
                             <ul class="side-nav-second-level">
                                 <li>
-                                    <a href="apps-ecommerce-products.html" class="<%= title === 'client'  ? 'activeSecondLevel' : '' %>">Người dùng</a>
+                                    <a href="/admin/client" class="<%= title === 'client'  ? 'activeSecondLevel' : '' %>">Người dùng</a>
                                 </li>
                                 <li>
-                                    <a href="apps-ecommerce-products-details.html" class="<%= title === 'admin-role'  ? 'activeSecondLevel' : '' %>">Quản trị viên</a>
+                                    <a href="/admin/admin-role" class="<%= title === 'admin-role'  ? 'activeSecondLevel' : '' %>">Quản trị viên</a>
                                 </li>
                             </ul>
                         </div>
@@ -202,7 +202,7 @@
                 <%- include('dashboard') %>
             <% } %>
             <% if (title === 'tours') { %>
-                <%- include('dashboad') %>
+                <%- include('dashboard') %>
             <% } %>
             <% if (title === 'orders') { %>
                 <%- include('adminOrder') %>

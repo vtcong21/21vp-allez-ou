@@ -3,10 +3,26 @@ const router = express.Router();
 const adminController = require('../controllers/adminController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-// render trang admin
+// render trang dashboard
 router.get('/'
     , authMiddleware.requireAdminRole
-    , adminController.renderAdminPage);
+    , adminController.renderDashboardPage);
+// render trang order
+router.get('/orders'
+    , authMiddleware.requireAdminRole
+    , adminController.renderOrderPage);
+// render trang tours
+router.get('/tours'
+    , authMiddleware.requireAdminRole
+    , adminController.renderTourPage);
+// render trang client
+router.get('/client'
+    , authMiddleware.requireAdminRole
+    , adminController.renderClientPage);
+// render trang adminRole
+router.get('/admin-role'
+    , authMiddleware.requireAdminRole
+    , adminController.renderAdminRolePage);
 // trả mảng client
 router.get('/getClientList'
     , authMiddleware.requireAdminRole
@@ -23,9 +39,6 @@ router.post('/createAdminAccount'
 router.delete('/deleteAdminAccount'
     , authMiddleware.requireAdminRole
     , adminController.deleteAdminAccount);
-// trang dashboard
-router.get('/dashboard'
-    , authMiddleware.requireAdminRole
-    , adminController.deleteAdminAccount)
+
 
 module.exports = router;

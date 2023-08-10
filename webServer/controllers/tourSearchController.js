@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const getTourSearchPage = async (req, res) => {
   try {
-    const response = await axios.get('http://localhost:5000/tourCards'); 
+    const response = await axios.get('/tourCards'); 
     const listTravel = response.data;
     console.log(listTravel);
     const contentPerPage = 10;
@@ -23,8 +23,6 @@ const getTourSearchPage = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
-
 
 
 module.exports = { getTourSearchPage };

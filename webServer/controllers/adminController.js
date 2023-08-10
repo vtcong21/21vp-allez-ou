@@ -2,12 +2,11 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 
-const renderAdminPage = async (req, res) => {
+const renderDashboardPage = async (req, res) => {
     try {
         if (!req.userRole) res.render('error');
         else {
             const user = await User.findById(req.userId).select('_id fullName');
-            console.log("done");
             res.render('admin', { user, title: 'dashboard' });
         }
     } catch (error) {
@@ -83,18 +82,65 @@ const deleteAdminAccount = async (req, res) => {
     }
 };
 
-// const getDashboardPage = async (req, res) => {
-//     try {
-//         if (!req.userRole) res.render('error');
-//         else {
-//             const user = await User.findById(req.userId).select('_id fullName');
-//             res.render('admin', { user });
-//         }
-//     } catch (error) {
-//         console.error('Error getting user information:', error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// }
+const renderOrderPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'orders' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
+const renderTourPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'tours' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 
-module.exports = { getAdminList, getClientList, createAdminAccount, deleteAdminAccount, renderAdminPage }
+const renderClientPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'client' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const renderAdminRolePage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'admin-role' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+module.exports = {
+    getAdminList,
+    getClientList,
+    createAdminAccount,
+    deleteAdminAccount,
+    renderDashboardPage,
+    renderOrderPage,
+    renderTourPage,
+    renderClientPage,
+    renderAdminRolePage
+}

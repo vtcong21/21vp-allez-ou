@@ -10,6 +10,7 @@ async function login() {
       email: email,
       password: password
     });
+    console.log(response.status);
     if (response.status === 400) {
       alert('Sai email hoặc mật khẩu');
     }
@@ -19,6 +20,7 @@ async function login() {
     }
   } catch (error) {
     console.error('Đã xảy ra lỗi:', error.message);
+    alert('Sai email hoặc mật khẩu');
   }
 }
 
