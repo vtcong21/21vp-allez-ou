@@ -16,7 +16,6 @@ const provinceRoutes = require("./routes/provinceRoutes");
 const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-const tourSearch = require('./routes/tourSearchRoutes');
 
 
 
@@ -46,17 +45,13 @@ app.use('/provinces', provinceRoutes);
 app.use('/auth', authRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/admin', adminRoutes);
-app.use('/tourSearch', tourSearch);
 
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
   //localhost:5000/test
-<<<<<<< HEAD
-  res.render('admin', {user: {
-=======
-  res.render('dangkytour', {user: {
->>>>>>> eae388e2914eac590487fa306fa80c19e075db62
+
+  res.render('tourSearch', {user: {
     fullName: 'Hello Kong ne',
     _id: '123456'
   }});

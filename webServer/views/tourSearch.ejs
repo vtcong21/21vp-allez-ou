@@ -6,14 +6,16 @@
     <link rel="stylesheet" type="text/css" href="/css/tourSearch.css">
     <link rel="stylesheet" href="/css/footer.css">
     <title>Du lịch</title>
+    <script defer src="/js/tourSearch.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
-
     <header>
       <div class="header-booking">
         <div class="booking-info option-select">
@@ -54,7 +56,7 @@
             </div>
         </div>
         <div class="sep-block" style="width: 20px;"></div>
-        <div class="find-filter" onclick="findButtonActive(this)" style="cursor: pointer;">
+        <div class="find-filter" onclick="findButtonActive()" style="cursor: pointer;">
             <img src="/img/tourSearch/find.png" alt="">
         </div>
     </div>
@@ -81,19 +83,19 @@
                         </div>
                         <div class="sub-filter-option">
                             <label class="f-option">1-3 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" checked="checked" value="option1" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">4-7 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" value="option2" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">8-14 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" value="option3" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 14 ngày
-                                <input type="radio" checked="checked" name="f1-radio">
+                                <input type="radio" value="option4" name="f1-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -106,19 +108,19 @@
                         </div>
                         <div class="sub-filter-option">
                             <label class="f-option">1 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" checked="checked" value="option1" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">2 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" value="option2" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">3-6 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" value="option3" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                             <label class="f-option">trên 7 người
-                                <input type="radio" checked="checked" name="f2-radio">
+                                <input type="radio" value="option4" name="f2-radio">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -138,6 +140,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="sep-line"></div>
+                    <div class="sub-filter">
+                        <div class="sub-filter-confirm">
+                            <button class="sub-filter-button" onclick="findButtonActive(), filterDelete()">Xóa bộ lọc</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="filter-screen" style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 3; background-color: rgba(0, 0, 0, 0.3);">
                     <div class="filter mobile-filter">
@@ -150,7 +158,7 @@
                                 <div class="name">Số ngày</div>
                             </div>
                             <div class="sub-filter-option">
-                                <select class="f-dropbox">
+                                <select class="f-dropbox f1-dropbox">
                                     <option value="option1">1-3 ngày</option>
                                     <option value="option2">4-7 ngày</option>
                                     <option value="option3">8-14 ngày</option>
@@ -163,7 +171,7 @@
                                 <div class="name">Số người</div>
                             </div>
                             <div class="sub-filter-option">
-                                <select class="f-dropbox">
+                                <select class="f-dropbox f2-dropbox">
                                     <option value="option1">1 người</option>
                                     <option value="option2">2 người</option>
                                     <option value="option3">3-6 người</option>
@@ -191,12 +199,12 @@
                             </div>
                             <div class="sub-filter-sort">
                                 <div class="tour-sort">
-                                    <div class="sort-block" onclick="sortButtonActive1(this)" style="display: block;">
+                                    <div class="sort-block" onclick="sortButtonActive(this, 0)" style="display: block;">
                                         <div class="sort-block-content">Ngày khởi hành</div>
                                         <img src="/img/tourSearch/up-arrow.svg" alt="">
                                     </div>
                                     <div style="height: 11px; display: block;"></div>
-                                    <div class="sort-block" onclick="sortButtonActive2(this)" style="display: block;">
+                                    <div class="sort-block" onclick="sortButtonActive(this, 1)" style="display: block;">
                                         <div class="sort-block-content">Giá tiền</div>
                                         <img src="/img/tourSearch/up-arrow.svg" alt="">
                                     </div>
@@ -206,46 +214,35 @@
                         <div class="sep-line"></div>
                         <div class="sub-filter">
                             <div class="sub-filter-confirm">
-                                <button class="sub-filter-button" onclick="findButtonActive(this)">Hủy</button>
-                                <button class="sub-filter-button" onclick="findButtonActive(this)">Áp dụng</button>
+                                <button class="sub-filter-button" onclick="findButtonActive()">Hủy</button>
+                                <button class="sub-filter-button" onclick="findButtonActive(), filterDelete()">Xóa bộ lọc</button>
+                                <button class="sub-filter-button" onclick="findButtonActive(), filterActive()">Áp dụng</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="listtour">
                     <div class="tour-sort">
-                        <div class="sort-block" onclick="sortButtonActive1(this)">
+                        <div class="sort-block" onclick="sortButtonActive(this, 0)">
                             <div class="sort-block-content">Ngày khởi hành</div>
                             <img src="/img/tourSearch/up-arrow.svg" alt="">
                         </div>
                         <div style="width: 15px; display: inline-block;"></div>
-                        <div class="sort-block" onclick="sortButtonActive2(this)">
+                        <div class="sort-block" onclick="sortButtonActive(this, 1)">
                             <div class="sort-block-content">Giá tiền</div>
                             <img src="/img/tourSearch/up-arrow.svg" alt="">
                         </div>
                     </div>
                     <div id = "travel-tour" class="row2">
-                        <% for(var i = 0; i < listTravel.length; i++) { %>
-                          <div class="col <% if (i < currentPage * contentPerPage || i >= (currentPage + 1) * contentPerPage) { %>hidden<% } %>">
-                            <img src=<%= listTravel[i].cardImgUrl %> alt="">
-                            <div class="content">
-                                <div class="sub-content">
-                                    <h3><%= listTravel[i].date %> - <%= listTravel[i].numOfDays %>N<%= listTravel[i].numOfDays %>Đ - Giờ đi: <%= listTravel[i].time %></h3>
-                                    <h1><%= listTravel[i].name %></h1>
-                                </div>
-                                <h2><%= listTravel[i].priceformat %></h2>
-                                <div class="content-more"><a href="#">Xem thêm</a></div>
-                            </div>
-                          </div>
-                        <% } %>
+                        
                     </div>
-                    <div class="page-control">
+                    <div id="page-control">
                         <div class="page-button" onclick="previousPage()" style="cursor: pointer;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
                                 <path d="M7.21044 0.841675L0.894653 7.03363L7.21044 13.4733" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
                             </svg>
                         </div>
-                        <div id="page-info"><%= currentPage + 1 %> / <%= limitPage %></div>
+                        <div id="page-info"></div>
                         <div class="page-button" onclick="nextPage()" style="cursor: pointer;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="15" viewBox="0 0 8 15" fill="none">
                                 <path d="M0.736945 13.4733L7.05273 7.28132L0.736946 0.841687" stroke="black" stroke-width="1.26316" stroke-linecap="round"/>
@@ -261,6 +258,7 @@
     <footer>
       <%- include('partials/footer') %>
     </footer>
+<<<<<<< HEAD
     <script>
         let currentPage = '<%= currentPage %>';
         console.log(currentPage);
@@ -467,5 +465,7 @@
             })(i));
         }
     </script>
+=======
+>>>>>>> fa7b9ad8ce8770a0dd8c1172032df204cfa161e1
 </body>
 </html>
