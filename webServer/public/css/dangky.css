@@ -98,7 +98,6 @@ body {
     font-family: "Nunito";
     font-weight: bold;
     font-size: 1.6rem;
-    cursor: pointer;
     width: calc(100% / 3);
 }
 .form-group-name {
@@ -160,8 +159,12 @@ label[for="pwd_confirm"] {
     }
 }
 
+.btn:not(:disabled):not(.disabled) {
+    cursor: default;
+}
+
+
 .btn:hover {
-    background-color: #4b60ce;
     color: #ffffff;
 }
 .btn-third-length {
