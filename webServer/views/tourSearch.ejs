@@ -3,63 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/head') %>
     <link rel="stylesheet" type="text/css" href="/css/tourSearch.css">
-    <link rel="stylesheet" href="/css/footer.css">
     <title>Du lịch</title>
     <script defer src="/js/tourSearch.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
 </head>
 <body>
     <header>
-      <div class="header-booking">
-        <div class="booking-info option-select">
-            <div class="col">
-                <div class="block">
-                    <div class="block-col1">
-                        <img src="/img/tourSearch/location.svg" alt="">
+        <%- include('partials/navbar') %>
+        <div class="header-booking">
+            <div class="booking-info option-select">
+                <div class="col">
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="/img/tourSearch/location.svg" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Điểm đi</div>
+                            <div class="block-row2">TP.Hồ Chí Minh</div>
+                        </div>
                     </div>
-                    <div class="block-col2">
-                        <div class="block-row1">Điểm đi</div>
-                        <div class="block-row2">TP.Hồ Chí Minh</div>
-                    </div>
-                </div>
-                <div class="sep-block" style="margin-left: 48px; margin-right: 48px;"><img src="/img/tourSearch/dir.svg" alt=""></div>
-                <div class="block">
-                    <div class="block-col1">
-                        <img src="/img/tourSearch/location.svg" alt="">
-                    </div>
-                    <div class="block-col2">
-                        <div class="block-row1">Điểm đến</div>
-                        <div class="block-row2">Hà Nội</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sep-block" style="width: 8px;"></div>
-        <div class="booking-info option-down">
-            <div class="col">
-                <div class="block">
-                    <div class="block-col1">
-                        <img src="/img/tourSearch/calendar.svg" alt="">
-                    </div>
-                    <div class="block-col2">
-                        <div class="block-row1">Ngày đi</div>
-                        <div class="block-row2">18/06/2023</div>
+                    <div class="sep-block" style="margin-left: 48px; margin-right: 48px;"><img src="/img/tourSearch/dir.svg" alt=""></div>
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="/img/tourSearch/location.svg" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Điểm đến</div>
+                            <div class="block-row2">Hà Nội</div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="sep-block" style="width: 8px;"></div>
+            <div class="booking-info option-down">
+                <div class="col">
+                    <div class="block">
+                        <div class="block-col1">
+                            <img src="/img/tourSearch/calendar.svg" alt="">
+                        </div>
+                        <div class="block-col2">
+                            <div class="block-row1">Ngày đi</div>
+                            <div class="block-row2">18/06/2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sep-block" style="width: 20px;"></div>
+            <div class="find-filter" onclick="findButtonActive()" style="cursor: pointer;">
+                <img src="/img/tourSearch/find.png" alt="">
+            </div>
         </div>
-        <div class="sep-block" style="width: 20px;"></div>
-        <div class="find-filter" onclick="findButtonActive()" style="cursor: pointer;">
-            <img src="/img/tourSearch/find.png" alt="">
-        </div>
-    </div>
     </header>
 
     <main>

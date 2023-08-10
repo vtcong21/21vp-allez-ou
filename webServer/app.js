@@ -53,7 +53,9 @@ app.get('/test', (req, res)=>{
   res.render('tourSearch', {user: {
     fullName: 'Hello Kong ne',
     _id: '123456'
-  }});
+  },
+  title:'client'
+});
 })
 
 app.listen(port, () => {

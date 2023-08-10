@@ -18,13 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
             const genderInput = document.getElementById('gender');
             const hoten1Input = document.getElementById('ho-ten1');
             const ngaysinhInput = document.getElementById('ngay-sinh');
-
+       
             const soDienThoaiPattern = /^0\d{9}$/;
             const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; // Biểu thức chính quy để kiểm tra email
             if (!hoTenInput.value || !soDienThoaiInput.value || !diaChiInput.value || !emailInput.value || !genderInput.value ||
                 !hoten1Input.value || !ngaysinhInput.value) {
-                alert('Vui lòng điền đầy đủ thông tin!');
+                    alert('Vui lòng điền đầy đủ thông tin!');
+
                 return false;
+                
             }
             else if (!soDienThoaiInput.value.match(soDienThoaiPattern)) {
                 alert('Số điện thoại không hợp lệ. Vui lòng nhập lại số điện thoại đúng định dạng!');
@@ -46,10 +48,15 @@ document.addEventListener('DOMContentLoaded', function () {
             button.dataset.bsTarget = '#exampleModalToggle';
 
 
-            // Lưu giá trị total vào LocalStorage với key là "totalValue"
+            const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
+            modal.show();
+                        // Lưu giá trị total vào LocalStorage với key là "totalValue"
             var totalDiv = document.querySelector(".total5");
             var totalValue = totalDiv.textContent;
             localStorage.setItem("totalValue", totalValue);
+            var totalValue1 = localStorage.getItem("totalValue");
+            var tongCongElement = document.querySelector(".tongcong");
+            tongCongElement.textContent = totalValue1;
             localStorage.setItem('hoTen', hoTenInput.value);
             localStorage.setItem('soDienThoai', soDienThoaiInput.value);
             localStorage.setItem('diaChi', diaChiInput.value);
@@ -119,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var babyDiscount = parseFloat(localStorage.getItem('babyDiscount'));
     // số lượng vé, người lớn - trẻ em - trẻ nhỏ - em póe
     var quantities = [1, 0, 0, 0];
+    var tonghanhkhachDisplay = document.querySelector(".tonghanhkhach");
     // mảng giá, tính theo cái discount
     var prices = [price, price * (1 - teenDiscount), price * (1 - kidDiscount), price * (1 - babyDiscount)];
 
@@ -132,6 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // update lần đầu khi load trang
     updateQuantityDisplay(0);
+    updateTotalQuantityDisplay();
+
 
 
     // 4 cái button minus, 4 cái button plus, lặp từng cái để tính 
@@ -154,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 0; i < quantities.length; i++) {
             total += quantities[i] * prices[i];
         }
-        totalDisplay.textContent = total;
+totalDisplay.textContent = total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     }
 
     function minusQuantity(index) {
@@ -181,8 +191,15 @@ document.addEventListener("DOMContentLoaded", function () {
         var quantity = document.querySelector(`.quantity${index === 0 ? '' : index + 1}`);
         var quantityDisplay = document.querySelector(`.quantity-display${index === 0 ? '' : index + 1}`);
         quantity.textContent = quantities[index];
-        quantityDisplay.textContent = Math.round(quantities[index] * prices[index]);
+        quantityDisplay.textContent = Math.round(quantities[index] * prices[index]).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         updateTotalDisplay();
+        updateTotalQuantityDisplay();
+
+        
+    }
+    function updateTotalQuantityDisplay() {
+        var totalQuantity = quantities.reduce((sum, quantity) => sum + quantity, 0);
+        tonghanhkhachDisplay.textContent = totalQuantity + " hành khách";
     }
 
     function addInputs(index) {

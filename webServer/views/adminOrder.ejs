@@ -1,25 +1,42 @@
 <link rel="stylesheet" href="/css/adminOrder.css">
 <!-- Pills navs -->
-<ul class="nav nav-pills mb-3 position-relative" id="ex1" role="tablist">
+<ul class="nav nav-pills mb-3 position-relative d-flex justify-content-between" id="ex1" role="tablist">
     <div class="grey-line"></div>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link active nav-order-status" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Chờ xác nhận</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link nav-order-status" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2" role="tab" aria-controls="ex1-pills-2" aria-selected="false">Đã xác nhận</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link nav-order-status" id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3" aria-selected="false">Hoàn thành</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link nav-order-status" id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4" role="tab" aria-controls="ex1-pills-4" aria-selected="false">Đã hủy</a>
+    <div class="nav-item d-flex">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active nav-order-status" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1"
+                role="tab" aria-controls="ex1-pills-1" aria-selected="false">Đặt thành công</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link nav-order-status" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2" role="tab"
+                aria-controls="ex1-pills-2" aria-selected="true">Hoàn thành</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link nav-order-status" id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3" role="tab"
+                aria-controls="ex1-pills-3" aria-selected="false">Đã hủy</a>
+        </li>
+    </div>
+    <li class="nav-item d-none d-sm-block">
+        <div class="input-group">
+            <div class="form-outline">
+                <input type="search" id="form1" class="form-control" placeholder="Tìm kiếm tour" />
+            </div>
+            <button type="button" class="btn btn-primary" style="height: 23px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-search"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+            </button>
+        </div>
     </li>
 </ul>
+
 <!-- Pills navs -->
 
 <!-- Pills content -->
 <div class="tab-content" id="ex1-content">
-    <!-- Chờ xác nhận -->
+    <!-- Đặt thành công -->
     <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
         <div class="table-responsive position-relative table-custom">
             <table class="table align-middle mb-0 table-striped table-borderless">
@@ -37,7 +54,8 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                    style="width: 30px; height: 30px;" class="rounded-circle" />
                                 <div class="ms-3">
                                     <p class="fw-bold mt-2 name">Vũ Nguyễn Xuân Uyên</p>
                                 </div>
@@ -53,11 +71,12 @@
                             <p class="fw-normal mt-2">10/07/2023</p>
                         </td>
                         <td>
-                            <p class="mt-2 badge text-bg-warning">Chờ xác nhận</p>
+                            <p class="mt-2  badge text-bg-success">Đặt thành công</p>
                         </td>
                         <td>
                             <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal1"><img src="/img/admin/adminOrder/showMore.png"/></a>
+                                <a data-bs-toggle="modal" data-bs-target="#orderModal1"><img
+                                        src="/img/admin/adminOrder/showMore.png" /></a>
                             </div>
                         </td>
                     </tr>
@@ -65,7 +84,7 @@
             </table>
         </div>
     </div>
-    <!-- Đã xác nhận -->
+    <!-- Hoàn thành -->
     <div class="tab-pane fade" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
         <div class="table-responsive position-relative table-custom">
             <table class="table align-middle mb-0 table-striped table-borderless">
@@ -83,7 +102,8 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                    style="width: 30px; height: 30px;" class="rounded-circle" />
                                 <div class="ms-3">
                                     <p class="fw-bold mt-2 name">Vũ Nguyễn Xuân Uyên</p>
                                 </div>
@@ -99,11 +119,12 @@
                             <p class="fw-normal mt-2">10/07/2023</p>
                         </td>
                         <td>
-                            <p class="mt-2  badge text-bg-success">Đã xác nhận</p>
+                            <p class="mt-2  badge text-bg-primary">Hoàn thành</p>
                         </td>
                         <td>
                             <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal2"><img src="img/admin/adminOrder/showMore.png" /></a>
+                                <a data-bs-toggle="modal" data-bs-target="#orderModal2"><img
+                                        src="img/admin/adminOrder/showMore.png" /></a>
                             </div>
                         </td>
                     </tr>
@@ -111,7 +132,7 @@
             </table>
         </div>
     </div>
-    <!-- Hoàn thành -->
+    <!-- Đã hủy -->
     <div class="tab-pane fade" id="ex1-pills-3" role="tabpanel" aria-labelledby="ex1-tab-3">
         <div class="table-responsive position-relative table-custom">
             <table class="table align-middle mb-0 table-striped table-borderless">
@@ -129,53 +150,8 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mt-2  name">Vũ Nguyễn Xuân Uyên</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2  name">NDSGN1871-117-110723VU-V-7</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 ">4</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 ">10/07/2023</p>
-                        </td>
-                        <td>
-                            <p class="mt-2  badge text-bg-primary">Hoàn thành</p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal2"><img src="img/admin/adminOrder/showMore.png" /></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <!-- Đã hủy -->
-    <div class="tab-pane fade" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-        <div class="table-responsive position-relative table-custom">
-            <table class="table align-middle mb-0 table-striped table-borderless">
-                <thead class="align-middle">
-                    <tr>
-                        <th class="table-title">KH đại diện</th>
-                        <th class="table-title">Mã tour</th>
-                        <th class="table-title">Số người</th>
-                        <th class="table-title">Ngày tạo đơn</th>
-                        <th class="table-title"></th>
-                        <th class="table-title"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
+                                <img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt=""
+                                    style="width: 30px; height: 30px;" class="rounded-circle" />
                                 <div class="ms-3">
                                     <p class="fw-bold mt-2  name">Vũ Nguyễn Xuân Uyên</p>
                                 </div>
@@ -195,7 +171,8 @@
                         </td>
                         <td>
                             <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal2"><img src="img/admin/adminOrder/showMore.png" /></a>
+                                <a data-bs-toggle="modal" data-bs-target="#orderModal2"><img
+                                        src="img/admin/adminOrder/showMore.png" /></a>
                             </div>
                         </td>
                     </tr>
@@ -212,7 +189,8 @@
             <div class="container p-0">
                 <div class="row justify-content-between text-start bg-white">
                     <div class="col-12 pf-4 text-center position-relative">
-                        <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                         <ul class="list-group list-group-borderless">
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
@@ -233,7 +211,8 @@
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar2 me-2"></i>Trạng thái: </span>
                                 <span class="h6 fw-normal mb-0">
-                                    <p class="badge text-bg-warning">Chờ xác nhận</p></span>
+                                    <p class="badge text-bg-warning">Chờ xác nhận</p>
+                                </span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
@@ -261,7 +240,8 @@
                             </li>
                         </ul>
                         <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI LỚN</span></p>
+                            <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI
+                                    LỚN</span></p>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Họ tên: </span>
                                 <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
@@ -275,9 +255,10 @@
                                 <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
                             </li>
                         </ul>
-                        
+
                         <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ EM</span></p>
+                            <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ
+                                    EM</span></p>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Họ tên: </span>
                                 <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
@@ -306,7 +287,8 @@
             <div class="container p-0">
                 <div class="row justify-content-between text-start bg-white">
                     <div class="col-12 pf-4 text-center position-relative">
-                        <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                         <ul class="list-group list-group-borderless">
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
@@ -327,7 +309,8 @@
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar2 me-2"></i>Trạng thái: </span>
                                 <span class="h6 fw-normal mb-0">
-                                    <p class="badge text-bg-warning">Chờ xác nhận</p></span>
+                                    <p class="badge text-bg-warning">Chờ xác nhận</p>
+                                </span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
@@ -355,7 +338,8 @@
                             </li>
                         </ul>
                         <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI LỚN</span></p>
+                            <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI
+                                    LỚN</span></p>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Họ tên: </span>
                                 <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
@@ -369,9 +353,10 @@
                                 <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
                             </li>
                         </ul>
-                        
+
                         <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ EM</span></p>
+                            <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ
+                                    EM</span></p>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Họ tên: </span>
                                 <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
