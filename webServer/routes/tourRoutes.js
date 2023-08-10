@@ -5,20 +5,20 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 
 router.get('/search'
-// , authMiddleware.authenticateToken
-, tourController.searchTours);
+    // , authMiddleware.authenticateToken
+    , tourController.searchTours);
 router.get('/'
     // ,authMiddleware.authenticateToken
     , tourController.getAllTours);
 router.post('/'
-// , authMiddleware.authenticateToken
-, tourController.createTour);
+    // , authMiddleware.authenticateToken
+    , tourController.createTour);
 router.get('/tourData/:code'
     // , authMiddleware.authenticateToken
     , tourController.getTourInfoData);
 router.delete('/:code'
-// , authMiddleware.authenticateToken
-, tourController.deleteTour);
+    // , authMiddleware.authenticateToken
+    , tourController.deleteTour);
 router.get('/:code'
     // ,authMiddleware.authenticateToken
     , tourController.getTourByCode);

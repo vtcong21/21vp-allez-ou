@@ -140,6 +140,7 @@ body{
 
 .search-button:hover{
     background-color: #DB415E;
+    cursor: pointer;
 }
 
 .location-icon{

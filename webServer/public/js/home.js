@@ -1,4 +1,9 @@
 // Hàm chuyển ngày thành chuỗi theo định dạng "dd/mm/yyyy"
+const endPoint = document.getElementById('endPoint');
+const startPoint = document.getElementById('startPoint');
+const searchTravelDate = document.getElementById('search_travel-date');
+const searchNumOfDate = document.getElementById('search_num-of-date');
+
 function changeDateToString(date) {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -84,15 +89,14 @@ function formatNumberWithCommas(number) {
     }
   }
 
+  
   function displayProvinces(provinces)
   {
-      const startPoint = document.getElementById('startPoint');
-      const endPoint = document.getElementById('endPoint');
       startPoint.innerHTML ="";
       endPoint.innerHTML ="";
 
-      const chooseStartPoint = '<option class="form-option">Hãy chọn điểm đi</option>';
-      const chooseEndPoint = '<option class="form-option">Hãy chọn điểm đến</option>';
+      const chooseStartPoint = '<option class="form-option" value = "">Hãy chọn điểm đi</option>';
+      const chooseEndPoint = '<option class="form-option" value ="">Hãy chọn điểm đến</option>';
 
       startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
       endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
@@ -109,4 +113,24 @@ function formatNumberWithCommas(number) {
       return `
         <option class="form-option" value="${province.code}">${province.name}</option>
       `
+  }
+
+  // Search Tour API
+
+  async function searchTour() {
+    try {
+      const response = await axios.get('/tours/search', {
+        params: {
+          startPlaceCode: startPoint.value,
+          endPlaceCode:  endPoint.value,
+          numOfDays: searchNumOfDate.value,
+          travelDate: searchTravelDate.value
+        }
+      });
+  
+      const data = response.data;
+      console.log(data);
+    } catch (error) {
+      console.error('Đã xảy ra lỗi:', error.message);
+    }
   }

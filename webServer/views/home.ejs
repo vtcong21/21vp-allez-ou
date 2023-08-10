@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="search-start d-flex flex-column">
                                         <h3>Ngày đi</h3>
-                                        <input class="form-control form__start-date" type="date" />
+                                        <input class="form-control form__start-date" type="date" id="search_travel-date" />
                                     </div>
                                 </div>
                                 <div class="d-flex search-date__tour">
@@ -63,8 +63,8 @@
                                     </div>
                                     <div class="search-start d-flex flex-column">
                                         <h3>Số ngày</h3>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option class="form-option">Tất cả</option>
+                                        <select class="form-select" aria-label="Default select example" id="search_num-of-date">
+                                            <option class="form-option" value="">Tất cả</option>
                                             <option class="form-option" value="3">1-3 ngày</option>
                                             <option class="form-option" value="7">4-7 ngày</option>
                                             <option class="form-option" value="10">8-14 ngày</option>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="search-click d-flex m-auto">
-                                <a class="navbar-text__hightlight search-button d-flex" href="#">
+                                <a class="navbar-text__hightlight search-button d-flex" onclick="searchTour()">
                                     <img src="/img/home/search.png" class="location-icon m-auto" />
                                 </a>
                             </div>
