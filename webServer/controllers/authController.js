@@ -151,11 +151,32 @@ const logout = (req, res) => {
   res.redirect('/');
 }
 
+const checkPassword = async (req, res) => {
+  try {
+    const { userId, password } = req.body; 
+    const user = await User.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      return res.status(200).json({ message: 'Password is correct' });
+    } else {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+  } catch (error) {
+    console.error('Error checking password:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   renderRegisterPage,
   register,
   verify,
   resendVerificationCode,
   login,
-  logout
+  logout,
+  checkPassword
 };
