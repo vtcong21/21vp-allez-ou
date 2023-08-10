@@ -2,17 +2,17 @@ const TourCard = require('../models/tourCard');
 
 const getAllTourCards = async (req, res) => {
   try {
-    const tourCards = await TourCard.find({}, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
+    const tourCards = await TourCard.find({isHidden: false}, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
     res.status(200).json(tourCards);
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong' });
   }
 };
-//
+
 const searchTourCards = async (req, res) => {
   try {
     const { startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice } = req.query;
-    const query = TourCard.find({}, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
+    const query = TourCard.find({isHidden: false}, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
     
     if (startPlaceCode) {
       query.where('startPlace.code').equals(startPlaceCode);

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/authMiddleware');
 const provinceController = require('../controllers/provinceController');
+//const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/', authMiddleware.authenticateToken, provinceController.getAllProvinces);
-router.get('/:code', authMiddleware.authenticateToken, provinceController.getProvinceByCode);
+router.get('/',  provinceController.getAllProvinces);
+router.get('/:code',  provinceController.getProvinceByCode);
 
 module.exports = router;
