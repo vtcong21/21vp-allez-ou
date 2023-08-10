@@ -21,6 +21,18 @@ async function getAPIResponse() {
     }
 }
 
+function sortData(type, dir) {
+    if(type == "price") {
+        if(dir == 1) listTravel.sort((travel1, travel2) => travel1.price - travel2.price);
+        else listTravel.sort((travel1, travel2) => travel2.price - travel1.price);
+    }
+    else {
+        listTravel.sort(compareEvents);
+        if(dir == 2) listTravel.reverse();
+    }
+    currentPage = 0;
+}
+
 function loadData() {
     listTravel = response.data;
     for(const key in filter) {
@@ -28,14 +40,7 @@ function loadData() {
             listTravel = listTravel.filter(item => item.price >= parseInt(filter[key][0]) && item.price <= parseInt(filter[key][1]));
         }
         else if(key == "sort") {
-            if(filter[key][0] == "price") {
-                if(filter[key][1] == "1") listTravel.sort((travel1, travel2) => travel1.price - travel2.price);
-                else listTravel.sort((travel1, travel2) => travel2.price - travel1.price);
-            }
-            else {
-                listTravel.sort(compareEvents);
-                if(filter[key][1] == "2") listTravel.reverse();
-            }
+            sortData(filter[key][0], parseInt(filter[key][1]));
         }
         else if(key == "numday") {
             if(filter[key] == "option1") {
@@ -171,6 +176,15 @@ function sortButtonActive(button, index) {
 
     if(sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
     else button.style.backgroundColor = '#F14868';
+
+    if(sortButtonState[0] != 0) {
+        sortData("date", sortButtonState[0]);
+        renderPage();
+    }
+    else if(sortButtonState[1] != 0) {
+        sortData("price", sortButtonState[1]);
+        renderPage();
+    }
 }
 
 var priceSlider = document.getElementsByClassName('f-price-slider');
@@ -198,6 +212,7 @@ function filterDelete() {
 
 function filterActive() {
     filter = {};
+
     if(sortButtonState[0] != 0) filter.sort = ["date", sortButtonState[0]];
     else if(sortButtonState[1] != 0) filter.sort = ["price", sortButtonState[1]];
 
