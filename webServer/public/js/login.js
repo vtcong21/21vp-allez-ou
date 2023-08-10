@@ -10,11 +10,7 @@ async function login() {
       email: email,
       password: password
     });
-    console.log(response.status);
-    if (response.status === 400) {
-      alert('Sai email hoặc mật khẩu');
-    }
-    else if(response.status===200){
+    if(response.status===200){
         const redirectUrl = response.data.redirectUrl;
         window.location=redirectUrl;
     }
