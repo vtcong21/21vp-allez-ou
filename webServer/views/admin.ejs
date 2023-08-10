@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <%- include('partials/head') %>
+<head>
+    <%- include('partials/head') %>
 
-        
+
         <!-- Theme Config Js -->
         <script src="/js/hyper-config.js"></script>
 
@@ -15,188 +15,216 @@
 
         <!-- content page -->
 
-        
-    </head>
 
-    <body>
-        <!-- Begin page -->
-        <div class="wrapper">
-            
-            <!-- ========== Topbar Start ========== -->
-            <div class="navbar-custom">
-                <div class="topbar px-5">
-                    <div class="d-flex align-items-center gap-lg-2 gap-1">
+</head>
 
-                        <!-- Topbar Brand Logo -->
-                        <div class="logo-topbar">
-                            <!-- Logo light -->
-                            <a href="index.html" class="logo-light">
-                                <span class="logo-lg">
-                                    <img src="/img/logo.png" alt="logo">
-                                </span>
-                                <span class="logo-sm">
-                                    <img src="/img/logo.png" alt="small logo">
-                                </span>
-                            </a>
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
 
-                            <!-- Logo Dark -->
-                            <a href="index.html" class="logo-dark">
-                                <span class="logo-lg">
-                                    <img src="/img/logo.png" alt="dark logo">
-                                </span>
-                                <span class="logo-sm">
-                                    <img src="/img/logo.png" alt="small logo">
-                                </span>
-                            </a>
-                        </div>
+        <!-- ========== Topbar Start ========== -->
+        <div class="navbar-custom">
+            <div class="topbar px-5">
+                <div class="d-flex align-items-center gap-lg-2 gap-1">
 
-                        <!-- Sidebar Menu Toggle Button -->
-                        <div class="d-flex justify-content-center">
-                            <button class="button-toggle-menu">
-                                <img src="/img/admin/menu-bar.png" alt="">
-                            </button>
-                            <p class="align-self-center m-0 menu-title">Thống kê</p>
-                        </div>
+                    <!-- Topbar Brand Logo -->
+                    <div class="logo-topbar">
+                        <!-- Logo light -->
+                        <a href="index.html" class="logo-light">
+                            <span class="logo-lg">
+                                <img src="/img/logo.png" alt="logo">
+                            </span>
+                            <span class="logo-sm">
+                                <img src="/img/logo.png" alt="small logo">
+                            </span>
+                        </a>
 
-                        <!-- Horizontal Menu Toggle Button -->
-                        <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
-                            <div class="lines">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </button>
-                    </div>
-
-                    <ul class="topbar-menu d-flex align-items-center gap-3">
-                        <li class="dropdown">
-                            <div class=" nav-user" data-bs-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false">
-                                <span class="d-lg-flex flex-column gap-1 d-none">
-                                    <h5 class="my-0"><%= user.fullName %></h5>
-                                    <h6 class="my-0 fw-normal">Admin</h6>
-                                </span>
-                                <span class="account-user-avatar">
-                                    <img src="/img/60x60.png" alt="user-image" width="32" class="rounded-circle">
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- ========== Topbar End ========== -->
-
-            <!-- ========== Left Sidebar Start ========== -->
-            <div class="leftside-menu">
-                <!-- Brand Logo Light -->
-                <a href="index.html" class="logo logo-light">
-                    <span class="logo-lg">
-                        <img src="/img/logo.png" alt="logo">
-                    </span>
-                    <span class="logo-sm">
-                        <img src="/img/logo.png" alt="small logo">
-                    </span>
-                </a>
-
-                <!-- Brand Logo Dark -->
-                <a href="index.html" class="logo logo-dark">
-                    <span class="logo-lg">
-                        <img src="/img/logo.png" alt="dark logo">
-                    </span>
-                    <span class="logo-sm">
-                        <img src="/img/logo.png" alt="small logo">
-                    </span>
-                </a>
-
-                <!-- Sidebar Hover Menu Toggle Button -->
-                <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
-                    <i class="ri-checkbox-blank-circle-line align-middle"></i>
-                </div>
-
-                <!-- Full Sidebar Menu Close Button -->
-                <div class="button-close-fullsidebar">
-                    <i class="ri-close-fill align-middle"></i>
-                </div>
-
-                <!-- Sidebar -left -->
-                <div class="h-100" id="leftside-menu-container" data-simplebar>
-                    <!-- Leftbar User -->
-                    <div class="leftbar-user">
-                        <a href="pages-profile.html">
-                            <img src="/img/60x60.png" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name mt-2">Dominic Keller</span>
+                        <!-- Logo Dark -->
+                        <a href="index.html" class="logo-dark">
+                            <span class="logo-lg">
+                                <img src="/img/logo.png" alt="dark logo">
+                            </span>
+                            <span class="logo-sm">
+                                <img src="/img/logo.png" alt="small logo">
+                            </span>
                         </a>
                     </div>
 
-                    <!--- Sidemenu -->
-                    <ul class="side-nav">
-                        <li class="side-nav-item">
-                            <a href="apps-chat.html" class="side-nav-link active-page">
-                                <img src="/img/admin/dashboard.png" alt="" class="side-logo">
-                                <span> Thống kê </span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#tour" aria-expanded="false" aria-controls="tour" class="side-nav-link">
-                                <img src="/img/admin/destination.png" alt="" >
-                                <span> Tour du lịch </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="tour">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="apps-ecommerce-products.html">Bài đăng</a>
-                                    </li>
-                                    <li>
-                                        <a href="apps-ecommerce-products-details.html">Đơn hàng</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#role" aria-expanded="false" aria-controls="role" class="side-nav-link">
-                                <img src="/img/admin/user.png" alt="" class="side-logo">
-                                <span> Vai trò </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="role">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="apps-ecommerce-products.html">Người dùng</a>
-                                    </li>
-                                    <li>
-                                        <a href="apps-ecommerce-products-details.html">Quản trị viên</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                    <a class="log-out d-flex align-items-center logOut" onclick="logOut()">
-                        <img src="/img/admin/log-out.png" alt=""> 
-                        <p>Đăng xuất</p>
-                    </a>
-                    <!--- End Sidemenu -->
-                    <div class="clearfix"></div>
+                    <!-- Sidebar Menu Toggle Button -->
+                    <div class="d-flex justify-content-center">
+                        <button class="button-toggle-menu">
+                            <img src="/img/admin/menu-bar.png" alt="">
+                        </button>
+                        <% if (title === 'dashboard') { %>
+                            <p class="align-self-center m-0 menu-title">Thống kê</p>
+                        <% } %>
+                        <% if (title === 'tours' || title === 'orders') { %>
+                            <p class="align-self-center m-0 menu-title">Tour du lịch</p>
+                        <% } %>
+                        <% if (title === 'admin-role' || title === 'client') { %>
+                            <p class="align-self-center m-0 menu-title">Vai trò</p>
+                        <% } %>
+                    </div>
+
+                    <!-- Horizontal Menu Toggle Button -->
+                    <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
                 </div>
+
+                <ul class="topbar-menu d-flex align-items-center gap-3">
+                    <li class="dropdown">
+                        <div class=" nav-user" data-bs-toggle="dropdown" role="button" aria-haspopup="false"
+                            aria-expanded="false">
+                            <span class="d-lg-flex flex-column gap-1 d-none">
+                                <h5 class="my-0">
+                                    <%= user.fullName %>
+                                </h5>
+                                <h6 class="my-0 fw-normal">Admin</h6>
+                            </span>
+                            <span class="account-user-avatar">
+                                <img src="/img/60x60.png" alt="user-image" width="32" class="rounded-circle">
+                            </span>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <!-- ========== Left Sidebar End ========== -->
-
-            <!-- ============================================================== -->
-            <!-- Start Page Content here -->
-            <!-- ============================================================== -->
-
-            <div class="content-page">
-                <%- include('adminOrder') %>
-            </div>
-
-
         </div>
-        <!-- END wrapper -->
+        <!-- ========== Topbar End ========== -->
 
-        <!-- Vendor js -->
-        <script src="/js/vendor.min.js"></script>   
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu">
+            <!-- Brand Logo Light -->
+            <a href="index.html" class="logo logo-light">
+                <span class="logo-lg">
+                    <img src="/img/logo.png" alt="logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="/img/logo.png" alt="small logo">
+                </span>
+            </a>
 
-        <!-- App js -->
-        <script src="/js/app.min.js"></script>
-        <script src="/js/login.js"></script>
-    </body>
-</html> 
+            <!-- Brand Logo Dark -->
+            <a href="index.html" class="logo logo-dark">
+                <span class="logo-lg">
+                    <img src="/img/logo.png" alt="dark logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="/img/logo.png" alt="small logo">
+                </span>
+            </a>
+
+            <!-- Sidebar Hover Menu Toggle Button -->
+            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
+                <i class="ri-checkbox-blank-circle-line align-middle"></i>
+            </div>
+
+            <!-- Full Sidebar Menu Close Button -->
+            <div class="button-close-fullsidebar">
+                <i class="ri-close-fill align-middle"></i>
+            </div>
+
+            <!-- Sidebar -left -->
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+                <!-- Leftbar User -->
+                <div class="leftbar-user">
+                    <a href="pages-profile.html">
+                        <img src="/img/60x60.png" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                        <span class="leftbar-user-name mt-2">Dominic Keller</span>
+                    </a>
+                </div>
+
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+                    <li class="side-nav-item">
+                        <a href="apps-chat.html" class="side-nav-link <%= title === 'dashboard' ? 'active-page' : '' %>">
+                            <img src="/img/admin/dashboard.png" alt="" class="side-logo">
+                            <span> Thống kê </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#tour" aria-expanded="false" aria-controls="tour"
+                            class="side-nav-link <%= (title === 'tours'||title ==='orders') ? 'active-page' : '' %>">
+                            <img src="/img/admin/destination.png" alt="">
+                            <span> Tour du lịch </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="tour">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="apps-ecommerce-products.html" class="<%= title === 'tours'  ? 'activeSecondLevel' : '' %>">Bài đăng</a>
+                                </li>
+                                <li>
+                                    <a href="apps-ecommerce-products-details.html" class="<%= title === 'orders'  ? 'activeSecondLevel' : '' %>">Đơn hàng</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#role" aria-expanded="false" aria-controls="role"
+                            class="side-nav-link <%= (title === 'admin-role' || title === 'client') ? 'active-page' : '' %>">
+                            <img src="/img/admin/user.png" alt="" class="side-logo">
+                            <span> Vai trò </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="role">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="apps-ecommerce-products.html" class="<%= title === 'client'  ? 'activeSecondLevel' : '' %>">Người dùng</a>
+                                </li>
+                                <li>
+                                    <a href="apps-ecommerce-products-details.html" class="<%= title === 'admin-role'  ? 'activeSecondLevel' : '' %>">Quản trị viên</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <a class="log-out d-flex align-items-center logOut" onclick="logOut()">
+                    <img src="/img/admin/log-out.png" alt="">
+                    <p>Đăng xuất</p>
+                </a>
+                <!--- End Sidemenu -->
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- ========== Left Sidebar End ========== -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <% if (title === 'dashboard') { %>
+                <%- include('dashboard') %>
+            <% } %>
+            <% if (title === 'tours') { %>
+                <%- include('dashboad') %>
+            <% } %>
+            <% if (title === 'orders') { %>
+                <%- include('adminOrder') %>
+            <% } %>
+            <% if (title === 'client') { %>
+                <%- include('client') %>
+            <% } %>
+            <% if (title === 'admin-role') { %>
+                <%- include('role-admin') %>
+            <% } %>
+        </div>
+
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Vendor js -->
+    <script src="/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="/js/app.min.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

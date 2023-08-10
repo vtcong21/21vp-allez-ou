@@ -46,7 +46,7 @@ a{
     cursor: pointer;
 }
 
-th:first-child::before{
+/* th:first-child::before{
     content: "";
     border-bottom: 2px solid #CBCDDF;
     position: absolute;
@@ -55,7 +55,7 @@ th:first-child::before{
     height: 2px;
     width: 290%;
     z-index: 2;
-}
+} */
 
 th:first-child{
     position: relative;

@@ -53,7 +53,9 @@ app.get('/test', (req, res)=>{
   res.render('admin', {user: {
     fullName: 'Hello Kong ne',
     _id: '123456'
-  }});
+  },
+  title:'orders'
+});
 })
 
 app.listen(port, () => {
