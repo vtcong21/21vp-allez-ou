@@ -6,7 +6,7 @@ const axios = require('axios');
 // trước hết trang này lấy ra toàn bộ tour card
 const getTourSearchPage = async (req, res) => {
   try {
-    const response = await axios.get('http://localhost:5000/tourCards'); 
+    const response = await axios.get('/tourCards'); 
     const listTravel = response.data;
     const contentPerPage = 10;
     for(var i = 0; i < listTravel.length; i++) {
