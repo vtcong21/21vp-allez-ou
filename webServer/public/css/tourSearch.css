@@ -101,6 +101,7 @@ header .booking-info .block .block-col2 .block-row2 {
 #travel .travel-container .path a {
   color: black;
   text-decoration: underline;
+  font-size: 13px;
   font-style: italic;
 }
 
