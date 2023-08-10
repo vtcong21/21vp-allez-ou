@@ -118,7 +118,7 @@ const resendVerificationCode = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
@@ -132,14 +132,15 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
     // console.log('Token sent');
     res.cookie('token', token);
-    //res.status(200).json({ redirectUrl: '/' });
-
+    
+    
     if (user.isAdmin === true) {
-      res.status(200).json({ redirectUrl: '/admin' });
+      return res.redirect('/admin');
     } else {
-      res.status(200).json({ redirectUrl: '/' });
+      return res.redirect('/');
     }
 
+    
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });

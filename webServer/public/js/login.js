@@ -47,8 +47,15 @@ async function login() {
     const response = await axios.post('/auth/login', {
       email: email,
       password: password
-    });
-    
+    })
+   
+    if (response.status === 200) {
+      
+      window.location.reload();
+    }
+
+
+
   } catch (error) {
     console.error('Đã xảy ra lỗi:', error.message);
   }
@@ -59,3 +66,4 @@ loginButton.addEventListener('click', function (event) {
   event.preventDefault();
   login();
 });
+
