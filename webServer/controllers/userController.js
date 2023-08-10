@@ -16,7 +16,7 @@ const getUserInfo = async (req, res) => {
   }
 };
 
-const pay = async (req, res) =>{
+const pay = async (req, res) => {
   // này từ từ
 };
 
