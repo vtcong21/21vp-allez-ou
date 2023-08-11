@@ -7,6 +7,7 @@ let filter = {};
 var listTravel;
 var currentPage;
 var limitPage;
+let sortButtonState = [0, 0];
 
 getAPIResponse();
 
@@ -39,9 +40,6 @@ function loadData() {
         if(key == "budget") {
             listTravel = listTravel.filter(item => item.price >= parseInt(filter[key][0]) && item.price <= parseInt(filter[key][1]));
         }
-        else if(key == "sort") {
-            sortData(filter[key][0], parseInt(filter[key][1]));
-        }
         else if(key == "numday") {
             if(filter[key] == "option1") {
                 listTravel = listTravel.filter(item => item.numOfDays >= 1 && item.numOfDays <= 3);
@@ -71,6 +69,14 @@ function loadData() {
             }
         }
     }
+
+    if(sortButtonState[0] != 0) {
+        sortData("date", sortButtonState[0]);
+    }
+    else if(sortButtonState[1] != 0) {
+        sortData("price", sortButtonState[1]);
+    }
+
     for(var i = 0; i < listTravel.length; i++) {
         listTravel[i].priceformat = listTravel[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
     }
@@ -88,7 +94,7 @@ function cardTravelTour(travel) {
                 <h1>${travel.name}</h1>
             </div>
             <h2>${travel.priceformat}</h2>
-            <div class="content-more"><a href="#">Xem thêm</a></div>
+            <div class="content-more"><a href="/tours/${travel.code}">Xem thêm</a></div>
         </div>
     </div>
     `;
@@ -155,8 +161,6 @@ function nextPage() {
 
 // ----------------------------------------------------
 
-let sortButtonState = [0, 0];
-
 function sortButtonActive(button, index) {
     sortButtonState[1 - index] = 0;
     sortButtonState[index] = (sortButtonState[index] + 1) % 3;
@@ -204,7 +208,7 @@ for(var i = 0; i < priceSlider.length; i++) {
 }
 
 function filterDelete() {
-    if(filter == {}) return;
+    // if(filter == {}) return;
     filter = {};
     loadData();
     renderPage();
@@ -212,9 +216,6 @@ function filterDelete() {
 
 function filterActive() {
     filter = {};
-
-    if(sortButtonState[0] != 0) filter.sort = ["date", sortButtonState[0]];
-    else if(sortButtonState[1] != 0) filter.sort = ["price", sortButtonState[1]];
 
     var sliderIndex = (window.innerWidth > 900) ? 0 : 1;
     filter.budget = [priceSlider[sliderIndex].noUiSlider.get()[0], priceSlider[sliderIndex].noUiSlider.get()[1]];
@@ -237,16 +238,11 @@ function filterActive() {
 }
 
 function findButtonActive() {
-    if(window.innerWidth <= 900) {
-        var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
-        if (filter.style.display === 'none') {
-            filter.style.display = 'block';
-        } else {
-            filter.style.display = 'none';
-        }
-    }
-    else {
-      filterActive();
+    var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
+    if (filter.style.display === 'none') {
+        filter.style.display = 'block';
+    } else {
+        filter.style.display = 'none';
     }
 }
 

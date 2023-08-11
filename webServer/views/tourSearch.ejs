@@ -131,10 +131,9 @@
       <div id="travel">
         <div class="travel-container">
             <div class="path">
-                <a href="">Du lịch</a>
-                /
-                <a href="">Miền Bắc</a>
+                
             </div>
+            <a class="navbar-text__hightlight fav-place__tag" onclick="findButtonActive()">Bộ lọc</a>
             <div class="travel-content">
                 <div class="filter web-filter">
                     <div class="title">
@@ -208,7 +207,8 @@
                     <div class="sep-line"></div>
                     <div class="sub-filter">
                         <div class="sub-filter-confirm">
-                            <button class="sub-filter-button" onclick="findButtonActive(), filterDelete()">Xóa bộ lọc</button>
+                            <button class="sub-filter-button" onclick="filterDelete()">Xóa bộ lọc</button>
+                            <button class="sub-filter-button" onclick="filterActive()">Áp dụng</button>
                         </div>
                     </div>
                 </div>
