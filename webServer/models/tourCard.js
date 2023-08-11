@@ -20,7 +20,7 @@ const tourCardSchema = new mongoose.Schema({
     date: { type: Date },
     time: { type: String },
     remainSlots: { type: Number, default: 0 },
-    numOfDdays: { type: Number },
+    numOfDays: { type: Number },
     promoDiscount: { type: Number, default: 0 },
     cardImgUrl: { type: String }
 },

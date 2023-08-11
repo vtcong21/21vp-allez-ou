@@ -26,7 +26,7 @@ const tourSchema = new mongoose.Schema({
   time: { type: String },
   slots: {type: Number},
   remainSlots: { type: Number, default: 0 },
-  numOfDdays: { type: Number},
+  numOfDays: { type: Number},
   promoDiscount: { type: Number, default: 0 },
   kidDiscount: { type: Number, default: 0.5 },
   babyDiscount: { type: Number, default: 0.7 },
@@ -40,7 +40,7 @@ const tourSchema = new mongoose.Schema({
     type: [dayScheduleSchema],
     validate: {
       validator: function (value) {
-        return value.length === this.num_of_days;
+        return value.length === this.numOfDays;
       },
       message: 'Schedule length must be equal to num_of_days',
     }

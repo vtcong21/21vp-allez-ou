@@ -49,6 +49,8 @@ table tr {
 .form-control {
     border: 1px solid rgba(110, 106, 142, 0.35);
     border-radius: 6px;
+    padding: 1rem 0.75rem; 
+    font-size: 1.5rem;
 }
 
 form[name="info"] {
@@ -115,7 +117,7 @@ form[name="information-nguoilon"] {
     border: none; 
     color: #ffffff;
     box-shadow: none; 
-    padding: 0.5em 8.4em;
+    padding: 0.5em 6.5em;
     font-weight: bolder;
 }
 
@@ -207,3 +209,43 @@ hr:not([size]){
     padding-left: 2em;
      padding-right: 2em;
 }
+#exampleModalToggle{ 
+    font-family: 'Nunito';
+}
+.tonghanhkhach{ 
+    font-weight: bold;
+    margin-left: 1.2em;
+}
+.total5{ 
+    font-weight: bold;
+    color: red;
+}
+.tongcong{ 
+    font-weight: bold;
+}
+#phuongthuc{ 
+    font-weight: bold
+}
+.modal-content{ 
+    border-radius: 15px;
+}
+.btn-close { 
+    padding-right: 0.5rem !important;
+    padding-top: 2rem !important;
+}
+.modalfooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Để căn giữa theo chiều dọc */
+    padding-top: 2rem !important; 
+    padding-bottom: 2rem !important;
+  }
+  .btn-primary { 
+    background-color: #4f6cff;
+    border-radius: 40px;
+    font-size: 1.5rem;
+    font-weight: bolder; 
+    padding: 0.5rem 3rem;
+
+  }

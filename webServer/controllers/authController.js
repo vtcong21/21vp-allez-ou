@@ -2,77 +2,163 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const mailController = require('../controllers/mailController');
+const axios = require('axios');
 
 
-const renderRegisterPage = (req, res) =>{
+const renderRegisterPage = (req, res) => {
   res.render('register');
 }
 
 const register = async (req, res) => {
   try {
-    const { fullName, email, password, gender, dateOfBirth, phoneNumber} = req.body;
+    const { fullName, email, password, gender, dateOfBirth, phoneNumber } = req.body;
 
+    let user = await User.findOne({ email });
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(409).json({ message: "User already exists" });
+    if (user) {
+      if (user.isVerified) {
+        return res.status(409).json({ message: "User already exists" });
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+        const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
+
+        user.fullName = fullName;
+        user.password = hashedPassword;
+        user.gender = gender;
+        user.dateOfBirth = dateOfBirth;
+        user.phoneNumber = phoneNumber;
+        user.verificationCode = verificationCode;
+        user.verificationCodeExpiration = verificationCodeExpiration;
+
+        await user.save();
+        await mailController.sendVerificationEmail(email, verificationCode);
+
+        return res.status(200).json({ message: "Updated existing user and sent verification email", email });
+      }
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+    const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
 
-    const user = new User({
+    user = new User({
       fullName,
       email,
       password: hashedPassword,
       gender,
       dateOfBirth,
       phoneNumber,
-      verificationCode
+      verificationCode,
+      verificationCodeExpiration
     });
+    
     await user.save();
     await mailController.sendVerificationEmail(email, verificationCode);
 
-    res.render('verify', { email });
+    res.status(200).json({ message: "Registration successful", email });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
+
+async function createPaymentAccount(userId) {
+  try {
+
+    const response = await axios.post('http://localhost:5001/accounts/createPaymentAccount', {
+      userId: userId
+    });
+
+    if (response.status === 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
-    
-    const user = await User.findOne(
-      { email }
-    );
+    const user = await User.findOne({ email });
+
     if (!user) {
       return res.status(400).json({ message: 'Invalid verification code' });
     }
 
     if (verificationCode !== user.verificationCode) {
-      await User.deleteOne({ email });
+      if (user.verificationCodeExpiration < new Date()) {
+        //await User.deleteOne({ email });
+        return res.status(400).json({ message: 'Incorrect verification code (expired)' });
+      }
+
       return res.status(400).json({ message: 'Incorrect verification code' });
     }
 
     user.isVerified = true;
     user.verificationCode = undefined;
+    user.verificationCodeExpiration = undefined;
     await user.save();
-
-    //res.status(200).json({ message: "User verified successfully" });
-    res.redirect('/auth/login');
+    const createPaymentAccountResult = await createPaymentAccount(user._id);
+    if (createPaymentAccountResult) {
+      const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
+      res.cookie('token', token);
+      return res.redirect('/');
+    } else {
+      return res.status(500).json({ message: 'Error creating payment account' });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
 
-const renderLoginPage = (req, res) => {
-  res.render('login');
+const resendVerificationCode = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: 'User is already verified' });
+    }
+
+    if (user.verificationCodeExpiration >= new Date()) {
+      return res.status(400).json({ message: 'Verification code is still valid' });
+    }
+
+    const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+    const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
+
+    user.verificationCode = verificationCode;
+    user.verificationCodeExpiration = verificationCodeExpiration;
+    await user.save();
+
+    await mailController.sendVerificationEmail(email, verificationCode);
+
+    res.status(200).json({ message: 'New verification code sent' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
+
+
+
+// const renderLoginPage = (req, res) => {
+//   res.render('login');
+// };
 
 const login = async (req, res) => {
   try {
@@ -88,30 +174,54 @@ const login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ userId: user._id , userRole: user.isAdmin}, process.env.SECRET_KEY, { expiresIn: '24h' });
+    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
     // console.log('Token sent');
     res.cookie('token', token);
-    res.status(200).json({ redirectUrl: '/' });
-    // if (user.isAdmin === 1) {
-    //   return res.redirect('/admin');
-    // } else {
-    //   return res.redirect('/');
-    // }
+
+
+    if (user.isAdmin === true) {
+      res.status(200).json({ redirectUrl: '/admin' });
+    } else {
+      res.status(200).json({ redirectUrl: '/' });
+    }
+
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-const logout = (req, res) =>{
+const logout = (req, res) => {
   res.clearCookie('token');
   res.redirect('/');
 }
 
+const checkPassword = async (req, res) => {
+  try {
+    const { userId, password } = req.body;
+    const user = await User.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      return res.status(200).json({ message: 'Password is correct' });
+    } else {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+  } catch (error) {
+    console.error('Error checking password:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
-  renderLoginPage,
   renderRegisterPage,
   register,
   verify,
+  resendVerificationCode,
   login,
-  logout
+  logout,
+  checkPassword
 };

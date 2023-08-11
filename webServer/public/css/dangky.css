@@ -225,6 +225,9 @@ label[for="pwd_confirm"] {
     border-radius: 20px;
     font-size: 1.6rem;
 }
+.btn-primary2:active {
+    background-color: red;
+  }
 @media screen and (max-width: 767px) {
     .btn-primary {
         margin-left: 0;
@@ -263,13 +266,11 @@ label[for="pwd_confirm"] {
 
 #btn-home-register .btn-primary {
     margin-top: 1em;
-    margin-left: 10em;
 }
 @media screen and (max-width: 767px) {
     #btn-home-register .btn-primary {
         margin-left: 0em;
         margin-top: 1em;
-        margin-right: 3.4em !important;
     }
     label [for="pwd_confirm"] {
         margin-top: 0;
@@ -377,4 +378,9 @@ order: -1;
 }
 .form-group-name #account_name{ 
     margin-bottom: 0vw;
+}
+#btn-home-register{ 
+    background: none; 
+    box-shadow: none;
+    margin-top: 1em;
 }

@@ -3,11 +3,11 @@ const router = express.Router();
 const dashboardController = require('../controllers/dashboardController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-
+// chưa xong
 // trả mảng doanh thu tất cả các tháng trong năm
 router.get('/getMonthlyRevenuesThisYear'
     // , authMiddleware.adminMiddleware
-    , dashboardController.getMonthlyRevenuesThisYear);
+    , dashboardController.updateRevenue);
 // trả % lợi nhuận tháng này so với tháng trước
 router.get('/getProfitPercentageThisMonth'
     // , authMiddleware.adminMiddleware

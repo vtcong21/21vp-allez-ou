@@ -2,14 +2,16 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
 
-const renderAdminPage = async (req, res) => {
+const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
+
+const renderDashboardPage = async (req, res) => {
     try {
         if (!req.userRole) res.render('error');
         else {
             const user = await User.findById(req.userId).select('_id fullName');
-            res.render('admin', {user});
+            res.render('admin', { user, title: 'dashboard' });
         }
-    } catch (error){
+    } catch (error) {
         console.error('Error getting user information:', error);
         res.status(500).send('Internal Server Error');
     }
@@ -82,7 +84,95 @@ const deleteAdminAccount = async (req, res) => {
     }
 };
 
+const renderOrderPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'orders' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const renderTourPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'tours' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const renderClientPage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'client' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+const renderAdminRolePage = async (req, res) => {
+    try {
+        if (!req.userRole) res.render('error');
+        else {
+            const user = await User.findById(req.userId).select('_id fullName');
+            res.render('admin', { user, title: 'admin-role' });
+        }
+    } catch (error) {
+        console.error('Error getting user information:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+async function fetchPaymentHistory(accountId) {
+    try {
+        const response = await axios.get(`http://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+const getWebPaymentHistory = async (req, res) => {
+    try {
+        if (!accountId) {
+            return res.status(400).json({ message: 'accountId is required' });
+        }
+        const paymentHistory = await fetchPaymentHistory(webPaymentAccountId);
+        if (paymentHistory !== null) {
+            return res.status(200).json(paymentHistory);
+        } else {
+            return res.status(500).json({ message: 'Failed to fetch payment history' });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
 
 
-
-module.exports = { getAdminList, getClientList, createAdminAccount, deleteAdminAccount, renderAdminPage }
+module.exports = {
+    getAdminList,
+    getClientList,
+    getWebPaymentHistory,
+    createAdminAccount,
+    deleteAdminAccount,
+    renderDashboardPage,
+    renderOrderPage,
+    renderTourPage,
+    renderClientPage,
+    renderAdminRolePage
+}

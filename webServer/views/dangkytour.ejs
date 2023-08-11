@@ -58,7 +58,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity">1</div>
+                                        <div class="quantity" style="font-weight: 800;">1</div>
                                         <button class="plus-button" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button2" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity2">0</div>
+                                        <div class="quantity2" style="font-weight: 800;">0</div>
                                         <button class="plus-button2" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button3" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity3">0</div>
+                                        <div class="quantity3" style="font-weight: 800;">0</div>
                                         <button class="plus-button3" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                 <div class="right-col">
                                     <div class="input-group">
                                         <button class="minus-button4" style="border-top-right-radius: 50%; border-bottom-right-radius: 50%;">-</button>
-                                        <div class="quantity4">0</div>
+                                        <div class="quantity4" style="font-weight: 800;">0</div>
                                         <button class="plus-button4" style="border-top-left-radius: 50%; border-bottom-left-radius: 50%;">+</button>
                                     </div>
                                 </div>
@@ -230,21 +230,8 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12 information-tour">
-                            <div style="text-align: center;">
-                                <label for="information-tour" style="text-decoration: underline;">Thông tin chuyến đi</label>
-                            </div>
-                            <div style="text-align: center;">
-                                <img src="https://via.placeholder.com/350x200" class="img-fluid" />
-                            </div>
-                            <div class="name-tour">
-                                Hà Nội - Sa Pa _ Fansipan - Yên Tử - Hạ Long - Ninh Bình - Tuyệt Tình Cốc - Tràng An - Bái Đính
-                            </div>
-                            <div class="detail-information">
-                                <p class="code-tour">Code Tour:</p>
-                                <p class="khoihanh">Khởi Hành:</p>
-                                <p class="noikhoihanh">Nơi Khởi Hành:</p>
-                                <p class="choconnhan">Chỗ còn nhận:</p>
-                            </div>
+                            <div id="tour-title"></div>
+
                             <div style="display: flex; justify-content: center; align-items: center;">
                                 <hr />
                             </div>
@@ -254,7 +241,7 @@
                                     <p style="font-style: italic; font-size: 1.28rem;">(từ 12 tuổi trở lên)</p>
                                 </div>
                                 <div class="right-col">
-                                    <div class="quantity-display" style="font-size: 1.92rem;">0</div>
+                                    <div class="quantity-display" style="font-size: 1.92rem;">0 ₫</div>
                                 </div>
                             </div>
                             <div class="total2">
@@ -263,7 +250,7 @@
                                     <p style="font-style: italic; font-size: 1.28rem;">(từ 5 - 11 tuổi)</p>
                                 </div>
                                 <div class="right-col">
-                                    <div class="quantity-display2" style="font-size: 1.92rem;">0</div>
+                                    <div class="quantity-display2" style="font-size: 1.92rem;">0 ₫</div>
                                 </div>
                             </div>
                             <div class="total3">
@@ -272,7 +259,7 @@
                                     <p style="font-style: italic; font-size: 1.28rem;">(từ 2 - 4 tuổi)</p>
                                 </div>
                                 <div class="right-col">
-                                    <div class="quantity-display3" style="font-size: 1.92rem;">0</div>
+                                    <div class="quantity-display3" style="font-size: 1.92rem;">0 ₫</div>
                                 </div>
                             </div>
                             <div class="total4">
@@ -281,7 +268,7 @@
                                     <p style="font-style: italic; font-size: 1.28rem;">(dưới 2 tuổi)</p>
                                 </div>
                                 <div class="right-col">
-                                    <div class="quantity-display4" style="font-size: 1.92rem;">0</div>
+                                    <div class="quantity-display4" style="font-size: 1.92rem;">0 ₫</div>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center;">
@@ -292,12 +279,86 @@
                                     <label for="nguoilon" style="font-size: 1.92rem;"> TỔNG CỘNG:</label>
                                 </div>
                                 <div class="right-col">
+                                    <div class="tonghanhkhach">hành khách</div>
                                     <div class="total5" style="font-size: 1.92rem;">0</div>
                                 </div>
                             </div>
                             <div class="button-order">
-                                <button id="button-order-btn">ĐẶT NGAY</button>
+                                <!-- <button id="button-order-btn">ĐẶT NGAY</button> -->
+                                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
                             </div>
+                            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+                                <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Thanh toán</h2>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="bodymodal" style="padding-left: 0.6em; padding-right: 0.5em; padding-top: 1em;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-6">
+                                                    <label for="nguoilon" style="font-weight: normal;"> Tổng hóa đơn:</label>
+                                                </div>
+                                                <div class="col-md-6 col-6">
+                                                    <div class="tongcong text-right" style="font-size: 1.92rem;">0</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-6">Phương thức thanh toán</div>
+                                                <div class="col-md-6 col-6" id="phuongthuc">Chuyển khoản ngân hàng</div>
+                                            </div>
+                                        </div>
+                                        <div class="modalfooter">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Thanh Toán</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Thanh toán</h2>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="bodymodal" style="padding-left: 0.6em; padding-right: 0.5em; padding-top: 1em;">
+                                            
+                                            
+                                        </div>
+                                        <div class="modalfooter">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal">Thanh Toán</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Thanh toán</h2>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="bodymodal" style="padding-left: 0.6em; padding-right: 0.5em; padding-top: 1em;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-6">
+                                                    <label for="nguoilon" style="font-weight: normal;"> Tổng hóa đơn:</label>
+                                                </div>
+                                                <div class="col-md-6 col-6">
+                                                    <div class="tongcong text-right" style="font-size: 1.92rem;">0</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 col-6">Phương thức thanh toán</div>
+                                                <div class="col-md-6 col-6" id="phuongthuc">Chuyển khoản ngân hàng</div>
+                                            </div>
+                                        </div>
+                                        <div class="modalfooter">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

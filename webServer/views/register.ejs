@@ -1,44 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Register</title>
-</head>
-<body>
-  <h1>Register</h1>
-  <form action="/auth/register" method="POST">
-    <label>
-      Full Name:
-      <input type="text" name="fullName" required>
-    </label>
-    <br>
-    <label>
-      Email:
-      <input type="email" name="email" required>
-    </label>
-    <br>
-    <label>
-      Password:
-      <input type="password" name="password" required>
-    </label>
-    <br>
-    <label>
-      Gender:
-      <input type="radio" name="gender" value="Male" required> Male
-      <input type="radio" name="gender" value="Female" required> Female
-      <input type="radio" name="gender" value="Undefined" required> Other
-    </label>
-    <br>
-    <label>
-      Date of Birth:
-      <input type="date" name="dateOfBirth" required>
-    </label>
-    <br>
-    <label>
-      Phone Number:
-      <input type="text" name="phoneNumber" required>
-    </label>
-    <br>
-    <button type="submit">Register</button>
-  </form>
-</body>
+<html lang="en">
+    <head>
+        <%- include('partials/head') %>
+        <link rel="stylesheet" href="/css/dangky.css" />
+        <title>Allez Où</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-9Z8o0SYzRw2up4z4zAwJ5Q2t+Ji7l7M2Lqk+kfuoXjU9+VGR9lJ2KQ9el2oyGvP3" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7x1u4w1qk5i9z/u2w5n0/7c9r9hfr9j7rr8jx9p4q0d9wlsjtl5tr7p" crossorigin="anonymous"></script>
+        <script src="/js/dangky.js"></script>
+    </head>
+    <body>
+        <div class="container-fluid center-form">
+            <div class="col-md-7 border-white">
+                <form style="padding-bottom: 6em;">
+                    <div class="container" id="main-container">
+                        <div class="form-group d-flex justify-content-between">
+                            <div class="btn btn-third-length" id="register" style="pointer-events: none;">1 - Tài Khoản</div>
+<div class="btn btn-third-length" id="info" style="pointer-events: none;">2 - Thông tin cá nhân</div>
+<div class="btn btn-third-length" id="bank-link" style="pointer-events: none;">3 - Xác thực</div>
+                        </div>
+                        <div id="personal-info">
+                            <div class="form-group-name">
+                                <label for="name">Họ và Tên:</label>
+                                <input type="name" class="form-control" id="name" placeholder="Nhập tên" />
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Nhập email" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="pwd">Mật khẩu:</label>
+                                    <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" />
+                                </div>
+                                <div class="form-group col-md-6 pwd-confirm-wrapper">
+                                    <label for="pwd_confirm" style="margin-left: 10%;">Xác nhận mật khẩu:</label>
+                                    <input type="password" class="form-control" id="pwd_confirm" placeholder="Xác nhận mật khẩu" style="margin-left: 10%;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid center-form">
+            <div class="col-md-7 border-white" id="btn-home-register">
+
+                <div class="row">
+                <div class="col-6 text-center"></div>
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-primary" id="button-next" onclick="if (validateForm()) { SaveValues1(); loadNewForm(); }">Tiếp Theo</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
