@@ -120,9 +120,24 @@ const getOrderPage = async (req, res) => {
     }
 };
 
+const getOrderDetails = async (req, res) => {
+
+};
+
+const cancelOrder = async (req, res) => {
+
+};
+
+const getTransactionPage = async (req, res) => {
+
+};
+
 module.exports = {
     addNewItem,
     getCartPage,
     deleteItem,
     getOrderPage,
+    getOrderDetails,
+    cancelOrder,
+    getTransactionPage,
 };
