@@ -64,7 +64,38 @@ const getCartPage = async (req, res) => {
     }
 };
 
+const deleteItem = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { itemId } = req.body;
+        
+        // Tìm người dùng theo userId
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Tìm index của item trong mảng cart của người dùng
+        const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
+        if (itemIndex === -1) {
+            return res.status(404).json({ message: 'Item not found in cart' });
+        }
+
+        // Xóa item khỏi mảng cart của người dùng
+        user.cart.splice(itemIndex, 1);
+
+        // Lưu lại thông tin người dùng sau khi xóa item
+        await user.save();
+
+        res.status(200).json({ message: 'Item removed from cart successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 module.exports = {
-    addNewCart,
+    addNewItem,
     getCartPage,
+    deleteItem,
 };
