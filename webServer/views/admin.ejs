@@ -198,8 +198,21 @@
         <!-- ============================================================== -->
 
         <div class="content-page">
-            <%- include('baidang') %>
-
+            <% if (title === 'dashboard') { %>
+             <%- include('dashboard') %>
+            <% } %>
+            <% if (title === 'orders') { %>
+                <%- include('adminOrder') %>
+            <% } %>
+            <% if (title === 'tours') { %>
+                <%- include('baidang') %>
+            <% } %>
+            <% if (title === 'client') { %>
+                <%- include('client') %>
+            <% } %>
+            <% if (title === 'admin-role') { %>
+                <%- include('role-admin') %>
+            <% } %>
         </div>
 
 
