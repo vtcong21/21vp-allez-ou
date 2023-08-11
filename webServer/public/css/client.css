@@ -82,7 +82,7 @@ td:last-child{
 }
 /* modal */
 .card{
-    width: 295px;
+    width: 70%;
     padding: 0;
 }
 .client-info{
@@ -150,4 +150,22 @@ td:last-child{
     thead {
         border-bottom: 2px solid #CBCDDF;
     }
+}
+
+.pagination-container {
+    max-width: 200px; /* Điều chỉnh kích thước container cho phân trang */
+    margin: 1.2em auto; /* Canh giữa theo chiều ngang */
+  }
+.custom-page-link{
+    border-radius: 3px;
+}
+
+.custom-prev-next{
+    border: none;
+    background-color: #e9ecf9;
+}
+
+.custom-prev-next:hover{
+    border: none;
+    background-color: #e9ecf9;
 }

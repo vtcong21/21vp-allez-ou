@@ -15,7 +15,13 @@ async function getAllClient() {
     try {
         const response = await axios.get("/admin/getClientList");
         if (response.status === 200) {
-            const clients = response.data;
+            let clients = response.data;
+            totalItems = clients.length;
+            clients = clients.map((client) => {
+                const formattedDateCreate = changeDateToString(client.dateCreate);
+                const formattedGender = convertGenderToVietnamese(client.gender)
+                return { ...client, dateCreate: formattedDateCreate, gender:formattedGender };
+            });
             displayClientList(clients);
             displayPagination(totalItems);
         } else {
@@ -63,13 +69,13 @@ function makeClientRow(client) {
             <a onclick="copyMail('${client.email}')"><img src="/img/admin/users-role/paper-plane.png" class="client-icon" /></a>
             <a onclick="copyPhone('${client.phoneNumber}')"><img src="/img/admin/users-role/phone-call-1.png" class="client-icon" /></a>
             <a><img src="/img/admin/users-role/eye-1.png" class="client-icon" data-bs-toggle="modal" data-bs-target="#modalInfo" 
-            data-fullName=${client.fullName} 
-            data-id=${client._id} 
-            data-gender=${client.gender} 
-            data-date=${client.dateCreate}
-            data-phone=${client.phoneNumber} 
-            data-email=${client.email} 
-            onclick = "showModalInfo()"/></a>
+            data-fullName= "${client.fullName}" 
+            data-id="${client._id}" 
+            data-gender="${client.gender}" 
+            data-date="${client.dateCreate}"
+            data-phone="${client.phoneNumber}" 
+            data-email="${client.email}" 
+            onclick = "showModalInfo(event)"/></a>
         </div>
     </td>
 </tr>
@@ -125,9 +131,7 @@ function changePage(page) {
 
 getAllClient();
 
-
-
-function showModalInfo(event){
+function showModalInfo(event) {
     const modalElement = document.querySelector("#modalInfo");
     const modalName = event.currentTarget.getAttribute("data-fullName");
     const modalClientID = event.currentTarget.getAttribute("data-id");
@@ -142,5 +146,30 @@ function showModalInfo(event){
     modalElement.querySelector("#client-date").textContent = modalDate;
     modalElement.querySelector("#client-phone").textContent = modalPhone;
     modalElement.querySelector("#client-email").textContent = modalEmail;
+}
 
+function changeDateToString(currentTimeString) {
+    var currentTime = new Date(currentTimeString); // Chuyển chuỗi thành đối tượng Date
+    var day = currentTime.getDate();
+    var month = currentTime.getMonth() + 1;
+    var year = currentTime.getFullYear();
+
+    if (day.toString().length === 1) {
+        day = "0" + day.toString();
+    }
+    if (month.toString().length === 1) {
+        month = "0" + month.toString();
+    }
+
+    return day + "/" + month + "/" + year;
+}
+
+function convertGenderToVietnamese(gender) {
+    if (gender === "Male") {
+        return "Nam";
+    } else if (gender === "Female") {
+        return "Nữ";
+    } else {
+        return gender;
+    }
 }
