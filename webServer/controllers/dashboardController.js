@@ -4,22 +4,22 @@ const cron = require('node-cron');
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
 
-
-const updateRevenue = async (req, res) => {
+// cái này là lập lịch lấy doanh thu NGÀY HÔM QUA vào 0:00----------------------------------------------
+const updateRevenue = async () => {
     try {
         const accountId = webPaymentAccountId;
-        const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory'
-            , {
-                params: {
-                    accountId: accountId
-                }
+        const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory', {
+            params: {
+                accountId: accountId
             }
-        );
+        });
         const paymentHistory = response.data.paymentHistory;
         console.log(response.data);
         // Lấy ngày hôm nay
         const today = new Date();
-        //const day = today.getDate();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1); // Lấy ngày hôm qua
+
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
         let dashboard = await Dashboard.findOne();
@@ -37,21 +37,18 @@ const updateRevenue = async (req, res) => {
             });
         }
 
-        // Tìm tháng hiện tại
         const currentMonthIndex = dashboard.monthlyRevenue.findIndex(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
 
-        // Cập nhật dailyRevenue cho ngày hôm nay
         dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push({
-            date: today,
+            date: yesterday, // Sử dụng ngày hôm qua
             revenue: paymentHistory.reduce((total, history) => total + history.amount, 0),
         });
 
-        // Tính tổng doanh thu trong tháng
         const monthRevenue = dashboard.monthlyRevenue[currentMonthIndex];
         monthRevenue.revenue = monthRevenue.dailyRevenue.reduce((total, daily) => total + daily.revenue, 0);
         await dashboard.save();
 
-        console.log('Updated revenue at', today);
+        console.log('Updated revenue at', yesterday);
     } catch (error) {
         console.error('Error updating revenue:', error.message);
     }
@@ -61,6 +58,64 @@ const updateRevenue = async (req, res) => {
 cron.schedule('0 0 * * *', () => {
     updateRevenue();
 });
+// --------------------------------------------------------------------------------------------
+
+const updateTodayRevenue = async (req, res) => {
+    try {
+        const accountId = webPaymentAccountId;
+        const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory', {
+            params: {
+                accountId: accountId
+            }
+        });
+        const paymentHistory = response.data.paymentHistory;
+        console.log(response.data);
+        
+        const today = new Date();
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+        let dashboard = await Dashboard.findOne();
+        if (!dashboard) {
+            return res.status(404).json({ message: 'Cannot find dashboard' });
+        }
+
+        const currentMonth = dashboard.monthlyRevenue.find(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
+        if (!currentMonth) {
+            dashboard.monthlyRevenue.push({
+                month: month,
+                year: year,
+                dailyRevenue: [],
+                revenue: 0,
+            });
+        }
+
+        const currentMonthIndex = dashboard.monthlyRevenue.findIndex(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
+
+        // Kiểm tra nếu ngày hôm nay đã tồn tại trong danh sách dailyRevenue
+        const existingDayIndex = dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.findIndex(dayRevenue => dayRevenue.date === today.toISOString());
+
+        if (existingDayIndex !== -1) {
+            // Nếu đã tồn tại thì cập nhật lại dữ liệu doanh thu
+            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue[existingDayIndex].revenue = paymentHistory.reduce((total, history) => total + history.amount, 0);
+        } else {
+            // Nếu chưa tồn tại thì thêm dữ liệu mới
+            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push({
+                date: today,
+                revenue: paymentHistory.reduce((total, history) => total + history.amount, 0),
+            });
+        }
+
+        const monthRevenue = dashboard.monthlyRevenue[currentMonthIndex];
+        monthRevenue.revenue = monthRevenue.dailyRevenue.reduce((total, daily) => total + daily.revenue, 0);
+        await dashboard.save();
+
+        console.log('Updated revenue for today at', today);
+        res.status(200).json({ message: 'Updated revenue for today' });
+    } catch (error) {
+        console.error('Error updating revenue:', error.message);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 
 
 const getMonthlyRevenuesThisYear = async (req, res) => {
@@ -105,7 +160,7 @@ const searchMonthlyRevenuesByYear = async (req, res) => {
     }
 };
 
-const getProfitPercentageThisMonth = async (req, res) => {
+const getRevenueAndProfitPercentageThisMonth = async (req, res) => {
     try {
         const currentYear = new Date().getFullYear();
         const currentMonth = new Date().getMonth() + 1;
@@ -122,7 +177,7 @@ const getProfitPercentageThisMonth = async (req, res) => {
         );
 
         if (!currentMonthRevenue || !previousMonthRevenue) {
-            throw new Error('Cannot fint profit');
+            throw new Error('Cannot find profit data');
         }
 
         const currentMonthProfit = currentMonthRevenue.revenue;
@@ -130,12 +185,15 @@ const getProfitPercentageThisMonth = async (req, res) => {
 
         const profitPercentage = ((currentMonthProfit - previousMonthProfit) / previousMonthProfit) * 100;
 
-        res.status(200).json(profitPercentage);
-    } catch (err) {
+        res.status(200).json({
+            currentMonthRevenue: currentMonthProfit,
+            profitPercentage: profitPercentage
+        });
+    } catch (error) {
+        console.error('Error fetching revenue and profit percentage:', error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
 
 const getRevenueLast7Days = async (req, res) => {
     try {
@@ -149,7 +207,7 @@ const getRevenueLast7Days = async (req, res) => {
                 const daily = dailyRevenue[j];
                 last7DaysRevenue.push(daily);
                 daysCount++;
-                console.log(daily);
+                //console.log(daily);
             }
         }
         res.status(200).json({ last7DaysRevenue });
@@ -160,12 +218,11 @@ const getRevenueLast7Days = async (req, res) => {
 }
 
 
-
-
 module.exports = {
     getMonthlyRevenuesThisYear,
-    getProfitPercentageThisMonth,
+    getRevenueAndProfitPercentageThisMonth,
     searchMonthlyRevenuesByYear,
     getRevenueLast7Days,
-    updateRevenue
+    updateRevenue,
+    updateTodayRevenue
 }
