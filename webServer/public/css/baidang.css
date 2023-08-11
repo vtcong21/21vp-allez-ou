@@ -50,3 +50,38 @@ line-height: normal;
     max-width: 200px; /* Điều chỉnh kích thước container cho phân trang */
     margin: 1.2em auto; /* Canh giữa theo chiều ngang */
   }
+  .pageContainer{ 
+    border-radius: 12px;
+  }
+.card{ 
+    border-radius: 12px;
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+} 
+.card-body{ 
+    padding-top: 0;
+}
+.list-group-item{ 
+    border-radius: 12px !important;
+}
+.name-tour{ 
+    font-size: 1.2rem;
+    color: black;
+    font-weight: bolder;
+}
+#tacvu{ 
+    border: 0; 
+    background-color: white; 
+    font-size: 2rem; 
+    font-weight: 900;
+}
+#name-tour{ 
+    padding-top: 1.5rem;
+    height: 5rem;
+}
+#code-tour{ 
+    margin-top: 3rem;
+}
+.code-tour{ 
+    font-size: 1.2rem;
+}

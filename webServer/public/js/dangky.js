@@ -48,13 +48,12 @@ function loadNewForm3() {
     // Thiết lập giá trị cho nút "Tiếp Theo"
     var btnHomeRegister = document.getElementById("btn-home-register");
     btnHomeRegister.innerHTML = `
-        <div class="row">
-            <div class="col-6 text-center">
-            </div>
-            <div class="col-6 text-center">
-                <button type="button" class="btn btn-primary" onclick="if (validateForm()) { SaveValues1(); loadNewForm(); }">Tiếp Theo</button>
-            </div>
-        </div>
+    <div class="row">
+                <div class="col-6 text-center"></div>
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-primary" id="button-next" onclick="if (validateForm()) { SaveValues1(); loadNewForm(); }">Tiếp Theo</button>
+                </div>
+                </div>
     `;
 
     // Thiết lập kiểu hiển thị cho các tab
@@ -113,12 +112,12 @@ function loadNewForm() {
     document.getElementById("phone").value = localStorage.getItem("phone");
     var btnHomeRegister = document.getElementById("btn-home-register");
     btnHomeRegister.innerHTML = `
-<div class="row" id="next1">
-    <div class="col-6 text-center">
-    <button type="button" class="btn btn-primary2" onclick="loadNewForm3()">Quay lại</button>
+    <div class="row" >
+    <div class="col-6 text-left">
+    <button type="button" class="btn btn-primary" onclick="loadNewForm3()" style="margin-left:0">Quay lại</button>
     </div>
-    <div class="col-6 text-center">
-    <button type="button" class="btn btn-primary" onclick="if (validateForm2()) {getinfo(); SaveValues2(); registerUser();  }">Tiếp Theo</button>
+    <div class="col-6 text-right">
+    <button type="button" class="btn btn-primary" id="button-next" onclick="if (validateForm2()) {getinfo(); SaveValues2(); registerUser();  }">Tiếp Theo</button>
     </div>
 </div>
 `;
@@ -170,12 +169,12 @@ function loadNewForm2() {
     personalInfoDiv.appendChild(formGroup);
     var btnHomeRegister = document.getElementById("btn-home-register");
     btnHomeRegister.innerHTML = `
-<div class="row" id="next2">
-    <div class="col-6 text-center">
-        <button type="button" class="btn btn-primary2" onclick="loadNewForm()">Quay lại</button>
+<div class="row">
+    <div class="col-6 text-left">
+        <button type="button" class="btn btn-primary" onclick="loadNewForm()">Quay lại</button>
     </div>
-    <div class="col-6 text-center">
-    <button type="button" class="btn btn-primary" onclick="if (finish()) {sendVerificationCodeToServer()}" >Hoàn tất</button>
+    <div class="col-6 text-right">
+    <button type="button" class="btn btn-primary" id="button-next" onclick="if (finish()) {sendVerificationCodeToServer()}" >Hoàn tất</button>
     </div>
 </div>
 `;

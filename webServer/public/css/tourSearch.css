@@ -94,6 +94,23 @@ header .booking-info .block .block-col2 .block-row2 {
 #travel .travel-container {
   width: 1100px;
   height: fit-content;
+  position: relative;
+}
+
+.fav-place__tag{
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  text-decoration: none;
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  color: #FFFFFF;
+  padding: 0.5em;
+  box-shadow: 0px 2.52685px 4.42199px rgba(0, 0, 0, 0.25);
+  display: none;
 }
 
 #travel .travel-container .path {
@@ -116,6 +133,7 @@ header .booking-info .block .block-col2 .block-row2 {
 }
 
 #travel .travel-container .travel-content .filter {
+  background-color: white;
   width: 23%;
   height: fit-content;
   border-radius: 21.474px;
@@ -468,6 +486,10 @@ header .booking-info .block .block-col2 .block-row2 {
     display: none;
   }
 
+  .fav-place__tag {
+    display: block;
+  }
+
   #travel .travel-container .travel-content .mobile-filter {
     display: block;
     position: fixed;
@@ -635,7 +657,7 @@ header .booking-info .block .block-col2 .block-row2 {
   box-shadow: none !important;
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 900px) {
   .search {
     flex-direction: column;
     width: 75%;

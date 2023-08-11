@@ -51,7 +51,7 @@ app.use('/user', userRoutes);
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
   //localhost:5000/test
-  res.render('tourSearch', {user: {
+  res.render('admin', {user: {
     fullName: 'Hello Kong ne',
     _id: '123456'
   },
