@@ -58,7 +58,7 @@ app.get('/test', (req, res)=>{
     fullName: 'Hello Kong ne',
     _id: '123456'
   },
-  title:'tours'
+  title:'orders'
 });
 })
 
