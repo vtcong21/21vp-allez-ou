@@ -111,7 +111,11 @@ const verify = async (req, res) => {
     if (createPaymentAccountResult) {
       const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
       res.cookie('token', token);
-      return res.redirect('/');
+      if (user.isAdmin === true) {
+        res.status(200).json({ redirectUrl: '/admin' });
+      } else {
+        res.status(200).json({ redirectUrl: '/' });
+      }
     } else {
       return res.status(500).json({ message: 'Error creating payment account' });
     }
@@ -134,9 +138,9 @@ const resendVerificationCode = async (req, res) => {
       return res.status(400).json({ message: 'User is already verified' });
     }
 
-    if (user.verificationCodeExpiration >= new Date()) {
-      return res.status(400).json({ message: 'Verification code is still valid' });
-    }
+    // if (user.verificationCodeExpiration >= new Date()) {
+    //   return res.status(400).json({ message: 'Verification code is still valid' });
+    // }
 
     const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
     const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
