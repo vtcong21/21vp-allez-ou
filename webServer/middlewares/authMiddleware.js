@@ -42,9 +42,5 @@ const requireAdminRole = (req, res, next) => {
 
 }
 
-<<<<<<< HEAD
-module.exports = { authenticateToken, adminMiddleware };
-=======
 
 module.exports = { authenticateToken, requireAdminRole };
->>>>>>> dev
