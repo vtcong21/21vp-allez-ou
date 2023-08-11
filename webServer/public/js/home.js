@@ -25,7 +25,7 @@ function formatNumberWithCommas(number) {
             <img src="${cardTour.cardImgUrl}" class="card-img-top card-img" alt="..." />
             <div class="card-body">
                 <div class="card-title">
-                    <p class="mb-0">${changeDateToString(new Date(cardTour.date))} - 7N6Đ - Giờ đi: ${cardTour.time}</p>
+                    <p class="mb-0">${changeDateToString(new Date(cardTour.date))} - ${cardTour.numOfDays}N${cardTour.numOfDays-1}Đ - Giờ đi: ${cardTour.time}</p>
                 </div>
                 <div class="card-text">
                     <a class="card-text__link" data-value="${cardTour.code}" href="/tours/${cardTour.code}">${cardTour.name}</a>
