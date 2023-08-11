@@ -69,10 +69,10 @@ const deleteItem = async (req, res) => {
         const userId = req.userId;
         const { itemId } = req.body;
 
-        // const user = await User.findById(userId);
-        // if (!user) {
-        //     return res.status(404).json({ message: 'User not found' });
-        // }
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
         // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
         const itemIndex = user.cart.findIndex(item => item.tourCode.equals(itemId));
