@@ -13,9 +13,31 @@ const register = async (req, res) => {
   try {
     const { fullName, email, password, gender, dateOfBirth, phoneNumber } = req.body;
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser && existingUser.isVerified) {
-      return res.status(409).json({ message: "User already exists" });
+    let user = await User.findOne({ email });
+
+    if (user) {
+      if (user.isVerified) {
+        return res.status(409).json({ message: "User already exists" });
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
+        const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
+
+        user.fullName = fullName;
+        user.password = hashedPassword;
+        user.gender = gender;
+        user.dateOfBirth = dateOfBirth;
+        user.phoneNumber = phoneNumber;
+        user.verificationCode = verificationCode;
+        user.verificationCodeExpiration = verificationCodeExpiration;
+
+        await user.save();
+        await mailController.sendVerificationEmail(email, verificationCode);
+
+        return res.status(200).json({ message: "Updated existing user and sent verification email", email });
+      }
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -24,7 +46,7 @@ const register = async (req, res) => {
     const verificationCode = (Math.floor(100000 + Math.random() * 900000)).toString();
     const verificationCodeExpiration = new Date(Date.now() + 2 * 60 * 1000);
 
-    const user = new User({
+    user = new User({
       fullName,
       email,
       password: hashedPassword,
@@ -34,6 +56,7 @@ const register = async (req, res) => {
       verificationCode,
       verificationCodeExpiration
     });
+    
     await user.save();
     await mailController.sendVerificationEmail(email, verificationCode);
 
@@ -44,9 +67,10 @@ const register = async (req, res) => {
   }
 };
 
+
 async function createPaymentAccount(userId) {
   try {
-   
+
     const response = await axios.post('http://localhost:5001/accounts/createPaymentAccount', {
       userId: userId
     });
