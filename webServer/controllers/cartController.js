@@ -68,23 +68,19 @@ const deleteItem = async (req, res) => {
     try {
         const userId = req.userId;
         const { itemId } = req.body;
-        
-        // Tìm người dùng theo userId
+
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Tìm index của item trong mảng cart của người dùng
+        // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
         const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
         if (itemIndex === -1) {
             return res.status(404).json({ message: 'Item not found in cart' });
         }
 
-        // Xóa item khỏi mảng cart của người dùng
         user.cart.splice(itemIndex, 1);
-
-        // Lưu lại thông tin người dùng sau khi xóa item
         await user.save();
 
         res.status(200).json({ message: 'Item removed from cart successfully' });
@@ -94,8 +90,39 @@ const deleteItem = async (req, res) => {
     }
 };
 
+const getOrderPage = async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const user = await User.findById(userId).populate({
+            path: 'orders',
+            populate: {
+                path: 'tourCode',
+                select: 'name date price'
+            }
+        });
+
+        if (!user.orders || user.orders.length === 0) {
+            return res.status(404).send('Order not found');
+        }
+
+        const orderItems = user.orders.map(order => ({
+            name: order.tourCode.name,
+            date: order.tourCode.date,
+            price: order.tourCode.price,
+            status: order.status
+        }));
+
+        res.render('orderPage', { orderItems });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send( 'Internal server error' );
+    }
+};
+
 module.exports = {
     addNewItem,
     getCartPage,
     deleteItem,
+    getOrderPage,
 };

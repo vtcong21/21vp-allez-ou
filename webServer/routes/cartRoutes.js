@@ -6,7 +6,7 @@ router.get('/', cartController.getCartPage);
 router.post('/addItem', cartController.addNewItem);
 router.delete('/deleteItem', cartController.deleteItem);
 
-// router.get('/history', cartController.getOrderPage);
+router.get('/history', cartController.getOrderPage);
 // router.get('/transaction', cartController.getTransactionPage);
 
 
