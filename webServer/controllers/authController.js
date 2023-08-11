@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const mailController = require('../controllers/mailController');
-const path = require('path');
+const axios = require('axios');
 
 
 const renderRegisterPage = (req, res) => {
@@ -44,6 +44,23 @@ const register = async (req, res) => {
   }
 };
 
+async function createPaymentAccount(userId) {
+  try {
+   
+    const response = await axios.post('http://localhost:5001/accounts/createPaymentAccount', {
+      userId: userId
+    });
+
+    if (response.status === 201) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
 const verify = async (req, res) => {
   try {
     const { email, verificationCode } = req.body;
@@ -66,10 +83,14 @@ const verify = async (req, res) => {
     user.verificationCode = undefined;
     user.verificationCodeExpiration = undefined;
     await user.save();
-
-    const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
-    res.cookie('token', token);
-    res.redirect('/');
+    const createPaymentAccountResult = await createPaymentAccount(user._id);
+    if (createPaymentAccountResult) {
+      const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
+      res.cookie('token', token);
+      return res.redirect('/');
+    } else {
+      return res.status(500).json({ message: 'Error creating payment account' });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
@@ -118,7 +139,7 @@ const resendVerificationCode = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid email or password' });
@@ -132,15 +153,15 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: user._id, userRole: user.isAdmin }, process.env.SECRET_KEY, { expiresIn: '72h' });
     // console.log('Token sent');
     res.cookie('token', token);
-    
-    
+
+
     if (user.isAdmin === true) {
       res.status(200).json({ redirectUrl: '/admin' });
     } else {
       res.status(200).json({ redirectUrl: '/' });
     }
 
-    
+
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -153,7 +174,7 @@ const logout = (req, res) => {
 
 const checkPassword = async (req, res) => {
   try {
-    const { userId, password } = req.body; 
+    const { userId, password } = req.body;
     const user = await User.findOne({ userId });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });

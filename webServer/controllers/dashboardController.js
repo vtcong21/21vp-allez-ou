@@ -2,9 +2,12 @@ const Dashboard = require('../models/dashboard');
 const axios = require('axios');
 const cron = require('node-cron');
 
+const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
+
+
 const updateRevenue = async (req, res) => {
     try {
-        const accountId = '64b79fc6896f214f7aae7ddc';
+        const accountId = webPaymentAccountId;
         const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory'
             , {
                 params: {
@@ -77,7 +80,6 @@ const getMonthlyRevenuesThisYear = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
-
 
 const searchMonthlyRevenuesByYear = async (req, res) => {
     try {
@@ -156,6 +158,8 @@ const getRevenueLast7Days = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+
 
 
 module.exports = {

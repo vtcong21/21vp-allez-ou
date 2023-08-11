@@ -39,6 +39,11 @@ router.post('/createAdminAccount'
 router.delete('/deleteAdminAccount'
     , authMiddleware.requireAdminRole
     , adminController.deleteAdminAccount);
+// lấy lịch sử giao dịch của web
+router.get('/getWebPaymentHistory'
+    , authMiddleware.requireAdminRole
+    , adminController.getWebPaymentHistory);
+
 
 
 module.exports = router;
