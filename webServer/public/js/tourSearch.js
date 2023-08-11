@@ -94,7 +94,7 @@ function cardTravelTour(travel) {
                 <h1>${travel.name}</h1>
             </div>
             <h2>${travel.priceformat}</h2>
-            <div class="content-more"><a href="#">Xem thêm</a></div>
+            <div class="content-more"><a href="/tours/${travel.code}">Xem thêm</a></div>
         </div>
     </div>
     `;
