@@ -241,7 +241,11 @@ async function registerUser() {
         console.log("request sent");
         loadNewForm2();
     } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 409) {
+            alert('Email đã tồn tại trên hệ thống');
+          } else {
+            console.error('Lỗi từ server:', error.response ? error.response.data : error.message);
+          }
     }
 }
 
