@@ -11,31 +11,31 @@ router.post('/addItem'
     , authMiddleware.authenticateToken
     , cartController.addNewItem
 );
-router.delete('/deleteItem'
-    , authMiddleware.authenticateToken
-    , cartController.deleteItem
-);
-// cập nhật item ở trang đơn đăng ký tour
+// router.delete('/deleteItem'
+//     , authMiddleware.authenticateToken
+//     , cartController.deleteItem
+// );
+// // cập nhật item ở trang đơn đăng ký tour
 
 
-router.get('/history'
-    , authMiddleware.authenticateToken
-    , cartController.getOrderPage
-);
-router.get('/orderDetails/:code'
-    , authMiddleware.authenticateToken
-    , cartController.getOrderDetails
-);
-router.post('/orderDetails/:code'
-    , authMiddleware.authenticateToken
-    , cartController.cancelOrder
-);
+// router.get('/history'
+//     , authMiddleware.authenticateToken
+//     , cartController.getOrderPage
+// );
+// router.get('/orderDetails/:code'
+//     , authMiddleware.authenticateToken
+//     , cartController.getOrderDetails
+// );
+// router.post('/orderDetails/:code'
+//     , authMiddleware.authenticateToken
+//     , cartController.cancelOrder
+// );
 
 
-router.get('/transaction'
-    , authMiddleware.authenticateToken
-    , cartController.getTransactionPage
-    );
+// router.get('/transaction'
+//     , authMiddleware.authenticateToken
+//     , cartController.getTransactionPage
+//     );
 
 
 
