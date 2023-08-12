@@ -48,27 +48,27 @@
                             </button>
                         </div>
                         <div class="row mt-5">
-                            <div class="col-sm-6 d-flex d-sm-block justify-content-between">
+                            <div class="col-sm-12 d-flex d-sm-block justify-content-between">
                                 <div>
                                     <p class="tour-info__text">Khởi hành: <strong><%= tour.date %>- <%= tour.schedules.length %>N<%= tour.schedules.length - 1 %>Đ - Giờ đi: <%= tour.time %></strong></p>
                                     <p class="tour-info__text">Nơi khởi hành: <strong><%= tour.startPlace.name %></strong></p>
                                     <p class="tour-info__text">Chỗ còn nhận: <strong><%= tour.remainSlots %></strong></p>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <img src="/img/tourInfo/contact-usnew.png" class="d-block d-sm-none tour-contact__responsive" id="contact" data-bs-toggle="dropdown" aria-expanded="false">
                                     <ul class="dropdown-menu" aria-labelledby="contact">
                                     <li><a class="dropdown-item" href="#">Gọi trực tiếp</a></li>
                                     <li><a class="dropdown-item" href="#">Liên hệ tư vấn</a></li>
-                                </div>
+                                </div> -->
                             </div>
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6">
                                 <div class="d-flex justify-content-end">
                                     <div class="d-sm-flex d-none">
                                         <a href="#" class="tour-call">Gọi trực tiếp</a>
                                         <a href="#" class="tour-contact m-0">Liên hệ tư vấn</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="container mt-5 tour-schedule">
@@ -198,7 +198,7 @@
                             </div>
                         </div>
                         <div class="d-flex mt-4">
-                            <button class="btn m-auto tour-table-price__button">ĐẶT NGAY</button>
+                            <button class="btn m-auto tour-table-price__button" onclick="addNewItem('<%- tour.code %>')">Thêm vào Giỏ hàng</button>
                         </div>
                     </div>
                     <div class="tour-review mb-4 order-sm-3">
@@ -217,7 +217,19 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         
+=======
+        <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true" id="myToast">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Thêm vào giỏ hàng thành công.
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+          
+>>>>>>> 07a2e24270f64a719f8e8f55f5ec56fdacb41c75
         <!--footer-->
         <%- include('partials/footer') %>
     </body>
