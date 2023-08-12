@@ -15,11 +15,11 @@
         <%- include('partials/navbar') %>
 
         <!-- Body -->
-        <div class="container container-v2">
+        <div class="container container-v2 mb-4">
 
             <!-- Thanh chuyển hướng trang con -->
             <div class="row justify-content-center mt-5 mx-md-5 mx-2 px-sm-2">
-                <ul class="nav nav-v2 nav-tabs nav-tabs-v2 flex-lg-row mb-5 p-0" role="tablist">
+                <ul class="nav nav-v2 nav-tabs nav-tabs-v2 flex-lg-row mb-4 p-0" role="tablist">
                     <li class="nav-item nav-item-v2 flex-fill">
                         <a class="nav-link nav-link-v2 text-center active" id="active-btn" data-toggle="tab" href=" " role="tab"> <i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</a>
                     </li>
@@ -64,8 +64,8 @@
                         </div>
                         <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center">
                             <div class="d-sm-flex flex-column align-items-center">
-                                <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" onclick="bookTourPage()">Đặt ngay</button>
-                                <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" type="button" onclick="deleteItem('<%- cartItems[i].itemId %>')">
+                                <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" id="orderForm-btn" onclick="bookTourPage()">Đặt ngay</button>
+                                <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" id="delete-btn" type="button" onclick="deleteItem('<%- cartItems[i].itemId %>')">
                                     <i class="ci-close-circle me-2"></i>
                                     <span class="fs-sm">Xóa</span>
                                 </button>

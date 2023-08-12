@@ -160,3 +160,23 @@ a:hover { color: #4F6CFF; }
     padding-bottom: 1em;
     border-radius: 18px;
 }
+
+#delete-btn:hover {
+    color:#F14868;
+}
+#delete-btn:active {
+    color:#F14868;
+    font-weight: 600;
+    text-decoration: underline;
+}
+#delete-btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+#orderForm-btn:active, #orderForm-btn:focus {
+    font-weight: 700;
+}
+#orderForm-btn:active {
+    text-decoration: underline;
+}
