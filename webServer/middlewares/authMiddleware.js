@@ -4,7 +4,7 @@ const authenticateToken = (req, res, next) => {
   //const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
   const token = req.cookies.token;
   if (!token) {
-    res.clearCookie('token');
+    //res.clearCookie('token');
     return next();
   }
   try {
