@@ -4,7 +4,7 @@ const Tour = require('../models/tour');
 const addNewItem = async (req, res) => {
     try {
         const userId = req.userId;
-        const { codeTour, price } = req.body;
+        const { codeTour } = req.body;
         
         var user = await User.findById(userId);
         if (!user) {
@@ -75,7 +75,7 @@ const deleteItem = async (req, res) => {
         }
 
         // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
-        const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
+        const itemIndex = user.cart.findIndex(item => item.tourCode.equals(itemId));
         if (itemIndex === -1) {
             return res.status(404).json({ message: 'Item not found in cart' });
         }
@@ -96,9 +96,10 @@ const getOrderPage = async (req, res) => {
 
         const user = await User.findById(userId).populate({
             path: 'orders',
+            select: 'tickets totalPrice status',
             populate: {
                 path: 'tourCode',
-                select: 'name date price'
+                select: 'name date startPlace'
             }
         });
 
@@ -109,8 +110,10 @@ const getOrderPage = async (req, res) => {
         const orderItems = user.orders.map(order => ({
             name: order.tourCode.name,
             date: order.tourCode.date,
-            price: order.tourCode.price,
-            status: order.status
+            startPlace: order.tourCode.startPlace,
+            totalPrice: order.totalPrice,
+            status: order.status,
+            numOfTickets: order.tickets.length,
         }));
 
         res.render('orderPage', { orderItems });
@@ -121,7 +124,25 @@ const getOrderPage = async (req, res) => {
 };
 
 const getOrderDetails = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { itemId } = req.params;
 
+
+        const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
+        if (itemIndex === -1) {
+            return res.status(404).json({ message: 'Item not found in cart' });
+        }
+
+        const codeItem = await Tour.findOne({ code });
+        if (!tour) {
+          return res.status(404).json({ message: 'Tour not found' });
+        }
+        console.log(tour);
+        res.status(200).json(tour);
+      } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+      }
 };
 
 const cancelOrder = async (req, res) => {

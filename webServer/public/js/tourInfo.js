@@ -31,20 +31,76 @@ accordionItems.forEach(accordionItem => {
   });
 });
 
+
+// Phần xử lý API cho nút Thêm vào giỏ hàng
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-function AddToCart(){
-    const token = getCookie("token");
-    if (!token)
-    {
-      console.log("show");
-      $('#loginModal').modal('show');
-    }
-    else{
-      // add vào giỏ hàng tại đây
-    }
-}
+// function checkLoginStatus() {
+//   const token = getCookie('token'); 
+  
+//   if (token) {
+//     console.log(token + ' true')
+//     return true; // Đã đăng nhập
+//   } else {
+//     console.log(' false')
+//     return false; // Chưa đăng nhập
+//   }
+// }
+
+// function showLoginModal() {
+//   const loginModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+//   loginModal.show();
+// }
+
+// async function addNewItem(code) {
+//   const loggedIn = checkLoginStatus();
+  
+//   if (loggedIn) {
+//     const token = getCookie('token');
+//     const codeTour = code;
+    
+//     try {
+//       const response = await axios.post('/addItem', { codeTour: codeTour }, {
+//         headers: {
+//           Authorization: `Bearer ${token}`
+//         }
+//       });
+      
+//       if (response.status === 200) {
+//         // Hiển thị thông báo toast
+//         const toast = new bootstrap.Toast(document.getElementById("myToast"));
+//         toast.show();
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+
+//     }
+//   } else {
+//     showLoginModal();
+//   }
+// }
+
+
+
+
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(";").shift();
+// }
+
+// function AddToCart(){
+//     const token = getCookie("token");
+//     if (!token)
+//     {
+//       console.log("show");
+//       $('#loginModal').modal('show');
+//     }
+//     else{
+//       // add vào giỏ hàng tại đây
+//     }
+// }
