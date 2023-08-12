@@ -215,7 +215,7 @@ body{
     font-style: normal;
     font-weight: 800;
     font-size: 1.8rem;
-    line-height: 2.2rem;
+    line-height: 1.9rem;
     text-decoration-line: underline;
     color: #000000;
 }
@@ -224,7 +224,7 @@ body{
     font-style: normal;
     font-weight: 700;
     font-size: 1.8rem;
-    line-height: 1.9rem;
+    line-height: 2.2rem;
     color: #F14868;
 }
 .tour-schedule-date__text{
@@ -344,6 +344,23 @@ body{
     color: #F14868;
     background: #FDE2E7;
 }
+
+.toast-body, .toast-title {
+    font-family: 'Nunito';
+    font-size: 1.6rem;
+}
+.toast-title {
+    color: #4F6CFF;
+}
+.pd-v2 {
+    padding-left: 3em;
+}
+.toast-position {
+    left: 0 !important;
+    bottom: 0 !important;
+    margin: 1em;
+}
+
 @media only screen and (max-width: 576px) {
     .body__container{
         margin: 0 1rem;
@@ -403,5 +420,13 @@ body{
     }
     .tour-schedule__title{
         margin-bottom: 2.9rem;
+    }
+    .toast-body, .toast-title {
+        font-size: 1.4rem;
+    }
+    .toast-position {
+        left: 0 !important;
+        bottom: 10em !important;
+        margin: 1em;
     }
 }
