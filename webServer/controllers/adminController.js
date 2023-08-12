@@ -163,10 +163,25 @@ const getWebPaymentHistory = async (req, res) => {
     }
 }
 
+const getTopSellingTours = async (req, res) => {
+    try {
+        const tours = await Tour.find()
+            .sort({ $expr: { $subtract: ['$slots', '$remainSlots'] } })
+            .limit(6);
+
+        res.status(200).json(tours);
+    } catch (error) {
+        console.error('Error fetching top selling tours:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
 
 module.exports = {
     getAdminList,
     getClientList,
+    getTopSellingTours,
     getWebPaymentHistory,
     createAdminAccount,
     deleteAdminAccount,
