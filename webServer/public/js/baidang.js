@@ -170,3 +170,43 @@ function changePage(page) {
 document.addEventListener("DOMContentLoaded", () => {
     fetchTourInformation();
 });
+document.addEventListener("DOMContentLoaded", function() {
+    // Lấy đối tượng button và container chứa các ngày
+    const buttonThemNgay = document.getElementById("button-them-ngay");
+    const ngayContainer = document.getElementById("ngay-container");
+  
+    // Số lượng ngày hiện tại
+    let currentNgay = 3;
+  
+    // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
+    buttonThemNgay.addEventListener("click", function () {
+      // Tạo phần tử div mới
+      const newNgayDiv = document.createElement("div");
+      newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
+  
+      // Tạo các phần tử con bên trong div mới
+      const newLabel = document.createElement("label");
+      newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
+      newLabel.textContent = "Ngày " + currentNgay;
+  
+      const newInput = document.createElement("input");
+      newInput.classList.add("form-control");
+      newInput.setAttribute("placeholder", "");
+  
+      const newTextInput = document.createElement("div");
+      newTextInput.classList.add("text-input");
+      newTextInput.setAttribute("contenteditable", "");
+      newTextInput.setAttribute("id", "ngay" + currentNgay + "-input");
+  
+      // Chèn các phần tử con vào div mới
+      newNgayDiv.appendChild(newLabel);
+      newNgayDiv.appendChild(newInput);
+      newNgayDiv.appendChild(newTextInput);
+  
+      // Chèn div mới vào container ngày
+      ngayContainer.appendChild(newNgayDiv);
+  
+      // Tăng số lượng ngày hiện tại
+      currentNgay++;
+    });
+  });
