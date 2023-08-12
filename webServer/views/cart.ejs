@@ -39,7 +39,9 @@
                 <section class="container px-0">
                     <h3>Giỏ hàng của bạn</h3>
                     <!--px-5 pb-5 mb-2 mb-md-4 mt-5-->
+
                     <!-- Item-->
+                    <% for(let i = 0; i < cartItems.length; i++) { %>
                     <div class="d-sm-flex justify-content-between align-items-center my-3 pb-3 border-bottom">
                         <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
                             <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
@@ -47,10 +49,10 @@
                             </a>
                             <div class="pt-2">
                                 <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html">Hà Nội - Sapa - Fansipan - Ninh Bình - Tràng An - Bái Đính - Tuyệt Tịnh Cốc - Hạ Long - Yên Tử</a>
+                                    <a href="shop-single-v1.html"><%- cartItems[i].name %></a>
                                 </h5>
-                                <div class="extra">Ngày khởi hành: 21/06/2023</div>
-                                <div class="extra price">9,790,000 <small>đ</small></div>
+                                <div class="extra">Ngày khởi hành: <%- cartItems[i].date %></div>
+                                <div class="extra price"><%- cartItems[i].price.toLocaleString() %> <small>đ</small></div>
                             </div>
                         </div>
                         <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center" style="max-width: 9rem;">
@@ -61,74 +63,8 @@
                             </button>
                         </div>
                     </div>
-                    <!-- Item-->
-                    <div class="d-sm-flex justify-content-between align-items-center my-3 pb-3 border-bottom">
-                        <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
-                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
-                                <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" width="150" alt="Product" />
-                            </a>
-                            <div class="pt-2">
-                                <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html">Hà Nội - Vịnh Hạ Long - Chùa Bái Đính - Tràng An - Tuyệt Tịnh Cốc (Khách sạn 4 sao)</a>
-                                </h5>
-                                <div class="extra">Ngày khởi hành: 21/06/2023</div>
-                                <div class="extra price">9,790,000 <small>đ</small></div>
-                            </div>
-                        </div>
-                        <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center" style="max-width: 9rem;">
-                            <button type="button" class="btn btn-danger" onclick="bookTourPage()">Đặt ngay</button>
-                            <button class="btn btn-link px-0" type="button" onclick="deleteItem()">
-                                <i class="ci-close-circle me-2"></i>
-                                <span class="fs-sm">Xóa</span>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div class="d-sm-flex justify-content-between align-items-center my-3 pb-3 border-bottom">
-                        <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
-                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
-                                <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" width="150" alt="Product" />
-                            </a>
-                            <div class="pt-2">
-                                <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html">
-                                        Liên Tuyến Trung Bắc: Đà Nẵng - Huế - Động Phong Nha & Thiên Đường - Bà Nà - Cầu Vàng - Hội An - Hà Nội - Sapa - Fansipan - Vịnh Hạ Long - Động Thiên Cung - Bái Đính - Tràng An - Hà Nội
-                                    </a>
-                                </h5>
-                                <div class="extra">Ngày khởi hành: 21/06/2023</div>
-                                <div class="extra price">9,790,000 <small>đ</small></div>
-                            </div>
-                        </div>
-                        <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center" style="max-width: 9rem;">
-                            <button type="button" class="btn btn-danger" onclick="bookTourPage()">Đặt ngay</button>
-                            <button class="btn btn-link px-0" type="button" onclick="deleteItem()">
-                                <i class="ci-close-circle me-2"></i>
-                                <span class="fs-sm">Xóa</span>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Item-->
-                    <div class="d-sm-flex justify-content-between align-items-center my-3 pb-3 border-bottom">
-                        <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
-                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
-                                <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" width="150" alt="Product" />
-                            </a>
-                            <div class="pt-2">
-                                <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html">Hà Nội - Nghỉ Dưỡng Du Thuyền Hạ Long Cao Cấp - Ninh Bình - Bái Đính - Tràng An - Tuyệt Tịnh Cốc (Khách sạn 4&5 sao)</a>
-                                </h5>
-                                <div class="extra">Ngày khởi hành: 21/06/2023</div>
-                                <div class="extra price">9,790,000 <small>đ</small></div>
-                            </div>
-                        </div>
-                        <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center" style="max-width: 9rem;">
-                            <button type="button" class="btn btn-danger" onclick="bookTourPage()">Đặt ngay</button>
-                            <button class="btn btn-link px-0" type="button" onclick="deleteItem()">
-                                <i class="ci-close-circle me-2"></i>
-                                <span class="fs-sm">Xóa</span>
-                            </button>
-                        </div>
-                    </div>
+                    <% } %>
+
                 </section>
             </div>
         </div>

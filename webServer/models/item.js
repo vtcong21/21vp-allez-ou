@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    tourCode: { type: String, ref: 'Tour', required: true },
+    tourCode: { type: String, required: true },
     tickets: [
         {
             type: { type: String, required: true },

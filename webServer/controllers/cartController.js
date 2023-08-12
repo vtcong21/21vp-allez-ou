@@ -32,35 +32,30 @@ const addNewItem = async (req, res) => {
     }
 };
 
-// const getCartPage = async (req, res) => {
-//     try {
-//         const userId = req.userId;
+const getCartPage = async (req, res) => {
+    try {
+        const userId = req.userId;
 
-//         // Nối những model có tham chiếu đến nhau => tạo thành path
-//         const user = await User.findById(userId).populate({
-//             path: 'cart',
-//             populate: {
-//                 path: 'tourCode',
-//                 select: 'name date price'
-//             }
-//         });
+        const userCart = await User.findById(userId).populate('cart');
+        if (!userCart) {
+            return res.status(404).send('There are no products in the shopping cart');
+        }
 
-//         if (!user.cart) {
-//             return res.status(404).send('There are no products in the shopping cart');
-//         }
+        const cartItems = await Promise.all(userCart.cart.map(async (item) => {
+            const tour = await Tour.findOne({ code: item.tourCode });
+            return {
+                name: tour.name,
+                date: tour.date,
+                price: tour.price,
+            };
+        }));
 
-//         const cartItems = user.cart.map(item => ({
-//             name: item.tourCode.name,
-//             date: item.tourCode.date,
-//             price: item.tourCode.price,
-//         }));
-
-//         res.render('cartPage', { cartItems });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Internal server error');
-//     }
-// };
+        res.render('cart', { cartItems });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+};
 
 // const deleteItem = async (req, res) => {
 //     try {
@@ -153,7 +148,7 @@ const addNewItem = async (req, res) => {
 
 module.exports = {
     addNewItem,
-    // getCartPage,
+    getCartPage,
     // deleteItem,
     // getOrderPage,
     // getOrderDetails,

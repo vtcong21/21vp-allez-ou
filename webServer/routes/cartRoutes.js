@@ -3,10 +3,10 @@ const router = express.Router();
 const cartController = require('../controllers/cartController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
-// router.get('/'
-//     , authMiddleware.authenticateToken
-//     , cartController.getCartPage
-// );
+router.get('/'
+    , authMiddleware.authenticateToken
+    , cartController.getCartPage
+);
 router.post('/addItem'    
     , authMiddleware.authenticateToken
     , cartController.addNewItem
