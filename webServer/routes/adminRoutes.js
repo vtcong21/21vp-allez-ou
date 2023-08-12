@@ -43,10 +43,13 @@ router.delete('/deleteAdminAccount'
 router.get('/getWebPaymentHistory'
     , authMiddleware.requireAdminRole
     , adminController.getWebPaymentHistory);
-// 6 tour bán chạy nhất
+//  lấy 6 tour bán chạy nhất
 router.get('getTopSellingTours'
 , authMiddleware.authenticateToken
 , adminController.getTopSellingTours);
-
+// lấy tất cả order
+router.get('getAllOrders'
+, authMiddleware.authenticateToken
+, adminController.getAllOrders);
 
 module.exports = router;
