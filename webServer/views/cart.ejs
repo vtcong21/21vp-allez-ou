@@ -51,12 +51,12 @@
                     <% for(let i = 0; i < cartItems.length; i++) { %>
                     <div class="d-sm-flex justify-content-between align-items-center my-3 pt-4 pb-2 border-top">
                         <div class="d-block d-sm-flex align-items-center text-sm-start text-center-v2">
-                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
+                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="/tours/<%= cartItems[i].code %>">
                                 <img src="<%= cartItems[i].imgURL %>" width="150" class="img-body" alt="Product" />
                             </a>
                             <div class="pt-3 pt-sm-2 px-4">
                                 <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html"><%- cartItems[i].name %></a>
+                                    <a href="/tours/<%= cartItems[i].code %>"><%- cartItems[i].name %></a>
                                 </h5>
                                 <div class="extra">Ngày khởi hành: <%- cartItems[i].date %></div>
                                 <div class="extra price"><%- cartItems[i].price.toLocaleString() %> đ</div>
