@@ -20,7 +20,7 @@ const getUserInfo = async (req, res) => {
   }
 };
 
-const createAnOrder = async (cartItem, user, item) => {
+  const createAnOrder = async (cartItem, user, item) => {
   cartItem.isPaid = true;
   user.cart.pull(cartItem._id);
   user.orders.push(cartItem._id);
@@ -29,6 +29,7 @@ const createAnOrder = async (cartItem, user, item) => {
   cartItem.orderDate = item.orderDate;
   cartItem.status = 'Shipping';
   cartItem.shippingAddress = item.shippingAddress;
+  cartItem.orderDate = new Date();
   await cartItem.save();
   await user.save();
 };
