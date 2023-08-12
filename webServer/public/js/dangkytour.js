@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const genderInput = document.getElementById('gender');
             const hoten1Input = document.getElementById('ho-ten1');
             const ngaysinhInput = document.getElementById('ngay-sinh');
-       
+            const hoten2Input = document.getElementById('ho-ten1');
+            const ngays2nhInput = document.getElementById('ngay-sinh');
+            const hoten3Input = document.getElementById('ho-ten1');
+            const ngays3nhInput = document.getElementById('ngay-sinh');
             const soDienThoaiPattern = /^0\d{9}$/;
             const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; // Biểu thức chính quy để kiểm tra email
             if (!hoTenInput.value || !soDienThoaiInput.value || !diaChiInput.value || !emailInput.value || !genderInput.value ||
