@@ -48,7 +48,7 @@
                     <h3>Giỏ hàng của bạn</h3>
                     <!--px-5 pb-5 mb-2 mb-md-4 mt-5-->
                     <!-- Item-->
-                    <% for(let i = 0; i < cartItems.length; i++) { %>
+                    <% for(let i = (cartItems.length - 1); i >= 0; i--) { %>
                     <div class="d-sm-flex justify-content-between align-items-center my-3 pt-4 pb-2 border-top">
                         <div class="d-block d-sm-flex align-items-center text-sm-start text-center-v2">
                             <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="/tours/<%= cartItems[i].code %>">
