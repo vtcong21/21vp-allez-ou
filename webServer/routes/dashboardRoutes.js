@@ -7,20 +7,23 @@ const authMiddleware = require('../middlewares/authMiddleware');
 // trả mảng doanh thu tất cả các tháng trong năm
 router.get('/getMonthlyRevenuesThisYear'
     // , authMiddleware.adminMiddleware
-    , dashboardController.updateRevenue);
-// trả % lợi nhuận tháng này so với tháng trước
-router.get('/getProfitPercentageThisMonth'
+    , dashboardController.getMonthlyRevenuesThisYear);
+// trả % lợi nhuận & doanh thu tháng này so với tháng trước
+router.get('/getRevenueAndProfitPercentageThisMonth'
     // , authMiddleware.adminMiddleware
-    , dashboardController.getProfitPercentageThisMonth);
+    , dashboardController.getRevenueAndProfitPercentageThisMonth);
 // lấy doanh thu 7 ngày gần nhất tính từ hôm nay
-router.post('/getRevenueLast7Days'
+router.get('/getRevenueLast7Days'
     // , authMiddleware.adminMiddleware
     , dashboardController.getRevenueLast7Days);
-//tìm mảng doanh thu các tháng theo năm
+// tìm mảng doanh thu các tháng theo năm
 router.get('/searchMonthlyRevenuesByYear'
     // , authMiddleware.adminMiddleware
     , dashboardController.searchMonthlyRevenuesByYear);
-
+// gọi cập nhật doanh thu của HÔM NAY
+router.put('/updateTodayRevenue'
+    // , authMiddleware.adminMiddleware
+    , dashboardController.updateTodayRevenue);
 
 
 module.exports = router;

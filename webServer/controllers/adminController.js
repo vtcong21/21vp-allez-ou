@@ -19,7 +19,7 @@ const renderDashboardPage = async (req, res) => {
 
 const getClientList = async (req, res) => {
     try {
-        const clientList = await User.find({ isAdmin: 0 }, '_id fullName gender dateCreate email phoneNumber');
+        const clientList = await User.find({ isAdmin: 0 }, '_id fullName gender dateOfBirth dateCreate email phoneNumber');
 
         res.status(200).json(clientList);
     } catch (error) {
