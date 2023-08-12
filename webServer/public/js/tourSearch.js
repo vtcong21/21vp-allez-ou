@@ -1,4 +1,3 @@
-
 const contentPerPage = 10;
 
 let response = null;

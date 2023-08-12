@@ -1,4 +1,3 @@
-
 // Hàm xóa hết dữ liệu trong localStorage
 function clearLocalStorage() {
     localStorage.clear();
@@ -162,7 +161,7 @@ function loadNewForm2() {
             </p>
             </div>
         <div class="col-md-6 col-6" style="text-align: left; padding:0 "> 
-            <button type="button" style="border: 0; padding: 0; background-color:#ffffff ;color: #4F6CFF;">Gửi lại mã</button>
+            <button id="resend-verify-code" type="button" style="border: 0; padding: 0; background-color:#ffffff ;color: #4F6CFF;">Gửi lại mã</button>
         </div> 
     </div>
 `;
@@ -208,7 +207,28 @@ function loadNewForm2() {
     } else {
         console.error("Cannot find element with id 'cheemail'");
     }
+    // api gửi lại mã
+    var resendCode = document.getElementById("resend-verify-code");
+    resendCode.addEventListener("click", resendVerificationCodeRequest);
 }
+
+async function resendVerificationCodeRequest() {
+    try {
+        const response = await axios.post("/auth/resendVerificationCode", {
+            email: localStorage.getItem("email")
+        });
+
+        if (response.status === 200) {
+            alert("Đã gửi lại mã xác thực thành công!");
+        } else {
+            alert("Không thể gửi lại mã xác thực. Vui lòng thử lại sau.");
+        }
+    } catch (error) {
+        console.error("Error sending resend verification code request:", error);
+        alert("Có lỗi xảy ra khi gửi lại mã xác thực. Vui lòng thử lại sau.");
+    }
+}
+
 function finish() {
     const confirmAccountField = document.getElementById("confirm-account1");
     var checkOTP = /^\d{6}$/;
@@ -260,8 +280,9 @@ async function sendVerificationCodeToServer() {
         console.log(verificationData);
         const response = await axios.post("/auth/verify", verificationData);
         console.log(response.data);
-        window.location.href = "/auth/login";
+        window.location.href = response.data.redirectUrl;
     } catch (error) {
+        alert('Mã OTP Nhập Vào Không Đúng');
         console.log(error);
     }
 }
@@ -352,4 +373,3 @@ function LoadFormValues2() {
         document.getElementById("Undefined").checked = true;
     }
 }
-

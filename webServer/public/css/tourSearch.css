@@ -100,7 +100,7 @@ header .booking-info .block .block-col2 .block-row2 {
 .fav-place__tag{
   position: absolute;
   right: 30px;
-  top: 30px;
+  top: 20px;
   text-decoration: none;
   font-family: 'Nunito';
   font-style: normal;
@@ -363,24 +363,20 @@ header .booking-info .block .block-col2 .block-row2 {
 }
 
 #travel-tour {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 48%); 
+  grid-gap: 20px 4%;
+  height: fit-content;
 }
 
 #travel-tour .col {
-  flex: 1 0 48%;
   height: 370px;
   box-shadow: 0px 2px 6px 0px #00000040;
   border-radius: 17px;
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin-bottom: 25px;
-  margin-left: 1%;
-  margin-right: 1%;
   overflow: hidden;
-
 }
 
 #travel-tour .col img {
@@ -405,6 +401,8 @@ header .booking-info .block .block-col2 .block-row2 {
   font-weight: 800;
   margin: 0;
   line-height: 20px;
+  height: 80px;
+  overflow: hidden;
 }
 
 #travel-tour .col .content h2 {
@@ -525,11 +523,17 @@ header .booking-info .block .block-col2 .block-row2 {
     justify-content: center;
   }
 
+  #travel-tour {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  #travel-tour .col .content h1 {
+    height: 100px;
+  }
+
   #travel-tour .col {
-    width: 100%;
-    flex: 1 0 100%;
-    max-width: 397px;
-    height: 290px !important;
+    height: 330px !important;
   }
 
   #travel-tour .col img {
@@ -548,12 +552,6 @@ header .booking-info .block .block-col2 .block-row2 {
 @media (max-width: 400px) {
   #travel .travel-container .travel-content .mobile-filter {
     width: 250px;
-  }
-}
-
-@media (max-width: 800px) {
-  #travel-tour .col {
-    height: 420px;
   }
 }
 
