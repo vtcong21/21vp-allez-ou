@@ -4,7 +4,7 @@ const Tour = require('../models/tour');
 const addNewItem = async (req, res) => {
     try {
         const userId = req.userId;
-        const { codeTour, price } = req.body;
+        const { codeTour } = req.body;
         
         var user = await User.findById(userId);
         if (!user) {
