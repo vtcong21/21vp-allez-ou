@@ -43,10 +43,8 @@ function checkLoginStatus() {
   const token = getCookie('token'); 
 
   if (token) {
-    console.log(token + ' true')
     return true; // Đã đăng nhập
   } else {
-    console.log(' false')
     return false; // Chưa đăng nhập
   }
 }
@@ -60,18 +58,19 @@ async function addNewItem(code) {
   const loggedIn = checkLoginStatus();
 
   if (loggedIn) {
-    const token = getCookie('token');
-    const codeTour = code;
-
+    const tourCode = code;
+  
     try {
-      const response = await axios.post('/addItem', { codeTour: codeTour });
+      const response = await axios.post('../cart/addItem', { tourCode: tourCode });
       
       if (response.status === 200) {
         // Hiển thị thông báo toast
+        console.log('thành công gửi post');
         const toast = new bootstrap.Toast(document.getElementById("myToast"));
         toast.show();
       }
     } catch (error) {
+      console.log('thất bại gửi post');
       console.error("Error:", error);
 
     }
