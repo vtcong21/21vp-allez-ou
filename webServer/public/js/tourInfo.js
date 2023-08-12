@@ -64,11 +64,7 @@ async function addNewItem(code) {
     const codeTour = code;
     
     try {
-      const response = await axios.post('/addItem', { codeTour: codeTour }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const response = await axios.post('/addItem', { codeTour: codeTour });
       
       if (response.status === 200) {
         // Hiển thị thông báo toast
