@@ -17,6 +17,16 @@ function changeDateToString(currentTime) {
   return day + "/" + month + "/" + year;
 }
 
+function convertGenderToVietnamese(gender) {
+  if (gender === "Male") {
+      return "Nam";
+  } else if (gender === "Female") {
+      return "Nữ";
+  } else {
+      return gender;
+  }
+}
+
 // trước hết trang này lấy ra toàn bộ tour card
 const getTourSearchPage = async (req, res) => {
   try {
@@ -159,10 +169,12 @@ const getTourByCode = async (req, res) => {
     }
     if (user) {
       const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth };
+      const formattedGender = convertGenderToVietnamese(user.gender);
+      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
       res.render('tourInfo', { tour, user })
     } else {
       // Nếu không có user, render view EJS với dữ liệu user là null
+
       res.render('tourInfo', { tour, user: null });
     }
     // res.render('tourInfo', { tour, user });

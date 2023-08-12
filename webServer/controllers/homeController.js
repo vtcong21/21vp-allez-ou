@@ -1,6 +1,14 @@
 const User = require('../models/user');
 
-
+function convertGenderToVietnamese(gender) {
+  if (gender === "Male") {
+      return "Nam";
+  } else if (gender === "Female") {
+      return "Nữ";
+  } else {
+      return gender;
+  }
+}
 function changeDateToString(currentTime) {
   var day = currentTime.getDate();
   var month = currentTime.getMonth() + 1;
@@ -21,7 +29,8 @@ const getHomePage = async (req, res) => {
 
     if (user) {
       const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth };
+      const formattedGender = convertGenderToVietnamese(user.gender);
+      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
       res.render('home', { user })
     } else {
       // Nếu không có user, render view EJS với dữ liệu user là null

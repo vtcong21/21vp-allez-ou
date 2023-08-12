@@ -143,6 +143,7 @@ td:last-child{
 .card-body{
     padding: 2.25rem 32px 0;
 }
+
 @media only screen and (max-width: 576px) {
     th:first-child::before{
         display: none;
