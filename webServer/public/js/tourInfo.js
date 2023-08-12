@@ -30,3 +30,21 @@ accordionItems.forEach(accordionItem => {
     }
   });
 });
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function AddToCart(){
+    const token = getCookie("token");
+    if (!token)
+    {
+      console.log("show");
+      $('#loginModal').modal('show');
+    }
+    else{
+      // add vào giỏ hàng tại đây
+    }
+}
