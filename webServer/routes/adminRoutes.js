@@ -48,7 +48,7 @@ router.get('getTopSellingTours'
 , authMiddleware.authenticateToken
 , adminController.getTopSellingTours);
 // lấy tất cả order
-router.get('/orders'
+router.get('/getAllOrders'
 , authMiddleware.authenticateToken
 , adminController.getAllOrders);
 // search order theo tour code
