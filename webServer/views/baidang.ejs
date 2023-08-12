@@ -1,8 +1,9 @@
 <link rel="stylesheet" href="/css/baidang.css">
+<link href="https://preview.keenthemes.com/keen/demo1/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 <div class="container-fluid">
                 
     <div class="col-md-9 col-9">
-        <button class="trang-thai">Đang hoạt động</button>
+        <button class="trang-thai" data-bs-toggle="modal" data-bs-target="#kt_modal_new_address">Đang hoạt động</button>
     </div>  
     <hr>
     <div class="row">
@@ -39,6 +40,104 @@
           </ul>
         </nav>
     </div>
-</div>
+    <!-- modal -->
+    <div class="modal fade" id="kt_modal_new_address" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mw-650px">
 
+            <!-- header modal -->
+            <div class="modal-content">
+                <form class="form" action="#" id="kt_modal_new_address_form">
+                    <div class="modal-header" id="kt_modal_new_address_header">
+                        <h2>Thông tin tour</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- nội dung -->
+                    <div class="modal-body py-10 px-lg-17">
+                        <div
+                            class="scroll-y me-n7 pe-7"
+                            id="kt_modal_new_address_scroll"
+                            data-kt-scroll="true"
+                            data-kt-scroll-activate="{default: false, lg: true}"
+                            data-kt-scroll-max-height="auto"
+                            data-kt-scroll-dependencies="#kt_modal_new_address_header"
+                            data-kt-scroll-wrappers="#kt_modal_new_address_scroll"
+                            data-kt-scroll-offset="300px"
+                        >
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="fs-5 fw-semibold mb-2" id="ma-tour" >Mã tour</label>
+                            <input class="form-control" placeholder=""/>
+                            <label class="fs-5 fw-semibold mb-2" id="ten-tour">Tên tour</label>
+                            <input class="form-control" placeholder=""/>
+                            <label class="fs-5 fw-semibold mb-2" id="diem-khoi-hanh">Điểm khởi hành</label>
+                            <input class="form-control" placeholder=""/> 
+                            <label class="fs-5 fw-semibold mb-2" id="diem-den">Điểm đến</label>
+                            <input class="form-control" placeholder=""/>
+                        </div>
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Giá vé người lớn</label>
+                            <input class="form-control" placeholder=""/>
+                            <div class="row g-9 mb-5" id="ngay-gio-khoihanh">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Ngày khởi hành</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Giờ khởi hành</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                            </div>
+                            <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Số vé bán</label>
+                            <input class="form-control" placeholder=""/>
+                        </div>
+                        <div class="d-flex flex-column mb-5 fv-row" id="hinhanh">
+                            <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Hình 1(card)</label>
+                            <input class="form-control" placeholder=""/>
+                            <div class="row g-9 mb-5" id="hinh-2-3">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 2</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 3</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                            </div>
+                            <div class="row g-9 mb-5">
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 4</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 5</label>
+                                    <input class="form-control" placeholder=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column mb-5 fv-row">
+                            <label class="fs-5 fw-semibold mb-2" id="phuong-tien" >Phương tiện</label>
+                            <input class="form-control" placeholder=""/>
+                            <label class="fs-5 fw-semibold mb-2" id="am-thuc">Ẩm thực</label>
+                            <input class="form-control" placeholder=""/>
+                            <label class="fs-5 fw-semibold mb-2" id="khach-san">Khách sạn</label>
+                            <input class="form-control" placeholder=""/> 
+                        </div>
+                        </div>
+                    </div>
+
+
+                    <!-- footer modal -->
+                    <div class="modal-footer flex-center">
+                        <!-- <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-light me-3">Discard</button> -->
+                        <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
+</div>
+<script src="https://preview.keenthemes.com/keen/demo1/assets/js/scripts.bundle.js"></script>
 <script defer src="/js/baidang.js"></script>

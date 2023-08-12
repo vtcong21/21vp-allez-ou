@@ -30,3 +30,51 @@ accordionItems.forEach(accordionItem => {
     }
   });
 });
+
+
+// Phần xử lý API cho nút Thêm vào giỏ hàng
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function checkLoginStatus() {
+  const token = getCookie('token'); 
+
+  if (token) {
+    return true; // Đã đăng nhập
+  } else {
+    return false; // Chưa đăng nhập
+  }
+}
+
+function showLoginModal() {
+  const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+  loginModal.show();
+}
+
+async function addNewItem(code) {
+  const loggedIn = checkLoginStatus();
+
+  if (loggedIn) {
+    const tourCode = code;
+  
+    try {
+      const response = await axios.post('../cart/addItem', { tourCode: tourCode });
+      
+      if (response.status === 200) {
+        // Hiển thị thông báo toast
+        console.log('thành công gửi post');
+        const toast = new bootstrap.Toast(document.getElementById("myToast"));
+        toast.show();
+      }
+    } catch (error) {
+      console.log('thất bại gửi post');
+      console.error("Error:", error);
+
+    }
+  } else {
+    showLoginModal();
+  }
+}

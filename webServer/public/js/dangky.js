@@ -282,6 +282,7 @@ async function sendVerificationCodeToServer() {
         console.log(response.data);
         window.location.href = response.data.redirectUrl;
     } catch (error) {
+        alert('Mã OTP Nhập Vào Không Đúng');
         console.log(error);
     }
 }

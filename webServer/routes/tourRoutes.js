@@ -39,6 +39,7 @@ router.delete('/:code'
 
 // render trang tour info
 router.get('/:code'
+    , authMiddleware.authenticateToken
     , tourController.getTourByCode);
 
 module.exports = router;
