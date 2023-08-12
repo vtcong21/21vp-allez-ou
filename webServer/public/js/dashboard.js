@@ -66,12 +66,9 @@ function changeDateToString(currentTimeString) {
 
 async function postToGetDashboard() {
   try {
-      const response = await axios.post('/dashboard/getRevenueLast7Days');
+      const response = await axios.get('/dashboard/getRevenueLast7Days');
       let dashboards = response.data.last7DaysRevenue;
-    //   dashboards = dashboards.map((dashboard) => {
-    //     const formattedDate = changeDateToString(dashboard.date);
-    //     return { ...dashboard, date: formattedDate};
-    // });
+      console.log("done");
       // Gọi hàm cập nhật biểu đồ với dữ liệu từ API
       updateChartWithData(dashboards);
   } catch (error) {
