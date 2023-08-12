@@ -123,9 +123,59 @@ const getUserPaymentHistory = async (req, res) => {
 };
 
 
+function convertGenderToVietnamese(gender) {
+  if (gender === "Male") {
+    return "Nam";
+  } else if (gender === "Female") {
+    return "Nữ";
+  } else {
+    return gender;
+  }
+}
+function changeDateToString(currentTime) {
+  var day = currentTime.getDate();
+  var month = currentTime.getMonth() + 1;
+  var year = currentTime.getFullYear();
+
+  if (day.toString().length === 1) {
+    day = "0" + day.toString();
+  }
+  if (month.toString().length === 1) {
+    month = "0" + month.toString();
+  }
+
+  return day + "/" + month + "/" + year;
+}
+
+const getOrderPage = async (req, res) => {
+  if (req.userRole === 0 || req.userRole === false) {
+    try {
+       const { itemId, tourCode } = req.body;
+       let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+
+       const tourData = await Tour.findOne({code: tourCode});
+       if (user) {
+        const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+        const formattedGender = convertGenderToVietnamese(user.gender);
+        const formattedUser = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+        res.render('dangkytour', { user: formattedUser, itemId, tourData });
+      } else {
+        res.render('dangkytour', { user: null, itemId, tourData });
+      }
+
+
+    } catch (error) {
+      console.error('Error rendering order page:', error);
+      res.status(500).render('error');
+    }
+  } else {  
+    res.status(403).render('error');
+  }
+}
 
 
 module.exports = {
+  getOrderPage,
   getUserInfo,
   getUserPaymentHistory,
   pay
