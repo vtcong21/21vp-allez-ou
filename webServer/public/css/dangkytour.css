@@ -249,3 +249,18 @@ hr:not([size]){
     padding: 0.5rem 3rem;
 
   }
+
+#xacnhanmatkhau{ 
+    font-weight: bolder;
+    padding-right:0 ;
+    padding-bottom: 0;
+}
+#xacnhanmatkhauinput{ 
+    border: 1px solid rgba(110, 106, 142, 0.30);
+    border-radius: 6px;
+}
+#dathangthanhcong{ 
+    font-weight: bolder;
+    padding-right:0 ;
+    padding-bottom: 2em;
+}

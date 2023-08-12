@@ -66,63 +66,90 @@
                         >
                         <div class="d-flex flex-column mb-5 fv-row">
                             <label class="fs-5 fw-semibold mb-2" id="ma-tour" >Mã tour</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="ma-tour-input"/>
                             <label class="fs-5 fw-semibold mb-2" id="ten-tour">Tên tour</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="ten-tour-input"/>
                             <label class="fs-5 fw-semibold mb-2" id="diem-khoi-hanh">Điểm khởi hành</label>
-                            <input class="form-control" placeholder=""/> 
+                            <input class="form-control" placeholder="" id="diem-khoi-hanh-input"/> 
                             <label class="fs-5 fw-semibold mb-2" id="diem-den">Điểm đến</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="diem-den-input"/>
                         </div>
                         <div class="d-flex flex-column mb-5 fv-row">
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Giá vé người lớn</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="gia-ve-nguoi-lon-input"/>
                             <div class="row g-9 mb-5" id="ngay-gio-khoihanh">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Ngày khởi hành</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="ngay-khoi-hanh-input"/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Giờ khởi hành</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="gio-khoi-hanh-input"/>
                                 </div>
                             </div>
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Số vé bán</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="so-ve-ban-input"/>
                         </div>
                         <div class="d-flex flex-column mb-5 fv-row" id="hinhanh">
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Hình 1(card)</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="hinh1-input"/>
                             <div class="row g-9 mb-5" id="hinh-2-3">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 2</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="hinh2-input"/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 3</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="hinh3-input"/>
                                 </div>
                             </div>
                             <div class="row g-9 mb-5">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 4</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="hinh4-input"/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 5</label>
-                                    <input class="form-control" placeholder=""/>
+                                    <input class="form-control" placeholder="" id="hinh5-input"/>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex flex-column mb-5 fv-row">
                             <label class="fs-5 fw-semibold mb-2" id="phuong-tien" >Phương tiện</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="phuong-tien-input"/>
                             <label class="fs-5 fw-semibold mb-2" id="am-thuc">Ẩm thực</label>
-                            <input class="form-control" placeholder=""/>
+                            <input class="form-control" placeholder="" id="am-thuc-input"/>
                             <label class="fs-5 fw-semibold mb-2" id="khach-san">Khách sạn</label>
-                            <input class="form-control" placeholder=""/> 
+                            <input class="form-control" placeholder="" id="khach-san-input"/> 
                         </div>
+                        <!-- <div class="d-flex flex-column fv-row" id="ngay-container">
+                            <label class="fs-5 fw-semibold mb-2" id="thongtintungngay" >Ngày 1</label>
+                            <input class="form-control" placeholder=""/>
+                            <div class="text-input" contenteditable id="ngay1-input"></div>
                         </div>
+                        <div class="d-flex flex-column fv-row" id="ngay-container">
+                            <label class="fs-5 fw-semibold mb-2" id="thongtintungngay">Ngày 2</label>
+                            <input class="form-control" placeholder=""/>
+                            <div class="text-input" contenteditable id="ngay2-input"></div>
+                        </div> -->
+                        <div id="ngay-container">
+                            <div class="d-flex flex-column fv-row" id="container-ngay-1">
+                              <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-1">Ngày 1</label>
+                              <input class="form-control" placeholder="" />
+                              <div class="text-input" contenteditable id="ngay1-input"></div>
+                            </div>
+                            <div class="d-flex flex-column fv-row" id="container-ngay-2">
+                                <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-2">Ngày 2</label>
+                                <input class="form-control" placeholder="" />
+                                <div class="text-input" contenteditable id="ngay2-input"></div>
+                              </div>
+                          </div>
+                          
+                          <div class="d-flex flex-center" id="them-ngay">
+                            <button id="button-them-ngay">Thêm Ngày</button>
+                          </div>
+                        
+
                     </div>
 
 
