@@ -41,7 +41,7 @@ function getCookie(name) {
 
 function checkLoginStatus() {
   const token = getCookie('token'); 
-  
+
   if (token) {
     console.log(token + ' true')
     return true; // Đã đăng nhập
@@ -52,17 +52,17 @@ function checkLoginStatus() {
 }
 
 function showLoginModal() {
-  const loginModal = new bootstrap.Modal(document.getElementById("exampleModal"));
+  const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
   loginModal.show();
 }
 
 async function addNewItem(code) {
   const loggedIn = checkLoginStatus();
-  
+
   if (loggedIn) {
     const token = getCookie('token');
     const codeTour = code;
-    
+
     try {
       const response = await axios.post('/addItem', { codeTour: codeTour });
       
@@ -79,6 +79,3 @@ async function addNewItem(code) {
     showLoginModal();
   }
 }
-
-
-
