@@ -44,7 +44,7 @@ router.get('/getWebPaymentHistory'
     , authMiddleware.requireAdminRole
     , adminController.getWebPaymentHistory);
 //  lấy 6 tour bán chạy nhất
-router.get('getTopSellingTours'
+router.get('/getTopSellingTours'
 , authMiddleware.authenticateToken
 , adminController.getTopSellingTours);
 // lấy tất cả order

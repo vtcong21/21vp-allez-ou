@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const Item = require('../models/item');
+const Tour = require('../models/tour');
+
 const bcrypt = require('bcrypt');
 
 
