@@ -33,7 +33,6 @@ const getHomePage = async (req, res) => {
       user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
       res.render('home', { user })
     } else {
-      // Nếu không có user, render view EJS với dữ liệu user là null
       res.render('home', { user: null });
     }
   } catch (error) {
