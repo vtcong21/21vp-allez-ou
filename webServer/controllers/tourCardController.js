@@ -3,7 +3,7 @@ const TourCard = require('../models/tourCard');
 const getAllTourCards = async (req, res) => {
   try {
     const tourCards = await TourCard.find({isHidden: false}, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
-    res.status(200).json(tourCards);
+    //res.status(200).json(tourCards);
     // render cái gì tự bỏ vô đi
     res.render('tourSearch', {tourCards});
     //--------------------------------------
@@ -55,8 +55,10 @@ const getTourCardByCode = async (req, res) => {
     if (!tourCard) {
       return res.status(404).json({ message: 'Tour card not found' });
     }
-    res.status(200).json(tourCard);
-    
+    //res.status(200).json(tourCard);
+    // render cái gì tự bỏ vô đi
+    res.render('tourSearch', {tourCard});
+    //--------------------------------------
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
