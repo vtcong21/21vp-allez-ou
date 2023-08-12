@@ -46,8 +46,8 @@
 }
 
 .top-tour img{
-    width: 50px;
-    height: 29px;
+    width: 60px;
+    height: 40px;
     object-fit: cover;
 }
 
@@ -81,4 +81,11 @@
     background: rgba(79, 108, 255, 0.50);
     width: 25px;
     height: 25px;
+}
+
+.truncate-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; 
 }

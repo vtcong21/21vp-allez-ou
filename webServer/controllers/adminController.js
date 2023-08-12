@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Item = require('../models/item');
+const Tour = require('../models/tour')
 const bcrypt = require('bcrypt');
 
 
@@ -166,10 +167,10 @@ const getWebPaymentHistory = async (req, res) => {
 
 const getTopSellingTours = async (req, res) => {
     try {
-        const tours = await Tour.find()
-            .sort({ $expr: { $subtract: ['$slots', '$remainSlots'] } })
+        const tours = await Tour.find({ isHidden: false })
+            .sort({ slots: -1, remainSlots: -1 })
             .limit(6);
-
+    
         res.status(200).json(tours);
     } catch (error) {
         console.error('Error fetching top selling tours:', error);

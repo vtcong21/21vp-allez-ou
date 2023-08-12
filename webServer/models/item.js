@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
     tourCode: { type: String, required: true },
+    representer: {
+        name: { type: String, required: true },
+        email: { type: String, required: true },
+        phoneNumber: { type: String, required: true },
+        address: { type: String, required: true }
+    },
     tickets: [
         {
             type: { type: String, required: true },

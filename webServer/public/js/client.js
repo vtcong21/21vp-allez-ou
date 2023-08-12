@@ -19,8 +19,9 @@ async function getAllClient() {
             totalItems = clients.length;
             clients = clients.map((client) => {
                 const formattedDateCreate = changeDateToString(client.dateCreate);
+                const formattedDateOfBirth = changeDateToString(client.dateOfBirth);
                 const formattedGender = convertGenderToVietnamese(client.gender)
-                return { ...client, dateCreate: formattedDateCreate, gender:formattedGender };
+                return { ...client, dateCreate: formattedDateCreate, gender:formattedGender, dateOfBirth:formattedDateOfBirth };
             });
             displayClientList(clients);
             displayPagination(totalItems);
@@ -72,7 +73,7 @@ function makeClientRow(client) {
             data-fullName= "${client.fullName}" 
             data-id="${client._id}" 
             data-gender="${client.gender}" 
-            data-date="${client.dateCreate}"
+            data-date="${client.dateOfBirth}"
             data-phone="${client.phoneNumber}" 
             data-email="${client.email}" 
             onclick = "showModalInfo(event)"/></a>

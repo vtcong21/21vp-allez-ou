@@ -1,48 +1,44 @@
 // Hàm để cập nhật dữ liệu biểu đồ
 function updateChartWithData(data) {
-  var ctx = document.getElementById('myChart').getContext('2d');
-  
+  var ctx = document.getElementById("myChart").getContext("2d");
+
   var myChart = new Chart(ctx, {
-      type: 'line',
+      type: "line",
       data: {
           labels: [
-            changeDateToString(data[0].date),
-            changeDateToString(data[1].date),
-            changeDateToString(data[2].date),
-            changeDateToString(data[3].date),
-            changeDateToString(data[4].date),
-            changeDateToString(data[5].date),
-            changeDateToString(data[6].date),
+              changeDateToString(data[0].date),
+              changeDateToString(data[1].date),
+              changeDateToString(data[2].date),
+              changeDateToString(data[3].date),
+              changeDateToString(data[4].date),
+              changeDateToString(data[5].date),
+              changeDateToString(data[6].date),
           ],
-          datasets: [{
-              data: [
-                data[0].revenue,
-                data[1].revenue,
-                data[2].revenue,
-                data[3].revenue,
-                data[4].revenue,
-                data[5].revenue,
-                data[6].revenue,
-              ],
-              lineTension: 0,
-              backgroundColor: 'transparent',
-              borderColor: '#007bff',
-              borderWidth: 4,
-              pointBackgroundColor: '#007bff'
-          }]
+          datasets: [
+              {
+                  data: [data[0].revenue, data[1].revenue, data[2].revenue, data[3].revenue, data[4].revenue, data[5].revenue, data[6].revenue],
+                  lineTension: 0,
+                  backgroundColor: "transparent",
+                  borderColor: "#007bff",
+                  borderWidth: 4,
+                  pointBackgroundColor: "#007bff",
+              },
+          ],
       },
       options: {
           scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: false,
-                  }
-              }]
+              yAxes: [
+                  {
+                      ticks: {
+                          beginAtZero: false,
+                      },
+                  },
+              ],
           },
           legend: {
-              display: false
-          }
-      }
+              display: false,
+          },
+      },
   });
 }
 
@@ -66,7 +62,7 @@ function changeDateToString(currentTimeString) {
 
 async function postToGetDashboard() {
   try {
-      const response = await axios.get('/dashboard/getRevenueLast7Days');
+      const response = await axios.get("/dashboard/getRevenueLast7Days");
       let dashboards = response.data.last7DaysRevenue;
       console.log("done");
       // Gọi hàm cập nhật biểu đồ với dữ liệu từ API
@@ -81,37 +77,69 @@ postToGetDashboard();
 
 // Hiển thị doanh thu tháng này
 
-const revenueThisMonth = document.getElementById('revenue-this-month');
-const revenueProfit = document.getElementById('revenue-profit')
+const revenueThisMonth = document.getElementById("revenue-this-month");
+const revenueProfit = document.getElementById("revenue-profit");
 
 async function getRevnueProfit() {
-    try {
-      const response = await axios.get('/dashboard/getRevenueAndProfitPercentageThisMonth');
-  
-      if (response.status === 200) {
-        displayProfit(response.data);
-      } else {
-        throw new Error('Lỗi khi gửi yêu cầu đến API');
-      }
-    } catch (error) {
-      console.error('Đã xảy ra lỗi:', error.message);
-    }
-  }
+  try {
+      const response = await axios.get("/dashboard/getRevenueAndProfitPercentageThisMonth");
 
-  function displayProfit(thisMonth){
-    revenueThisMonth.textContent = thisMonth.currentMonthRevenue.toLocaleString() + " VNĐ";
-    const profit = thisMonth.profitPercentage;
-    if(profit < 0)
-    {
-        revenueProfit.textContent = "giảm " + -parseFloat(profit.toFixed(2)) + " %";
-        revenueProfit.classList.add('decrease');
-    }
-    else if(profit > 0){
-        revenueProfit.textContent = "tăng " + parseFloat(profit.toFixed(2)) + " %";
-        revenueProfit.classList.add('increase');
-    }
-    else{
-        revenueProfit.textContent = "bằng ";
-    }
+      if (response.status === 200) {
+          displayProfit(response.data);
+      } else {
+          throw new Error("Lỗi khi gửi yêu cầu đến API");
+      }
+  } catch (error) {
+      console.error("Đã xảy ra lỗi:", error.message);
   }
-  getRevnueProfit();
+}
+
+function displayProfit(thisMonth) {
+  revenueThisMonth.textContent = thisMonth.currentMonthRevenue.toLocaleString() + " VNĐ";
+  const profit = thisMonth.profitPercentage;
+  if (profit < 0) {
+      revenueProfit.textContent = "giảm " + -parseFloat(profit.toFixed(2)) + " %";
+      revenueProfit.classList.add("decrease");
+  } else if (profit > 0) {
+      revenueProfit.textContent = "tăng " + parseFloat(profit.toFixed(2)) + " %";
+      revenueProfit.classList.add("increase");
+  } else {
+      revenueProfit.textContent = "bằng ";
+  }
+}
+getRevnueProfit();
+
+// Top tour bán chạy nhất
+async function getBestSellingTour() {
+  try {
+      const response = await axios.get("/admin/getTopSellingTours");
+
+      if (response.status === 200) {
+          displayBestSellingTour(response.data);
+      } else {
+          throw new Error("Lỗi khi gửi yêu cầu đến API");
+      }
+  } catch (error) {
+      console.error("Đã xảy ra lỗi:", error.message);
+  }
+}
+
+function displayBestSellingTour(tours) {
+  const topSellingTourContainer = document.getElementById("topSellingTour-container");
+  topSellingTourContainer.innerHTML = "";
+  for (let tour of tours) {
+      topSellingTourContainer.insertAdjacentHTML("beforeend", makeBestTourRow(tour));
+  }
+}
+function makeBestTourRow(tour) {
+  return `
+<div class="d-flex justify-content-between top-tour">
+<img src="${tour.cardImgUrl}">
+<a href="/tours/${tour.code}">${tour.name}</a>
+<p>${tour.slots - tour.remainSlots} vé</p>
+</div>
+<div class="grey-line"></div>
+`;
+}
+
+getBestSellingTour();
