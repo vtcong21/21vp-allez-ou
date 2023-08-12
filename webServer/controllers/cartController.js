@@ -111,7 +111,7 @@ const deleteItem = async (req, res) => {
         user.cart = user.cart.filter(item => !item._id.equals(itemId));
         await user.save();
         res.status(200).json({ message: 'Item removed from cart successfully' });
-        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
