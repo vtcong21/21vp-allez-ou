@@ -26,6 +26,7 @@ body{
 
 .body__container{
     margin: 0 13.7rem;
+    margin-top: 4em;
     margin-bottom: 5em;
 }
 
@@ -105,7 +106,7 @@ body{
 .tour-table-price{
     background: rgba(255, 255, 255, 0.9);
     border-radius: 22.5px;
-    padding: 3em 4em;
+    padding: 3em 3em;
 }
 .tour-table-price__title{
     text-align: center;
@@ -214,7 +215,7 @@ body{
     font-style: normal;
     font-weight: 800;
     font-size: 1.8rem;
-    line-height: 1.9rem;
+    line-height: 2.2rem;
     text-decoration-line: underline;
     color: #000000;
 }
@@ -244,7 +245,7 @@ body{
 .tour-banner{
     background: rgba(255, 255, 255, 0.9);
     border-radius: 22.5px;
-    padding: 3em 4em;
+    padding: 3em 3em;
 }
 .tour-icon img{
     width: 7rem;
@@ -345,7 +346,8 @@ body{
 }
 @media only screen and (max-width: 576px) {
     .body__container{
-        margin: 0 1rem
+        margin: 0 1rem;
+        margin-top: 4em;
     }
     .info__container{
         border-radius: 40px;

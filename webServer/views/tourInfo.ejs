@@ -9,15 +9,15 @@
         <!--Navbar-->
         <%- include('partials/navbar') %>
         <!--body-->
-        <div class="body__container mt-5">
-            <div class="link-text">
+        <div class="body__container">
+            <!-- <div class="link-text">
                 <p>
                     <a href="#"><em>Du lịch</em></a> / <a href="#"><em>Du lịch miền Bắc</em></a> /
                     <a href="#">
                         <em><%= tour.name %></em>
                     </a>
                 </p>
-            </div>
+            </div> -->
             <div class="row g-5 mt-1">
                 <div class="col-sm-8 info__container">
                     <div class="container">
@@ -180,7 +180,7 @@
                                     <p class="tour-table-price__type">Trẻ em</p>
                                     <p class="tour-table-price__age">(Từ 5-11 tuổi)</p>
                                 </div>
-                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.babyDiscount)).toLocaleString()%>đ</p>
+                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.teenDiscount)).toLocaleString()%>đ</p>
                             </div>
                             <div class="d-flex justify-content-between mt-4">
                                 <div class="d-flex flex-column">
@@ -194,7 +194,7 @@
                                     <p class="tour-table-price__type">Em bé</p>
                                     <p class="tour-table-price__age">(dưới 2 tuổi)</p>
                                 </div>
-                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.teenDiscount)).toLocaleString()%>đ</p>
+                                <p class="tour-table-price__price"><%-(tour.price * (1 - tour.babyDiscount)).toLocaleString()%>đ</p>
                             </div>
                         </div>
                         <div class="d-flex mt-4">
