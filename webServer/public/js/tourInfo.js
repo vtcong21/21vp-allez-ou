@@ -54,6 +54,12 @@ function showLoginModal() {
   loginModal.show();
 }
 
+function showToast() {
+  const toastLiveExample = document.getElementById('liveToast')
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastBootstrap.show()
+}
+
 async function addNewItem(code) {
   const loggedIn = checkLoginStatus();
 
@@ -66,8 +72,7 @@ async function addNewItem(code) {
       if (response.status === 200) {
         // Hiển thị thông báo toast
         console.log('thành công gửi post');
-        const toast = new bootstrap.Toast(document.getElementById("myToast"));
-        toast.show();
+        showToast();
       }
     } catch (error) {
       console.log('thất bại gửi post');

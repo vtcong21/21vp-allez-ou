@@ -104,28 +104,14 @@ const deleteItem = async (req, res) => {
         const userId = req.userId;
         const { itemId } = req.body;
         console.log(userId);
-        // const userCart = await User.findById(userId).populate('cart');
-        // if (!userCart) {
-        //     return res.status(404).send('There are no products in the shopping cart');
-        // }
-
-
-        // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
-        // const itemIndex = user.cart.findIndex(item => item.tourCode.equals(itemId));
-        // if (itemIndex === -1) {
-        //     return res.status(404).json({ message: 'Item not found in cart' });
-        // }
-
-
+      
         const user = await User.findById(userId);
+
         // Tìm và loại bỏ phần tử có _id trùng với itemId
         user.cart = user.cart.filter(item => !item._id.equals(itemId));
-
-
-        // user.cart.splice(itemIndex, 1);
         await user.save();
-
         res.status(200).json({ message: 'Item removed from cart successfully' });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });

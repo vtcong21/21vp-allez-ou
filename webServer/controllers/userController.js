@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Item = require('../models/item');
 const Tour = require('../models/tour');
+const mailController = require('./mailController');
 const axios = require('axios');
 
 
@@ -20,14 +21,15 @@ const getUserInfo = async (req, res) => {
   }
 };
 
-  const createAnOrder = async (cartItem, user, item) => {
+const createAnOrder = async (cartItem, user, item) => {
   cartItem.isPaid = true;
   user.cart.pull(cartItem._id);
   user.orders.push(cartItem._id);
+  cartItem.representer = item.representer;
   cartItem.tickets = item.tickets;
   cartItem.totalPrice = item.totalPrice;
   cartItem.orderDate = item.orderDate;
-  cartItem.status = 'Shipping';
+  cartItem.status = 'Success';
   cartItem.shippingAddress = item.shippingAddress;
   cartItem.orderDate = new Date();
   await cartItem.save();
@@ -50,7 +52,7 @@ const pay = async (req, res) => {
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
     }
-    
+
     const isCartItemInCart = user.cart.some(cartItemId => cartItemId.toString() === cartItem._id.toString());
     if (!isCartItemInCart) {
       return res.status(400).json({ error: 'Item not found in cart' });
@@ -76,7 +78,9 @@ const pay = async (req, res) => {
     if (response.status === 400) {
       return res.status(400).json({ error: 'Insufficient balance' });
     } else if (response.data.success) {
+      // tạo order -> gửi mail -> trừ remain slots
       await createAnOrder(cartItem, user, item);
+      await mailController.sendConfirmationEmail(user, cartItem, tour);
       tour.remainSlots -= item.tickets.length;
       return res.json({ success: true });
     } else {
