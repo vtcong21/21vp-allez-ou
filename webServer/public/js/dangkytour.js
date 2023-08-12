@@ -142,6 +142,38 @@ document.addEventListener("DOMContentLoaded", function () {
     updateQuantityDisplay(0);
     updateTotalQuantityDisplay();
 
+    function updateQuantityDisplay(index) {
+        var quantity = document.querySelector(`.quantity${index === 0 ? '' : index + 1}`);
+        var quantityDisplay = document.querySelector(`.quantity-display${index === 0 ? '' : index + 1}`);
+        quantity.textContent = quantities[index];
+        quantityDisplay.textContent = Math.round(quantities[index] * prices[index]).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        updateTotalDisplay();
+        updateTotalQuantityDisplay();
+
+        
+    }
+    function updateTotalQuantityDisplay() {
+        var totalQuantity = quantities.reduce((sum, quantity) => sum + quantity, 0);
+        tonghanhkhachDisplay.textContent = totalQuantity + " hành khách";
+    }
+    function minusQuantity(index) {
+        if (quantities[index] > 0) {
+            quantities[index]--;
+            updateQuantityDisplay(index);
+            if (quantities[index] >= 1) {
+                removeInputs(index);
+            }
+        }
+    }
+
+    
+    function updateTotalDisplay() {
+        var total = 0;
+        for (let i = 0; i < quantities.length; i++) {
+            total += quantities[i] * prices[i];
+        }
+totalDisplay.textContent = total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+    }
 
 
     // 4 cái button minus, 4 cái button plus, lặp từng cái để tính 
@@ -157,26 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
             plusQuantity(index);
             updateInformationGroup(index);
         });
-    }
-    // mấy hàm linh tinh để tính toán---------------------------------------------------------------
-    function updateTotalDisplay() {
-        var total = 0;
-        for (let i = 0; i < quantities.length; i++) {
-            total += quantities[i] * prices[i];
-        }
-totalDisplay.textContent = total.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-    }
-
-    function minusQuantity(index) {
-        if (quantities[index] > 0) {
-            quantities[index]--;
-            updateQuantityDisplay(index);
-            if (quantities[index] >= 1) {
-                removeInputs(index);
-            }
-        }
-    }
-
+    }    
     function plusQuantity(index) {
         if (quantities.reduce((sum, quantity) => sum + quantity, 0) < maxQuantity) {
             quantities[index]++;
@@ -186,22 +199,6 @@ totalDisplay.textContent = total.toLocaleString('vi-VN', { style: 'currency', cu
             }
         }
     }
-
-    function updateQuantityDisplay(index) {
-        var quantity = document.querySelector(`.quantity${index === 0 ? '' : index + 1}`);
-        var quantityDisplay = document.querySelector(`.quantity-display${index === 0 ? '' : index + 1}`);
-        quantity.textContent = quantities[index];
-        quantityDisplay.textContent = Math.round(quantities[index] * prices[index]).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        updateTotalDisplay();
-        updateTotalQuantityDisplay();
-
-        
-    }
-    function updateTotalQuantityDisplay() {
-        var totalQuantity = quantities.reduce((sum, quantity) => sum + quantity, 0);
-        tonghanhkhachDisplay.textContent = totalQuantity + " hành khách";
-    }
-
     function addInputs(index) {
         var firstGroup = document.querySelector(`.first-group${(index + 1) * 2}`);
         if (!firstGroup) {
@@ -266,6 +263,31 @@ totalDisplay.textContent = total.toLocaleString('vi-VN', { style: 'currency', cu
             informationGroup.style.display = "block";
         }
     }
+    function getFormData() {
+        var formData = [];
+        
+        for (let index = 0; index < 4; index++) {
+          var nameInput = document.getElementById(`ho-ten-${index}`);
+          var genderInput = document.getElementById(`gender-${index}`);
+          var dobInput = document.getElementById(`ngay-sinh-${index}`);
+          
+          if (nameInput && genderInput && dobInput) {
+            var data = {
+              hoTen: nameInput.value,
+              gioiTinh: genderInput.value,
+              ngaySinh: dobInput.value
+            };
+            
+            formData.push(data);
+          }
+        }
+        
+        return formData;
+      }
+      
+      // Sử dụng đoạn mã để lấy dữ liệu từ các ô input
+      var formData = getFormData();
+      console.log(formData);
 });
 
 
