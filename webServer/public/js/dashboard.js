@@ -66,12 +66,9 @@ function changeDateToString(currentTimeString) {
 
 async function postToGetDashboard() {
   try {
-      const response = await axios.post('/dashboard/getRevenueLast7Days');
+      const response = await axios.get('/dashboard/getRevenueLast7Days');
       let dashboards = response.data.last7DaysRevenue;
-    //   dashboards = dashboards.map((dashboard) => {
-    //     const formattedDate = changeDateToString(dashboard.date);
-    //     return { ...dashboard, date: formattedDate};
-    // });
+      console.log("done");
       // Gọi hàm cập nhật biểu đồ với dữ liệu từ API
       updateChartWithData(dashboards);
   } catch (error) {
@@ -81,3 +78,40 @@ async function postToGetDashboard() {
 
 // Gọi hàm để lấy dữ liệu từ API và cập nhật biểu đồ
 postToGetDashboard();
+
+// Hiển thị doanh thu tháng này
+
+const revenueThisMonth = document.getElementById('revenue-this-month');
+const revenueProfit = document.getElementById('revenue-profit')
+
+async function getRevnueProfit() {
+    try {
+      const response = await axios.get('/dashboard/getRevenueAndProfitPercentageThisMonth');
+  
+      if (response.status === 200) {
+        displayProfit(response.data);
+      } else {
+        throw new Error('Lỗi khi gửi yêu cầu đến API');
+      }
+    } catch (error) {
+      console.error('Đã xảy ra lỗi:', error.message);
+    }
+  }
+
+  function displayProfit(thisMonth){
+    revenueThisMonth.textContent = thisMonth.currentMonthRevenue.toLocaleString() + " VNĐ";
+    const profit = thisMonth.profitPercentage;
+    if(profit < 0)
+    {
+        revenueProfit.textContent = "giảm " + -parseFloat(profit.toFixed(2)) + " %";
+        revenueProfit.classList.add('decrease');
+    }
+    else if(profit > 0){
+        revenueProfit.textContent = "tăng " + parseFloat(profit.toFixed(2)) + " %";
+        revenueProfit.classList.add('increase');
+    }
+    else{
+        revenueProfit.textContent = "bằng ";
+    }
+  }
+  getRevnueProfit();

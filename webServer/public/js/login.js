@@ -10,9 +10,9 @@ async function login() {
       email: email,
       password: password
     });
-    if(response.status===200){
-        const redirectUrl = response.data.redirectUrl;
-        window.location=redirectUrl;
+    if (response.status === 200) {
+      const redirectUrl = response.data.redirectUrl;
+      window.location = redirectUrl;
     }
   } catch (error) {
     console.error('Đã xảy ra lỗi:', error.message);
@@ -25,4 +25,3 @@ loginButton.addEventListener('click', function (event) {
   event.preventDefault();
   login();
 });
-

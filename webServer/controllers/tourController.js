@@ -2,14 +2,38 @@ const Tour = require('../models/tour');
 const User = require('../models/user');
 const axios = require('axios');
 
+function changeDateToString(currentTime) {
+  var day = currentTime.getDate();
+  var month = currentTime.getMonth() + 1;
+  var year = currentTime.getFullYear();
+
+  if (day.toString().length === 1) {
+    day = "0" + day.toString();
+  }
+  if (month.toString().length === 1) {
+    month = "0" + month.toString();
+  }
+
+  return day + "/" + month + "/" + year;
+}
+
+function convertGenderToVietnamese(gender) {
+  if (gender === "Male") {
+      return "Nam";
+  } else if (gender === "Female") {
+      return "Nữ";
+  } else {
+      return gender;
+  }
+}
 
 // trước hết trang này lấy ra toàn bộ tour card
 const getTourSearchPage = async (req, res) => {
   try {
-    const response = await axios.get('/tourCards'); 
+    const response = await axios.get('/tourCards');
     const listTravel = response.data;
     const contentPerPage = 10;
-    for(var i = 0; i < listTravel.length; i++) {
+    for (var i = 0; i < listTravel.length; i++) {
       listTravel[i].priceformat = listTravel[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "đ";
     }
     const currentArea = 'north';
@@ -20,7 +44,7 @@ const getTourSearchPage = async (req, res) => {
       limitPage: limitPage,
       listTravel: listTravel,
       contentPerPage: contentPerPage
-  });
+    });
   } catch (error) {
     console.error('Error getting user information:', error);
     res.status(500).send('Internal Server Error');
@@ -28,10 +52,9 @@ const getTourSearchPage = async (req, res) => {
 };
 
 
-
 const getAllTours = async (req, res) => {
   try {
-    const tours = await Tour.find({isHidden: false});
+    const tours = await Tour.find({ isHidden: false });
     res.status(200).json(tours);
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong' });
@@ -40,7 +63,7 @@ const getAllTours = async (req, res) => {
 
 const getHiddenTours = async (req, res) => {
   try {
-    const tours = await Tour.find({isHidden: true});
+    const tours = await Tour.find({ isHidden: true });
     res.status(200).json(tours);
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong' });
@@ -87,7 +110,7 @@ const searchTours = async (req, res) => {
       maxPrice,
     } = req.query;
 
-    const query = Tour.find({isHidden: false});
+    const query = Tour.find({ isHidden: false });
 
     if (startPlaceCode) {
       query.where('startPlace.code').equals(startPlaceCode);
@@ -139,34 +162,19 @@ const getTourInfoData = async (req, res) => {
 const getTourByCode = async (req, res) => {
   try {
     const { code } = req.params;
-    const user = await User.findById(req.userId).select('fullName email dateOfBirth');
+    let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
     const tour = await Tour.findOne({ code });
     if (!tour) {
       return res.status(404).json({ message: 'Tour not found' });
     }
     if (user) {
-      // Kiểm tra dateOfBirth có giá trị hợp lệ không
-      if (user.dateOfBirth instanceof Date && !isNaN(user.dateOfBirth)) {
-        // Chuyển đổi thành chuỗi ngày/tháng/năm
-        const dateOfBirth = user.dateOfBirth.toISOString().slice(0, 10);
-        // Render view EJS và truyền dữ liệu vào
-        res.render('tourInfo', { 
-          tour,
-          user: { 
-            fullName: user.fullName,
-            email: user.email,
-            dateOfBirth,
-            phoneNumber: user.phoneNumber,
-            gender: user.gender
-          }
-        });
-      } else {
-        // Gán giá trị mặc định nếu dateOfBirth không hợp lệ
-        const defaultDateOfBirth = '01/01/2000'; // Hoặc giá trị mặc định khác bạn muốn
-        res.render('tourInfo', { tour ,user: { ...user, dateOfBirth: defaultDateOfBirth } });
-      }
+      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+      const formattedGender = convertGenderToVietnamese(user.gender);
+      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+      res.render('tourInfo', { tour, user })
     } else {
       // Nếu không có user, render view EJS với dữ liệu user là null
+
       res.render('tourInfo', { tour, user: null });
     }
     // res.render('tourInfo', { tour, user });

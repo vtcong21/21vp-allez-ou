@@ -211,7 +211,7 @@ function makeUserRow(user) {
             </td>
             <td>
                 <div class="d-flex justify-content-end my-1">
-                    <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="${user._id}" onclick="getUserId(event)"><img src="img/admin/admins-role/trash-bin.png" /></a>
+                    <a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-id="${user._id}" onclick="getUserId(event)"><img src="/img/admin/admins-role/trash-bin.png" /></a>
                 </div>
             </td>
         </tr>
