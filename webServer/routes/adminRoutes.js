@@ -48,8 +48,13 @@ router.get('getTopSellingTours'
 , authMiddleware.authenticateToken
 , adminController.getTopSellingTours);
 // lấy tất cả order
-router.get('getAllOrders'
+router.get('/orders'
 , authMiddleware.authenticateToken
 , adminController.getAllOrders);
+// search order theo tour code
+router.get('/orders/search'
+, authMiddleware.authenticateToken
+, adminController.searchOrdersByTourCode);
+
 
 module.exports = router;

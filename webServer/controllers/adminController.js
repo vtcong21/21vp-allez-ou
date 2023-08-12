@@ -187,6 +187,20 @@ const getAllOrders = async (req, res) =>{
       }
 }
 
+
+const searchOrdersByTourCode = async (req, res) => {
+    try {
+      const { tourCode } = req.query;
+  
+      const orders = await Item.find({ isPaid: true, 'tourCode': tourCode });
+  
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error('Error searching orders by tour code:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+
 module.exports = {
     getAdminList,
     getClientList,
@@ -199,5 +213,6 @@ module.exports = {
     renderOrderPage,
     renderTourPage,
     renderClientPage,
-    renderAdminRolePage
+    renderAdminRolePage,
+    searchOrdersByTourCode
 }
