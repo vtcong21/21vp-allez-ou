@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Item = require('../models/item');
 const Tour = require('../models/tour');
+const mailController = require('./mailController');
 const axios = require('axios');
 
 
@@ -77,7 +78,9 @@ const pay = async (req, res) => {
     if (response.status === 400) {
       return res.status(400).json({ error: 'Insufficient balance' });
     } else if (response.data.success) {
+      // tạo order -> gửi mail -> trừ remain slots
       await createAnOrder(cartItem, user, item);
+      await mailController.sendConfirmationEmail(user, cartItem, tour);
       tour.remainSlots -= item.tickets.length;
       return res.json({ success: true });
     } else {
