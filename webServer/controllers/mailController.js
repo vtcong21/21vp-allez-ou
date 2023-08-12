@@ -53,4 +53,5 @@ const sendConfirmationEmail = async (user, item, tour) => {
 
 
 
+
 module.exports = { sendVerificationEmail, sendConfirmationEmail };
