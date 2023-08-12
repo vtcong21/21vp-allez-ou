@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Item = require('../models/item');
+const Tour = require('../models/tour');
 const axios = require('axios');
 
 
@@ -54,6 +55,16 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Item not found in cart' });
     }
 
+    const tour = await Tour.findOne({ code: cartItem.tourCode });
+
+    if (!tour) {
+      return res.status(404).json({ error: 'Tour not found' });
+    }
+
+    if (item.tickets.length > tour.remainSlots) {
+      return res.status(400).json({ error: 'Not enough available slots for the tickets' });
+    }
+
     const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
       senderAccountId: userId,
       recipientAccountId: webPaymentAccountId,
@@ -65,6 +76,7 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Insufficient balance' });
     } else if (response.data.success) {
       await createAnOrder(cartItem, user, item);
+      tour.remainSlots -= item.tickets.length;
       return res.json({ success: true });
     } else {
       return res.status(500).json({ error: 'Payment failed' });

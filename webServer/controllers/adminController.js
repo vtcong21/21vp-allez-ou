@@ -163,16 +163,56 @@ const getWebPaymentHistory = async (req, res) => {
     }
 }
 
+const getTopSellingTours = async (req, res) => {
+    try {
+        const tours = await Tour.find()
+            .sort({ $expr: { $subtract: ['$slots', '$remainSlots'] } })
+            .limit(6);
+
+        res.status(200).json(tours);
+    } catch (error) {
+        console.error('Error fetching top selling tours:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+const getAllOrders = async (req, res) =>{
+    try {
+        const orders = await Item.find({ isPaid: true });
+    
+        res.status(200).json(orders);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
+}
+
+
+const searchOrdersByTourCode = async (req, res) => {
+    try {
+      const { tourCode } = req.query;
+  
+      const orders = await Item.find({ isPaid: true, 'tourCode': tourCode });
+  
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error('Error searching orders by tour code:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
 
 module.exports = {
     getAdminList,
     getClientList,
+    getTopSellingTours,
     getWebPaymentHistory,
+    getAllOrders,
     createAdminAccount,
     deleteAdminAccount,
     renderDashboardPage,
     renderOrderPage,
     renderTourPage,
     renderClientPage,
-    renderAdminRolePage
+    renderAdminRolePage,
+    searchOrdersByTourCode
 }
