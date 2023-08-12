@@ -72,12 +72,13 @@ const getCartPage = async (req, res) => {
 
             return {
                 imgURL: tour.cardImgUrl,
+                code: item.tourCode,
                 name: tour.name,
                 date: tour.date,
                 price: tour.price,
+                itemId: item._id,
             };
         }));
-
 
         let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
 
@@ -85,9 +86,11 @@ const getCartPage = async (req, res) => {
           const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
           const formattedGender = convertGenderToVietnamese(user.gender);
           user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+          
+          // có user, render trang cart
           res.render('cart', { user, cartItems });
         } else {
-          // Nếu không có user, render view EJS với dữ liệu user là null
+          // Nếu không có user, render trang home
           res.render('home', { user: null });
         }
     } catch (error) {
@@ -96,31 +99,38 @@ const getCartPage = async (req, res) => {
     }
 };
 
-// const deleteItem = async (req, res) => {
-//     try {
-//         const userId = req.userId;
-//         const { itemId } = req.body;
+const deleteItem = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { itemId } = req.body;
+        console.log(userId);
+        // const userCart = await User.findById(userId).populate('cart');
+        // if (!userCart) {
+        //     return res.status(404).send('There are no products in the shopping cart');
+        // }
 
-//         const user = await User.findById(userId);
-//         if (!user) {
-//             return res.status(404).json({ message: 'User not found' });
-//         }
 
-//         // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
-//         const itemIndex = user.cart.findIndex(item => item.tourCode.equals(itemId));
-//         if (itemIndex === -1) {
-//             return res.status(404).json({ message: 'Item not found in cart' });
-//         }
+        // Kiểm tra phtử trong cart có trùng id với id ban đầu ko
+        // const itemIndex = user.cart.findIndex(item => item.tourCode.equals(itemId));
+        // if (itemIndex === -1) {
+        //     return res.status(404).json({ message: 'Item not found in cart' });
+        // }
 
-//         user.cart.splice(itemIndex, 1);
-//         await user.save();
 
-//         res.status(200).json({ message: 'Item removed from cart successfully' });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
+        const user = await User.findById(userId);
+        // Tìm và loại bỏ phần tử có _id trùng với itemId
+        user.cart = user.cart.filter(item => !item._id.equals(itemId));
+
+
+        // user.cart.splice(itemIndex, 1);
+        await user.save();
+
+        res.status(200).json({ message: 'Item removed from cart successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 
 // const getOrderPage = async (req, res) => {
 //     try {
@@ -188,7 +198,7 @@ const getCartPage = async (req, res) => {
 module.exports = {
     addNewItem,
     getCartPage,
-    // deleteItem,
+    deleteItem,
     // getOrderPage,
     // getOrderDetails,
     // cancelOrder,

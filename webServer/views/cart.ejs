@@ -65,7 +65,7 @@
                         <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center">
                             <div class="d-sm-flex flex-column align-items-center">
                                 <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" onclick="bookTourPage()">Đặt ngay</button>
-                                <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" type="button" onclick="deleteItem()">
+                                <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" type="button" onclick="deleteItem('<%- cartItems[i].itemId %>')">
                                     <i class="ci-close-circle me-2"></i>
                                     <span class="fs-sm">Xóa</span>
                                 </button>
@@ -80,6 +80,6 @@
 
         <!--Footer-->
         <%- include('partials/footer') %>
-        
+        <script defer src="/js/cart.js"></script>
     </body>
 </html>
