@@ -1,8 +1,20 @@
 :root {
     font-size: 62.5% !important;
 }
+.body{ 
+    color: #6E6A8E !important;
+
+}
 .content-page{
     padding: 3.375em 2.5em;
+}
+.container-fluid{ 
+    color: #6E6A8E !important;
+
+}
+.name-tour{ 
+    color: #6E6A8E !important;
+
 }
 h3{ 
     font-weight: bold;
@@ -55,6 +67,7 @@ line-height: normal;
   }
   .pageContainer{ 
     border-radius: 12px;
+ 
   }
 .card{ 
     border-radius: 12px;
@@ -62,14 +75,13 @@ line-height: normal;
     border-bottom-right-radius: 12px !important;
 } 
 .card-body{ 
-    padding-top: 0;
+    padding-top: 0 !important;
 }
 .list-group-item{ 
     border-radius: 12px !important;
 }
 .name-tour{ 
-    font-size: 1.08rem;
-    color: black;
+    font-size: 1.2rem !important ;
     font-weight: bolder;
 }
 .p-3{ 
@@ -190,3 +202,45 @@ line-height: normal;
 .nav-link{
     padding-bottom: 1rem !important;
 }
+#tao-tour{ 
+    background-color: #F14868; 
+    color: white; 
+    border-radius: 10px;
+    border: none; 
+    padding: 0.5rem 1rem; 
+    font-weight: bold;
+} 
+#tao-tour:active{ 
+    background-color: white; 
+    color: #F14868;
+}
+.progress-bar{
+    background: #4F6CFF !important;
+
+}
+#loading-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  #loading-spinner {
+    display: none;
+  }
+  
+  #loading-spinner.show {
+    display: block;
+  }
+  

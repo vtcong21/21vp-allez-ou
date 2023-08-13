@@ -1,4 +1,6 @@
-
+// Trước khi gọi API
+// Trước khi gọi API
+document.getElementById("loading-spinner").classList.add("show");
 // Lấy các phần tử tab
 const activeTab = document.getElementById('ex1-tab-1');
 const endedTab = document.getElementById('ex1-tab-2');
@@ -37,6 +39,7 @@ let currentPage = 1;
 //         console.log(error);
 //     }
 // } 
+
 async function fetchTourInformation() {
     try {
         const response = await axios.get('/tours');
@@ -65,12 +68,17 @@ function renderTourPage(page) {
     const endIndex = startIndex + itemsPerPage;
 
     // Lấy danh sách tour trên trang hiện tại
-    let currentTourDataList;
-    if (hiddenTourDataList !== undefined) {
-        currentTourDataList = hiddenTourDataList.slice(startIndex, endIndex);
-    } else {
-        currentTourDataList = tourDataList.slice(startIndex, endIndex);
-    }                                                                                                                                                               
+
+    // let currentTourDataList;
+    // if (hiddenTourDataList !== undefined) {
+    //     currentTourDataList = hiddenTourDataList.slice(startIndex, endIndex);
+    // } else {
+    //     currentTourDataList = tourDataList.slice(startIndex, endIndex);
+    // }              
+    //Để tạm cái này để render ra tours. Chưa sửa mongo để test hiddenTours. 
+
+    let currentTourDataList = tourDataList||hiddenTourDataList ;
+    currentTourDataList = currentTourDataList.slice(startIndex, endIndex);                                                                                                                                                 
     // Xóa các thẻ div tour cũ trước khi tạo lại
     const container = document.querySelector('.row');
     container.innerHTML = '';
@@ -82,19 +90,11 @@ function renderTourPage(page) {
         const slots = tourData.slots;
         const remainSlots = tourData.remainSlots;
         const tourName = tourData.name;
-const maxLength = 96;
-// function calculateProgressBarWidth(slots, remainSlots) {
-//     const usedSlots = slots - remainSlots;
-//     const progressbar = (usedSlots / slots) * 100;
-//     return progressbar;
-//   }
-//   const progressbarwidth = calculateProgressBarWidth(slots,remainSlots); 
-//     const progressbaredit = document.getElementsByClassName(`progress-bar`);
-//     progressbaredit.style.width = progressbarwidth + "%";  
+const maxLength = 80;
 
 let truncatedName = tourName;
 if (tourName.length > maxLength) {
-  truncatedName = tourName.substring(0, maxLength - 10) + "...";
+  truncatedName = tourName.substring(0, maxLength - 3) + "...";
 }
 const formattedDate = new Date(tourDate).toLocaleDateString('en-GB');
 const dateParts = formattedDate.split('/');
@@ -148,9 +148,14 @@ const tourDate1 = departureDate;
 
         `;
 
-        // Thêm thẻ div vào container
-        container.appendChild(tourDiv);
+
+
     });
+
+
+    
+// Sau khi nhận được dữ liệu từ API
+document.getElementById("loading-spinner").classList.remove("show");
 
     // Tạo phân trang
     renderPagination();
