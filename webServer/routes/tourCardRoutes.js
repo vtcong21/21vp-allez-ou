@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const tourCardController = require('../controllers/tourCardController');
-//const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
+const convertUserDataMiddleware = require('../middlewares/convertUserDataMiddleware');
+
 
 // tìm tourCards
 router.get('/search'
-// , authMiddleware.authenticateToken
+, authMiddleware.authenticateToken
+, convertUserDataMiddleware.getUserData
 , tourCardController.searchTourCards);
 // lấy về toàn bộ ds tourCard
 router.get('/'

@@ -56,10 +56,10 @@
                     </a>
                 </li>
                 <li class="nav-item d-flex navbar-left">
-                    <a class="nav-link active navbar-text navbar-active m-auto" aria-current="page" href="/">TRANG CHỦ</a>
+                    <a class="nav-link active navbar-text m-auto <%= title === 'home' ? 'navbar-active' : '' %>" aria-current="page" href="/">TRANG CHỦ</a>
                 </li>
                 <li class="nav-item d-flex navbar-left">
-                    <a class="nav-link active navbar-text m-auto" aria-current="page" href="/tourCards/search">DU LỊCH</a>
+                    <a class="nav-link active navbar-text m-auto <%= title === 'travel' ? 'navbar-active' : '' %>" aria-current="page" href="/tourCards/search">DU LỊCH</a>
                 </li>
             </ul>
         </div>

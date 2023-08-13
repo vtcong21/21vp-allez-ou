@@ -148,10 +148,10 @@ const getTourInfoData = async (req, res) => {
   try {
     const { code } = req.params;
     const tour = await Tour.findOne({ code });
-    if (!tour) {
+    if (!tour || tour.isHidden === true) {
       return res.status(404).json({ message: 'Tour not found' });
     }
-    console.log(tour);
+    //console.log(tour);
     res.status(200).json(tour);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -164,12 +164,12 @@ const getTourByCode = async (req, res) => {
     const { code } = req.params;
     const user = req.user;
     let tour = await Tour.findOne({ code });
-    if (!tour) {
+    if (!tour || tour.isHidden === true) {
       return res.status(404).json({ message: 'Tour not found' });
     }
     const formattedDate = changeDateToString(tour.date);
     tour = { ...tour.toObject(), date: formattedDate};
-    res.render('tourInfo', { tour, user })
+    res.render('tourInfo', { tour, user, title:'travel' })
 
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });

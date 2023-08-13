@@ -170,7 +170,7 @@ const getTopSellingTours = async (req, res) => {
         const tours = await Tour.find({ isHidden: false })
             .sort({ slots: -1, remainSlots: -1 })
             .limit(6);
-    
+
         res.status(200).json(tours);
     } catch (error) {
         console.error('Error fetching top selling tours:', error);
@@ -178,32 +178,73 @@ const getTopSellingTours = async (req, res) => {
     }
 };
 
-const getAllOrders = async (req, res) =>{
+const getAllOrders = async (req, res) => {
     try {
         const orders = await Item.find({ isPaid: true });
-    
+
         res.status(200).json(orders);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching orders:', error);
         res.status(500).json({ error: 'Internal server error' });
-      }
+    }
 }
 
 
 const searchOrdersByTourCode = async (req, res) => {
     try {
-      const { tourCode } = req.query;
-  
-      const orders = await Item.find({ isPaid: true, 'tourCode': tourCode });
-  
-      res.status(200).json(orders);
+        const { tourCode } = req.query;
+
+        const orders = await Item.find({ isPaid: true, 'tourCode': tourCode });
+
+        res.status(200).json(orders);
     } catch (error) {
-      console.error('Error searching orders by tour code:', error);
-      res.status(500).json({ error: 'Internal server error' });
+        console.error('Error searching orders by tour code:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-  };
+};
+
+const getBookingStats = async (req, res) =>{
+    try {
+        const currentDate = new Date();
+        const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0, 23, 59, 59, 999);
+        const firstDayOfLastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
+
+
+
+        const ordersThisMonth = await Item.find({
+            isPaid: true,
+            orderDate: { $gte: firstDayOfMonth, $lte: lastDayOfMonth }
+        });
+
+
+
+        const ordersLastMonth = await Item.find({
+            isPaid: true,
+            orderDate: { $gte: firstDayOfLastMonth, $lte: firstDayOfMonth }
+        });
+
+        
+        const ticketsThisMonth = ordersThisMonth.reduce((totalTickets, order) => totalTickets + order.tickets.length, 0);
+        const ticketsLastMonth = ordersLastMonth.reduce((totalTickets, order) => totalTickets + order.tickets.length, 0);
+
+       
+        const ticketPercentageChange = ((ticketsThisMonth - ticketsLastMonth) / ticketsLastMonth) * 100;
+
+        res.status(200).json({
+            ticketsThisMonth: ticketsThisMonth,
+            ticketPercentageChange: ticketPercentageChange
+        });
+    } catch (error) {
+        console.error('Error fetching ticket stats:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
 
 module.exports = {
+    getBookingStats,
     getAdminList,
     getClientList,
     getTopSellingTours,

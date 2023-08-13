@@ -45,16 +45,18 @@ router.get('/getWebPaymentHistory'
     , adminController.getWebPaymentHistory);
 //  lấy 6 tour bán chạy nhất
 router.get('/getTopSellingTours'
-, authMiddleware.authenticateToken
-, adminController.getTopSellingTours);
+    , authMiddleware.requireAdminRole
+    , adminController.getTopSellingTours);
 // lấy tất cả order
 router.get('/getAllOrders'
-, authMiddleware.authenticateToken
-, adminController.getAllOrders);
+    , authMiddleware.requireAdminRole
+    , adminController.getAllOrders);
 // search order theo tour code
 router.get('/orders/search'
-, authMiddleware.authenticateToken
-, adminController.searchOrdersByTourCode);
-
+    , authMiddleware.requireAdminRole
+    , adminController.searchOrdersByTourCode);
+router.get('/getBookingStats'
+    , authMiddleware.requireAdminRole
+    , adminController.getBookingStats);
 
 module.exports = router;
