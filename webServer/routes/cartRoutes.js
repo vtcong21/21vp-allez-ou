@@ -11,10 +11,10 @@ router.post('/addItem'
     , authMiddleware.authenticateToken
     , cartController.addNewItem
 );
-// router.delete('/deleteItem'
-//     , authMiddleware.authenticateToken
-//     , cartController.deleteItem
-// );
+router.delete('/deleteItem'
+    , authMiddleware.authenticateToken
+    , cartController.deleteItem
+);
 // // cập nhật item ở trang đơn đăng ký tour
 
 

@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Item = require('../models/item');
 const Tour = require('../models/tour');
+const mailController = require('./mailController');
 const axios = require('axios');
 
 
@@ -20,14 +21,15 @@ const getUserInfo = async (req, res) => {
   }
 };
 
-  const createAnOrder = async (cartItem, user, item) => {
+const createAnOrder = async (cartItem, user, item) => {
   cartItem.isPaid = true;
   user.cart.pull(cartItem._id);
   user.orders.push(cartItem._id);
+  cartItem.representer = item.representer;
   cartItem.tickets = item.tickets;
   cartItem.totalPrice = item.totalPrice;
   cartItem.orderDate = item.orderDate;
-  cartItem.status = 'Shipping';
+  cartItem.status = 'Success';
   cartItem.shippingAddress = item.shippingAddress;
   cartItem.orderDate = new Date();
   await cartItem.save();
@@ -50,7 +52,7 @@ const pay = async (req, res) => {
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
     }
-    
+
     const isCartItemInCart = user.cart.some(cartItemId => cartItemId.toString() === cartItem._id.toString());
     if (!isCartItemInCart) {
       return res.status(400).json({ error: 'Item not found in cart' });
@@ -76,7 +78,9 @@ const pay = async (req, res) => {
     if (response.status === 400) {
       return res.status(400).json({ error: 'Insufficient balance' });
     } else if (response.data.success) {
+      // tạo order -> gửi mail -> trừ remain slots
       await createAnOrder(cartItem, user, item);
+      await mailController.sendConfirmationEmail(user, cartItem, tour);
       tour.remainSlots -= item.tickets.length;
       return res.json({ success: true });
     } else {
@@ -119,9 +123,59 @@ const getUserPaymentHistory = async (req, res) => {
 };
 
 
+function convertGenderToVietnamese(gender) {
+  if (gender === "Male") {
+    return "Nam";
+  } else if (gender === "Female") {
+    return "Nữ";
+  } else {
+    return gender;
+  }
+}
+function changeDateToString(currentTime) {
+  var day = currentTime.getDate();
+  var month = currentTime.getMonth() + 1;
+  var year = currentTime.getFullYear();
+
+  if (day.toString().length === 1) {
+    day = "0" + day.toString();
+  }
+  if (month.toString().length === 1) {
+    month = "0" + month.toString();
+  }
+
+  return day + "/" + month + "/" + year;
+}
+
+const getOrderPage = async (req, res) => {
+  if (req.userRole === 0 || req.userRole === false) {
+    try {
+       const { itemId, tourCode } = req.body;
+       let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+
+       const tourData = await Tour.findOne({code: tourCode});
+       if (user) {
+        const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+        const formattedGender = convertGenderToVietnamese(user.gender);
+        const formattedUser = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+        res.render('dangkytour', { user: formattedUser, itemId, tourData });
+      } else {
+        res.render('dangkytour', { user: null, itemId, tourData });
+      }
+
+
+    } catch (error) {
+      console.error('Error rendering order page:', error);
+      res.status(500).render('error');
+    }
+  } else {  
+    res.status(403).render('error');
+  }
+}
 
 
 module.exports = {
+  getOrderPage,
   getUserInfo,
   getUserPaymentHistory,
   pay

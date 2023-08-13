@@ -68,9 +68,13 @@ line-height: normal;
     border-radius: 12px !important;
 }
 .name-tour{ 
-    font-size: 1.2rem;
+    font-size: 1.08rem;
     color: black;
     font-weight: bolder;
+}
+.p-3{ 
+    padding-left: 2.25rem !important; 
+    padding-right: 2.25rem !important;
 }
 #tacvu{ 
     border: 0; 
@@ -136,4 +140,41 @@ line-height: normal;
 }
 #hinhanh{ 
     margin-bottom: 0.1rem !important;
+}
+.text-input {
+    width: 100%;
+    height: 10rem;
+    padding: 10px;
+    outline: none;
+    overflow-y: auto;
+    vertical-align: top;
+    text-align: left;
+    margin-top: 1rem;
+    border: 1px solid rgba(110, 106, 142, 0.40);
+    border-radius: 5px;
+}
+.text-input:focus{ 
+    border: 3px solid rgba(110, 106, 142, 0.40);
+
+}
+#button-them-ngay{ 
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #F14868;
+    background-color: white; 
+    color: #F14868;
+    font-weight: 900;
+    font-size: 1.2rem;
+} 
+#button-them-ngay:active{ 
+    border: 1px solid white;
+    background-color: #F14868;
+    color: white;
+
+}
+#container-ngay{ 
+    border-bottom: 0.2rem !important;
+}
+#them-ngay{ 
+    margin-top: 1rem;
 }

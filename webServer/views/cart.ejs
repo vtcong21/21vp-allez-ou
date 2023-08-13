@@ -6,61 +6,70 @@
         <title>Document</title>
         
         <%- include('partials/head') %>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/css/cart.css" />
     </head>
     <body>
-        <header style="height: 100px; background-color: black;"></header>
-        <div class="container">
+        <!-- Header -->
+        <%- include('partials/navbar') %>
+
+        <!-- Body -->
+        <div class="container container-v2 mb-4">
+
+            <!-- Thanh chuyển hướng trang con -->
             <div class="row justify-content-center mt-5 mx-md-5 mx-2 px-sm-2">
-                <ul class="nav nav-tabs flex-lg-row mb-5 p-0" role="tablist">
-                    <li class="nav-item flex-fill">
-                        <a class="nav-link text-center active" id="active-btn" data-toggle="tab" href=" " role="tab"> <i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</a>
+                <ul class="nav nav-v2 nav-tabs nav-tabs-v2 flex-lg-row mb-4 p-0" role="tablist">
+                    <li class="nav-item nav-item-v2 flex-fill">
+                        <a class="nav-link nav-link-v2 text-center active" id="active-btn" data-toggle="tab" href=" " role="tab"> <i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a class="nav-link text-center" data-toggle="tab" href=" " role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
+                    <li class="nav-item nav-item-v2 flex-fill">
+                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href=" " role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
                     </li>
-                    <li class="nav-item flex-fill">
-                        <a class="nav-link text-center" data-toggle="tab" href=" " role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
+                    <li class="nav-item nav-item-v2 flex-fill">
+                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href=" " role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
                     </li>
                 </ul>
 
-                <div class="dropdown p-0">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</button>
+                <div class="dropdown dropdown-v2 p-0">
+                    <button class="btn btn-v2 dropdown-toggle dropdown-toggle-v2 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</button>
                     <ul class="dropdown-menu w-100">
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href=" " role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
+                            <a class="nav-link nav-link-v2" data-toggle="tab" href=" " role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href=" " role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
+                            <a class="nav-link nav-link-v2" data-toggle="tab" href=" " role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
                         </li>
                     </ul>
                 </div>
 
-                <section class="container px-0">
+                <!-- Giỏ hàng -->
+                <section class="container bg-w">
                     <h3>Giỏ hàng của bạn</h3>
                     <!--px-5 pb-5 mb-2 mb-md-4 mt-5-->
-
                     <!-- Item-->
-                    <% for(let i = 0; i < cartItems.length; i++) { %>
-                    <div class="d-sm-flex justify-content-between align-items-center my-3 pb-3 border-bottom">
-                        <div class="d-block d-sm-flex align-items-center text-center text-sm-start">
-                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="shop-single-v1.html">
-                                <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" width="150" alt="Product" />
+                    <% for(let i = (cartItems.length - 1); i >= 0; i--) { %>
+                    <div class="d-sm-flex justify-content-between align-items-center my-3 pt-4 pb-2 border-top">
+                        <div class="d-block d-sm-flex align-items-center text-sm-start text-center-v2">
+                            <a class="d-inline-block flex-shrink-0 mx-auto me-sm-4" href="/tours/<%= cartItems[i].code %>">
+                                <img src="<%= cartItems[i].imgURL %>" width="150" class="img-body" alt="Product" />
                             </a>
-                            <div class="pt-2">
+                            <div class="pt-3 pt-sm-2 px-4">
                                 <h5 class="max-width-h5 fs-base mb-2 truncate-text">
-                                    <a href="shop-single-v1.html"><%- cartItems[i].name %></a>
+                                    <a href="/tours/<%= cartItems[i].code %>"><%- cartItems[i].name %></a>
                                 </h5>
                                 <div class="extra">Ngày khởi hành: <%- cartItems[i].date %></div>
-                                <div class="extra price"><%- cartItems[i].price.toLocaleString() %> <small>đ</small></div>
+                                <div class="extra price"><%- cartItems[i].price.toLocaleString() %> đ</div>
                             </div>
                         </div>
-                        <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center" style="max-width: 9rem;">
-                            <button type="button" class="btn btn-danger" onclick="bookTourPage()">Đặt ngay</button>
-                            <button class="btn btn-link px-0" type="button" onclick="deleteItem()">
-                                <i class="ci-close-circle me-2"></i>
-                                <span class="fs-sm">Xóa</span>
-                            </button>
+                        <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center">
+                            <div class="d-sm-flex flex-column align-items-center">
+                                <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" id="orderForm-btn" onclick="bookTourPage()">Đặt ngay</button>
+                                <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" id="delete-btn" type="button" onclick="deleteItem('<%- cartItems[i].itemId %>')">
+                                    <i class="ci-close-circle me-2"></i>
+                                    <span class="fs-sm">Xóa</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <% } %>
@@ -68,5 +77,9 @@
                 </section>
             </div>
         </div>
+
+        <!--Footer-->
+        <%- include('partials/footer') %>
+        <script defer src="/js/cart.js"></script>
     </body>
 </html>
