@@ -80,18 +80,14 @@ const getCartPage = async (req, res) => {
             };
         }));
 
-        let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+        const user = req.user;
 
         if (user) {
-          const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-          const formattedGender = convertGenderToVietnamese(user.gender);
-          user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-          
           // có user, render trang cart
           res.render('cart', { user, cartItems });
         } else {
           // Nếu không có user, render trang home
-          res.render('home', { user: null });
+          res.render('home', { user});
         }
     } catch (error) {
         console.error(error);

@@ -25,17 +25,7 @@ function changeDateToString(currentTime) {
 }
 const getHomePage = async (req, res) => {
   try {
-    //let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    let user = req.user;
-    if (user) {
-      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      const formattedGender = convertGenderToVietnamese(user.gender);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-      //res.render('home', { user })
-    } 
-    // else {
-    //   res.render('home', { user});
-    // }
+    const user = req.user;
     res.render('home', {user});
   } catch (error) {
     console.error('Error getting user information:', error);
