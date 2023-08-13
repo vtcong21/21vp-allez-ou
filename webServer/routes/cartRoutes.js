@@ -20,22 +20,22 @@ router.delete('/deleteItem'
 // // cập nhật item ở trang đơn đăng ký tour
 
 
-router.get('/order-history'
+router.get('/orderHistory'
     , authMiddleware.authenticateToken
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
-// router.get('/orderDetails/:code'
-//     , authMiddleware.authenticateToken
-//     , cartController.getOrderDetails
-// );
+router.get('/orderDetails/:code'
+    , authMiddleware.authenticateToken
+    , cartController.getOrderDetails
+);
 // router.post('/orderDetails/:code'
 //     , authMiddleware.authenticateToken
 //     , cartController.cancelOrder
 // );
 
 
-// router.get('/payment-history'
+// router.get('/paymentHistory'
 //     , authMiddleware.authenticateToken
 //     , cartController.getTransactionPage
 //     );

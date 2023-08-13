@@ -122,15 +122,16 @@ const getOrderHistoryPage = async (req, res) => {
             tour = { ...tour.toObject(), date: formattedStartDate };
 
             return {
-                imgURL: tour.cardImgUrl,
+                status: item.status,
                 code: item.tourCode,
+                itemId: item._id,
+
+                imgURL: tour.cardImgUrl,
                 name: tour.name,
                 date: tour.date,
                 numOfTickets: item.tickets.length,
                 totalPrice: item.totalPrice,
-                itemId: item._id,
                 startPlace: tour.startPlace.name,
-                status: item.status,
             };
         }));
 
