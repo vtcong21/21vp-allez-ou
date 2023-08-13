@@ -114,38 +114,49 @@ const deleteItem = async (req, res) => {
     }
 };
 
-// const getOrderPage = async (req, res) => {
-//     try {
-//         const userId = req.userId;
+const getOrderHistoryPage = async (req, res) => {
+    try {
+        const userId = req.userId;
 
-//         const user = await User.findById(userId).populate({
-//             path: 'orders',
-//             select: 'tickets totalPrice status',
-//             populate: {
-//                 path: 'tourCode',
-//                 select: 'name date startPlace'
-//             }
-//         });
+        const userOrders = await User.findById(userId).populate('orders');
+        if (!userOrders) {
+            return res.status(404).send('There are no orders in the order history');
+        }
+        
+        let orderItems = await Promise.all(userOrders.orders.map(async (item) => {
+            let tour = await Tour.findOne({ code: item.tourCode });
+            const formattedStartDate = changeDateToString(tour.date);
+            tour = { ...tour.toObject(), date: formattedStartDate };
 
-//         if (!user.orders || user.orders.length === 0) {
-//             return res.status(404).send('Order not found');
-//         }
+            return {
+                imgURL: tour.cardImgUrl,
+                // code: item.tourCode,
+                name: tour.name,
+                date: tour.date,
+                numOfTickets: item.tickets.length,
+                totalPrice: item.totalPrice,
+                itemId: item._id,
+            };
+        }));
 
-//         const orderItems = user.orders.map(order => ({
-//             name: order.tourCode.name,
-//             date: order.tourCode.date,
-//             startPlace: order.tourCode.startPlace,
-//             totalPrice: order.totalPrice,
-//             status: order.status,
-//             numOfTickets: order.tickets.length,
-//         }));
+        let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
 
-//         res.render('orderPage', { orderItems });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send( 'Internal server error' );
-//     }
-// };
+        if (user) {
+          const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+          const formattedGender = convertGenderToVietnamese(user.gender);
+          user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+          
+          // có user, render trang cart
+          res.render('orderStatus', { user, orderItems });
+        } else {
+          // Nếu không có user, render trang home
+          res.render('home', { user: null });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send( 'Internal server error' );
+    }
+};
 
 // const getOrderDetails = async (req, res) => {
 //     try {
@@ -181,7 +192,7 @@ module.exports = {
     addNewItem,
     getCartPage,
     deleteItem,
-    // getOrderPage,
+    getOrderHistoryPage,
     // getOrderDetails,
     // cancelOrder,
     // getTransactionPage,
