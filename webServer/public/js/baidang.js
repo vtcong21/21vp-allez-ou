@@ -1,17 +1,62 @@
 
+// Lấy các phần tử tab
+const activeTab = document.getElementById('ex1-tab-1');
+const endedTab = document.getElementById('ex1-tab-2');
+
+// Gắn sự kiện bấm vào tab "Đang hoạt động"
+activeTab.addEventListener('click', function () {
+    fetchTourInformation(); // Gọi hàm để lấy danh sách tour đang hoạt động
+});
+
+// Gắn sự kiện bấm vào tab "Đã kết thúc"
+endedTab.addEventListener('click', function () {
+    fetchHiddenToursInformation(); // Gọi hàm để lấy danh sách tour đã kết thúc
+});
 let tourDataList = [];
 let currentPage = 1;
 
+// async function fetchTourInformation() {
+//     try {
+//         const response = await axios.get('/tours');
+//         tourDataList = response.data;
+//         totaltours=tourDataList.length;
+//         renderTourPage(currentPage);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// } 
+// async function fetchHiddenToursInformation() {
+//     try {
+//         const response = await axios.get('/tours/hiddenTours');
+//         const hiddenTourDataList = response.data;
+//         // Thêm danh sách tour đã kết thúc vào danh sách tour hiện tại
+//         tourDataList = [...tourDataList, ...hiddenTourDataList];
+//         // Gọi hàm renderTourPage để hiển thị danh sách tour mới
+//         renderTourPage(currentPage);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// } 
 async function fetchTourInformation() {
     try {
         const response = await axios.get('/tours');
         tourDataList = response.data;
-        totaltours=tourDataList.length;
         renderTourPage(currentPage);
     } catch (error) {
         console.log(error);
     }
 }
+
+async function fetchHiddenToursInformation() {
+    try {
+        const response = await axios.get('/tours/hiddenTours');
+        const hiddenTourDataList = response.data;
+        renderTourPage(currentPage, hiddenTourDataList);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 function renderTourPage(page) {
     // Xác định vị trí bắt đầu và kết thúc của danh sách tour trên trang hiện tại
@@ -20,8 +65,12 @@ function renderTourPage(page) {
     const endIndex = startIndex + itemsPerPage;
 
     // Lấy danh sách tour trên trang hiện tại
-    const currentTourDataList = tourDataList.slice(startIndex, endIndex);
-
+    let currentTourDataList;
+    if (hiddenTourDataList !== undefined) {
+        currentTourDataList = hiddenTourDataList.slice(startIndex, endIndex);
+    } else {
+        currentTourDataList = tourDataList.slice(startIndex, endIndex);
+    }                                                                                                                                                               
     // Xóa các thẻ div tour cũ trước khi tạo lại
     const container = document.querySelector('.row');
     container.innerHTML = '';
