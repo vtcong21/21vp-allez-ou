@@ -67,38 +67,40 @@
                     <!-- Pills content -->
 
                     <div class="tab-content" id="ex1-content">
+
+
                         <!-- Đặt thành công -->
                         <div class="tab-pane px-3 fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                            <div id="pagination-success"></div>
                             
-                            <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
-                                <div class="row row-v2 g-0">
-                                    <!-- Image -->
-                                    <div class="col-sm-2 col-12 px-0">
-                                        <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" class="img-v2" alt="" />
-                                    </div>
-
-                                    <!-- card card-v2 Body START -->
-                                    <div class="col-sm-7 col-12 px-1">
-                                        <div class="card-body card-body-v2 p-3">
-                                            <!-- Title -->
-                                            <h5 class="card-title mb-3 truncate-text"><a href="#">Hà Nội - Sapa - Fansipan - Ninh Bình - Tràng An - Bái Đính - Tuyệt Tịnh Cốc - Hạ Long - Yên Tử</a></h5>
-                                            <!-- List -->
-                                            <ul class="nav nav-divider small mb-0 mt-2">
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i>21/06/2023</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i>2 khách</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i>TP.Hồ Chí Mihh</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i>9,876,000<small>đ</small></li>
-                                            </ul>
+                            <% for(let i = (orderSuccess.length - 1); i >= 0; i--) { %>
+                                <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
+                                    <div class="row row-v2 g-0">
+                                        <!-- Image -->
+                                        <div class="col-sm-2 col-12 px-0">
+                                            <img src="<%= orderSuccess[i].imgURL %>" class="img-v2" alt="" />
                                         </div>
-                                    </div>
+    
+                                        <!-- card card-v2 Body START -->
+                                        <div class="col-sm-7 col-12 px-1">
+                                            <div class="card-body card-body-v2 p-3">
+                                                <!-- Title -->
+                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderSuccess[i].name %></a></h5>
+                                                <!-- List -->
+                                                <ul class="nav nav-divider small mb-0 mt-2">
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderSuccess[i].date %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderSuccess[i].numOfTickets %> vé</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderSuccess[i].startPlace %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderSuccess[i].totalPrice %>đ</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     <!-- card card-v2 body END -->
                                     <div class="col-sm-3 col-12 text-end">
                                         <span class="badge badge-v2 rounded-pill bg-success m-4">Đặt thành công</span>
                                     </div>
                                 </div>
                             </div>
-
+                            <% } %>
                             
 
                             <!-- Kết thúc trang "Đặt thành công" -->
@@ -107,36 +109,36 @@
 
                         <!-- Hoàn thành -->
                         <div class="tab-pane px-3 fade" id="ex1-pills-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                            <div id="pagination-completed"></div>
 
-                            <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
-                                <div class="row row-v2 g-0">
-                                    <!-- Image -->
-                                    <div class="col-sm-2 col-12 px-0">
-                                        <img src="https://media.travel.com.vn/tour/tfd_220105044803_234329.jpg" class="img-v2" alt="" />
-                                    </div>
-
-                                    <!-- card card-v2 Body START -->
-                                    <div class="col-sm-7 col-12 px-1">
-                                        <div class="card-body card-body-v2 p-3">
-                                            <!-- Title -->
-                                            <h5 class="card-title mb-3 truncate-text"><a href="#">Hà Nội - Sapa - Fansipan - Ninh Bình - Tràng An - Bái Đính - Tuyệt Tịnh Cốc - Hạ Long - Yên Tử</a></h5>
-                                            <!-- List -->
-                                            <ul class="nav nav-divider small mb-0 mt-2">
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i>21/06/2023</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i>2 khách</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i>TP.Hồ Chí Mihh</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i>9,876,000<small>đ</small></li>
-                                            </ul>
+                            <% for(let i = (orderCompleted.length - 1); i >= 0; i--) { %>
+                                <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
+                                    <div class="row row-v2 g-0">
+                                        <!-- Image -->
+                                        <div class="col-sm-2 col-12 px-0">
+                                            <img src="<%= orderCompleted[i].imgURL %>" class="img-v2" alt="" />
                                         </div>
-                                    </div>
+    
+                                        <!-- card card-v2 Body START -->
+                                        <div class="col-sm-7 col-12 px-1">
+                                            <div class="card-body card-body-v2 p-3">
+                                                <!-- Title -->
+                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCompleted[i].name %></a></h5>
+                                                <!-- List -->
+                                                <ul class="nav nav-divider small mb-0 mt-2">
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCompleted[i].date %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCompleted[i].numOfTickets %> vé</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCompleted[i].startPlace %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCompleted[i].totalPrice %>đ</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     <!-- card card-v2 body END -->
                                     <div class="col-sm-3 col-12 text-end">
                                         <span class="badge badge-v2 rounded-pill bg-primary m-4">Hoàn thành</span>
                                     </div>
                                 </div>
                             </div>
-
+                            <% } %>
 
 
                             <!-- Kết thúc trang "Hoàn thành" -->
@@ -146,35 +148,36 @@
 
                         <!-- Đã hủy -->
                         <div class="tab-pane px-3 fade" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                            <div id="pagination-cancelled"></div>
-                            
-                            <!-- <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
+
+                            <% for(let i = (orderCancelled.length - 1); i >= 0; i--) { %>
+                            <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
                                 <div class="row row-v2 g-0">
-                                    
+                                    <!-- Image -->
                                     <div class="col-sm-2 col-12 px-0">
-                                        <img src="" class="img-v2" alt="" />
+                                        <img src="<%= orderCancelled[i].imgURL %>" class="img-v2" alt="" />
                                     </div>
 
-                                    
+                                    <!-- card card-v2 Body START -->
                                     <div class="col-sm-7 col-12 px-1">
                                         <div class="card-body card-body-v2 p-3">
-                                            
-                                            <h5 class="card-title mb-3 truncate-text"><a href="#"></a></h5>
-                                            
+                                            <!-- Title -->
+                                            <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCancelled[i].name %></a></h5>
+                                            <!-- List -->
                                             <ul class="nav nav-divider small mb-0 mt-2">
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i>đ</li>
+                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCancelled[i].date %></li>
+                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCancelled[i].numOfTickets %> vé</li>
+                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCancelled[i].startPlace %></li>
+                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCancelled[i].totalPrice %>đ</li>
                                             </ul>
                                         </div>
                                     </div>
-                                    
+                                    <!-- card card-v2 body END -->
                                     <div class="col-sm-3 col-12 text-end">
                                         <span class="badge badge-v2 rounded-pill bg-danger m-4">Đã hủy</span>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
+                            <% } %>
 
 
                             

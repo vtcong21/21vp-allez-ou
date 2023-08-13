@@ -129,16 +129,17 @@ const getOrderHistoryPage = async (req, res) => {
                 numOfTickets: item.tickets.length,
                 totalPrice: item.totalPrice,
                 itemId: item._id,
-                startPlace: tour.startPlace,
+                startPlace: tour.startPlace.name,
+                status: item.status,
             };
         }));
 
         const orderSuccess = orderItems.filter(order => order.status === 'Success');
-        const orderCancelled = orderItems.filter(order => order.status === 'Cancelled');
         const orderCompleted = orderItems.filter(order => order.status === 'Completed');
+        const orderCancelled = orderItems.filter(order => order.status === 'Cancelled');
 
         const user = req.user;
-        res.render('orderHistory', { user, orderSuccess, orderCancelled, orderCompleted, title: 'null' });
+        res.render('orderHistory', { user, orderSuccess, orderCompleted, orderCancelled, title: 'null' });
 
     } catch (error) {
         console.error(error);
