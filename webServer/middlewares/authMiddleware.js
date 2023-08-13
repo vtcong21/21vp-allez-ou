@@ -36,17 +36,17 @@ const authenticateToken = async (req, res, next) => {
     //console.log(decodedToken);
     req.userId = decodedToken.userId;
     req.userRole = decodedToken.userRole;
-    //---Truyền hẳn user vào luôn
-    let user = null;
-    user = await User.findById(decodedToken.userId).select('fullName email dateOfBirth phoneNumber gender').exec();
-    // Xử lí thông tin user ở đây
-    if (user) {
-      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      const formattedGender = convertGenderToVietnamese(user.gender);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-    }
-    req.user = user;
-    //----------------------------------------
+    // //---Truyền hẳn user vào luôn
+    // let user = null;
+    // user = await User.findById(decodedToken.userId).select('fullName email dateOfBirth phoneNumber gender').exec();
+    // // Xử lí thông tin user ở đây
+    // if (user) {
+    //   const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+    //   const formattedGender = convertGenderToVietnamese(user.gender);
+    //   user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+    // }
+    // req.user = user;
+    // //----------------------------------------
     next();
   } catch (error) {
     console.error('Error validating token:', error);
