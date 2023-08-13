@@ -20,7 +20,7 @@ a:hover { color: #4F6CFF; }
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; 
+    -webkit-line-clamp: 2; 
 }
 
 .btn-v2 {
@@ -76,27 +76,15 @@ a:hover { color: #4F6CFF; }
         margin-top: 5px;
         font-size: 1.5rem;
     }
-    .extra, .price {
-        font-size: 1.4rem;
-    }
-    .max-width-h5, .extra, .price {
-        line-height: 1.8rem;
-    }
     .nav-tabs-v2 {
         display: none; 
-    }
-    .text-center-v2 {
-        text-align: center;
     }
     .dropdown-v2 {
         display: block;
     }
-    h3 {
-        font-size: 1.8rem;
-    }
 }
 
-.nav-link-v2 {
+/* .nav-link-v2 {
     font-size: 1.5rem;
     color: #6e6a8eb9;
 }
@@ -133,72 +121,34 @@ a:hover { color: #4F6CFF; }
 }
 #orderForm-btn:active {
     text-decoration: underline;
-}
+} */
 
 
-.nav-item a:hover { color: #4F6CFF; }
+/* .nav-item a:hover { color: #4F6CFF; }
 .nav-item-child a:hover { color: #F14868; }
 
 .max-width-h5 {
     max-width: 600px; 
     margin: 0 auto; 
     line-height: 1.2rem;
-}
+} */
 
-.truncate-text {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Số dòng tối đa */
-}
-@media (max-width: 575.98px) {
+
+
+/* @media (max-width: 575.98px) {
     h5 a {
         font-size: 0.9rem;
     }
     .max-width-h5 {
         line-height: 0.9rem;
     }
-}
+} */
 
-.extra {
-    font-size: 0.8rem;
-    padding: 2px;
-}
 
-.price {
-    /* color: #4F6CFF; */
-    color:#F14868;
-    font-weight: 800;
-}
 
-.btn {
-    font-size: 0.8rem;
-}
 
-.btn-danger {
-    background-color: #F14868;
-    border-color: #F14868;
-    border-radius: 20px;
-    color: white;
-    padding-left: 26px;
-    padding-right: 26px;
-}
 
-.btn-danger:hover {
-    background-color: #E14461;
-    color: white;
-}
-
-.btn-link {
-    color: #6e6a8eb9;
-    padding-left: 0;
-}
-
-.btn-link:hover{
-    color: #E14461;
-}
-
-.nav-tabs {
+/* .nav-tabs {
     border-radius: 10px;
     background: #e9ecef;
     border-bottom: 0 solid transparent;
@@ -225,15 +175,15 @@ a:hover { color: #4F6CFF; }
 }
 .nav-link:hover {
     color: #4F6CFF;
-}
+} */
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
     .nav-tabs, h3 {
       display: none; 
     }
-} 
+}  */
 
-.dropdown-toggle {
+/* .dropdown-toggle {
     border: 3px solid #4F6CFF;
     border-radius: 10px;
     font-size: 1rem;
@@ -244,10 +194,10 @@ a:hover { color: #4F6CFF; }
 .dropdown-toggle:hover {
     border: 3px solid #3753DD;
     color: #3753DD;
-}
+} */
 
   
-@media (min-width: 575px) {
+/* @media (min-width: 575px) {
     .dropdown {
       display: none;
     }
@@ -266,16 +216,9 @@ img {
 .card {
     border-radius: 16px;
     padding-left: 50px;
-}
+} */
 
-
-.truncate-text {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2; /* Số dòng tối đa */
-}
-@media (max-width: 575.98px) {
+/* @media (max-width: 575.98px) {
     .max-width-h5 {
         line-height: 0.9rem;
     }
@@ -288,17 +231,19 @@ img {
 }
 .nav-item {
     padding-right: 10px;
-}
+} */
+
+
 
 /* PILL */
-
 .nav-order-status{
     color: #9F9EB9;
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     margin-bottom: 10px;
+    padding: 0 2em;
 }
 
 .active.nav-order-status{
@@ -316,7 +261,7 @@ img {
     content: "";
     border-bottom: 1px solid #CBCDDF;
     position: absolute;
-    top: 84%;
+    top: 76%;
     height: 0%;
     width: 100%;
     z-index: 0;

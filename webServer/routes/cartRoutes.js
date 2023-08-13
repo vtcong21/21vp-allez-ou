@@ -20,7 +20,7 @@ router.delete('/deleteItem'
 // // cập nhật item ở trang đơn đăng ký tour
 
 
-router.get('/history'
+router.get('/order-history'
     , authMiddleware.authenticateToken
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
@@ -35,7 +35,7 @@ router.get('/history'
 // );
 
 
-// router.get('/transaction'
+// router.get('/payment-history'
 //     , authMiddleware.authenticateToken
 //     , cartController.getTransactionPage
 //     );
