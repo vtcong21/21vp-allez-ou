@@ -148,27 +148,27 @@ const getOrderHistoryPage = async (req, res) => {
     }
 };
 
-// const getOrderDetails = async (req, res) => {
-//     try {
-//         const userId = req.userId;
-//         const { itemId } = req.params;
+const getOrderDetails = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const { itemId } = req.params;
 
 
-//         const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
-//         if (itemIndex === -1) {
-//             return res.status(404).json({ message: 'Item not found in cart' });
-//         }
+        const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
+        if (itemIndex === -1) {
+            return res.status(404).json({ message: 'Item not found in cart' });
+        }
 
-//         const codeItem = await Tour.findOne({ code });
-//         if (!tour) {
-//           return res.status(404).json({ message: 'Tour not found' });
-//         }
-//         console.log(tour);
-//         res.status(200).json(tour);
-//       } catch (error) {
-//         res.status(500).json({ error: 'Internal server error' });
-//       }
-// };
+        const codeItem = await Tour.findOne({ code });
+        if (!tour) {
+          return res.status(404).json({ message: 'Tour not found' });
+        }
+        console.log(tour);
+        res.status(200).json(tour);
+      } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+      }
+};
 
 // const cancelOrder = async (req, res) => {
 
@@ -183,7 +183,7 @@ module.exports = {
     getCartPage,
     deleteItem,
     getOrderHistoryPage,
-    // getOrderDetails,
+    getOrderDetails,
     // cancelOrder,
     // getTransactionPage,
 };
