@@ -21,7 +21,7 @@
             <div class="form-outline">
                 <input type="search" id="search" class="form-control" placeholder="Tìm kiếm tour" />
             </div>
-            <button type="submit" class="btn btn-primary" style="height: 28px;width: 32.6px;">
+            <button type="submit" class="btn btn-primary" style="height: 28px;width: 32.6px;" onclick="searchOrderByCodeTour()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-search"
                     viewBox="0 0 16 16">
                     <path
@@ -50,38 +50,11 @@
                         <th class="table-title"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="/img/client.png" alt=""
-                                    style="width: 30px; height: 30px;" class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mt-2 name">Vũ Nguyễn Xuân Uyên</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 name">NDSGN1871-117-110723VU-V-7</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2">4</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2">10/07/2023</p>
-                        </td>
-                        <td>
-                            <p class="mt-2  badge text-bg-success">Đặt thành công</p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal"><img
-                                        src="/img/admin/adminOrder/showMore.png" /></a>
-                            </div>
-                        </td>
-                    </tr>
+                <tbody id="tab-success">
+                    
                 </tbody>
             </table>
+            <ul class="pagination mt-3 justify-content-center" id="pagination-success"></ul>
         </div>
     </div>
     <!-- Hoàn thành -->
@@ -98,38 +71,11 @@
                         <th class="table-title"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="/img/client.png" alt=""
-                                    style="width: 30px; height: 30px;" class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mt-2 name">Vũ Nguyễn Xuân Uyên</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 name">NDSGN1871-117-110723VU-V-7</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2">4</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2">10/07/2023</p>
-                        </td>
-                        <td>
-                            <p class="mt-2  badge text-bg-primary">Hoàn thành</p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal"><img
-                                        src="/img/admin/adminOrder/showMore.png" /></a>
-                            </div>
-                        </td>
-                    </tr>
+                <tbody  id="tab-completed">
+                    
                 </tbody>
             </table>
+            <ul class="pagination mt-3 justify-content-center" id="pagination-completed"></ul>
         </div>
     </div>
     <!-- Đã hủy -->
@@ -146,38 +92,11 @@
                         <th class="table-title"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="/img/client.png" alt=""
-                                    style="width: 30px; height: 30px;" class="rounded-circle" />
-                                <div class="ms-3">
-                                    <p class="fw-bold mt-2  name">Vũ Nguyễn Xuân Uyên</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2  name">NDSGN1871-117-110723VU-V-7</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 ">4</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mt-2 ">10/07/2023</p>
-                        </td>
-                        <td>
-                            <p class="mt-2  badge text-bg-danger">Đã hủy</p>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-end mt-2">
-                                <a data-bs-toggle="modal" data-bs-target="#orderModal"><img
-                                        src="/img/admin/adminOrder/showMore.png" /></a>
-                            </div>
-                        </td>
-                    </tr>
+                <tbody  id="tab-cancelled">
+                    
                 </tbody>
             </table>
+            <ul class="pagination mt-3 justify-content-center" id="pagination-cancelled"></ul>
         </div>
     </div>
 </div>
@@ -194,11 +113,11 @@
                         <ul class="list-group list-group-borderless">
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
-                                <span class="h6 fw-normal mb-0">NDSGN559-006-080823XE-V</span>
+                                <span class="h6 fw-normal mb-0" id="order-code-tour">NDSGN559-006-080823XE-V</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
-                                <span class="h6 fw-normal mb-0">Vũ Nguyễn Xuân Uyên</span>
+                                <span class="mb-0"> <i class="bi bi-person fa-fw me-2"></i>Khách hàng đại diện: </span>
+                                <span class="h6 fw-normal mb-0" id="order-representer-name">Vũ Nguyễn Xuân Uyên</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
@@ -206,21 +125,21 @@
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
-                                <span class="h6 fw-normal mb-0">4,590,000₫</span>
+                                <span class="h6 fw-normal mb-0" id="order-total-price">4,590,000₫</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar2 me-2"></i>Trạng thái: </span>
                                 <span class="h6 fw-normal mb-0">
-                                    <p class="badge text-bg-warning">Chờ xác nhận</p>
+                                    <p class="" id="order-status">Chờ xác nhận</p>
                                 </span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
-                                <span class="h6 fw-normal mb-0">15/08/2023</span>
+                                <span class="h6 fw-normal mb-0" id="order-start-date">15/08/2023</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
-                                <span class="h6 fw-normal mb-0">3</span>
+                                <span class="h6 fw-normal mb-0" id="order-number-ticket">3</span>
                             </li>
                         </ul>
 
@@ -228,50 +147,52 @@
                             <p class="more-title">Thông tin liên hệ</p>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Email: </span>
-                                <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                <span class="h6 fw-normal mb-0" id="order-representer__email">vnxuyen21@vp.fitus.edu.vn</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Số điện thoại: </span>
-                                <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                <span class="h6 fw-normal mb-0" id="order-representer__phone">093 883 7226</span>
                             </li>
                             <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                 <span class="mb-0">Địa chỉ: </span>
-                                <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                <span class="h6 fw-normal mb-0" id="order-representer__address">227 Nguyễn Văn Cừ Quận 5</span>
                             </li>
                         </ul>
-                        <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI
-                                    LỚN</span></p>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Họ tên: </span>
-                                <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
-                            </li>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Giới tính: </span>
-                                <span class="h6 fw-normal mb-0">093 883 7226</span>
-                            </li>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Ngày sinh: </span>
-                                <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
-                            </li>
-                        </ul>
-
-                        <ul class="list-group list-group-borderless">
-                            <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ
-                                    EM</span></p>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Họ tên: </span>
-                                <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
-                            </li>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Giới tính: </span>
-                                <span class="h6 fw-normal mb-0">093 883 7226</span>
-                            </li>
-                            <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                <span class="mb-0">Ngày sinh: </span>
-                                <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
-                            </li>
-                        </ul>
+                        <div id="order-tickets__container">
+                            <!-- <ul class="list-group list-group-borderless">
+                                <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI
+                                        LỚN</span></p>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Họ tên: </span>
+                                    <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                </li>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Giới tính: </span>
+                                    <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                </li>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Ngày sinh: </span>
+                                    <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                </li>
+                            </ul>
+    
+                            <ul class="list-group list-group-borderless">
+                                <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ
+                                        EM</span></p>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Họ tên: </span>
+                                    <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                </li>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Giới tính: </span>
+                                    <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                </li>
+                                <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                    <span class="mb-0">Ngày sinh: </span>
+                                    <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                </li>
+                            </ul> -->
+                        </div>
                     </div>
                 </div>
             </div>
