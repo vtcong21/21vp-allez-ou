@@ -81,14 +81,8 @@ const getCartPage = async (req, res) => {
         }));
 
         const user = req.user;
+        res.render('cart', { user, cartItems, title: 'null' });
 
-        if (user) {
-          // có user, render trang cart
-          res.render('cart', { user, cartItems });
-        } else {
-          // Nếu không có user, render trang home
-          res.render('home', { user});
-        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -139,19 +133,9 @@ const getOrderHistoryPage = async (req, res) => {
             };
         }));
 
-        let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+        const user = req.user;
+        res.render('orderStatus', { user, orderItems, title: 'null' });
 
-        if (user) {
-          const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-          const formattedGender = convertGenderToVietnamese(user.gender);
-          user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-          
-          // có user, render trang cart
-          res.render('orderStatus', { user, orderItems });
-        } else {
-          // Nếu không có user, render trang home
-          res.render('home', { user: null });
-        }
     } catch (error) {
         console.error(error);
         res.status(500).send( 'Internal server error' );
