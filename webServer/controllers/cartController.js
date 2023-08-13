@@ -116,7 +116,6 @@ const getOrderHistoryPage = async (req, res) => {
         if (!userOrders) {
             return res.status(404).send('There are no orders in the order history');
         }
-        
         let orderItems = await Promise.all(userOrders.orders.map(async (item) => {
             let tour = await Tour.findOne({ code: item.tourCode });
             const formattedStartDate = changeDateToString(tour.date);
@@ -124,17 +123,22 @@ const getOrderHistoryPage = async (req, res) => {
 
             return {
                 imgURL: tour.cardImgUrl,
-                // code: item.tourCode,
+                code: item.tourCode,
                 name: tour.name,
                 date: tour.date,
                 numOfTickets: item.tickets.length,
                 totalPrice: item.totalPrice,
                 itemId: item._id,
+                startPlace: tour.startPlace,
             };
         }));
 
+        const orderSuccess = orderItems.filter(order => order.status === 'Success');
+        const orderCancelled = orderItems.filter(order => order.status === 'Cancelled');
+        const orderCompleted = orderItems.filter(order => order.status === 'Completed');
+
         const user = req.user;
-        res.render('orderHistory', { user, orderItems, title: 'null' });
+        res.render('orderHistory', { user, orderSuccess, orderCancelled, orderCompleted, title: 'null' });
 
     } catch (error) {
         console.error(error);
