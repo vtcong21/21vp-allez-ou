@@ -134,7 +134,7 @@ const getOrderHistoryPage = async (req, res) => {
         }));
 
         const user = req.user;
-        res.render('orderStatus', { user, orderItems, title: 'null' });
+        res.render('orderHistory', { user, orderItems, title: 'null' });
 
     } catch (error) {
         console.error(error);
