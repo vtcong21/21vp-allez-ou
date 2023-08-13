@@ -100,7 +100,7 @@ const searchTourCards = async (req, res) => {
 const getTourCardByCode = async (req, res) => {
   try {
     const { code } = req.params;
-    const tourCard = await TourCard.findOne({ code }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
+    const tourCard = await TourCard.findOne({ isHidden: false, code }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
     let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
     if (!tourCard) {
       return res.status(404).json({ message: 'Tour card not found' });
