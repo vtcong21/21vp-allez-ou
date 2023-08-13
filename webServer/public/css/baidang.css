@@ -178,3 +178,15 @@ line-height: normal;
 #them-ngay{ 
     margin-top: 1rem;
 }
+.grey-line{
+    content: "";
+    border-bottom: 2px solid #CBCDDF;
+    position: absolute;
+    top: 96%;
+    height: 0%;
+    width: 100%;
+    z-index: 0;
+}
+.nav-link{
+    padding-bottom: 1rem !important;
+}
