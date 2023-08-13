@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const convertUserDataMiddleware = require('../middlewares/convertUserDataMiddleware');
 
 router.get('/'
     , authMiddleware.authenticateToken
+    , convertUserDataMiddleware.getUserData
     , cartController.getCartPage
 );
 router.post('/addItem'    
@@ -20,6 +22,7 @@ router.delete('/deleteItem'
 
 router.get('/history'
     , authMiddleware.authenticateToken
+    , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
 // router.get('/orderDetails/:code'
