@@ -147,7 +147,17 @@ const tourDate1 = departureDate;
 </div>
 
         `;
-
+        // Thêm thẻ div vào container
+        container.appendChild(tourDiv);
+        function calculateProgressBarWidth(slots, remainSlots) {
+            const usedSlots = slots - remainSlots;
+            const progressbar = (usedSlots / slots) * 100;
+            return progressbar;
+          }
+          const progressbarwidth = calculateProgressBarWidth(slots, remainSlots);
+          const progressBarElement = document.getElementById(`progressBar-${tourCode}`); // Thay "tourCode" bằng giá trị thích hợp
+          progressBarElement.style.width = progressbarwidth + "%";
+          progressBarElement.setAttribute("aria-valuenow", remainSlots);
 
 
     });
