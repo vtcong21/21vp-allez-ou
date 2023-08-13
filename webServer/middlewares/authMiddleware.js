@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-
-const authenticateToken = (req, res, next) => {
+const User =require('../models/user');
+const authenticateToken = async (req, res, next) => {
   //const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
   const token = req.cookies.token;
   if (!token) {
@@ -12,6 +12,13 @@ const authenticateToken = (req, res, next) => {
     //console.log(decodedToken);
     req.userId = decodedToken.userId;
     req.userRole = decodedToken.userRole;
+    //---Truyền hẳn user vào luôn
+    let user = null;
+    //console.log(req.userId);
+    user = await User.findById(decodedToken.userId).select('fullName email dateOfBirth phoneNumber gender').exec();
+    req.user = user;
+    //console.log(req.user);
+    //----------------------------------------
     next();
   } catch (error) {
     console.error('Error validating token:', error);
@@ -28,7 +35,7 @@ const requireAdminRole = (req, res, next) => {
   }
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    console.log(decodedToken);
+    //console.log(decodedToken);
     req.userId = decodedToken.userId;
     req.userRole = decodedToken.userRole;
     if (req.userRole !== true) {
