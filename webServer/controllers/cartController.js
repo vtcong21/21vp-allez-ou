@@ -118,38 +118,38 @@ const deleteItem = async (req, res) => {
     }
 };
 
-// const getOrderPage = async (req, res) => {
-//     try {
-//         const userId = req.userId;
+const getOrderPage = async (req, res) => {
+    try {
+        const userId = req.userId;
 
-//         const user = await User.findById(userId).populate({
-//             path: 'orders',
-//             select: 'tickets totalPrice status',
-//             populate: {
-//                 path: 'tourCode',
-//                 select: 'name date startPlace'
-//             }
-//         });
+        const user = await User.findById(userId).populate({
+            path: 'orders',
+            select: 'tickets totalPrice status',
+            populate: {
+                path: 'tourCode',
+                select: 'name date startPlace'
+            }
+        });
 
-//         if (!user.orders || user.orders.length === 0) {
-//             return res.status(404).send('Order not found');
-//         }
+        if (!user.orders || user.orders.length === 0) {
+            return res.status(404).send('Order not found');
+        }
 
-//         const orderItems = user.orders.map(order => ({
-//             name: order.tourCode.name,
-//             date: order.tourCode.date,
-//             startPlace: order.tourCode.startPlace,
-//             totalPrice: order.totalPrice,
-//             status: order.status,
-//             numOfTickets: order.tickets.length,
-//         }));
+        const orderItems = user.orders.map(order => ({
+            name: order.tourCode.name,
+            date: order.tourCode.date,
+            startPlace: order.tourCode.startPlace,
+            totalPrice: order.totalPrice,
+            status: order.status,
+            numOfTickets: order.tickets.length,
+        }));
 
-//         res.render('orderPage', { orderItems });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send( 'Internal server error' );
-//     }
-// };
+        res.render('orderPage', { orderItems });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send( 'Internal server error' );
+    }
+};
 
 // const getOrderDetails = async (req, res) => {
 //     try {
@@ -185,7 +185,7 @@ module.exports = {
     addNewItem,
     getCartPage,
     deleteItem,
-    // getOrderPage,
+    getOrderPage,
     // getOrderDetails,
     // cancelOrder,
     // getTransactionPage,
