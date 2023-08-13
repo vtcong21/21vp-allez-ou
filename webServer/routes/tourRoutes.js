@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const tourController = require('../controllers/tourController');
 const authMiddleware = require('../middlewares/authMiddleware');
+const convertUserDataMiddleware = require('../middlewares/convertUserDataMiddleware');
 
 
 // tìm kiếm tour
@@ -40,6 +41,7 @@ router.delete('/:code'
 // render trang tour info
 router.get('/:code'
     , authMiddleware.authenticateToken
+    , convertUserDataMiddleware.getUserData
     , tourController.getTourByCode);
 
 module.exports = router;

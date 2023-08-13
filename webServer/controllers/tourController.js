@@ -169,7 +169,7 @@ const getTourByCode = async (req, res) => {
     }
     const formattedDate = changeDateToString(tour.date);
     tour = { ...tour.toObject(), date: formattedDate};
-    res.render('tourInfo', { tour, user })
+    res.render('tourInfo', { tour, user, title:'travel' })
 
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });

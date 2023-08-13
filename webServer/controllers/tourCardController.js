@@ -58,8 +58,7 @@ const searchTourCards = async (req, res) => {
   try {
     const { startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice } = req.query;
     const query = TourCard.find({ isHidden: false }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
-    let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    console.log(startPlaceCode);
+    const user = req.user;
     if (startPlaceCode) {
       query.where('startPlace.code').equals(startPlaceCode);
     }
@@ -84,17 +83,13 @@ const searchTourCards = async (req, res) => {
       query.where('price').gte(minPrice).lte(maxPrice);
     }
 
-    const results = await query.exec();
-    if (user) {
-      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      const formattedGender = convertGenderToVietnamese(user.gender);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-      res.render('tourSearch', { tourCards: results, user })
-    } else {
-      // Nếu không có user, render view EJS với dữ liệu user là null
-
-      res.render('tourSearch', { tourCards: results, user: null });
-    }
+    let results = await query.exec();
+    results = results.map(tourCard => {
+      const formattedDate = changeDateToString(tourCard.date);
+      return { ...tourCard.toObject(), date: formattedDate };
+    });
+    res.render('tourSearch', { tourCards: results, user, title:'travel' });
+    
 
     // res.status(200).json(results);
   } catch (error) {

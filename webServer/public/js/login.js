@@ -12,7 +12,14 @@ async function login() {
     });
     if (response.status === 200) {
       const redirectUrl = response.data.redirectUrl;
-      window.location = redirectUrl;
+      if(redirectUrl === '/')
+      {
+        location.reload();
+      }
+      else if(redirectUrl === '/admin')
+      {
+        window.location = redirectUrl;
+      }
     }
   } catch (error) {
     console.error('Đã xảy ra lỗi:', error.message);
