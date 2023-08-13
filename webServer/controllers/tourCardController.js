@@ -58,7 +58,8 @@ const searchTourCards = async (req, res) => {
   try {
     const { startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice } = req.query;
     const query = TourCard.find({ isHidden: false }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
-
+    let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+    console.log(startPlaceCode);
     if (startPlaceCode) {
       query.where('startPlace.code').equals(startPlaceCode);
     }
@@ -84,7 +85,18 @@ const searchTourCards = async (req, res) => {
     }
 
     const results = await query.exec();
-    res.status(200).json(results);
+    if (user) {
+      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
+      const formattedGender = convertGenderToVietnamese(user.gender);
+      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
+      res.render('tourSearch', { tourCards: results, user })
+    } else {
+      // Nếu không có user, render view EJS với dữ liệu user là null
+
+      res.render('tourSearch', { tourCards: results, user: null });
+    }
+
+    // res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }

@@ -1,7 +1,4 @@
-const endPoint = document.getElementById('endPoint');
-const startPoint = document.getElementById('startPoint');
-const searchTravelDate = document.getElementById('search_travel-date');
-const searchNumOfDate = document.getElementById('search_num-of-date');
+
 
 // Hàm chuyển ngày thành chuỗi theo định dạng "dd/mm/yyyy"
 function changeDateToString(date) {
@@ -115,22 +112,12 @@ function formatNumberWithCommas(number) {
       `
   }
 
-  // Search Tour API
-
-  async function searchTour() {
-    try {
-      const response = await axios.get('/tours/search', {
-        params: {
-          startPlaceCode: startPoint.value,
-          endPlaceCode:  endPoint.value,
-          numOfDays: searchNumOfDate.value,
-          travelDate: searchTravelDate.value
-        }
-      });
-  
-      const data = response.data;
-      console.log(data);
-    } catch (error) {
-      console.error('Đã xảy ra lỗi:', error.message);
-    }
+  // Search Tour
+  const endPoint = document.getElementById('endPoint');
+  const startPoint = document.getElementById('startPoint');
+  const searchTravelDate = document.getElementById('search_travel-date');
+  const searchNumOfDate = document.getElementById('search_num-of-date');
+  function searchTour() {
+      // console.log(startPoint.value);
+      window.location.href = `/tourCards/search/?startPlaceCode=${startPoint.value}&endPlaceCode=${endPoint.value}&travelDate=${searchTravelDate.value}&numOfDays=${searchNumOfDate.value}`
   }

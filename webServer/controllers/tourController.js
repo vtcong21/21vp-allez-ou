@@ -162,19 +162,15 @@ const getTourInfoData = async (req, res) => {
 const getTourByCode = async (req, res) => {
   try {
     const { code } = req.params;
-    let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    const tour = await Tour.findOne({ code });
+    const user = req.user;
+    let tour = await Tour.findOne({ code });
     if (!tour) {
       return res.status(404).json({ message: 'Tour not found' });
     }
-    if (user) {
-      const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-      const formattedGender = convertGenderToVietnamese(user.gender);
-      user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-      res.render('tourInfo', { tour, user })
-    } else {
-      res.render('tourInfo', { tour, user: null });
-    }
+    const formattedDate = changeDateToString(tour.date);
+    tour = { ...tour.toObject(), date: formattedDate};
+    res.render('tourInfo', { tour, user })
+
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
