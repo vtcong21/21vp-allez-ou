@@ -4,6 +4,9 @@
         <%- include('partials/head') %>
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="/css/dangkytour.css" />
+        <script>
+            var tourData = <%-JSON.stringify(tourData)%>;
+          </script>
         <script src="/js/dangkytour.js"></script>
     </head>
     <%- include('partials/navbar') %>
@@ -230,7 +233,23 @@
                 <div class="col-md-4">
                     <div class="row">
                         <div class="col-md-12 information-tour">
-                            <div id="tour-title"></div>
+                            <div id="tour-title">
+                                <div style="text-align: center;">
+                                    <label for="information-tour" style="text-decoration: underline;">Thông tin chuyến đi</label>
+                                </div>
+                                <div style="text-align: center;">
+                                    <img src="<%=tourData.cardImgUrl%>" class="img-fluid" />
+                                </div>
+                                <div class="name-tour">
+                                    <%=tourData.name%>
+                                </div>
+                                <div class="detail-information">
+                                    <p class="code-tour">Mã Tour: <%=tourData.code%></p>
+                                    <p class="khoihanh">Khởi Hành: <%=tourData.date%></p>
+                                    <p class="noikhoihanh">Nơi Khởi Hành: <%=tourData.startPlace.name%></p>
+                                    <p class="choconnhan">Chỗ còn nhận: <strong><%=tourData.remainSlots%></strong></p>
+                                </div>
+                            </div>
 
                             <div style="display: flex; justify-content: center; align-items: center;">
                                 <hr />
@@ -284,8 +303,8 @@
                                 </div>
                             </div>
                             <div class="button-order">
-                                <!-- <button id="button-order-btn">ĐẶT NGAY</button> -->
-                                <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
+                                <button id="button-order-btn">ĐẶT NGAY</button>
+                                <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a> -->
                             </div>
                             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
                                 <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">

@@ -153,7 +153,7 @@ const getOrderPage = async (req, res) => {
        const { itemId, tourCode } = req.body;
        let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
 
-       const tourData = await Tour.findOne({code: tourCode});
+       const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
        if (user) {
         const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
         const formattedGender = convertGenderToVietnamese(user.gender);
