@@ -163,10 +163,12 @@ const getTourByCode = async (req, res) => {
   try {
     const { code } = req.params;
     let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    const tour = await Tour.findOne({ code });
+    let tour = await Tour.findOne({ code });
     if (!tour) {
       return res.status(404).json({ message: 'Tour not found' });
     }
+    const formattedDate = changeDateToString(tour.date);
+    tour = { ...tour.toObject(), date: formattedDate};
     if (user) {
       const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
       const formattedGender = convertGenderToVietnamese(user.gender);
