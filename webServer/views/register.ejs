@@ -28,17 +28,21 @@
                             <div class="form-group-name">
                                 <label for="name">Họ và Tên:</label>
                                 <input type="name" class="form-control" id="name" placeholder="Nhập tên" />
+                                <div id="invalidName" class="text-danger d-none">Vui lòng nhập họ và tên!</div> 
                                 <label for="email">Email:</label>
                                 <input type="email" class="form-control" id="email" placeholder="Nhập email" />
+                                <div id="invalidEmail" class="text-danger d-none">Địa chỉ email không hợp lệ!</div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="pwd">Mật khẩu:</label>
                                     <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu" />
+                                    <div id="requirePwd" class="text-danger d-none">Vui lòng nhập mật khẩu!</div> 
                                 </div>
                                 <div class="form-group col-md-6 pwd-confirm-wrapper">
                                     <label for="pwd_confirm" style="margin-left: 10%;">Xác nhận mật khẩu:</label>
                                     <input type="password" class="form-control" id="pwd_confirm" placeholder="Xác nhận mật khẩu" style="margin-left: 10%;" />
+                                    <div id="missMatchPwd" class="text-danger d-none" style="margin-left: 10%;">Xác nhận mật khẩu không khớp!</div> 
                                 </div>
                             </div>
                         </div>

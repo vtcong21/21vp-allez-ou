@@ -151,19 +151,11 @@ const getOrderPage = async (req, res) => {
   if (req.userRole === 0 || req.userRole === false) {
     try {
        const { itemId, tourCode } = req.body;
-       let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+      //  let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
+       const user = req.user
 
        const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
-       if (user) {
-        const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
-        const formattedGender = convertGenderToVietnamese(user.gender);
-        const formattedUser = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-        res.render('dangkytour', { user: formattedUser, itemId, tourData });
-      } else {
-        res.render('dangkytour', { user: null, itemId, tourData });
-      }
-
-
+      res.render('dangkytour', { user, itemId, tourData, title:null });
     } catch (error) {
       console.error('Error rendering order page:', error);
       res.status(500).render('error');

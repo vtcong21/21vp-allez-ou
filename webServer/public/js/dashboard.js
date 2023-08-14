@@ -60,11 +60,10 @@ function changeDateToString(currentTimeString) {
   return day + "/" + month + "/" + year;
 }
 
-async function postToGetDashboard() {
+async function getDashboard() {
   try {
       const response = await axios.get("/dashboard/getRevenueLast7Days");
       let dashboards = response.data.last7DaysRevenue;
-      console.log("done");
       // Gọi hàm cập nhật biểu đồ với dữ liệu từ API
       updateChartWithData(dashboards);
   } catch (error) {
@@ -73,12 +72,14 @@ async function postToGetDashboard() {
 }
 
 // Gọi hàm để lấy dữ liệu từ API và cập nhật biểu đồ
-postToGetDashboard();
+getDashboard();
 
 // Hiển thị doanh thu tháng này
 
 const revenueThisMonth = document.getElementById("revenue-this-month");
 const revenueProfit = document.getElementById("revenue-profit");
+const numOfTicketsThisMonth = document.getElementById('numOf-tickets-this-month');
+const ticketPercentageChange = document.getElementById('ticket-percentage-change');
 
 async function getRevnueProfit() {
   try {
@@ -143,3 +144,29 @@ function makeBestTourRow(tour) {
 }
 
 getBestSellingTour();
+
+async function getBookingStats() {
+    try {
+        const response = await axios.get("/admin/getBookingStats");
+        let bookingStats = response.data;
+        displayBookingStats(bookingStats);
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
+function displayBookingStats(bookingStats){
+    numOfTicketsThisMonth.textContent = bookingStats.ticketsThisMonth;
+  const profit = bookingStats.ticketPercentageChange;
+  if (profit < 0) {
+    ticketPercentageChange.textContent = "giảm " + -parseFloat(profit.toFixed(2)) + " %";
+    ticketPercentageChange.classList.add("decrease");
+  } else if (profit > 0) {
+    ticketPercentageChange.textContent = "tăng " + parseFloat(profit.toFixed(2)) + " %";
+    ticketPercentageChange.classList.add("increase");
+  } else {
+    ticketPercentageChange.textContent = "bằng ";
+  }
+}
+
+getBookingStats();
