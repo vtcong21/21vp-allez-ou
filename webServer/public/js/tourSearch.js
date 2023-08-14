@@ -156,6 +156,49 @@ function renderPage() {
     pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
 }
 
+getAllProvince() 
+
+async function getAllProvince() {
+    try {
+        const response = await axios.get('/provinces');
+
+        if (response.status === 200) {
+        const provinces = response.data;
+        displayProvinces(provinces);
+        } else {
+        throw new Error('Lỗi khi gửi yêu cầu đến API');
+        }
+    } catch (error) {
+        console.error('Đã xảy ra lỗi:', error.message);
+    }
+}
+
+
+function displayProvinces(provinces)
+{
+    startPoint.innerHTML ="";
+    endPoint.innerHTML ="";
+
+    const chooseStartPoint = '<option class="form-option" value = "">Hãy chọn điểm đi</option>';
+    const chooseEndPoint = '<option class="form-option" value ="">Hãy chọn điểm đến</option>';
+
+    startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
+    endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
+
+    provinces.forEach(province => {
+    const provinceSelection = makeProvinceSelection(province);
+    startPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    endPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    });
+}
+
+function makeProvinceSelection(province)
+{
+    return `
+    <option class="form-option" value="${province.code}">${province.name}</option>
+    `
+}
+
 function previousPage() {
     if (currentPage > 0) {
         currentPage--;
@@ -265,8 +308,12 @@ function findButtonActive() {
 
 function searchTour() {
     var startPlaceSelect = document.getElementById('startPoint');
+    if(startPlaceSelect.value == "") searchParams.startPlaceCode = null;
+    else searchParams.startPlaceCode = parseInt(startPlaceSelect.value);
 
     var endPlaceSelect = document.getElementById('endPoint');
+    if(endPlaceSelect.value == "") searchParams.endPlaceCode = null;
+    else searchParams.endPlaceCode = parseInt(endPlaceSelect.value);
 
     var travelDateSelect = document.getElementById('search_travel-date');
     if(travelDateSelect.value == "") searchParams.travelDate = null;
