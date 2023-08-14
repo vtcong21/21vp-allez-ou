@@ -122,31 +122,6 @@ const getUserPaymentHistory = async (req, res) => {
   }
 };
 
-
-function convertGenderToVietnamese(gender) {
-  if (gender === "Male") {
-    return "Nam";
-  } else if (gender === "Female") {
-    return "Nữ";
-  } else {
-    return gender;
-  }
-}
-function changeDateToString(currentTime) {
-  var day = currentTime.getDate();
-  var month = currentTime.getMonth() + 1;
-  var year = currentTime.getFullYear();
-
-  if (day.toString().length === 1) {
-    day = "0" + day.toString();
-  }
-  if (month.toString().length === 1) {
-    month = "0" + month.toString();
-  }
-
-  return day + "/" + month + "/" + year;
-}
-
 const getOrderPage = async (req, res) => {
   if (req.userRole === 0 || req.userRole === false) {
     try {
@@ -155,7 +130,7 @@ const getOrderPage = async (req, res) => {
        const user = req.user
 
        const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
-      res.render('dangkytour', { user, itemId, tourData, title:null });
+      res.status(200).render('dangkytour', { user, itemId, tourData, title:null });
     } catch (error) {
       console.error('Error rendering order page:', error);
       res.status(500).render('error');

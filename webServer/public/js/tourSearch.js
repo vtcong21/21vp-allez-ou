@@ -6,7 +6,8 @@ let searchParams = {
     startPlaceCode: null,
     endPlaceCode: null,
     numOfPeople: null,
-    numOfDays: null,
+    minNumOfDays: null,
+    maxNumOfDays: null,
     travelDate: null,
     minPrice: null,
     maxPrice: null
@@ -155,6 +156,49 @@ function renderPage() {
     pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
 }
 
+getAllProvince() 
+
+async function getAllProvince() {
+    try {
+        const response = await axios.get('/provinces');
+
+        if (response.status === 200) {
+        const provinces = response.data;
+        displayProvinces(provinces);
+        } else {
+        throw new Error('Lỗi khi gửi yêu cầu đến API');
+        }
+    } catch (error) {
+        console.error('Đã xảy ra lỗi:', error.message);
+    }
+}
+
+
+function displayProvinces(provinces)
+{
+    startPoint.innerHTML ="";
+    endPoint.innerHTML ="";
+
+    const chooseStartPoint = '<option class="form-option" value = "">Hãy chọn điểm đi</option>';
+    const chooseEndPoint = '<option class="form-option" value ="">Hãy chọn điểm đến</option>';
+
+    startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
+    endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
+
+    provinces.forEach(province => {
+    const provinceSelection = makeProvinceSelection(province);
+    startPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    endPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    });
+}
+
+function makeProvinceSelection(province)
+{
+    return `
+    <option class="form-option" value="${province.code}">${province.name}</option>
+    `
+}
+
 function previousPage() {
     if (currentPage > 0) {
         currentPage--;
@@ -260,6 +304,36 @@ function findButtonActive() {
     } else {
         filter.style.display = 'none';
     }
+}
+
+function searchTour() {
+    var startPlaceSelect = document.getElementById('startPoint');
+    if(startPlaceSelect.value == "") searchParams.startPlaceCode = null;
+    else searchParams.startPlaceCode = parseInt(startPlaceSelect.value);
+
+    var endPlaceSelect = document.getElementById('endPoint');
+    if(endPlaceSelect.value == "") searchParams.endPlaceCode = null;
+    else searchParams.endPlaceCode = parseInt(endPlaceSelect.value);
+
+    var travelDateSelect = document.getElementById('search_travel-date');
+    if(travelDateSelect.value == "") searchParams.travelDate = null;
+    else searchParams.travelDate = travelDateSelect.value;
+
+    var numOfDaysSelect = document.getElementById('search_num-of-date');
+    if(numOfDaysSelect.value == "") {
+        searchParams.minNumOfDays = null; searchParams.maxNumOfDays = null;
+    }
+    else if(numOfDaysSelect.value == "1") {
+        searchParams.minNumOfDays = 1; searchParams.maxNumOfDays = 3;
+    }
+    else if(numOfDaysSelect.value == "2") {
+        searchParams.minNumOfDays = 4; searchParams.maxNumOfDays = 7;
+    }
+    else if(numOfDaysSelect.value == "3") {
+        searchParams.minNumOfDays = 14; searchParams.maxNumOfDays = null;
+    }
+
+    getAPIResponse();
 }
 
 function toggleFilterVisibility() {

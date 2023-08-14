@@ -93,7 +93,6 @@ const deleteItem = async (req, res) => {
     try {
         const userId = req.userId;
         const { itemId } = req.body;
-        console.log(userId);
       
         const user = await User.findById(userId);
 
@@ -152,22 +151,24 @@ const getOrderDetails = async (req, res) => {
     try {
         const userId = req.userId;
         const { itemId } = req.params;
+        console.log(itemId + ' ' + userID);
 
-
-        const itemIndex = user.cart.findIndex(item => item._id.equals(itemId));
-        if (itemIndex === -1) {
-            return res.status(404).json({ message: 'Item not found in cart' });
+        const userOrders = await User.findById(userId).populate('orders');
+        if (!userOrders) {
+            return res.status(404).send('There are no products in the order history');
         }
 
-        const codeItem = await Tour.findOne({ code });
-        if (!tour) {
-          return res.status(404).json({ message: 'Tour not found' });
+        const orderDetails = userOrders.orders.find(item => item._id.toString() === itemId);
+        if (!orderDetails) {
+            return res.status(404).json({ error: 'Order not found' });
         }
-        console.log(tour);
-        res.status(200).json(tour);
-      } catch (error) {
+
+        console.log(orderDetails);
+        res.render('orderDetails', { user, orderDetails, title: 'null' });
+
+    } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
-      }
+    }
 };
 
 // const cancelOrder = async (req, res) => {

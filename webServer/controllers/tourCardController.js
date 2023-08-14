@@ -56,7 +56,7 @@ const getAllTourCards = async (req, res) => {
 
 const searchTourCards = async (req, res) => {
   try {
-    const { startPlaceCode, endPlaceCode, numOfPeople, numOfDays, travelDate, minPrice, maxPrice } = req.query;
+    const { startPlaceCode, endPlaceCode, numOfPeople, minNumOfDays, maxNumOfDays, travelDate, minPrice, maxPrice } = req.query;
     const query = TourCard.find({ isHidden: false }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
     const user = req.user;
     if (startPlaceCode) {
@@ -75,8 +75,12 @@ const searchTourCards = async (req, res) => {
       query.where('date').equals(new Date(travelDate));
     }
 
-    if (numOfDays) {
-      query.where('numOfDays').equals(numOfDays);
+    if (minNumOfDays) {
+      query.where('numOfDays').gte(minNumOfDays);
+    }
+
+    if (maxNumOfDays) {
+      query.where('numOfDays').lte(maxNumOfDays);
     }
 
     if (minPrice && maxPrice) {
@@ -88,10 +92,9 @@ const searchTourCards = async (req, res) => {
       const formattedDate = changeDateToString(tourCard.date);
       return { ...tourCard.toObject(), date: formattedDate };
     });
-    // res.render('tourSearch', { tourCards: results, user, title:'travel' });
-    
+    res.render('tourSearch', { tourCards: results, user, title:'travel' });
 
-    res.status(200).json(results);
+    // res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }

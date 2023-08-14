@@ -17,7 +17,7 @@ router.delete('/deleteItem'
     , authMiddleware.authenticateToken
     , cartController.deleteItem
 );
-// // cập nhật item ở trang đơn đăng ký tour
+// cập nhật item ở trang đơn đăng ký tour
 
 
 router.get('/orderHistory'
@@ -25,7 +25,7 @@ router.get('/orderHistory'
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
-router.get('/orderDetails/:code'
+router.get('/orderHistory/:itemId'
     , authMiddleware.authenticateToken
     , cartController.getOrderDetails
 );

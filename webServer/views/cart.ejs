@@ -23,10 +23,10 @@
                         <a class="nav-link nav-link-v2 text-center active" id="active-btn" data-toggle="tab" href="/cart" role="tab"> <i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</a>
                     </li>
                     <li class="nav-item nav-item-v2 flex-fill">
-                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href="/cart/order-history" role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
+                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href="/cart/orderHistory" role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
                     </li>
                     <li class="nav-item nav-item-v2 flex-fill">
-                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href="/cart/payment-history" role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
+                        <a class="nav-link nav-link-v2 text-center" data-toggle="tab" href="/cart/paymentHistory" role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
                     </li>
                 </ul>
 
@@ -34,10 +34,10 @@
                     <button class="btn btn-v2 dropdown-toggle dropdown-toggle-v2 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-bag-heart-fill me-2"></i>Giỏ hàng</button>
                     <ul class="dropdown-menu w-100">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-v2" data-toggle="tab" href="/cart/order-history" role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
+                            <a class="nav-link nav-link-v2" data-toggle="tab" href="/cart/orderHistory" role="tab"> <i class="bi bi-ui-radios me-2"></i>Đơn hàng đã đặt</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-v2" data-toggle="tab" href="/cart/payment-history" role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
+                            <a class="nav-link nav-link-v2" data-toggle="tab" href="/cart/paymentHistory" role="tab"> <i class="bi bi-credit-card-2-back-fill me-2"></i>Lịch sử giao dịch</a>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="pt-2 pt-sm-0 ps-sm-3 mx-auto mx-sm-0 text-center text-sm-start text-sm-center">
                             <div class="d-sm-flex flex-column align-items-center">
-                                <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" id="orderForm-btn" onclick="bookTourPage()">Đặt ngay</button>
+                                <button type="button" class="btn btn-v2 btn-danger btn-danger-v2" id="orderForm-btn" onclick="bookTourPage('<%- cartItems[i].itemId %>', '<%= cartItems[i].code %>')">Đặt ngay</button>
                                 <button class="btn btn-v2 btn-link btn-link-v2 px-0 mt-3" id="delete-btn" type="button" onclick="deleteItem('<%- cartItems[i].itemId %>')">
                                     <i class="ci-close-circle me-2"></i>
                                     <span class="fs-sm">Xóa</span>
