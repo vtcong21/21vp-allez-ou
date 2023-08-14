@@ -6,7 +6,8 @@ let searchParams = {
     startPlaceCode: null,
     endPlaceCode: null,
     numOfPeople: null,
-    numOfDays: null,
+    minNumOfDays: null,
+    maxNumOfDays: null,
     travelDate: null,
     minPrice: null,
     maxPrice: null
@@ -260,6 +261,32 @@ function findButtonActive() {
     } else {
         filter.style.display = 'none';
     }
+}
+
+function searchTour() {
+    var startPlaceSelect = document.getElementById('startPoint');
+
+    var endPlaceSelect = document.getElementById('endPoint');
+
+    var travelDateSelect = document.getElementById('search_travel-date');
+    if(travelDateSelect.value == "") searchParams.travelDate = null;
+    else searchParams.travelDate = travelDateSelect.value;
+
+    var numOfDaysSelect = document.getElementById('search_num-of-date');
+    if(numOfDaysSelect.value == "") {
+        searchParams.minNumOfDays = null; searchParams.maxNumOfDays = null;
+    }
+    else if(numOfDaysSelect.value == "1") {
+        searchParams.minNumOfDays = 1; searchParams.maxNumOfDays = 3;
+    }
+    else if(numOfDaysSelect.value == "2") {
+        searchParams.minNumOfDays = 4; searchParams.maxNumOfDays = 7;
+    }
+    else if(numOfDaysSelect.value == "3") {
+        searchParams.minNumOfDays = 14; searchParams.maxNumOfDays = null;
+    }
+
+    getAPIResponse();
 }
 
 function toggleFilterVisibility() {
