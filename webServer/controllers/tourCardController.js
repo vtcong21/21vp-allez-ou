@@ -92,10 +92,9 @@ const searchTourCards = async (req, res) => {
       const formattedDate = changeDateToString(tourCard.date);
       return { ...tourCard.toObject(), date: formattedDate };
     });
-    // res.render('tourSearch', { tourCards: results, user, title:'travel' });
-    
+    res.render('tourSearch', { tourCards: results, user, title:'travel' });
 
-    res.status(200).json(results);
+    // res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
