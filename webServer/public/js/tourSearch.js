@@ -2,6 +2,16 @@ const contentPerPage = 10;
 
 let response = null;
 let filter = {};
+let searchParams = {
+    startPlaceCode: null,
+    endPlaceCode: null,
+    numOfPeople: null,
+    minNumOfDays: null,
+    maxNumOfDays: null,
+    travelDate: null,
+    minPrice: null,
+    maxPrice: null
+};
 
 var listTravel;
 var currentPage;
@@ -12,7 +22,9 @@ getAPIResponse();
 
 async function getAPIResponse() {
     try {
-        response = await axios.get("/tourCards");
+        response = await axios.get("/tourCards/search", {
+            params: searchParams
+        });
         loadData();
         renderPage();
     }
@@ -34,7 +46,7 @@ function sortData(type, dir) {
 }
 
 function loadData() {
-    listTravel = response.data;
+    listTravel = response.data.slice();
     for(const key in filter) {
         if(key == "budget") {
             listTravel = listTravel.filter(item => item.price >= parseInt(filter[key][0]) && item.price <= parseInt(filter[key][1]));
@@ -144,6 +156,49 @@ function renderPage() {
     pageInfo.innerHTML = (currentPage + 1).toString() + " / " + limitPage.toString();
 }
 
+getAllProvince() 
+
+async function getAllProvince() {
+    try {
+        const response = await axios.get('/provinces');
+
+        if (response.status === 200) {
+        const provinces = response.data;
+        displayProvinces(provinces);
+        } else {
+        throw new Error('Lỗi khi gửi yêu cầu đến API');
+        }
+    } catch (error) {
+        console.error('Đã xảy ra lỗi:', error.message);
+    }
+}
+
+
+function displayProvinces(provinces)
+{
+    startPoint.innerHTML ="";
+    endPoint.innerHTML ="";
+
+    const chooseStartPoint = '<option class="form-option" value = "">Hãy chọn điểm đi</option>';
+    const chooseEndPoint = '<option class="form-option" value ="">Hãy chọn điểm đến</option>';
+
+    startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
+    endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
+
+    provinces.forEach(province => {
+    const provinceSelection = makeProvinceSelection(province);
+    startPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    endPoint.insertAdjacentHTML('beforeend', provinceSelection);
+    });
+}
+
+function makeProvinceSelection(province)
+{
+    return `
+    <option class="form-option" value="${province.code}">${province.name}</option>
+    `
+}
+
 function previousPage() {
     if (currentPage > 0) {
         currentPage--;
@@ -159,23 +214,27 @@ function nextPage() {
 }
 
 // ----------------------------------------------------
-
-function sortButtonActive(button, index) {
-    sortButtonState[1 - index] = 0;
-    sortButtonState[index] = (sortButtonState[index] + 1) % 3;
+function sortButtonReset() {
     var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
     for(var i = 0; i < images.length; i++) {
         images[i].src = "/img/tourSearch/up-arrow.svg";
     }
 
-    var image = button.querySelector('img');
-    if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
-    else image.src = "/img/tourSearch/up-arrow.svg";
-
     var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
     for(var i = 0; i < sortButtons.length; i++) {
         sortButtons[i].style.backgroundColor = '#6E6A8E';
     }
+}
+
+function sortButtonActive(button, index) {
+    sortButtonState[1 - index] = 0;
+    sortButtonState[index] = (sortButtonState[index] + 1) % 3;
+
+    sortButtonReset();
+
+    var image = button.querySelector('img');
+    if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
+    else image.src = "/img/tourSearch/up-arrow.svg";
 
     if(sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
     else button.style.backgroundColor = '#F14868';
@@ -208,6 +267,8 @@ for(var i = 0; i < priceSlider.length; i++) {
 
 function filterDelete() {
     // if(filter == {}) return;
+    sortButtonState = [0, 0];
+    sortButtonReset();
     filter = {};
     loadData();
     renderPage();
@@ -243,6 +304,36 @@ function findButtonActive() {
     } else {
         filter.style.display = 'none';
     }
+}
+
+function searchTour() {
+    var startPlaceSelect = document.getElementById('startPoint');
+    if(startPlaceSelect.value == "") searchParams.startPlaceCode = null;
+    else searchParams.startPlaceCode = parseInt(startPlaceSelect.value);
+
+    var endPlaceSelect = document.getElementById('endPoint');
+    if(endPlaceSelect.value == "") searchParams.endPlaceCode = null;
+    else searchParams.endPlaceCode = parseInt(endPlaceSelect.value);
+
+    var travelDateSelect = document.getElementById('search_travel-date');
+    if(travelDateSelect.value == "") searchParams.travelDate = null;
+    else searchParams.travelDate = travelDateSelect.value;
+
+    var numOfDaysSelect = document.getElementById('search_num-of-date');
+    if(numOfDaysSelect.value == "") {
+        searchParams.minNumOfDays = null; searchParams.maxNumOfDays = null;
+    }
+    else if(numOfDaysSelect.value == "1") {
+        searchParams.minNumOfDays = 1; searchParams.maxNumOfDays = 3;
+    }
+    else if(numOfDaysSelect.value == "2") {
+        searchParams.minNumOfDays = 4; searchParams.maxNumOfDays = 7;
+    }
+    else if(numOfDaysSelect.value == "3") {
+        searchParams.minNumOfDays = 14; searchParams.maxNumOfDays = null;
+    }
+
+    getAPIResponse();
 }
 
 function toggleFilterVisibility() {
