@@ -29,24 +29,24 @@ function convertGenderToVietnamese(gender) {
 
 const getAllTourCards = async (req, res) => {
   try {
-    const tourCards = await TourCard.find({ isHidden: false }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
-    //res.status(200).json(tourCards);
+    // const tourCards = await TourCard.find({ isHidden: false }, 'name code startPlace endPlaces price promoDiscount date time remainSlots numOfDays cardImgUrl');
+    // res.status(200).json(tourCards);
     // render cái gì tự bỏ vô đi
     //res.render('tourSearch', {tourCards});
 
     let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-    if (!tourCards) {
-      return res.status(404).json({ message: 'Tour cards not found' });
-    }
+    // if (!tourCards) {
+    //   return res.status(404).json({ message: 'Tour cards not found' });
+    // }
     if (user) {
       const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
       const formattedGender = convertGenderToVietnamese(user.gender);
       user = { ...user.toObject(), dateOfBirth: formattedDateOfBirth, gender: formattedGender };
-      res.render('tourSearch', { tourCards, user })
+      res.render('tourSearch', { user, title: 'travel' })
     } else {
       // Nếu không có user, render view EJS với dữ liệu user là null
 
-      res.render('tourSearch', { tourCards, user: null });
+      res.render('tourSearch', { user: null, title: 'travel' });
     }
     //--------------------------------------
   } catch (error) {
@@ -88,10 +88,10 @@ const searchTourCards = async (req, res) => {
       const formattedDate = changeDateToString(tourCard.date);
       return { ...tourCard.toObject(), date: formattedDate };
     });
-    res.render('tourSearch', { tourCards: results, user, title:'travel' });
+    // res.render('tourSearch', { tourCards: results, user, title:'travel' });
     
 
-    // res.status(200).json(results);
+    res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }

@@ -2,6 +2,15 @@ const contentPerPage = 10;
 
 let response = null;
 let filter = {};
+let searchParams = {
+    startPlaceCode: null,
+    endPlaceCode: null,
+    numOfPeople: null,
+    numOfDays: null,
+    travelDate: null,
+    minPrice: null,
+    maxPrice: null
+};
 
 var listTravel;
 var currentPage;
@@ -12,7 +21,9 @@ getAPIResponse();
 
 async function getAPIResponse() {
     try {
-        response = await axios.get("/tourCards");
+        response = await axios.get("/tourCards/search", {
+            params: searchParams
+        });
         loadData();
         renderPage();
     }
@@ -34,7 +45,7 @@ function sortData(type, dir) {
 }
 
 function loadData() {
-    listTravel = response.data;
+    listTravel = response.data.slice();
     for(const key in filter) {
         if(key == "budget") {
             listTravel = listTravel.filter(item => item.price >= parseInt(filter[key][0]) && item.price <= parseInt(filter[key][1]));
@@ -159,23 +170,27 @@ function nextPage() {
 }
 
 // ----------------------------------------------------
-
-function sortButtonActive(button, index) {
-    sortButtonState[1 - index] = 0;
-    sortButtonState[index] = (sortButtonState[index] + 1) % 3;
+function sortButtonReset() {
     var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
     for(var i = 0; i < images.length; i++) {
         images[i].src = "/img/tourSearch/up-arrow.svg";
     }
 
-    var image = button.querySelector('img');
-    if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
-    else image.src = "/img/tourSearch/up-arrow.svg";
-
     var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
     for(var i = 0; i < sortButtons.length; i++) {
         sortButtons[i].style.backgroundColor = '#6E6A8E';
     }
+}
+
+function sortButtonActive(button, index) {
+    sortButtonState[1 - index] = 0;
+    sortButtonState[index] = (sortButtonState[index] + 1) % 3;
+
+    sortButtonReset();
+
+    var image = button.querySelector('img');
+    if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
+    else image.src = "/img/tourSearch/up-arrow.svg";
 
     if(sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
     else button.style.backgroundColor = '#F14868';
@@ -208,6 +223,8 @@ for(var i = 0; i < priceSlider.length; i++) {
 
 function filterDelete() {
     // if(filter == {}) return;
+    sortButtonState = [0, 0];
+    sortButtonReset();
     filter = {};
     loadData();
     renderPage();
