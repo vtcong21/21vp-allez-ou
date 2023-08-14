@@ -243,4 +243,23 @@ line-height: normal;
   #loading-spinner.show {
     display: block;
   }
+  .nav-order-status{
+    color: #9F9EB9 !important;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.active.nav-order-status{
+    background: none !important;
+    color: #9F9EB9 !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid #4F6CFF;
+    margin: 0;
+    z-index: 1;
+    position: relative;
+    color: #4F6CFF !important;
+}
+
   
