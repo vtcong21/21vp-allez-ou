@@ -149,6 +149,47 @@ const getOrderHistoryPage = async (req, res) => {
     }
 };
 
+const updateItemStatus = async () => {
+    try {
+        const currentDate = new Date();
+        const orders = await Item.find({ isPaid: true });
+        
+        for (const order of orders) {
+            const tour = await Tour.findOne({ code: order.tourCode });
+
+            if (!tour) {
+                console.log(`Tour not found for order with tourCode: ${order.tourCode}`);
+                continue;
+            }
+
+            for (const item of tour.items) {
+                if (item._id.toString() === order._id.toString()) {
+                    const startDate = new Date(tour.date);
+                    startDate.setDate(startDate.getDate() + item.startDateOffset);
+
+                    const endDate = new Date(startDate);
+                    endDate.setDate(endDate.getDate() + tour.numOfDays);
+
+                    if (endDate < currentDate) {
+                        // Nếu endDate đã qua thì cập nhật trạng thái của item thành 'Completed'
+                        await Item.updateOne({ _id: order._id }, { status: 'Completed' });
+                    }
+                }
+            }
+        }
+        
+
+        console.log('Updated item statuses');
+    } catch (error) {
+        console.error('Error updating item statuses:', error.message);
+    }
+};
+
+
+cron.schedule('0 0 * * *', () => {
+    updateItemStatus();
+});
+
 const getOrderDetails = async (req, res) => {
     try {
         const userId = req.userId;
