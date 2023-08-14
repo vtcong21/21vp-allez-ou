@@ -5,6 +5,7 @@ body {
 
 .container-v2 {
     margin-top: 10rem;
+    min-height: 600px;
 }
 
 h3 {
@@ -139,6 +140,9 @@ a:hover { color: #4F6CFF; }
     }
     h3 {
         font-size: 1.8rem;
+    }
+    .container-v2 {
+        min-height: 700px;
     }
 }
 

@@ -90,7 +90,7 @@
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderSuccess[i].date %></li>
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderSuccess[i].numOfTickets %> vé</li>
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderSuccess[i].startPlace %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderSuccess[i].totalPrice %>đ</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderSuccess[i].totalPrice.toLocaleString() %>đ</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCompleted[i].date %></li>
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCompleted[i].numOfTickets %> vé</li>
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCompleted[i].startPlace %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCompleted[i].totalPrice %>đ</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCompleted[i].totalPrice.toLocaleString() %>đ</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
                                                 <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCancelled[i].date %></li>
                                                 <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCancelled[i].numOfTickets %> vé</li>
                                                 <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCancelled[i].startPlace %></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCancelled[i].totalPrice %>đ</li>
+                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCancelled[i].totalPrice.toLocaleString() %>đ</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -193,6 +193,12 @@
         <%- include('partials/footer') %>
         <!-- MDB -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+        <script>
+            const ordersSuccess = <%- JSON.stringify(orderSuccess) %>;
+            const ordersCompleted = <%- JSON.stringify(orderCompleted) %>;
+            const ordersCancelled = <%- JSON.stringify(orderCancelled) %>;
+        </script>
         <script defer src="/js/orderHistory.js"></script>
+        
     </body>
 </html>

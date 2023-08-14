@@ -116,21 +116,23 @@ const getOrderHistoryPage = async (req, res) => {
             return res.status(404).send('There are no orders in the order history');
         }
         let orderItems = await Promise.all(userOrders.orders.map(async (item) => {
-            let tour = await Tour.findOne({ code: item.tourCode });
+            let tour = await Tour.findOne({ code: item.tourCode }).select('cardImgUrl name date startPlace.name');
             const formattedStartDate = changeDateToString(tour.date);
             tour = { ...tour.toObject(), date: formattedStartDate };
 
             return {
-                status: item.status,
-                code: item.tourCode,
-                itemId: item._id,
+                // status: item.status,
+                // code: item.tourCode,
+                // itemId: item._id,
 
-                imgURL: tour.cardImgUrl,
-                name: tour.name,
-                date: tour.date,
-                numOfTickets: item.tickets.length,
-                totalPrice: item.totalPrice,
-                startPlace: tour.startPlace.name,
+                // imgURL: tour.cardImgUrl,
+                // name: tour.name,
+                // date: tour.date,
+                // numOfTickets: item.tickets.length,
+                // totalPrice: item.totalPrice,
+                // startPlace: tour.startPlace.name,
+                tour,
+                item,
             };
         }));
 

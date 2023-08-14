@@ -5,6 +5,7 @@ body {
 
 .container-v2 {
     margin-top: 10rem;
+    min-height: 600px;
 }
 
 h5 a {
@@ -165,5 +166,8 @@ a:hover { color: #4F6CFF; }
     }
     .truncate-text {
         -webkit-line-clamp: 3; 
+    }
+    .container-v2 {
+        min-height: 700px;
     }
 }
