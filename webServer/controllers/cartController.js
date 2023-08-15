@@ -137,9 +137,9 @@ const getOrderHistoryPage = async (req, res) => {
             };
         }));
 
-        const orderSuccess = orderItems.filter(order => order.status === 'Success');
-        const orderCompleted = orderItems.filter(order => order.status === 'Completed');
-        const orderCancelled = orderItems.filter(order => order.status === 'Cancelled');
+        const orderSuccess = orderItems.filter(order => order.item.status === 'Success');
+        const orderCompleted = orderItems.filter(order => order.item.status === 'Completed');
+        const orderCancelled = orderItems.filter(order => order.item.status === 'Cancelled');
 
         const user = req.user;
         res.render('orderHistory', { user, orderSuccess, orderCompleted, orderCancelled, title: 'null' });

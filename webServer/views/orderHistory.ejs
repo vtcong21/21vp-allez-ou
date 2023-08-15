@@ -77,20 +77,21 @@
                                     <div class="row row-v2 g-0">
                                         <!-- Image -->
                                         <div class="col-sm-2 col-12 px-0">
-                                            <img src="<%= orderSuccess[i].imgURL %>" class="img-v2" alt="" />
+                                            <img src="<%= orderSuccess[i].tour.cardImgUrl %>" class="img-v2" alt="" />
                                         </div>
     
                                         <!-- card card-v2 Body START -->
                                         <div class="col-sm-7 col-12 px-1">
                                             <div class="card-body card-body-v2 p-3">
                                                 <!-- Title -->
-                                                <h5 class="card-title mb-3 truncate-text"><a href="/cart/orderHistory/<%= orderSuccess[i].itemId %>"><%= orderSuccess[i].name %></a></h5>
+                                                <h5 class="card-title mb-3 truncate-text"><a href="" data-bs-toggle="modal" data-bs-target="#modal_1" 
+                                                    onclick="openSuccessModal('<%= i %>')"><%= orderSuccess[i].tour.name %></a></h5>
                                                 <!-- List -->
                                                 <ul class="nav nav-divider small mb-0 mt-2">
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderSuccess[i].date %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderSuccess[i].numOfTickets %> vé</li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderSuccess[i].startPlace %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderSuccess[i].totalPrice.toLocaleString() %>đ</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderSuccess[i].tour.date %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderSuccess[i].item.tickets.length %> vé</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderSuccess[i].tour.startPlace.name %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderSuccess[i].item.totalPrice.toLocaleString() %>đ</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -115,20 +116,20 @@
                                     <div class="row row-v2 g-0">
                                         <!-- Image -->
                                         <div class="col-sm-2 col-12 px-0">
-                                            <img src="<%= orderCompleted[i].imgURL %>" class="img-v2" alt="" />
+                                            <img src="<%= orderCompleted[i].tour.cardImgUrl %>" class="img-v2" alt="" />
                                         </div>
     
                                         <!-- card card-v2 Body START -->
                                         <div class="col-sm-7 col-12 px-1">
                                             <div class="card-body card-body-v2 p-3">
                                                 <!-- Title -->
-                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCompleted[i].name %></a></h5>
+                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCompleted[i].tour.name %></a></h5>
                                                 <!-- List -->
                                                 <ul class="nav nav-divider small mb-0 mt-2">
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCompleted[i].date %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCompleted[i].numOfTickets %> vé</li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCompleted[i].startPlace %></li>
-                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCompleted[i].totalPrice.toLocaleString() %>đ</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCompleted[i].tour.date %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCompleted[i].item.tickets.length %> vé</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCompleted[i].tour.startPlace.name %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCompleted[i].item.totalPrice.toLocaleString() %>đ</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -139,6 +140,7 @@
                                 </div>
                             </div>
                             <% } %>
+                            
 
 
                             <!-- Kết thúc trang "Hoàn thành" -->
@@ -150,27 +152,27 @@
                         <div class="tab-pane px-3 fade" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
 
                             <% for(let i = (orderCancelled.length - 1); i >= 0; i--) { %>
-                            <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
-                                <div class="row row-v2 g-0">
-                                    <!-- Image -->
-                                    <div class="col-sm-2 col-12 px-0">
-                                        <img src="<%= orderCancelled[i].imgURL %>" class="img-v2" alt="" />
-                                    </div>
-
-                                    <!-- card card-v2 Body START -->
-                                    <div class="col-sm-7 col-12 px-1">
-                                        <div class="card-body card-body-v2 p-3">
-                                            <!-- Title -->
-                                            <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCancelled[i].name %></a></h5>
-                                            <!-- List -->
-                                            <ul class="nav nav-divider small mb-0 mt-2">
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCancelled[i].date %></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCancelled[i].numOfTickets %> vé</li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCancelled[i].startPlace %></li>
-                                                <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCancelled[i].totalPrice.toLocaleString() %>đ</li>
-                                            </ul>
+                                <div class="card card-v2 shadow-sm overflow-hidden p-0 mb-4">
+                                    <div class="row row-v2 g-0">
+                                        <!-- Image -->
+                                        <div class="col-sm-2 col-12 px-0">
+                                            <img src="<%= orderCancelled[i].tour.cardImgUrl %>" class="img-v2" alt="" />
                                         </div>
-                                    </div>
+    
+                                        <!-- card card-v2 Body START -->
+                                        <div class="col-sm-7 col-12 px-1">
+                                            <div class="card-body card-body-v2 p-3">
+                                                <!-- Title -->
+                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCancelled[i].tour.name %></a></h5>
+                                                <!-- List -->
+                                                <ul class="nav nav-divider small mb-0 mt-2">
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCancelled[i].tour.date %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-people-fill me-2"></i><%= orderCancelled[i].item.tickets.length %> vé</li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-geo-alt-fill me-2"></i><%= orderCancelled[i].tour.startPlace.name %></li>
+                                                    <li class="nav-item mb-1 fs-v2"><i class="bi bi-credit-card-fill me-2"></i><%= orderCancelled[i].item.totalPrice.toLocaleString() %>đ</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     <!-- card card-v2 body END -->
                                     <div class="col-sm-3 col-12 text-end">
                                         <span class="badge badge-v2 rounded-pill bg-danger m-4">Đã hủy</span>
@@ -178,6 +180,7 @@
                                 </div>
                             </div>
                             <% } %>
+                            
 
 
                             
@@ -188,17 +191,138 @@
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal" id="modal_1">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+
+                <!-- Modal body -->
+                    <div class="modal-body card shadow">
+                        <!-- Image -->
+                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <!-- Card body -->
+                        <ul class="card-body text-center p-4">
+                            <!-- Title -->
+                            <h1 class="card-title fss">🎊 Đặt thành công! 🎊</h1>
+                            <p class="lead mb-3">
+                                Cảm ơn bạn đã tin tưởng và lựa chọn dịch vụ của Allez òu,<br />
+                                dưới đây là thông tin vé của bạn
+                            </p>
+                            <!-- Second title -->
+                            <h5 class="text-primary mb-4" >Name</h5>
+                            <!-- List -->
+                            <div class="row justify-content-between text-start">
+                                <div class="col-12">
+                                    <ul class="list-group list-group-borderless">
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
+                                            <span class="h6 fw-normal mb-0">NDSGN559-006-080823XE-V</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
+                                            <span class="h6 fw-normal mb-0">Vũ Nguyễn Xuân Uyên</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
+                                            <span class="h6 fw-normal mb-0">Ngân hàng</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
+                                            <span class="h6 fw-normal mb-0">4,590,000₫</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày xác nhận: </span>
+                                            <span class="h6 fw-normal mb-0">03/08/2023</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
+                                            <span class="h6 fw-normal mb-0">15/08/2023</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
+                                            <span class="h6 fw-normal mb-0">3</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-borderless">
+                                        <p class="more-title">Thông tin liên hệ</p>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Email: </span>
+                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Số điện thoại: </span>
+                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Địa chỉ: </span>
+                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-borderless">
+                                        <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI LỚN</span></p>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Họ tên: </span>
+                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Giới tính: </span>
+                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Ngày sinh: </span>
+                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Phòng riêng: </span>
+                                            <span class="h6 fw-normal mb-0">Có</span>
+                                        </li>
+                                    </ul>
+    
+                                    <ul class="list-group list-group-borderless">
+                                        <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ EM</span></p>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Họ tên: </span>
+                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Giới tính: </span>
+                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Ngày sinh: </span>
+                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0">Phòng riêng: </span>
+                                            <span class="h6 fw-normal mb-0">Có</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- Download button -->
+                            <a href="#" class="btn btn-primary mb-0"> <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
+                        </ul>
+                    </div>
+        
+          
+              </div>
+            </div>
+          </div>
+          
+
         
         <!--Footer-->
         <%- include('partials/footer') %>
         <!-- MDB -->
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+        <script defer src="/js/orderHistory.js"></script>
         <script>
             const ordersSuccess = <%- JSON.stringify(orderSuccess) %>;
             const ordersCompleted = <%- JSON.stringify(orderCompleted) %>;
             const ordersCancelled = <%- JSON.stringify(orderCancelled) %>;
         </script>
-        <script defer src="/js/orderHistory.js"></script>
         
     </body>
 </html>
