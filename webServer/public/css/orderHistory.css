@@ -166,6 +166,9 @@ a:hover { color: #4F6CFF; }
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+.model-content-v2 {
+    border-radius: 16px;
+}
 
 
 /* img */
@@ -175,9 +178,9 @@ img {
     overflow-clip-margin: content-box;
     overflow: clip;
 }
-.rounded-top {
-    /* border-radius: 16px 16px 0 0 !important; */
-}
+/* .rounded-top {
+    border-radius: 16px 16px 0 0 !important;
+} */
 
 .card-body-v3 {
     -webkit-box-flex: 1;

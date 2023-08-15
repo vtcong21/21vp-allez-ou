@@ -69,6 +69,60 @@ function openSuccessModal(i) {
     myModal.show();
 }
 
+const myModal2 = new bootstrap.Modal(document.getElementById('modal_2'));
+
+function openCompletedModal(i) {
+    console.log(ordersCompleted[i]);
+    
+    const modalElement = document.querySelector("#modal_2");
+    modalElement.querySelector("#order-name-tour2").textContent = ordersCompleted[i].tour.name;
+    modalElement.querySelector("#order-code-tour2").textContent = ordersCompleted[i].item.tourCode;
+    modalElement.querySelector("#order-representer-name2").textContent = ordersCompleted[i].item.representer.name;
+    modalElement.querySelector("#order-total-price2").textContent = ordersCompleted[i].item.totalPrice;
+    modalElement.querySelector("#order-start-date2").textContent = ordersCompleted[i].tour.date;
+    modalElement.querySelector("#order-number-ticket2").textContent = ordersCompleted[i].item.tickets.length;
+    modalElement.querySelector("#order-representer__email2").textContent = ordersCompleted[i].item.representer.email;
+    modalElement.querySelector("#order-representer__phone2").textContent = ordersCompleted[i].item.representer.phone;
+    modalElement.querySelector("#order-representer__address2").textContent = ordersCompleted[i].item.representer.address;
+
+    const ticketsContainer = document.getElementById("order-tickets__container2");
+    ticketsContainer.innerHTML = "";
+    console.log(ordersCompleted[i].item.tickets);
+    for (let j = 0; j < ordersCompleted[i].item.tickets.length; j++) {
+        let ticketRow = maketTicketRow(ordersCompleted[i].item.tickets[j], j + 1);
+        ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
+    }
+
+    myModal2.show();
+}
+
+const myModal3 = new bootstrap.Modal(document.getElementById('modal_3'));
+
+function openCancelledModal(i) {
+    console.log(ordersCancelled[i]);
+    
+    const modalElement = document.querySelector("#modal_3");
+    modalElement.querySelector("#order-name-tour3").textContent = ordersCancelled[i].tour.name;
+    modalElement.querySelector("#order-code-tour3").textContent = ordersCancelled[i].item.tourCode;
+    modalElement.querySelector("#order-representer-name3").textContent = ordersCancelled[i].item.representer.name;
+    modalElement.querySelector("#order-total-price3").textContent = ordersCancelled[i].item.totalPrice;
+    modalElement.querySelector("#order-start-date3").textContent = ordersCancelled[i].tour.date;
+    modalElement.querySelector("#order-number-ticket3").textContent = ordersCancelled[i].item.tickets.length;
+    modalElement.querySelector("#order-representer__email3").textContent = ordersCancelled[i].item.representer.email;
+    modalElement.querySelector("#order-representer__phone3").textContent = ordersCancelled[i].item.representer.phone;
+    modalElement.querySelector("#order-representer__address3").textContent = ordersCancelled[i].item.representer.address;
+
+    const ticketsContainer = document.getElementById("order-tickets__container3");
+    ticketsContainer.innerHTML = "";
+    console.log(ordersCancelled[i].item.tickets);
+    for (let j = 0; j < ordersCancelled[i].item.tickets.length; j++) {
+        let ticketRow = maketTicketRow(ordersCancelled[i].item.tickets[j], j + 1);
+        ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
+    }
+
+    myModal3.show();
+}
+
 function maketTicketRow(ticket, index) {
     return `
     <ul class="list-group list-group-borderless">

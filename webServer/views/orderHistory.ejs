@@ -123,7 +123,8 @@
                                         <div class="col-sm-7 col-12 px-1">
                                             <div class="card-body card-body-v2 p-3">
                                                 <!-- Title -->
-                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCompleted[i].tour.name %></a></h5>
+                                                <h5 class="card-title mb-3 truncate-text"><a href="" data-bs-toggle="modal" data-bs-target="#modal_2" 
+                                                    onclick="openCompletedModal('<%= i %>')"><%= orderCompleted[i].tour.name %></a></h5>
                                                 <!-- List -->
                                                 <ul class="nav nav-divider small mb-0 mt-2">
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCompleted[i].tour.date %></li>
@@ -163,7 +164,8 @@
                                         <div class="col-sm-7 col-12 px-1">
                                             <div class="card-body card-body-v2 p-3">
                                                 <!-- Title -->
-                                                <h5 class="card-title mb-3 truncate-text"><a href="#"><%= orderCancelled[i].tour.name %></a></h5>
+                                                <h5 class="card-title mb-3 truncate-text"><a href="" data-bs-toggle="modal" data-bs-target="#modal_3" 
+                                                    onclick="openCancelledModal('<%= i %>')"><%= orderCancelled[i].tour.name %></a></h5>
                                                 <!-- List -->
                                                 <ul class="nav nav-divider small mb-0 mt-2">
                                                     <li class="nav-item mb-1 fs-v2"><i class="bi bi-calendar2-check-fill me-2"></i><%= orderCancelled[i].tour.date %></li>
@@ -191,10 +193,10 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal SUCCESS -->
         <div class="modal" id="modal_1">
             <div class="modal-dialog modal-lg modal-v2">
-              <div class="modal-content">
+              <div class="modal-content model-content-v2">
 
 
                 <!-- Modal Header -->
@@ -272,9 +274,164 @@
           
               </div>
             </div>
-          </div>
+        </div>
           
+        <!-- Modal COMPLETED -->
+        <div class="modal" id="modal_2">
+            <div class="modal-dialog modal-lg modal-v2">
+              <div class="modal-content model-content-v2">
 
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                    <div class="modal-body card-v3 shadow-v3 p-0">
+                        <!-- Image -->
+                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <!-- Card body -->
+                        <ul class="card-body-v3 text-center px-5">
+                            <!-- Title -->
+                            <h1 class="card-title fss mt-5">🎊 Chuyến đi đã kết thúc! 🎊</h1>
+                            <p class="lead mb-3">
+                                Cảm ơn bạn đồng hành cùng Allez òu,<br/>
+                                suốt chặng đường vừa qua.
+                                
+                            </p>
+                            <!-- Second title -->
+                            <h5 class="text-primary mb-4" id="order-name-tour2" >Name</h5>
+                            <!-- List -->
+                            <div class="row justify-content-between text-start">
+                                <div class="col-12 col-v2">
+                                    <ul class="list-group list-group-borderless">
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-code-tour2">NDSGN559-006-080823XE-V</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer-name2">Vũ Nguyễn Xuân Uyên</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
+                                            <span class="h6-v2 fw-normal mb-0">Ngân hàng</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-total-price2">4,590,000₫</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-start-date2">03/08/2023</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-number-ticket2">3</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-borderless">
+                                        <p class="more-title">Thông tin liên hệ của người đại diện</p>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Email: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__email2">vnxuyen21@vp.fitus.edu.vn</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Số điện thoại: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__phone2">093 883 7226</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Địa chỉ: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__address2">227 Nguyễn Văn Cừ Quận 5</span>
+                                        </li>
+                                    </ul>
+                            
+                            <div id="order-tickets__container2" class="mb-5"></div>
+
+                        </ul>
+                    </div>
+                    
+              </div>
+            </div>
+        </div>
+
+        <!-- Modal COMPLETED -->
+        <div class="modal" id="modal_3">
+            <div class="modal-dialog modal-lg modal-v2">
+              <div class="modal-content model-content-v2">
+
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                    <div class="modal-body card-v3 shadow-v3 p-0">
+                        <!-- Image -->
+                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <!-- Card body -->
+                        <ul class="card-body-v3 text-center px-5">
+                            <!-- Title -->
+                            <h1 class="card-title fss mt-5"> ĐÃ HỦY CHUYẾN</h1>
+
+                            <!-- Second title -->
+                            <h5 class="text-primary mb-4" id="order-name-tour3" >Name</h5>
+                            <!-- List -->
+                            <div class="row justify-content-between text-start">
+                                <div class="col-12 col-v2">
+                                    <ul class="list-group list-group-borderless">
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-code-tour3">NDSGN559-006-080823XE-V</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer-name3">Vũ Nguyễn Xuân Uyên</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
+                                            <span class="h6-v2 fw-normal mb-0">Ngân hàng</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-total-price3">4,590,000₫</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-start-date3">03/08/2023</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-number-ticket3">3</span>
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-borderless">
+                                        <p class="more-title">Thông tin liên hệ của người đại diện</p>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Email: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__email3">vnxuyen21@vp.fitus.edu.vn</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Số điện thoại: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__phone3">093 883 7226</span>
+                                        </li>
+                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
+                                            <span class="mb-0 h6-v2">Địa chỉ: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__address3">227 Nguyễn Văn Cừ Quận 5</span>
+                                        </li>
+                                    </ul>
+                            
+                            <div id="order-tickets__container3"></div>
+
+                        </ul>
+                    </div>
+          
+                    
+              </div>
+            </div>
+        </div>
         
         <!--Footer-->
         <%- include('partials/footer') %>
