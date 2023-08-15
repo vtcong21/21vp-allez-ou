@@ -7,7 +7,6 @@
     <%- include('partials/head') %>
     <link rel="stylesheet" type="text/css" href="/css/tourSearch.css">
     <!-- <title>Du lịch</title> -->
-    <!-- <script defer src="/js/tourSearch.js"></script> -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
@@ -341,6 +340,9 @@
         var currentPage;
         var limitPage;
         let sortButtonState = [0, 0];
+        var priceSlider = document.getElementsByClassName('f-price-slider');
+        var priceMin = document.getElementsByClassName('f-price-min');
+        var priceMax = document.getElementsByClassName('f-price-max');
         getListTravel();
         function getListTravel() {
             // response = await axios.get("/tourCards");
@@ -473,34 +475,36 @@
             }
         }
         // ----------------------------------------------------
+        function sortButtonReset() {
+            var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
+            for(var i = 0; i < images.length; i++) {
+                images[i].src = "/img/tourSearch/up-arrow.svg";
+            }
+
+            var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
+            for(var i = 0; i < sortButtons.length; i++) {
+                sortButtons[i].style.backgroundColor = '#6E6A8E';
+            }
+        }
         function sortButtonActive(button, index) {
             sortButtonState[1 - index] = 0;
             sortButtonState[index] = (sortButtonState[index] + 1) % 3;
-            var images = document.querySelectorAll("#travel .tour-sort .sort-block img");
-            for (var i = 0; i < images.length; i++) {
-                images[i].src = "/img/tourSearch/up-arrow.svg";
-            }
+            sortButtonReset();
             var image = button.querySelector('img');
-            if (sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
+            if(sortButtonState[index] == 2) image.src = "/img/tourSearch/down-arrow.svg";
             else image.src = "/img/tourSearch/up-arrow.svg";
-            var sortButtons = document.querySelectorAll("#travel .tour-sort .sort-block");
-            for (var i = 0; i < sortButtons.length; i++) {
-                sortButtons[i].style.backgroundColor = '#6E6A8E';
-            }
-            if (sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
+            if(sortButtonState[index] == 0) button.style.backgroundColor = '#6E6A8E';
             else button.style.backgroundColor = '#F14868';
-            if (sortButtonState[0] != 0) {
+            if(sortButtonState[0] != 0) {
                 sortData("date", sortButtonState[0]);
                 renderPage();
             }
-            else if (sortButtonState[1] != 0) {
+            else if(sortButtonState[1] != 0) {
                 sortData("price", sortButtonState[1]);
                 renderPage();
             }
         }
-        var priceSlider = document.getElementsByClassName('f-price-slider');
-        var priceMin = document.getElementsByClassName('f-price-min');
-        var priceMax = document.getElementsByClassName('f-price-max');
+        
         for (var i = 0; i < priceSlider.length; i++) {
             noUiSlider.create(priceSlider[i], {
                 start: [2000000, 11000000],
@@ -514,9 +518,10 @@
         }
         function filterDelete() {
             // if(filter == {}) return;
+            sortButtonState = [0, 0];
+            sortButtonReset();
             filter = {};
-            loadData();
-            renderPage();
+            getListTravel();
         }
         function filterActive() {
             filter = {};
@@ -534,8 +539,7 @@
             }
             filter.numday = check1.value;
             filter.slot = check2.value;
-            loadData();
-            renderPage();
+            getListTravel();
         }
         function findButtonActive() {
             var filter = document.querySelector("#travel .travel-container .travel-content .filter-screen");
@@ -569,6 +573,71 @@
                     }
                 };
             })(i));
+        }
+
+        function searchTour() {
+                let searchParams = {};
+                var startPlaceSelect = document.getElementById('startPoint');
+                if(startPlaceSelect.value != "") searchParams.startPlaceCode = parseInt(startPlaceSelect.value);
+
+                var endPlaceSelect = document.getElementById('endPoint');
+                if(endPlaceSelect.value != "") searchParams.endPlaceCode = parseInt(endPlaceSelect.value);
+
+                var travelDateSelect = document.getElementById('search_travel-date');
+                if(travelDateSelect.value != "") searchParams.travelDate = travelDateSelect.value;
+
+                var numOfDaysSelect = document.getElementById('search_num-of-date');
+                if(numOfDaysSelect.value == "1") {
+                    searchParams.minNumOfDays = 1; searchParams.maxNumOfDays = 3;
+                }
+                else if(numOfDaysSelect.value == "2") {
+                    searchParams.minNumOfDays = 4; searchParams.maxNumOfDays = 7;
+                }
+                else if(numOfDaysSelect.value == "3") {
+                    searchParams.minNumOfDays = 14; 
+                }
+                const queryString = new URLSearchParams(searchParams).toString();
+                const redirectUrl = `/tourCards/search?${queryString}`;
+                window.location.href = redirectUrl;
+        }
+
+        getAllProvince() 
+        async function getAllProvince() {
+            try {
+                const response = await axios.get('/provinces');
+
+                if (response.status === 200) {
+                const provinces = response.data;
+                displayProvinces(provinces);
+                } else {
+                throw new Error('Lỗi khi gửi yêu cầu đến API');
+                }
+            } catch (error) {
+                console.error('Đã xảy ra lỗi:', error.message);
+            }
+        }
+        function displayProvinces(provinces)
+        {
+            startPoint.innerHTML ="";
+            endPoint.innerHTML ="";
+
+            const chooseStartPoint = '<option class="form-option" value = "">Hãy chọn điểm đi</option>';
+            const chooseEndPoint = '<option class="form-option" value ="">Hãy chọn điểm đến</option>';
+
+            startPoint.insertAdjacentHTML('beforeend', chooseStartPoint);
+            endPoint.insertAdjacentHTML('beforeend', chooseEndPoint);
+
+            provinces.forEach(province => {
+            const provinceSelection = makeProvinceSelection(province);
+            startPoint.insertAdjacentHTML('beforeend', provinceSelection);
+            endPoint.insertAdjacentHTML('beforeend', provinceSelection);
+            });
+        }
+        function makeProvinceSelection(province)
+        {
+            return `
+            <option class="form-option" value="${province.code}">${province.name}</option>
+            `
         }
     </script>
 </body>
