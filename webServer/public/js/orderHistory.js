@@ -57,6 +57,7 @@ function openSuccessModal(i) {
     modalElement.querySelector("#order-representer__email").textContent = ordersSuccess[i].item.representer.email;
     modalElement.querySelector("#order-representer__phone").textContent = ordersSuccess[i].item.representer.phone;
     modalElement.querySelector("#order-representer__address").textContent = ordersSuccess[i].item.representer.address;
+    document.getElementById('confirmDeleteButton').setAttribute('data-id', ordersSuccess[i].item._id);
 
     const ticketsContainer = document.getElementById("order-tickets__container");
     ticketsContainer.innerHTML = "";
@@ -142,5 +143,28 @@ function maketTicketRow(ticket, index) {
 </ul>
     `;
 }
+
+
+const myDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+
+function openDeletedModal() {
+    myDeleteModal.show();
+}
+
+async function CancelOrderFunc() {
+    try {
+        const orderId = document.getElementById('confirmDeleteButton').getAttribute('data-id');
+        const response = await axios.put(`/cart/orderHistory/${orderId}`, {
+            data: { orderId: orderId }
+        });
+
+        if (response.status === 200) {
+            location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 

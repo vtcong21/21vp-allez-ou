@@ -122,16 +122,6 @@ const getOrderHistoryPage = async (req, res) => {
             tour = { ...tour.toObject(), date: formattedStartDate };
 
             return {
-                // status: item.status,
-                // code: item.tourCode,
-                // itemId: item._id,
-
-                // imgURL: tour.cardImgUrl,
-                // name: tour.name,
-                // date: tour.date,
-                // numOfTickets: item.tickets.length,
-                // totalPrice: item.totalPrice,
-                // startPlace: tour.startPlace.name,
                 tour,
                 item,
             };
@@ -150,6 +140,8 @@ const getOrderHistoryPage = async (req, res) => {
     }
 };
 
+
+//---------------------------------------------------------------------------------
 const updateItemStatus = async () => {
     try {
         const currentDate = new Date();
@@ -186,10 +178,10 @@ const updateItemStatus = async () => {
     }
 };
 
-
 cron.schedule('0 0 * * *', () => {
     updateItemStatus();
 });
+//---------------------------------------------------------------------------
 
 const getOrderDetails = async (req, res) => {
     try {
@@ -215,13 +207,37 @@ const getOrderDetails = async (req, res) => {
     }
 };
 
-// const cancelOrder = async (req, res) => {
+const cancelOrder = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const orderId = req.params.code;
+        console.log(orderId);
 
-// };
+        const user = await User.findById(userId).populate('orders');
 
-// const getTransactionPage = async (req, res) => {
+        const order = user.orders.find(order => order._id.equals(orderId));
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
 
-// };
+        if (order.status === 'Completed' || order.status === 'Cancelled') {
+            return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
+        }
+
+        order.status = 'Cancelled';
+        await order.save();
+
+        res.status(200).json({ message: 'Order has been successfully canceled' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+const getPaymentHistory = async (req, res) => {
+
+};
 
 module.exports = {
     addNewItem,
@@ -229,6 +245,8 @@ module.exports = {
     deleteItem,
     getOrderHistoryPage,
     getOrderDetails,
-    // cancelOrder,
-    // getTransactionPage,
+    cancelOrder,
+    getPaymentHistory,
+
+    updateItemStatus,
 };

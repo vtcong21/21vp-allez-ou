@@ -267,7 +267,7 @@
 
                             <!-- Download button -->
                             <div class="d-flex my-5">
-                            <a href="#" class="btn btn-primary-v3  m-auto"> <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
+                            <a href="#" class="btn btn-primary-v3 m-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" > <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
                             </div>
                         </ul>
                     </div>
@@ -433,10 +433,29 @@
             </div>
         </div>
         
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel h5-v3">Xác nhận Hủy chuyến</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body h5-v3">
+                        Bạn chắc chắn muốn hủy chuyến đi này?<br>
+                        <small>Khi đã hủy sẽ không thể hoàn tác.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
+                        <button type="button" class="btn btn-danger modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
+                        onclick="CancelOrderFunc()">Vẫn hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--Footer-->
         <%- include('partials/footer') %>
         <!-- MDB -->
-        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
         <script defer src="/js/orderHistory.js"></script>
         <script>

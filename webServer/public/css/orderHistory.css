@@ -257,6 +257,15 @@ img {
 .h6-v2 {
     font-size: 1.36rem;
 }
+
+.modal-delete-btn{
+    width: 46px;
+    height: 33px;
+    font-size: 1.2rem
+}
+.h5-v3 {
+    font-size: 1.2rem;
+}
 @media only screen and (max-width: 576px) {
     h5 a {
         margin-top: 5px;
