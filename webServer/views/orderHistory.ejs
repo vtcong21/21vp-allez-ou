@@ -193,118 +193,82 @@
 
         <!-- Modal -->
         <div class="modal" id="modal_1">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg modal-v2">
               <div class="modal-content">
 
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
                 <!-- Modal body -->
-                    <div class="modal-body card shadow">
+                    <div class="modal-body card-v3 shadow-v3 p-0">
                         <!-- Image -->
                         <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
                         <!-- Card body -->
-                        <ul class="card-body text-center p-4">
+                        <ul class="card-body-v3 text-center px-5">
                             <!-- Title -->
-                            <h1 class="card-title fss">🎊 Đặt thành công! 🎊</h1>
+                            <h1 class="card-title fss mt-5">🎊 Đặt thành công! 🎊</h1>
                             <p class="lead mb-3">
                                 Cảm ơn bạn đã tin tưởng và lựa chọn dịch vụ của Allez òu,<br />
                                 dưới đây là thông tin vé của bạn
                             </p>
                             <!-- Second title -->
-                            <h5 class="text-primary mb-4" >Name</h5>
+                            <h5 class="text-primary mb-4" id="order-name-tour" >Name</h5>
                             <!-- List -->
                             <div class="row justify-content-between text-start">
-                                <div class="col-12">
+                                <div class="col-12 col-v2">
                                     <ul class="list-group list-group-borderless">
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
-                                            <span class="h6 fw-normal mb-0">NDSGN559-006-080823XE-V</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-vr fa-fw me-2"></i>Mã tour: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-code-tour">NDSGN559-006-080823XE-V</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
-                                            <span class="h6 fw-normal mb-0">Vũ Nguyễn Xuân Uyên</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-person fa-fw me-2"></i>Khách đại diện: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer-name">Vũ Nguyễn Xuân Uyên</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
-                                            <span class="h6 fw-normal mb-0">Ngân hàng</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-wallet2 fa-fw me-2"></i>Thanh toán: </span>
+                                            <span class="h6-v2 fw-normal mb-0">Ngân hàng</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
-                                            <span class="h6 fw-normal mb-0">4,590,000₫</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-currency-dollar fa-fw me-2"></i>Tổng tiền: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-total-price">4,590,000₫</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày xác nhận: </span>
-                                            <span class="h6 fw-normal mb-0">03/08/2023</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-start-date">03/08/2023</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-calendar fa-fw me-2"></i>Ngày đi: </span>
-                                            <span class="h6 fw-normal mb-0">15/08/2023</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
-                                            <span class="h6 fw-normal mb-0">3</span>
+                                            <span class="mb-0 h6-v2"> <i class="bi bi-people fa-fw me-2"></i>Số khách: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-number-ticket">3</span>
                                         </li>
                                     </ul>
                                     <ul class="list-group list-group-borderless">
-                                        <p class="more-title">Thông tin liên hệ</p>
+                                        <p class="more-title">Thông tin liên hệ của người đại diện</p>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Email: </span>
-                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
+                                            <span class="mb-0 h6-v2">Email: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__email">vnxuyen21@vp.fitus.edu.vn</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Số điện thoại: </span>
-                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
+                                            <span class="mb-0 h6-v2">Số điện thoại: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__phone">093 883 7226</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Địa chỉ: </span>
-                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
-                                        </li>
-                                    </ul>
-                                    <ul class="list-group list-group-borderless">
-                                        <p class="more-title">Khách hàng 1 <span class="badge rounded-pill bg-success"> NGƯỜI LỚN</span></p>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Họ tên: </span>
-                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Giới tính: </span>
-                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Ngày sinh: </span>
-                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Phòng riêng: </span>
-                                            <span class="h6 fw-normal mb-0">Có</span>
+                                            <span class="mb-0 h6-v2">Địa chỉ: </span>
+                                            <span class="h6-v2 fw-normal mb-0" id="order-representer__address">227 Nguyễn Văn Cừ Quận 5</span>
                                         </li>
                                     </ul>
-    
-                                    <ul class="list-group list-group-borderless">
-                                        <p class="more-title">Khách hàng 2 <span class="badge rounded-pill bg-success"> TRẺ EM</span></p>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Họ tên: </span>
-                                            <span class="h6 fw-normal mb-0">vnxuyen21@vp.fitus.edu.vn</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Giới tính: </span>
-                                            <span class="h6 fw-normal mb-0">093 883 7226</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Ngày sinh: </span>
-                                            <span class="h6 fw-normal mb-0">227 Nguyễn Văn Cừ Quận 5</span>
-                                        </li>
-                                        <li class="list-group-item d-sm-flex justify-content-between align-items-center">
-                                            <span class="mb-0">Phòng riêng: </span>
-                                            <span class="h6 fw-normal mb-0">Có</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-    
+                            
+                            <div id="order-tickets__container"></div>
+
                             <!-- Download button -->
-                            <a href="#" class="btn btn-primary mb-0"> <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
+                            <div class="d-flex my-5">
+                            <a href="#" class="btn btn-primary-v3  m-auto"> <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
+                            </div>
                         </ul>
                     </div>
-        
           
               </div>
             </div>
