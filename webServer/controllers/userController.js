@@ -128,7 +128,7 @@ const getOrderPage = async (req, res) => {
        const { itemId, tourCode } = req.body;
       //  let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
        const user = req.user
-
+      console.log(req.body);
        const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
       res.status(200).render('dangkytour', { user, itemId, tourData, title:null });
     } catch (error) {
