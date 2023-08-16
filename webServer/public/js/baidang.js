@@ -115,7 +115,16 @@ const tourDate1 = departureDate;
                     </div>
                 </div>
                 <div class="col-3 text-right">
-                    <button id="tacvu" type="button">&#8230;</button>
+                    <div class="dropdown card-widgets">
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                    <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
+                    </div>
+                    </div>               
                 </div>
             </div>
             <div class="row" id="code-tour">
@@ -246,6 +255,8 @@ document.addEventListener("DOMContentLoaded", function() {
       const newInput = document.createElement("input");
       newInput.classList.add("form-control");
       newInput.setAttribute("placeholder", "");
+      newInput.setAttribute("id","ngay" + currentNgay);
+
   
       const newTextInput = document.createElement("div");
       newTextInput.classList.add("text-input");
@@ -263,4 +274,28 @@ document.addEventListener("DOMContentLoaded", function() {
       // Tăng số lượng ngày hiện tại
       currentNgay++;
     });
+    const buttonBotNgay = document.getElementById("button-bot-ngay");
+
+// Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
+buttonBotNgay.addEventListener("click", function() {
+  // Lấy danh sách tất cả các ngày
+  const ngayDivs = document.getElementsByClassName("container-ngay");
+
+  // Kiểm tra nếu vẫn còn ngày trong container
+  if (ngayDivs.length > 0) {
+    // Lấy ngày cuối cùng
+    const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
+
+    // Xóa ngày cuối cùng khỏi container
+    ngayContainer.removeChild(lastNgayDiv);
+  }
+  if(currentNgay >3) 
+  { 
+    currentNgay--;
+  } 
+  else{ 
+    alert('Số ngày tối thiểu là 2.');
+  }
+});
   });
+  // Lấy đối tượng button và container chứa các ngày
