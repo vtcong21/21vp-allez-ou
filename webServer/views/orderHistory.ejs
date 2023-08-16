@@ -6,7 +6,6 @@
         
         <%- include('partials/head') %>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/css/orderHistory.css" />
     </head>
     <body>
@@ -207,7 +206,7 @@
                 <!-- Modal body -->
                     <div class="modal-body card-v3 shadow-v3 p-0">
                         <!-- Image -->
-                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <img id="order-img-tour" src=" " class="rounded-top" alt="" />
                         <!-- Card body -->
                         <ul class="card-body-v3 text-center px-5">
                             <!-- Title -->
@@ -290,7 +289,7 @@
                 <!-- Modal body -->
                     <div class="modal-body card-v3 shadow-v3 p-0">
                         <!-- Image -->
-                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <img id="order-img-tour2" src=" " class="rounded-top" alt="" />
                         <!-- Card body -->
                         <ul class="card-body-v3 text-center px-5">
                             <!-- Title -->
@@ -370,7 +369,7 @@
                 <!-- Modal body -->
                     <div class="modal-body card-v3 shadow-v3 p-0">
                         <!-- Image -->
-                        <img src="https://booking.webestica.com/assets/images/gallery/04.jpg" class="rounded-top" alt="" />
+                        <img id="order-img-tour3" src=" " class="rounded-top" alt="" />
                         <!-- Card body -->
                         <ul class="card-body-v3 text-center px-5">
                             <!-- Title -->
@@ -435,18 +434,18 @@
         
         <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="width: max-content; border-radius: 14px;">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel h5-v3">Xác nhận Hủy chuyến</h5>
+                        <h5 class="modal-title fs-v3" id="confirmDeleteModalLabel"><strong>Xác nhận Hủy chuyến</strong></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body h5-v3">
+                    <div class="modal-body fs-v3">
                         Bạn chắc chắn muốn hủy chuyến đi này?<br>
-                        <small>Khi đã hủy sẽ không thể hoàn tác.</small>
+                        <small>*Khi đã hủy sẽ không thể hoàn tác.</small>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
-                        <button type="button" class="btn btn-danger modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
+                        <button type="button" class="btn btn-secondary btn-secondary-v2 modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
+                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
                         onclick="CancelOrderFunc()">Vẫn hủy</button>
                     </div>
                 </div>

@@ -48,6 +48,7 @@ function openSuccessModal(i) {
     console.log(ordersSuccess[i]);
     
     const modalElement = document.querySelector("#modal_1");
+    modalElement.querySelector("#order-img-tour").src = ordersSuccess[i].tour.cardImgUrl;
     modalElement.querySelector("#order-name-tour").textContent = ordersSuccess[i].tour.name;
     modalElement.querySelector("#order-code-tour").textContent = ordersSuccess[i].item.tourCode;
     modalElement.querySelector("#order-representer-name").textContent = ordersSuccess[i].item.representer.name;
@@ -76,6 +77,7 @@ function openCompletedModal(i) {
     console.log(ordersCompleted[i]);
     
     const modalElement = document.querySelector("#modal_2");
+    modalElement.querySelector("#order-img-tour2").src = ordersCompleted[i].tour.cardImgUrl;
     modalElement.querySelector("#order-name-tour2").textContent = ordersCompleted[i].tour.name;
     modalElement.querySelector("#order-code-tour2").textContent = ordersCompleted[i].item.tourCode;
     modalElement.querySelector("#order-representer-name2").textContent = ordersCompleted[i].item.representer.name;
@@ -103,6 +105,7 @@ function openCancelledModal(i) {
     console.log(ordersCancelled[i]);
     
     const modalElement = document.querySelector("#modal_3");
+    modalElement.querySelector("#order-img-tour3").src = ordersCancelled[i].tour.cardImgUrl;
     modalElement.querySelector("#order-name-tour3").textContent = ordersCancelled[i].tour.name;
     modalElement.querySelector("#order-code-tour3").textContent = ordersCancelled[i].item.tourCode;
     modalElement.querySelector("#order-representer-name3").textContent = ordersCancelled[i].item.representer.name;

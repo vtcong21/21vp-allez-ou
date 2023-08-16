@@ -258,13 +258,28 @@ img {
     font-size: 1.36rem;
 }
 
+.btn-secondary {
+    background-color: #9b99a7;
+}
+.btn-danger {
+    background-color: #F14868;
+}
 .modal-delete-btn{
-    width: 46px;
-    height: 33px;
-    font-size: 1.2rem
+    width: 84px;
+    height: 30px;
+    font-size: 1.36rem;
+    border: none;
+    border-radius: 16px;
 }
 .h5-v3 {
     font-size: 1.2rem;
+}
+.fs-v3 {
+    font-size: 1.5rem;
+}
+small {
+    color: #4F6CFF;
+    font-style: italic;
 }
 @media only screen and (max-width: 576px) {
     h5 a {

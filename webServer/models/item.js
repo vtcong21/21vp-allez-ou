@@ -19,6 +19,7 @@ const itemSchema = new mongoose.Schema({
     ],
     totalPrice: { type: Number, default: 0 },
     orderDate: { type: Date, default: Date.now },
+    cancelDate: { type: Date, default: Date.now },
     status: { type: String, default: 'Pending' },
     shippingAddress: { type: String },
     isPaid: { type: Boolean, default: false }
