@@ -184,10 +184,29 @@ line-height: normal;
     color: white;
 
 }
+#button-bot-ngay{ 
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #F14868;
+    background-color: white; 
+    color: #F14868;
+    font-weight: 900;
+    font-size: 1.2rem;
+} 
+#button-bot-ngay:active{ 
+    border: 1px solid white;
+    background-color: #F14868;
+    color: white;
+
+}
+
 #container-ngay{ 
     border-bottom: 0.2rem !important;
 }
 #them-ngay{ 
+    margin-top: 1rem;
+}
+#bot-ngay{ 
     margin-top: 1rem;
 }
 .grey-line{
