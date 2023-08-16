@@ -125,7 +125,6 @@ const getUserPaymentHistory = async (req, res) => {
 const getOrderPage = async (req, res) => {
   if (req.userRole === 0 || req.userRole === false) {
     try {
-<<<<<<< HEAD
       const itemId = req.params.itemId; 
       const user = req.user;
 
@@ -133,14 +132,6 @@ const getOrderPage = async (req, res) => {
       const tourData = await Tour.findOne({ code: item.tourCode }); 
     
       res.status(200).render('dangkytour', { user, itemId, tourData, title: null });
-=======
-       const { itemId, tourCode } = req.body;
-      //  let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-       const user = req.user
-      console.log(req.body);
-       const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
-      res.status(200).render('dangkytour', { user, itemId, tourData, title:null });
->>>>>>> dev
     } catch (error) {
       console.error('Error rendering order page:', error);
       res.status(500).render('error');
