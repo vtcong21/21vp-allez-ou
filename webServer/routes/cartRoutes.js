@@ -32,7 +32,7 @@ router.put('/orderHistory/:code'
 
 router.get('/paymentHistory'
     , authMiddleware.authenticateToken
-    , cartController.getPaymentHistory
-    );
+    , cartController.getPaymentHistoryPage
+);
 
 module.exports = router;

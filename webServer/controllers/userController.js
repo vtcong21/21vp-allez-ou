@@ -125,12 +125,13 @@ const getUserPaymentHistory = async (req, res) => {
 const getOrderPage = async (req, res) => {
   if (req.userRole === 0 || req.userRole === false) {
     try {
-       const { itemId, tourCode } = req.body;
-      //  let user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender');
-       const user = req.user
+      const itemId = req.params.itemId; 
+      const user = req.user;
 
-       const tourData = await Tour.findOne({code: 'NDSGN1871-109-270623VU-V'});
-      res.status(200).render('dangkytour', { user, itemId, tourData, title:null });
+      const item = await Item.findById(itemId);
+      const tourData = await Tour.findOne({ code: item.tourCode }); 
+    
+      res.status(200).render('dangkytour', { user, itemId, tourData, title: null });
     } catch (error) {
       console.error('Error rendering order page:', error);
       res.status(500).render('error');
@@ -139,6 +140,7 @@ const getOrderPage = async (req, res) => {
     res.status(403).render('error');
   }
 }
+
 
 
 module.exports = {

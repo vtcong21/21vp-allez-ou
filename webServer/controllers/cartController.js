@@ -235,8 +235,35 @@ const cancelOrder = async (req, res) => {
 };
 
 
-const getPaymentHistory = async (req, res) => {
+const getPaymentHistoryPage = async (req, res) => {
+    try {
+        const userId = req.userId;
 
+        const userOrders = await User.findById(userId).populate('orders');
+        if (!userOrders) {
+            return res.status(404).send('There are no orders in the order history');
+        }
+        let orderItems = await Promise.all(userOrders.orders.map(async (item) => {
+            let tour = await Tour.findOne({ code: item.tourCode }).select('cardImgUrl name date startPlace.name');
+            const formattedStartDate = changeDateToString(tour.date);
+            tour = { ...tour.toObject(), date: formattedStartDate };
+
+            return {
+                tour,
+                item,
+            };
+        }));
+
+        const paid = orderItems.filter(order => order.item.status === 'Completed' || order.item.status === 'Success' );
+        const refunded = orderItems.filter(order => order.item.status === 'Cancelled');
+
+        const user = req.user;
+        res.render('paymentHistory', { user, paid, refunded, title: 'null' });
+        // res.status(200).json({ paid, refunded })
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
 };
 
 module.exports = {
@@ -246,7 +273,7 @@ module.exports = {
     getOrderHistoryPage,
     getOrderDetails,
     cancelOrder,
-    getPaymentHistory,
+    getPaymentHistoryPage,
 
     updateItemStatus,
 };
