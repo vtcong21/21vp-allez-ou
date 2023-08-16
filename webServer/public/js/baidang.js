@@ -115,16 +115,15 @@ const tourDate1 = departureDate;
                     </div>
                 </div>
                 <div class="col-3 text-right">
-                    <div class="dropdown card-widgets">
-                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        </a>
-                    <div class="dropdown-menu dropdown-menu-end">
-                    <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
-                    </div>
-                    </div>               
+                <div class="dropdown">
+                <button class="btn btn-secondary" id="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ...
+                </button>
+                <ul class="dropdown-menu">
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Xóa Tour</a></li>
+                <li><a  class="dropdown-item" href="#"><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
+                </ul>
+            </div>
                 </div>
             </div>
             <div class="row" id="code-tour">
@@ -178,6 +177,24 @@ const tourDate1 = departureDate;
     renderPagination();
     
 }
+const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+let tourId = null;
+function getTourId(event) {
+    tourId = event.currentTarget.getAttribute("data-id");
+}
+confirmDeleteButton.addEventListener("click", function () {
+    console.log(tourId);  
+    axios
+      .delete(`/tours/${tourId}`, {
+      })
+      .then((response) => {
+        console.log(response.data);
+        changePage(page, hiddenTourDataList);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 let isHidden = false; // Khai báo biến isHidden mặc định là false
 
 function renderPagination(hiddenTourDataList) {
@@ -225,8 +242,6 @@ function changePage(page, hiddenTourDataList) {
     }
 
     renderTourPage(currentPage);
-
-    // Hiển thị lại phân trang
     renderPagination(hiddenTourDataList);
 }
 

@@ -280,5 +280,62 @@ line-height: normal;
     position: relative;
     color: #4F6CFF !important;
 }
-
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
   
+  .dropdown-trigger {
+    cursor: pointer;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black;
+    margin-bottom: 3px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .custom-dropdown:hover .dropdown-menu,
+  .custom-dropdown .dropdown-trigger:focus + .dropdown-menu {
+    display: block;
+  }
+  .dropdown-menu{
+    height: auto;
+    width: auto;
+  }
+  #dropdown{
+    background-color: white !important;
+  }
+  #dropdown:hover{ 
+    background-color: white !important;
+  } 
+  #dropdown:focus{ 
+    background-color: white !important;
+  }
+  a img{
+    width: 11px;
+    height: 11px;
+    margin-left: 0.5em;
+    cursor: pointer;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+}
