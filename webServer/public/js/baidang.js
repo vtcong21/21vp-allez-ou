@@ -17,29 +17,6 @@ endedTab.addEventListener('click', function () {
 let tourDataList = [];
 let currentPage = 1;
 
-// async function fetchTourInformation() {
-//     try {
-//         const response = await axios.get('/tours');
-//         tourDataList = response.data;
-//         totaltours=tourDataList.length;
-//         renderTourPage(currentPage);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// } 
-// async function fetchHiddenToursInformation() {
-//     try {
-//         const response = await axios.get('/tours/hiddenTours');
-//         const hiddenTourDataList = response.data;
-//         // Thêm danh sách tour đã kết thúc vào danh sách tour hiện tại
-//         tourDataList = [...tourDataList, ...hiddenTourDataList];
-//         // Gọi hàm renderTourPage để hiển thị danh sách tour mới
-//         renderTourPage(currentPage);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// } 
-
 async function fetchTourInformation() {
     try {
         const response = await axios.get(`/tours`);
@@ -64,7 +41,6 @@ async function fetchHiddenToursInformation() {
         console.log(error);
     }
 }
-
 
 function renderTourPage(page, hiddenTourDataList) {
     // Xác định vị trí bắt đầu và kết thúc của danh sách tour trên trang hiện tại
@@ -105,6 +81,7 @@ const tourDate1 = departureDate;
 
         // Tạo nội dung cho thẻ div
         tourDiv.innerHTML = `
+
         <div class="pageContainer">
     <div class="card d-block">
         <div class="card-body">
@@ -121,7 +98,7 @@ const tourDate1 = departureDate;
                 </button>
                 <ul class="dropdown-menu">
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Xóa Tour</a></li>
-                <li><a  class="dropdown-item" href="#"><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" data-id="${tourCode}"><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
                 </ul>
             </div>
                 </div>
@@ -167,12 +144,6 @@ const tourDate1 = departureDate;
 
 
     });
-
-
-    
-// Sau khi nhận được dữ liệu từ API
-// document.getElementById("loading-spinner").classList.remove("show");
-
     // Tạo phân trang
     renderPagination();
     
@@ -189,7 +160,8 @@ confirmDeleteButton.addEventListener("click", function () {
       })
       .then((response) => {
         console.log(response.data);
-        changePage(page, hiddenTourDataList);
+        fetchTourInformation(); 
+        fetchHiddenToursInformation();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -313,4 +285,67 @@ buttonBotNgay.addEventListener("click", function() {
   }
 });
   });
+  document.addEventListener("DOMContentLoaded", function() {
+    // Lấy đối tượng button và container chứa các ngày
+    const buttonThemNgay = document.getElementById("button-them-ngay-change");
+    const ngayContainer = document.getElementById("ngay-container2");
+  
+    // Số lượng ngày hiện tại
+    let currentNgay = 3;
+  
+    // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
+    buttonThemNgay.addEventListener("click", function () {
+      // Tạo phần tử div mới
+      const newNgayDiv = document.createElement("div");
+      newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
+  
+      // Tạo các phần tử con bên trong div mới
+      const newLabel = document.createElement("label");
+      newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
+      newLabel.textContent = "Ngày " + currentNgay;
+  
+      const newInput = document.createElement("input");
+      newInput.classList.add("form-control");
+      newInput.setAttribute("placeholder", "");
+      newInput.setAttribute("id","ngay" + currentNgay + "-change");
+  
+      const newTextInput = document.createElement("div");
+      newTextInput.classList.add("text-input");
+      newTextInput.setAttribute("contenteditable", "");
+      newTextInput.setAttribute("id", "ngay" + currentNgay + "-change-input");
+  
+      // Chèn các phần tử con vào div mới
+      newNgayDiv.appendChild(newLabel);
+      newNgayDiv.appendChild(newInput);
+      newNgayDiv.appendChild(newTextInput);
+  
+      // Chèn div mới vào container ngày
+      ngayContainer.appendChild(newNgayDiv);
+  
+      // Tăng số lượng ngày hiện tại
+      currentNgay++;
+    });
+    
+    const buttonBotNgay = document.getElementById("button-bot-ngay-change");
+  
+    // Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
+    buttonBotNgay.addEventListener("click", function() {
+      // Lấy danh sách tất cả các ngày
+      const ngayDivs = document.getElementsByClassName("container-ngay");
+  
+      // Kiểm tra nếu vẫn còn ngày trong container
+      if (ngayDivs.length > 0) {
+        // Lấy ngày cuối cùng
+        const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
+  
+        // Xóa ngày cuối cùng khỏi container
+        ngayContainer.removeChild(lastNgayDiv);
+      }
+      if (currentNgay > 3) { 
+        currentNgay--;
+      } else { 
+        alert('Số ngày tối thiểu là 2.');
+      }
+    });
+});
   // Lấy đối tượng button và container chứa các ngày
