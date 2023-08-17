@@ -44,4 +44,8 @@ router.get('/:code'
     , convertUserDataMiddleware.getUserData
     , tourController.getTourByCode);
 
+router.put('/edit/:code'
+    , authMiddleware.requireAdminRole
+    , tourController.editTourByCode);
+
 module.exports = router;
