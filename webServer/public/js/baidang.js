@@ -17,29 +17,6 @@ endedTab.addEventListener('click', function () {
 let tourDataList = [];
 let currentPage = 1;
 
-// async function fetchTourInformation() {
-//     try {
-//         const response = await axios.get('/tours');
-//         tourDataList = response.data;
-//         totaltours=tourDataList.length;
-//         renderTourPage(currentPage);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// } 
-// async function fetchHiddenToursInformation() {
-//     try {
-//         const response = await axios.get('/tours/hiddenTours');
-//         const hiddenTourDataList = response.data;
-//         // Thêm danh sách tour đã kết thúc vào danh sách tour hiện tại
-//         tourDataList = [...tourDataList, ...hiddenTourDataList];
-//         // Gọi hàm renderTourPage để hiển thị danh sách tour mới
-//         renderTourPage(currentPage);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// } 
-
 async function fetchTourInformation() {
     try {
         const response = await axios.get(`/tours`);
@@ -64,7 +41,6 @@ async function fetchHiddenToursInformation() {
         console.log(error);
     }
 }
-
 
 function renderTourPage(page, hiddenTourDataList) {
     // Xác định vị trí bắt đầu và kết thúc của danh sách tour trên trang hiện tại
@@ -105,6 +81,7 @@ const tourDate1 = departureDate;
 
         // Tạo nội dung cho thẻ div
         tourDiv.innerHTML = `
+
         <div class="pageContainer">
     <div class="card d-block">
         <div class="card-body">
@@ -167,12 +144,6 @@ const tourDate1 = departureDate;
 
 
     });
-
-
-    
-// Sau khi nhận được dữ liệu từ API
-// document.getElementById("loading-spinner").classList.remove("show");
-
     // Tạo phân trang
     renderPagination();
     
