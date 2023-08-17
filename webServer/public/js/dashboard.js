@@ -6,17 +6,17 @@ function updateChartWithData(data) {
       type: "line",
       data: {
           labels: [
-              changeDateToString(data[0].date),
-              changeDateToString(data[1].date),
-              changeDateToString(data[2].date),
-              changeDateToString(data[3].date),
-              changeDateToString(data[4].date),
-              changeDateToString(data[5].date),
               changeDateToString(data[6].date),
+              changeDateToString(data[5].date),
+              changeDateToString(data[4].date),
+              changeDateToString(data[3].date),
+              changeDateToString(data[2].date),
+              changeDateToString(data[1].date),
+              changeDateToString(data[0].date),
           ],
           datasets: [
               {
-                  data: [data[0].revenue, data[1].revenue, data[2].revenue, data[3].revenue, data[4].revenue, data[5].revenue, data[6].revenue],
+                  data: [data[6].revenue, data[5].revenue, data[4].revenue, data[3].revenue, data[2].revenue, data[1].revenue, data[0].revenue],
                   lineTension: 0,
                   backgroundColor: "transparent",
                   borderColor: "#007bff",
