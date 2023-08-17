@@ -7,11 +7,22 @@ const endedTab = document.getElementById('ex1-tab-2');
 
 // Gắn sự kiện bấm vào tab "Đang hoạt động"
 activeTab.addEventListener('click', function () {
+    const navPill1 = document.getElementById('ex1-tab-1');
+    const navPill2 = document.getElementById('ex1-tab-2');
+    navPill2.classList.remove('active');
+
+    navPill1.classList.add('active');
+
     fetchTourInformation(); // Gọi hàm để lấy danh sách tour đang hoạt động
 });
 
 // Gắn sự kiện bấm vào tab "Đã kết thúc"
 endedTab.addEventListener('click', function () {
+    const navPill1 = document.getElementById('ex1-tab-1');
+    const navPill2 = document.getElementById('ex1-tab-2');
+    navPill1.classList.remove('active');
+
+    navPill2.classList.add('active');
     fetchHiddenToursInformation(); // Gọi hàm để lấy danh sách tour đã kết thúc
 });
 let tourDataList = [];
