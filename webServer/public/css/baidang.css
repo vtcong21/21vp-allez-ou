@@ -184,10 +184,29 @@ line-height: normal;
     color: white;
 
 }
+#button-bot-ngay{ 
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #F14868;
+    background-color: white; 
+    color: #F14868;
+    font-weight: 900;
+    font-size: 1.2rem;
+} 
+#button-bot-ngay:active{ 
+    border: 1px solid white;
+    background-color: #F14868;
+    color: white;
+
+}
+
 #container-ngay{ 
     border-bottom: 0.2rem !important;
 }
 #them-ngay{ 
+    margin-top: 1rem;
+}
+#bot-ngay{ 
     margin-top: 1rem;
 }
 .grey-line{
@@ -261,5 +280,62 @@ line-height: normal;
     position: relative;
     color: #4F6CFF !important;
 }
-
+.custom-dropdown {
+    position: relative;
+    display: inline-block;
+  }
   
+  .dropdown-trigger {
+    cursor: pointer;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: black;
+    margin-bottom: 3px;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .custom-dropdown:hover .dropdown-menu,
+  .custom-dropdown .dropdown-trigger:focus + .dropdown-menu {
+    display: block;
+  }
+  .dropdown-menu{
+    height: auto;
+    width: auto;
+  }
+  #dropdown{
+    background-color: white !important;
+  }
+  #dropdown:hover{ 
+    background-color: white !important;
+  } 
+  #dropdown:focus{ 
+    background-color: white !important;
+  }
+  a img{
+    width: 11px;
+    height: 11px;
+    margin-left: 0.5em;
+    cursor: pointer;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+}

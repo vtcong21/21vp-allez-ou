@@ -1,7 +1,10 @@
 const User = require('../models/user');
 const Tour = require('../models/tour'); 
-const Item = require('../models/item'); 
+const Item = require('../models/item');
+const axios = require('axios');
 const cron = require('node-cron');
+
+const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
 
 function convertGenderToVietnamese(gender) {
     if (gender === "Male") {
@@ -122,24 +125,14 @@ const getOrderHistoryPage = async (req, res) => {
             tour = { ...tour.toObject(), date: formattedStartDate };
 
             return {
-                // status: item.status,
-                // code: item.tourCode,
-                // itemId: item._id,
-
-                // imgURL: tour.cardImgUrl,
-                // name: tour.name,
-                // date: tour.date,
-                // numOfTickets: item.tickets.length,
-                // totalPrice: item.totalPrice,
-                // startPlace: tour.startPlace.name,
                 tour,
                 item,
             };
         }));
 
-        const orderSuccess = orderItems.filter(order => order.status === 'Success');
-        const orderCompleted = orderItems.filter(order => order.status === 'Completed');
-        const orderCancelled = orderItems.filter(order => order.status === 'Cancelled');
+        const orderSuccess = orderItems.filter(order => order.item.status === 'Success');
+        const orderCompleted = orderItems.filter(order => order.item.status === 'Completed');
+        const orderCancelled = orderItems.filter(order => order.item.status === 'Cancelled');
 
         const user = req.user;
         res.render('orderHistory', { user, orderSuccess, orderCompleted, orderCancelled, title: 'null' });
@@ -150,6 +143,8 @@ const getOrderHistoryPage = async (req, res) => {
     }
 };
 
+
+//---------------------------------------------------------------------------------
 const updateItemStatus = async () => {
     try {
         const currentDate = new Date();
@@ -186,10 +181,10 @@ const updateItemStatus = async () => {
     }
 };
 
-
 cron.schedule('0 0 * * *', () => {
     updateItemStatus();
 });
+//---------------------------------------------------------------------------
 
 const getOrderDetails = async (req, res) => {
     try {
@@ -215,13 +210,104 @@ const getOrderDetails = async (req, res) => {
     }
 };
 
-// const cancelOrder = async (req, res) => {
+const cancelOrder = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const orderId = req.params.code;
+        
+        const user = await User.findById(userId).populate('orders');
+        
+        const order = user.orders.find(order => order._id.equals(orderId));
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
 
-// };
+        if (order.status === 'Completed' || order.status === 'Cancelled') {
+            return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
+        }
 
-// const getTransactionPage = async (req, res) => {
+        order.status = 'Cancelled';
+        order.cancelDate = Date.now();
+        await order.save();
 
-// };
+        res.status(200).json({ message: 'Order has been successfully canceled' });
+
+        // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+        //     senderAccountId: webPaymentAccountId,
+        //     recipientAccountId: userId,
+        //     amount: order.totalPrice,
+        //     itemId: order._id
+        // });
+
+        // if (response.status === 400) {
+        //     return res.status(400).json({ error: 'Insufficient balance' });
+        // } else if (response.data.success) {
+        //     // tạo order -> gửi mail -> trừ remain slots
+        //     // await createAnOrder(cartItem, user, item);
+        //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
+        //     // tour.remainSlots -= item.tickets.length;
+        //     // return res.json({ success: true });
+        // } else {
+        //     return res.status(500).json({ error: 'Payment failed' });
+        // }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const getPaymentHistoryPage = async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const userOrders = await User.findById(userId).populate('orders');
+        if (!userOrders) {
+            return res.status(404).send('There are no orders in the order history');
+        }
+
+        const paymentList = [];
+        await Promise.all(userOrders.orders.map(async (item) => {
+            let paymentDetails;
+            let tour = await Tour.findOne({ code: item.tourCode });
+
+            const formattedOrderDate = changeDateToString(item.orderDate);
+            const formattedCancelDate = changeDateToString(item.cancelDate);
+            itemDate = { ...tour.toObject(), orderDate: formattedOrderDate, cancelDate: formattedCancelDate };
+
+            if (item.status === 'Success' || item.status === 'Completed') {
+                paymentDetails = {
+                    name: tour.name,
+                    date: itemDate.date,
+                    totalPrice: item.totalPrice
+                };
+            } else if (item.status === 'Cancelled') {
+                paymentDetails = [
+                    {
+                        name: tour.name,
+                        date: itemDate.date,
+                        totalPrice: item.totalPrice
+                    },
+                    {
+                        name: tour.name,
+                        date: itemDate.cancelDate,
+                        totalPrice: item.totalPrice
+                    }
+                ];
+            }
+
+            if (paymentDetails) {
+                paymentList.push(paymentDetails);
+            }
+        }));
+
+        const user = req.user;
+        // res.render('paymentHistory', { user, paymentList, title: 'null' });
+        res.status(200).json({ paymentList })
+
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 module.exports = {
     addNewItem,
@@ -229,6 +315,8 @@ module.exports = {
     deleteItem,
     getOrderHistoryPage,
     getOrderDetails,
-    // cancelOrder,
-    // getTransactionPage,
+    cancelOrder,
+    getPaymentHistoryPage,
+
+    updateItemStatus,
 };

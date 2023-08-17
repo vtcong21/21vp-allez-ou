@@ -115,7 +115,15 @@ const tourDate1 = departureDate;
                     </div>
                 </div>
                 <div class="col-3 text-right">
-                    <button id="tacvu" type="button">&#8230;</button>
+                <div class="dropdown">
+                <button class="btn btn-secondary" id="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ...
+                </button>
+                <ul class="dropdown-menu">
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Xóa Tour</a></li>
+                <li><a  class="dropdown-item" href="#"><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
+                </ul>
+            </div>
                 </div>
             </div>
             <div class="row" id="code-tour">
@@ -169,6 +177,24 @@ const tourDate1 = departureDate;
     renderPagination();
     
 }
+const confirmDeleteButton = document.getElementById("confirmDeleteButton");
+let tourId = null;
+function getTourId(event) {
+    tourId = event.currentTarget.getAttribute("data-id");
+}
+confirmDeleteButton.addEventListener("click", function () {
+    console.log(tourId);  
+    axios
+      .delete(`/tours/${tourId}`, {
+      })
+      .then((response) => {
+        console.log(response.data);
+        changePage(page, hiddenTourDataList);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  });
 let isHidden = false; // Khai báo biến isHidden mặc định là false
 
 function renderPagination(hiddenTourDataList) {
@@ -216,8 +242,6 @@ function changePage(page, hiddenTourDataList) {
     }
 
     renderTourPage(currentPage);
-
-    // Hiển thị lại phân trang
     renderPagination(hiddenTourDataList);
 }
 
@@ -246,6 +270,8 @@ document.addEventListener("DOMContentLoaded", function() {
       const newInput = document.createElement("input");
       newInput.classList.add("form-control");
       newInput.setAttribute("placeholder", "");
+      newInput.setAttribute("id","ngay" + currentNgay);
+
   
       const newTextInput = document.createElement("div");
       newTextInput.classList.add("text-input");
@@ -263,4 +289,28 @@ document.addEventListener("DOMContentLoaded", function() {
       // Tăng số lượng ngày hiện tại
       currentNgay++;
     });
+    const buttonBotNgay = document.getElementById("button-bot-ngay");
+
+// Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
+buttonBotNgay.addEventListener("click", function() {
+  // Lấy danh sách tất cả các ngày
+  const ngayDivs = document.getElementsByClassName("container-ngay");
+
+  // Kiểm tra nếu vẫn còn ngày trong container
+  if (ngayDivs.length > 0) {
+    // Lấy ngày cuối cùng
+    const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
+
+    // Xóa ngày cuối cùng khỏi container
+    ngayContainer.removeChild(lastNgayDiv);
+  }
+  if(currentNgay >3) 
+  { 
+    currentNgay--;
+  } 
+  else{ 
+    alert('Số ngày tối thiểu là 2.');
+  }
+});
   });
+  // Lấy đối tượng button và container chứa các ngày

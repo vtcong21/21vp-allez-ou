@@ -25,22 +25,14 @@ router.get('/orderHistory'
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
-router.get('/orderHistory/:itemId'
+router.put('/orderHistory/:code'
     , authMiddleware.authenticateToken
-    , cartController.getOrderDetails
+    , cartController.cancelOrder
 );
-// router.post('/orderDetails/:code'
-//     , authMiddleware.authenticateToken
-//     , cartController.cancelOrder
-// );
 
-
-// router.get('/paymentHistory'
-//     , authMiddleware.authenticateToken
-//     , cartController.getTransactionPage
-//     );
-
-
-
+router.get('/paymentHistory'
+    , authMiddleware.authenticateToken
+    , cartController.getPaymentHistoryPage
+);
 
 module.exports = router;
