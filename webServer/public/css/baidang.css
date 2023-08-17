@@ -199,6 +199,39 @@ line-height: normal;
     color: white;
 
 }
+#button-them-ngay-change{ 
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #F14868;
+    background-color: white; 
+    color: #F14868;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: 0.6rem !important;
+} 
+#button-them-ngay-change:active{ 
+    border: 1px solid white;
+    background-color: #F14868;
+    color: white;
+
+}
+#button-bot-ngay-change{ 
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #F14868;
+    background-color: white; 
+    color: #F14868;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-top: 0.6rem !important;
+
+} 
+#button-bot-ngay-change:active{ 
+    border: 1px solid white;
+    background-color: #F14868;
+    color: white;
+
+}
 
 #container-ngay{ 
     border-bottom: 0.2rem !important;
