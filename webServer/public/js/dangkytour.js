@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const ngaysinhInput = document.getElementById('ngay-sinh');
 
             const soDienThoaiPattern = /^0\d{9}$/;
-            const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; // Biểu thức chính quy để kiểm tra email
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Biểu thức chính quy để kiểm tra email
             if (!hoTenInput.value || !soDienThoaiInput.value || !diaChiInput.value || !emailInput.value || !genderInput.value ||
                 !hoten1Input.value || !ngaysinhInput.value) {
                 alert('Vui lòng điền đầy đủ thông tin!');
@@ -179,15 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var totalQuantity = quantities.reduce((sum, quantity) => sum + quantity, 0);
         tonghanhkhachDisplay.textContent = totalQuantity + " hành khách";
     }
-    function minusQuantity(index) {
-        if (quantities[index] > 0) {
-            quantities[index]--;
-            updateQuantityDisplay(index);
-            if (quantities[index] >= 1) {
-                removeInputs(index);
-            }
-        }
-    }
+
 
     function updateTotalDisplay() {
         var total = 0;
@@ -218,6 +210,22 @@ document.addEventListener("DOMContentLoaded", function () {
             updateQuantityDisplay(index);
             if (quantities[index] >= 2) {
                 addInputs(index);
+            }
+        } else if (quantities[index] == maxQuantity) {
+            alert('Vượt quá số lượng vé');
+        }
+    }
+    function minusQuantity(index) {
+        if (index === 0 && quantities[0] === 1) {
+            alert('Ít nhất 1 người lớn');
+            return false;
+        }
+        if (quantities[index] > 0) {
+            quantities[index]--;
+            updateQuantityDisplay(index);
+            if (quantities[index] >= 1) {
+                removeInputs(index);
+                updateQuantityDisplay(index);
             }
         }
     }
