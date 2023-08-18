@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tickets: tickets,
                 totalPrice: totalPrice
             }
+
             const button = document.getElementById('button-order-btn');
             button.dataset.bsTarget = '#exampleModalToggle';
             const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
@@ -103,7 +104,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const modal2 = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));
             const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
-
+            const buttonxacnhan = document.getElementById('button-xacnhan');
+            buttonxacnhan.onclick = async () => {
             try {
                 const checkPasswordResponse = await axios.post('/auth/checkPassword', {
                     password: xacnhanmatkhauInput
@@ -136,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } catch (error) {
                 // Xử lý lỗi nếu có
                 alert('Đã xảy ra lỗi khi gọi API kiểm tra mật khẩu: ' + error.message);
+            }
             }
 
         };

@@ -231,13 +231,13 @@ function changePage(page, hiddenTourDataList) {
 document.addEventListener("DOMContentLoaded", () => {
     fetchTourInformation();
 });
-document.addEventListener("DOMContentLoaded", function() {
+let currentNgay_create = 3;
+document.addEventListener("DOMContentLoaded", function(event) {
     // Lấy đối tượng button và container chứa các ngày
     const buttonThemNgay = document.getElementById("button-them-ngay");
     const ngayContainer = document.getElementById("ngay-container");
   
     // Số lượng ngày hiện tại
-    let currentNgay = 3;
   
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
@@ -248,18 +248,18 @@ document.addEventListener("DOMContentLoaded", function() {
       // Tạo các phần tử con bên trong div mới
       const newLabel = document.createElement("label");
       newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
-      newLabel.textContent = "Ngày " + currentNgay;
+      newLabel.textContent = "Ngày " + currentNgay_create;
   
       const newInput = document.createElement("input");
       newInput.classList.add("form-control");
       newInput.setAttribute("placeholder", "");
-      newInput.setAttribute("id","ngay" + currentNgay);
+      newInput.setAttribute("id","ngay" + currentNgay_create);
 
   
       const newTextInput = document.createElement("div");
       newTextInput.classList.add("text-input");
       newTextInput.setAttribute("contenteditable", "");
-      newTextInput.setAttribute("id", "ngay" + currentNgay + "-input");
+      newTextInput.setAttribute("id", "ngay" + currentNgay_create + "-input");
   
       // Chèn các phần tử con vào div mới
       newNgayDiv.appendChild(newLabel);
@@ -270,7 +270,8 @@ document.addEventListener("DOMContentLoaded", function() {
       ngayContainer.appendChild(newNgayDiv);
   
       // Tăng số lượng ngày hiện tại
-      currentNgay++;
+      currentNgay_create++;
+      console.log(currentNgay_create);
     });
     const buttonBotNgay = document.getElementById("button-bot-ngay");
 
@@ -287,22 +288,23 @@ buttonBotNgay.addEventListener("click", function() {
     // Xóa ngày cuối cùng khỏi container
     ngayContainer.removeChild(lastNgayDiv);
   }
-  if(currentNgay >3) 
+  if(currentNgay_create >3) 
   { 
-    currentNgay--;
+    currentNgay_create--;
   } 
   else{ 
     alert('Số ngày tối thiểu là 2.');
   }
 });
   });
-  document.addEventListener("DOMContentLoaded", function() {
+  let currentNgay = 3;
+
+  document.addEventListener("DOMContentLoaded", function(event) {
     // Lấy đối tượng button và container chứa các ngày
     const buttonThemNgay = document.getElementById("button-them-ngay-change");
     const ngayContainer = document.getElementById("ngay-container2");
   
     // Số lượng ngày hiện tại
-    let currentNgay = 3;
   
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
@@ -359,4 +361,82 @@ buttonBotNgay.addEventListener("click", function() {
       }
     });
 });
-  // Lấy đối tượng button và container chứa các ngày
+const createTour = async (currentNgay_create) => {
+  // Lấy giá trị từ các ô input HTML
+  const name = document.getElementById('ten-tour-input').value;
+  const code = document.getElementById('ma-tour-input').value;
+  const price = parseFloat(document.getElementById('gia-ve-nguoi-lon-input').value);
+//   const startPlaceCode = document.getElementById('start-place-code').value;
+  const startPlaceName = document.getElementById('diem-khoi-hanh-input').value;
+//   const endPlaceCode = document.getElementById('end-place-code').value;
+  const endPlaceName = document.getElementById('diem-den-input').value;
+  const date = document.getElementById('ngay-khoi-hanh-input').value;
+  const time = document.getElementById('gio-khoi-hanh-input').value;
+  const remainSlots = parseInt(document.getElementById('so-ve-ban-input').value);
+  const cardImgUrl = document.getElementById('hinh1-input').value;
+  const img1Url = document.getElementById('hinh2-input').value;
+  const img2Url = document.getElementById('hinh3-input').value;
+  const img3Url = document.getElementById('hinh4-input').value;
+  const img4Url = document.getElementById('hinh5-input').value;
+  const transport = document.getElementById('phuong-tien-input').value;
+  const food = document.getElementById('am-thuc-input').value;
+  const hotel = document.getElementById('khach-san-input').value;
+
+  // Lấy dữ liệu từ các ô input của schedules
+  const schedules = [];
+
+  for (let i = 1; i <= currentNgay_create; i++) {
+    const dayInput = document.getElementById(`ngay${i}`).value;
+    const dayDetail = document.getElementById(`ngay${i}-input`).innerText;
+
+    const schedule = {
+      name: dayInput,
+      schedule_detail: dayDetail
+    };
+
+    schedules.push(schedule);
+  }
+
+  // Tạo đối tượng dữ liệu JSON
+  const tourData = {
+    name: name,
+    code: code,
+    price: price,
+    startPlace: {
+    //   code: startPlaceCode,
+      name: startPlaceName
+    },
+    endPlaces: [
+      {
+        // code: endPlaceCode,
+        name: endPlaceName
+      }
+    ],
+    date: date,
+    time: time,
+    remainSlots: remainSlots,
+    cardImgUrl: cardImgUrl,
+    imgUrls: [img1Url, img2Url, img3Url, img4Url],
+    transport: transport,
+    food: food,
+    hotel: hotel,
+    schedules: schedules,
+    isHidden: false,
+    numOfDays: currentNgay_create -1 , 
+    slots : remainSlots
+
+
+    // Thêm các trường dữ liệu khác vào đối tượng JSON
+  };
+
+  try {
+    // Gửi yêu cầu tạo tour tới API
+    const response = await axios.post('/tours', tourData);
+    console.log(response.data); // Xử lý dữ liệu phản hồi từ API (nếu cần)
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
+document.getElementById('done-tao-tour').addEventListener('click', () => createTour(currentNgay_create));
