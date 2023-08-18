@@ -2,10 +2,40 @@ function logOut() {
   window.location.href = '/auth/logout';
 }
 
+function removeErrorNotify(){
+  const emptyEmail = document.getElementById('emptyEmail');
+    const emptyPwd = document.getElementById('emptyPwd');
+
+    emptyEmail.classList.add('d-none');
+    emptyPwd.classList.add('d-none');
+}
+
 async function login() {
   try {
     const email = document.getElementsByName('email')[0].value;
     const password = document.getElementsByName('password')[0].value;
+
+    const emptyEmail = document.getElementById('emptyEmail');
+    const emptyPwd = document.getElementById('emptyPwd');
+
+    // Ẩn thông bá lỗi trước khi kiểm tra
+    emptyEmail.classList.add('d-none');
+    emptyPwd.classList.add('d-none');
+    let flag = true;
+
+    // Kiểm tra xem email và password có trống hay không
+    if (email.trim() === '') {
+      emptyEmail.classList.remove('d-none');
+      flag = false;
+    }
+    if (password.trim() === '') {
+      emptyPwd.classList.remove('d-none');
+      flag = false;
+    }
+    console.log(false);
+    if (flag == false){
+      return;
+    }
     const response = await axios.post('/auth/login', {
       email: email,
       password: password

@@ -120,19 +120,24 @@ function displayOrderList(orders, orderTab, orderStatus) {
     const endIndex = startIndex + itemsPerPage;
     const orderToShow = orders.slice(startIndex, endIndex);
     for (let i = 0; i < orderToShow.length; i++) {
+        console.log(orderToShow[i]);
         const row = makeOrderRow(orderToShow[i], orderStatus, statusClass, i);
         orderTab.insertAdjacentHTML("beforeend", row);
     }
 }
 
 function makeOrderRow(order, status, className, index) {
+    let representerName = "";
+    if (order.representer && order.representer.name) {
+        representerName = order.representer.name;
+    }
     return `
 <tr>
 <td>
     <div class="d-flex align-items-center">
         <img src="/img/client.png" alt="" style="width: 30px; height: 30px;" class="rounded-circle" />
         <div class="ms-3">
-            <p class="fw-bold mt-2 name">${order.representer.name}</p>
+            <p class="fw-bold mt-2 name">${representerName }</p>
         </div>
     </div>
 </td>
@@ -269,7 +274,6 @@ function maketTicketRow(ticket, index) {
 }
 
 // Search order By tour
-
 async function searchOrderByCodeTour() {
     try {
         const tourCode = document.getElementById("search").value;

@@ -176,6 +176,24 @@ const getTourByCode = async (req, res) => {
   }
 };
 
+const editTourByCode = async (req, res) => {
+  const tourCode = req.params.code;
+  const updatedInfo = req.body;
+
+  try {
+    const updatedTour = await Tour.findOneAndUpdate({ code: tourCode }, updatedInfo, {
+      new: true,
+    });
+
+    if (!updatedTour) {
+      return res.status(404).json({ message: 'Tour not found' });
+    }
+
+    res.status(200).json(updatedTour);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
 
 module.exports = {
   getAllTours,
@@ -185,5 +203,6 @@ module.exports = {
   searchTours,
   getTourInfoData,
   getTourSearchPage,
-  getHiddenTours
+  getHiddenTours,
+  editTourByCode
 };

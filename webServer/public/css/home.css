@@ -15,7 +15,7 @@ html{
 	transition: transform 0.05s ease;
 	transition: transform 0.05s ease, -webkit-transform 0.05s ease;
 	-webkit-backface-visibility: visible;
-	        backface-visibility: visible;
+	backface-visibility: visible;
 }
 body{
     background-color: #F5F5F5;
