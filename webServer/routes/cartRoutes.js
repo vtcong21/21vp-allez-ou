@@ -25,10 +25,10 @@ router.get('/orderHistory'
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
-router.put('/orderHistory/:code'
-    , authMiddleware.authenticateToken
-    , cartController.cancelOrder
-);
+// router.put('/orderHistory/:code'
+//     , authMiddleware.authenticateToken
+//     , cartController.cancelOrder
+// );
 
 router.get('/paymentHistory'
     , authMiddleware.authenticateToken

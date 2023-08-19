@@ -210,51 +210,51 @@ const getOrderDetails = async (req, res) => {
     }
 };
 
-const cancelOrder = async (req, res) => {
-    try {
-        const userId = req.userId;
-        const orderId = req.params.code;
+// const cancelOrder = async (req, res) => {
+//     try {
+//         const userId = req.userId;
+//         const orderId = req.params.code;
         
-        const user = await User.findById(userId).populate('orders');
+//         const user = await User.findById(userId).populate('orders');
         
-        const order = user.orders.find(order => order._id.equals(orderId));
-        if (!order) {
-            return res.status(404).json({ message: 'Order not found' });
-        }
+//         const order = user.orders.find(order => order._id.equals(orderId));
+//         if (!order) {
+//             return res.status(404).json({ message: 'Order not found' });
+//         }
 
-        if (order.status === 'Completed' || order.status === 'Cancelled') {
-            return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
-        }
+//         if (order.status === 'Completed' || order.status === 'Cancelled') {
+//             return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
+//         }
 
-        order.status = 'Cancelled';
-        order.cancelDate = Date.now();
-        await order.save();
+//         order.status = 'Cancelled';
+//         order.cancelDate = Date.now();
+//         await order.save();
 
-        res.status(200).json({ message: 'Order has been successfully canceled' });
+//         res.status(200).json({ message: 'Order has been successfully canceled' });
 
-        // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
-        //     senderAccountId: webPaymentAccountId,
-        //     recipientAccountId: userId,
-        //     amount: order.totalPrice,
-        //     itemId: order._id
-        // });
+//         // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+//         //     senderAccountId: webPaymentAccountId,
+//         //     recipientAccountId: userId,
+//         //     amount: order.totalPrice,
+//         //     itemId: order._id
+//         // });
 
-        // if (response.status === 400) {
-        //     return res.status(400).json({ error: 'Insufficient balance' });
-        // } else if (response.data.success) {
-        //     // tạo order -> gửi mail -> trừ remain slots
-        //     // await createAnOrder(cartItem, user, item);
-        //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
-        //     // tour.remainSlots -= item.tickets.length;
-        //     // return res.json({ success: true });
-        // } else {
-        //     return res.status(500).json({ error: 'Payment failed' });
-        // }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
+//         // if (response.status === 400) {
+//         //     return res.status(400).json({ error: 'Insufficient balance' });
+//         // } else if (response.data.success) {
+//         //     // tạo order -> gửi mail -> trừ remain slots
+//         //     // await createAnOrder(cartItem, user, item);
+//         //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
+//         //     // tour.remainSlots -= item.tickets.length;
+//         //     // return res.json({ success: true });
+//         // } else {
+//         //     return res.status(500).json({ error: 'Payment failed' });
+//         // }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Internal server error' });
+//     }
+// };
 
 const getPaymentHistoryPage = async (req, res) => {
     try {
@@ -315,7 +315,7 @@ module.exports = {
     deleteItem,
     getOrderHistoryPage,
     getOrderDetails,
-    cancelOrder,
+    // cancelOrder,
     getPaymentHistoryPage,
 
     updateItemStatus,
