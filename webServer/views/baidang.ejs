@@ -8,11 +8,11 @@
     <div class="grey-line"></div>
     <div class="nav-item d-flex">
         <li class="nav-item" role="presentation">
-            <a class="nav-link active nav-order-status" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1"
+            <a class="nav-link active nav-order-status" id="ex1-tab-1" data-mdb-toggle="pill" 
                 role="tab" aria-controls="ex1-pills-1" aria-selected="false">Đang hoạt động</a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link nav-order-status" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2" role="tab"
+            <a class="nav-link nav-order-status" id="ex1-tab-2" data-mdb-toggle="pill"  role="tab"
                 aria-controls="ex1-pills-2" aria-selected="true">Đã kết thúc</a>
         </li>
     </div>
@@ -87,29 +87,28 @@
                         <div class="d-flex flex-column mb-5 fv-row">
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Giá vé người lớn</label>
                             <input class="form-control" placeholder="" id="gia-ve-nguoi-lon-input"/>
-                            <div class="row g-9 mb-5" id="ngay-gio-khoihanh">
+                            <div class="row g-9 mb-5" id="ngay-gio-khoihanh" style="margin-top: 0;">
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Ngày khởi hành</label>
-                                    <input class="form-control" placeholder="" id="ngay-khoi-hanh-input"/>
+                                    <input type="date" class="form-control" placeholder="" id="ngay-khoi-hanh-input"/>
                                 </div>
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Giờ khởi hành</label>
-                                    <input class="form-control" placeholder="" id="gio-khoi-hanh-input"/>
+                                    <input type="time" class="form-control" placeholder="" id="gio-khoi-hanh-input"/>
                                 </div>
                             </div>
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Số vé bán</label>
-                            <input class="form-control" placeholder="" id="so-ve-ban-input"/>
+                            <input type="number" class="form-control" placeholder="" id="so-ve-ban-input"/>
                         </div>
                         <div class="d-flex flex-column mb-5 fv-row" id="hinhanh">
                             <label class="fs-5 fw-semibold mb-2" id="gia-ve-nguoi-lon">Hình 1(card)</label>
                             <input class="form-control" placeholder="" id="hinh1-input"/>
-                            <div class="row g-9 mb-5" id="hinh-2-3">
+                            <div class="row g-9 mb-5" id="hinh-2-3" style="margin-top: 0;">
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 2</label>
-                                    <input class="form-control" placeholder="" id="hinh2-input"/>
+                                    <label class="fs-5 fw-semibold mb-2" id="hinh-2">Hình 2</label>                                    <input class="form-control" placeholder="" id="hinh2-input"/>
                                 </div>
                                 <div class="col-md-6 fv-row">
-                                    <label class="fs-5 fw-semibold mb-2" id="ngay-khoi-hanh">Hình 3</label>
+                                    <label class="fs-5 fw-semibold mb-2" id="hinh-3">Hình 3</label>
                                     <input class="form-control" placeholder="" id="hinh3-input"/>
                                 </div>
                             </div>
@@ -132,16 +131,6 @@
                             <label class="fs-5 fw-semibold mb-2" id="khach-san">Khách sạn</label>
                             <input class="form-control" placeholder="" id="khach-san-input"/> 
                         </div>
-                        <!-- <div class="d-flex flex-column fv-row" id="ngay-container">
-                            <label class="fs-5 fw-semibold mb-2" id="thongtintungngay" >Ngày 1</label>
-                            <input class="form-control" placeholder=""/>
-                            <div class="text-input" contenteditable id="ngay1-input"></div>
-                        </div>
-                        <div class="d-flex flex-column fv-row" id="ngay-container">
-                            <label class="fs-5 fw-semibold mb-2" id="thongtintungngay">Ngày 2</label>
-                            <input class="form-control" placeholder=""/>
-                            <div class="text-input" contenteditable id="ngay2-input"></div>
-                        </div> -->
                         <div id="ngay-container">
                             <div class="d-flex flex-column fv-row" id="container-ngay-1">
                               <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-1">Ngày 1</label>
@@ -175,8 +164,8 @@
                     <!-- footer modal -->
                     <div class="modal-footer flex-center">
                         <!-- <button type="reset" id="kt_modal_new_address_cancel" class="btn btn-light me-3">Discard</button> -->
-                        <button type="submit" id="kt_modal_new_address_submit" class="btn btn-primary">
-                            <span class="indicator-label">Submit</span>
+                        <button type="submit" id="done-tao-tour" class="btn btn-primary">
+                            <span class="indicator-label">Tạo tour</span>
                         </button>
                     </div>
                 </form>

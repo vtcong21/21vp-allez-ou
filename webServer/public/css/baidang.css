@@ -150,6 +150,12 @@ line-height: normal;
 #hinh-2-3{ 
     margin-bottom: 0.2rem !important;
 }
+#hinh-2{ 
+    margin-top: 0;
+} 
+#hinh-3{ 
+    margin-top: 0;
+}
 #hinhanh{ 
     margin-bottom: 0.1rem !important;
 }
@@ -371,4 +377,10 @@ line-height: normal;
     cursor: pointer;
     margin-right: 0.5em;
     margin-bottom: 0.5em;
+}
+#ex1-tab-1:hover{ 
+    cursor: pointer;
+}
+#ex1-tab-2:hover{ 
+    cursor: pointer;
 }
