@@ -33,10 +33,15 @@ router.get('/toursSearchPage'
 router.get('/tourData/:code'
     , tourController.getTourInfoData);
 
-// xóa tour, admin mới được xóa
-router.delete('/:code'
+// ẩn tour, admin mới được ẩn
+router.put('hideTour/:code'
     , authMiddleware.requireAdminRole
-    , tourController.deleteTour);
+    , tourController.hideTour);
+
+// hiện tour, admin mới được hiện
+router.put('displayTour/:code'
+, authMiddleware.requireAdminRole
+, tourController.displayTour);
 
 // render trang tour info
 router.get('/:code'

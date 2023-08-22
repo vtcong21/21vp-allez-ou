@@ -83,16 +83,43 @@ const createTour = async (req, res) => {
   }
 };
 
-const deleteTour = async (req, res) => {
+const hideTour = async (req, res) => {
   try {
     const code = req.params.code;
-    const deletedTour = await Tour.findOneAndDelete({ code });
+    const tour = await Tour.findOne({ code });
 
-    if (deletedTour) {
-      res.status(200).json({ message: 'Tour deleted successfully' });
-    } else {
-      res.status(404).json({ error: 'Tour not found' });
+    if (!tour) {
+      return res.status(404).json({ error: 'Tour not found' });
     }
+    if(tour.isHidden == true) {
+      return res.status(400).json({ error: 'Tour has been hidden' });
+    }
+
+    tour.isHidden = true;
+    await tour.save();
+
+    res.status(200).json({ message: 'Tour hidden successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete tour' });
+  }
+};
+
+const displayTour = async (req, res) => {
+  try {
+    const code = req.params.code;
+    const tour = await Tour.findOne({ code });
+
+    if (!tour) {
+      return res.status(404).json({ error: 'Tour not found' });
+    }
+    if(tour.isHidden == false) {
+      return res.status(400).json({ error: 'Tour is being displayed' });
+    }
+
+    tour.isHidden = false;
+    await tour.save();
+
+    res.status(200).json({ message: 'Tour displayed successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete tour' });
   }
@@ -185,11 +212,12 @@ const editTourByCode = async (req, res) => {
       new: true,
     });
 
-    if (!updatedTour) {
+    if (updatedTour) {
+      res.status(200).json({ message: 'Tour updated successfully' });
+    } else {
       return res.status(404).json({ message: 'Tour not found' });
     }
 
-    res.status(200).json(updatedTour);
   } catch (error) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -198,7 +226,8 @@ const editTourByCode = async (req, res) => {
 module.exports = {
   getAllTours,
   createTour,
-  deleteTour,
+  hideTour,
+  displayTour,
   getTourByCode,
   searchTours,
   getTourInfoData,
