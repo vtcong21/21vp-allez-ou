@@ -55,9 +55,15 @@ function showLoginModal() {
 }
 
 function showToast() {
-  const toastLiveExample = document.getElementById('liveToast')
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-  toastBootstrap.show()
+  const toastLiveExample = document.getElementById('liveToast');
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+  toastBootstrap.show();
+}
+
+function showToast2() {
+  const toastLiveExample2 = document.getElementById('liveToast2');
+  const toastBootstrap2 = bootstrap.Toast.getOrCreateInstance(toastLiveExample2);
+  toastBootstrap2.show();
 }
 
 async function addNewItem(code) {
@@ -68,18 +74,52 @@ async function addNewItem(code) {
   
     try {
       const response = await axios.post('../cart/addItem', { tourCode: tourCode });
-      
+      console.log(response.status);
       if (response.status === 200) {
         // Hiển thị thông báo toast
         console.log('thành công gửi post');
         showToast();
-      }
+      } 
     } catch (error) {
       console.log('thất bại gửi post');
-      console.error("Error:", error);
-
+      showToast2();
     }
   } else {
     showLoginModal();
   }
 }
+
+// Top tour bán chạy nhất
+async function getBestSellingTour() {
+  try {
+      const response = await axios.get("/tours/getTopSellingTours");
+
+      if (response.status === 200) {
+          displayBestSellingTour(response.data);
+      } else {
+          throw new Error("Lỗi khi gửi yêu cầu đến API");
+      }
+  } catch (error) {
+      console.error("Đã xảy ra lỗi:", error.message);
+  }
+}
+
+function displayBestSellingTour(tours) {
+  const topSellingTourContainer = document.getElementById("topSellingTour-container");
+  topSellingTourContainer.innerHTML = "";
+  for (let tour of tours) {
+      topSellingTourContainer.insertAdjacentHTML("beforeend", makeBestTourRow(tour));
+  }
+}
+function makeBestTourRow(tour) {
+  return `
+<div class="d-flex top-tour">
+<img src="${tour.cardImgUrl}">
+<a href="/tours/${tour.code}" class="mx-3">${tour.name}</a>
+<p>${tour.price.toLocaleString()}đ</p>
+</div>
+<div class="grey-line"></div>
+`;
+}
+
+getBestSellingTour();

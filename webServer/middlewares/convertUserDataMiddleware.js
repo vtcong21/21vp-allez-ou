@@ -28,7 +28,7 @@ const getUserData = async (req, res, next) => {
     try {
         //---Truyền hẳn user vào luôn
         let user = null;
-        if (req.userId) user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender').exec();
+        if (req.userId) user = await User.findById(req.userId).select('fullName email dateOfBirth phoneNumber gender isAdmin').exec();
         // Xử lí thông tin user ở đây
         if (user) {
             const formattedDateOfBirth = changeDateToString(user.dateOfBirth);
