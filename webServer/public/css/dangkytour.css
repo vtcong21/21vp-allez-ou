@@ -264,3 +264,7 @@ hr:not([size]){
     padding-right:0 ;
     padding-bottom: 2em;
 }
+.form-control{ 
+    padding-top: 0; 
+    padding-bottom: 0;
+}

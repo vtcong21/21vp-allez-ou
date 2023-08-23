@@ -253,12 +253,21 @@ document.addEventListener("DOMContentLoaded", function () {
         var col2 = document.createElement("div");
         col2.classList.add("col-md-3", "col-3");
 
-        var input2 = document.createElement("input");
-        input2.type = "text";
-        input2.classList.add("form-control");
-        input2.placeholder = "Nam/Nữ";
-        input2.classList.add(`gender-${index}`);
-        col2.appendChild(input2);
+        var select = document.createElement("select");
+select.classList.add("form-control");
+select.classList.add(`gender-${index}`);
+
+var option1 = document.createElement("option");
+option1.value = "Nam";
+option1.text = "Nam";
+select.appendChild(option1);
+
+var option2 = document.createElement("option");
+option2.value = "Nữ";
+option2.text = "Nữ";
+select.appendChild(option2);
+
+col2.appendChild(select);
 
         var col3 = document.createElement("div");
         col3.classList.add("col-md-4", "col-4");
