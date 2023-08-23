@@ -1,6 +1,8 @@
 const Dashboard = require('../models/dashboard');
+const Tour = require('../models/tour');
 const axios = require('axios');
 const cron = require('node-cron');
+
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
 
@@ -54,9 +56,31 @@ const updateRevenue = async () => {
     }
 };
 
+// update trạng thái ẩn, lập lịch 0:00 -----------------------------------------------------------------
+const updateToursState = async () => {
+    try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Đặt giờ, phút, giây, mili giây của ngày hôm nay thành 0 để so sánh chính xác ngày
+
+        const tours = await Tour.find({ date: today });
+
+        for (const tour of tours) {
+            if (tour.isHidden == false) {
+                tour.isHidden = true;
+            }
+            await tour.save(); // Cập nhật trạng thái isHidden của tour thành true
+        }
+
+        console.log('Updated tour state');
+    } catch (error) {
+        console.error('Error updating tour state:', error.message);
+    }
+};
+
 // Lên lịch chạy công việc cập nhật doanh thu vào lúc 0:00 hàng ngày
 cron.schedule('0 0 * * *', () => {
     updateRevenue();
+    updateToursState();
 });
 // --------------------------------------------------------------------------------------------
 
@@ -70,7 +94,7 @@ const updateTodayRevenue = async (req, res) => {
         });
         const paymentHistory = response.data.paymentHistory;
         console.log(response.data);
-        
+
         const today = new Date();
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
@@ -224,5 +248,6 @@ module.exports = {
     searchMonthlyRevenuesByYear,
     getRevenueLast7Days,
     updateRevenue,
-    updateTodayRevenue
+    updateTodayRevenue,
+    updateToursState
 }

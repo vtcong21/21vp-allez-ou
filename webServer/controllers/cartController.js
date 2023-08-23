@@ -39,6 +39,11 @@ const addNewItem = async (req, res) => {
         const userId = req.userId;
         const { tourCode } = req.body;
 
+        const checkAdmin = await User.findById(userId);
+        if(checkAdmin.isAdmin === true) {
+            return res.status(400).json({ message: 'Admin can not create tour cart' });
+        }
+
         const tour = await Tour.findOne({ code: tourCode });
         if (!tour) {
             return res.status(404).json({ message: 'Tour not found' });
@@ -67,6 +72,12 @@ const addNewItem = async (req, res) => {
 const getCartPage = async (req, res) => {
     try {
         const userId = req.userId;
+        const user = req.user;
+        
+        const checkAdmin = await User.findById(userId);
+        if(checkAdmin.isAdmin === true) {
+            return res.status(400).render('error');
+        }
 
         const userCart = await User.findById(userId).populate('cart');
         if (!userCart) {
@@ -97,7 +108,6 @@ const getCartPage = async (req, res) => {
             }
         }
 
-        const user = req.user;
         res.render('cart', { user, cartItems, title: 'null' });
 
     } catch (error) {
@@ -127,6 +137,11 @@ const deleteItem = async (req, res) => {
 const getOrderHistoryPage = async (req, res) => {
     try {
         const userId = req.userId;
+
+        const checkAdmin = await User.findById(userId);
+        if(checkAdmin.isAdmin === true) {
+            return res.status(400).render('error');
+        }
 
         const userOrders = await User.findById(userId).populate('orders');
         if (!userOrders) {
@@ -274,6 +289,11 @@ const cancelOrder = async (req, res) => {
 const getPaymentHistoryPage = async (req, res) => {
     try {
         const userId = req.userId;
+
+        const checkAdmin = await User.findById(userId);
+        if(checkAdmin.isAdmin === true) {
+            return res.status(400).render('error');
+        }
 
         const userOrders = await User.findById(userId).populate('orders');
         if (!userOrders) {

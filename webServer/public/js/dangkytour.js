@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         fullName: nameInput.value,
                         gender: genderInput.value,
                         dateOfBirth: dobInput.value,
-                        price: price[index]
+                        price: prices[index]
                     };
                     formData.push(data);
                 }
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 fullName: hoTenList[j].value,
                                 gender: genderList[j].value,
                                 dateOfBirth: ngaySinhList[j].value,
-                                price: price[index]
+                                price: prices[index]
                             };
                             formData.push(data);
                         }
@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
+        console.log(formData); // In ra formData để kiểm tra
         return formData;
     }
 
@@ -106,41 +107,22 @@ document.addEventListener('DOMContentLoaded', function () {
             const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
             const buttonxacnhan = document.getElementById('button-xacnhan');
             buttonxacnhan.onclick = async () => {
-            try {
-                const checkPasswordResponse = await axios.post('/auth/checkPassword', {
-                    password: xacnhanmatkhauInput
-                });
-
-                if (checkPasswordResponse.status === 200 && checkPasswordResponse.data.status === 'ok') {
-                    // Mật khẩu xác nhận đúng, gửi dữ liệu item tới API /user/pay
-                    try {
-                        const payResponse = await axios.post('/user/pay', {
-                            item: item
-                        });
-
-                        if (payResponse.status === 200) {
-                            // Đã thanh toán thành công, mở cửa sổ modal thứ 3
-                            modal2.hide(); // Ẩn cửa sổ modal thứ 2
-                            const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
-                            modal3.show(); // Hiển thị cửa sổ modal thứ 3
-                        } else {
-                            // Xử lý lỗi nếu có
-                            alert('Đã xảy ra lỗi khi gọi API thanh toán');
-                        }
-                    } catch (error) {
-                        // Xử lý lỗi nếu có
-                        alert('Đã xảy ra lỗi khi gọi API thanh toán: ' + error.message);
-                    }
-                } else {
-                    // Mật khẩu xác nhận không đúng, thông báo cho người dùng
-                    alert('Mật khẩu xác nhận không đúng');
+                try {
+                  const password = xacnhanmatkhauInput; // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
+                    console.log(password);
+                  const checkPasswordResponse = await axios.post('/auth/checkPassword', {
+                    password: password // Gửi mật khẩu vào body của yêu cầu POST
+                  });
+                  if (checkPasswordResponse){
+                    alert('1');
+                  }
+                  // Xử lý kết quả trả về nếu cần
+              
+                } catch (error) {
+                  // Xử lý lỗi nếu có
+                  alert('Mật Khẩu Nhập Vào Không Đúng ' + error.message);
                 }
-            } catch (error) {
-                // Xử lý lỗi nếu có
-                alert('Đã xảy ra lỗi khi gọi API kiểm tra mật khẩu: ' + error.message);
-            }
-            }
-
+              };
         };
 
     }
