@@ -88,3 +88,38 @@ async function addNewItem(code) {
     showLoginModal();
   }
 }
+
+// Top tour bán chạy nhất
+async function getBestSellingTour() {
+  try {
+      const response = await axios.get("/tours/getTopSellingTours");
+
+      if (response.status === 200) {
+          displayBestSellingTour(response.data);
+      } else {
+          throw new Error("Lỗi khi gửi yêu cầu đến API");
+      }
+  } catch (error) {
+      console.error("Đã xảy ra lỗi:", error.message);
+  }
+}
+
+function displayBestSellingTour(tours) {
+  const topSellingTourContainer = document.getElementById("topSellingTour-container");
+  topSellingTourContainer.innerHTML = "";
+  for (let tour of tours) {
+      topSellingTourContainer.insertAdjacentHTML("beforeend", makeBestTourRow(tour));
+  }
+}
+function makeBestTourRow(tour) {
+  return `
+<div class="d-flex top-tour">
+<img src="${tour.cardImgUrl}">
+<a href="/tours/${tour.code}" class="mx-3">${tour.name}</a>
+<p>${tour.price.toLocaleString()}đ</p>
+</div>
+<div class="grey-line"></div>
+`;
+}
+
+getBestSellingTour();

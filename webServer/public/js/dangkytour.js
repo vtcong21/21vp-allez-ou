@@ -104,9 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.show();
 
             const modal2 = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));
-            const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
             const buttonxacnhan = document.getElementById('button-xacnhan');
             buttonxacnhan.onclick = async () => {
+                const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
                 try {
                   const password = xacnhanmatkhauInput; // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
                     console.log(password);
@@ -114,13 +114,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     password: password // Gửi mật khẩu vào body của yêu cầu POST
                   });
                   if (checkPasswordResponse){
-                    alert('1');
+                    try {
+                        const payResponse = await axios.post('/user/pay', {
+                            item: item
+                        });
+
+                        if (payResponse.status === 200) {
+                            // Đã thanh toán thành công, mở cửa sổ modal thứ 3
+                            modal2.hide(); // Ẩn cửa sổ modal thứ 2
+                            const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
+                            modal3.show(); // Hiển thị cửa sổ modal thứ 3
+                        } else {
+                            // Xử lý lỗi nếu có
+                            alert('Đã xảy ra lỗi khi gọi API thanh toán');
+                        }
+                    } catch (error) {
+                        // Xử lý lỗi nếu có
+                        alert('Đã xảy ra lỗi khi gọi API thanh toán: ' + error.message);
+                    }
+                  }
+                  else { 
+                    alert('mat khau nhap vao khong dung');
                   }
                   // Xử lý kết quả trả về nếu cần
               
                 } catch (error) {
                   // Xử lý lỗi nếu có
-                  alert('Mật Khẩu Nhập Vào Không Đúng ' + error.message);
+                  alert('Mật Khẩu Nhập Vào Không Đúng ');
                 }
               };
         };
@@ -233,12 +253,21 @@ document.addEventListener("DOMContentLoaded", function () {
         var col2 = document.createElement("div");
         col2.classList.add("col-md-3", "col-3");
 
-        var input2 = document.createElement("input");
-        input2.type = "text";
-        input2.classList.add("form-control");
-        input2.placeholder = "Nam/Nữ";
-        input2.classList.add(`gender-${index}`);
-        col2.appendChild(input2);
+        var select = document.createElement("select");
+select.classList.add("form-control");
+select.classList.add(`gender-${index}`);
+
+var option1 = document.createElement("option");
+option1.value = "Nam";
+option1.text = "Nam";
+select.appendChild(option1);
+
+var option2 = document.createElement("option");
+option2.value = "Nữ";
+option2.text = "Nữ";
+select.appendChild(option2);
+
+col2.appendChild(select);
 
         var col3 = document.createElement("div");
         col3.classList.add("col-md-4", "col-4");

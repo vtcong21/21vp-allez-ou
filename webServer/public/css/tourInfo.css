@@ -430,3 +430,43 @@ body{
         margin: 1em;
     }
 }
+
+/* card */
+.top-tour img{
+    width: 70px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.top-tour a{
+    width: 35ch;
+    color: #000;
+    font-family: Nunito;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.grey-line{
+    margin: 1.5em 0;
+    border-top: 1.8px solid rgba(159, 158, 185, 0.25);
+}
+
+.top-tour p{
+    color: #4F6CFF;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.tour-top-container{
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 22.5px;
+    padding: 3em 3em 1em;
+}

@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <%- include('partials/head') %>
-        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="/css/tourInfo.css" />
     </head>
     <body>
@@ -212,6 +211,17 @@
                                     <p class="tour-review__text"><%- tour.schedules[i].name  %></p>
                                 </div>
                             <% } %>
+                        </div>
+                    </div>
+                    <div class="order-sm-4 mb-4 tour-top-container">
+                        <h3 class="tour-review__title mb-5">Top các tour bán chạy</h3>
+                        <div class="d-flex flex-column justify-content-around mt-4" id="topSellingTour-container">
+                            <div class="d-flex top-tour">
+                                <img src="https://media.travel.com.vn/destination/tf_221101121724_534302.jpg">
+                                <a href="/tours/NDPQC001-026-240623"  class="mx-3">Phú Quốc - Trải nghiệm chèo Sup - Đạp xe tại Rạch Vẹm hoang sơ - Cắm trại đêm - BBQ tối</a>
+                                <p>2,700,000đ</p>
+                            </div>
+                            <div class="grey-line"></div>
                         </div>
                     </div>
                 </div>

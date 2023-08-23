@@ -43,6 +43,10 @@ router.put('displayTour/:code'
 , authMiddleware.requireAdminRole
 , tourController.displayTour);
 
+// Lấy các top tour
+router.get('/getTopSellingTours'
+    , tourController.getTopSellingTours);
+
 // render trang tour info
 router.get('/:code'
     , authMiddleware.authenticateToken
@@ -52,5 +56,6 @@ router.get('/:code'
 router.put('/edit/:code'
     , authMiddleware.requireAdminRole
     , tourController.editTourByCode);
+
 
 module.exports = router;
