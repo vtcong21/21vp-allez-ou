@@ -26,8 +26,8 @@ router.get('/getOrderPage/:itemId'
 , userController.getOrderPage
 );
 // lưu thông tin sau khi đăng ký tour
-router.put('/saveOrder/:itemId'
-, authMiddleware.authenticateToken
-, userController.updateItemInfo
-);
+// router.put('/saveOrder/:itemId'
+// , authMiddleware.authenticateToken
+// , userController.updateItemInfo
+// );
 module.exports = router;

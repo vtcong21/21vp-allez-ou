@@ -16,10 +16,28 @@ h3 {
 h6 {
     color: black;
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 500;
     padding-bottom: 0.5em;
+    padding-right: 1.2em;
 }
+
+.refunded {
+    color: green !important;
+    font-size: 1.29rem;
+    font-weight: 600;
+}
+
+.not-refunded {
+    color: red !important;
+    font-size: 1.29rem;
+    font-weight: 600;
+}
+
+.date-v2 {
+    font-size: 1.16rem;
+}
+
 
 .money {
     font-size: 1.2rem;

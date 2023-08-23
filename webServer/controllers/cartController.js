@@ -29,6 +29,10 @@ function changeDateToString(currentTime) {
   
     return day + "/" + month + "/" + year;
 }
+function sortByDate(list) {
+    list.sort((a, b) => a.date - b.date);
+}
+
 
 const addNewItem = async (req, res) => {
     try {
@@ -69,20 +73,29 @@ const getCartPage = async (req, res) => {
             return res.status(404).send('There are no products in the shopping cart');
         }
 
-        let cartItems = await Promise.all(userCart.cart.map(async (item) => {
-            let tour = await Tour.findOne({ code: item.tourCode });
-            const formattedStartDate = changeDateToString(tour.date);
-            tour = { ...tour.toObject(), date: formattedStartDate };
+        let cartItems = [];
 
-            return {
-                imgURL: tour.cardImgUrl,
-                code: item.tourCode,
-                name: tour.name,
-                date: tour.date,
-                price: tour.price,
-                itemId: item._id,
-            };
-        }));
+        for (const item of userCart.cart) {
+            let tour = await Tour.findOne({ code: item.tourCode });
+            if (!tour) {
+                // Xóa item khỏi giỏ hàng nếu tour không tồn tại
+                await User.findByIdAndUpdate(userId, { $pull: { cart: item._id } });
+            } else if (tour.isHidden == true) {
+                await User.findByIdAndUpdate(userId, { $pull: { cart: item._id } });
+            } else {
+                const formattedStartDate = changeDateToString(tour.date);
+                tour = { ...tour.toObject(), date: formattedStartDate };
+
+                cartItems.push({
+                    imgURL: tour.cardImgUrl,
+                    code: item.tourCode,
+                    name: tour.name,
+                    date: tour.date,
+                    price: tour.price,
+                    itemId: item._id,
+                });
+            }
+        }
 
         const user = req.user;
         res.render('cart', { user, cartItems, title: 'null' });
@@ -119,6 +132,7 @@ const getOrderHistoryPage = async (req, res) => {
         if (!userOrders) {
             return res.status(404).send('There are no orders in the order history');
         }
+        
         let orderItems = await Promise.all(userOrders.orders.map(async (item) => {
             let tour = await Tour.findOne({ code: item.tourCode }).select('cardImgUrl name date startPlace.name');
             const formattedStartDate = changeDateToString(tour.date);
@@ -145,10 +159,16 @@ const getOrderHistoryPage = async (req, res) => {
 
 
 //---------------------------------------------------------------------------------
+function addDaysToDate(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
 const updateItemStatus = async () => {
     try {
-        const currentDate = new Date();
-        const orders = await Item.find({ isPaid: true });
+        const currentDate = new Date(Date.now());
+        const orders = await Item.find({ isPaid: true, status: 'Success' });
         
         for (const order of orders) {
             const tour = await Tour.findOne({ code: order.tourCode });
@@ -158,24 +178,14 @@ const updateItemStatus = async () => {
                 continue;
             }
 
-            for (const item of tour.items) {
-                if (item._id.toString() === order._id.toString()) {
-                    const startDate = new Date(tour.date);
-                    startDate.setDate(startDate.getDate() + item.startDateOffset);
-
-                    const endDate = new Date(startDate);
-                    endDate.setDate(endDate.getDate() + tour.numOfDays);
-
-                    if (endDate < currentDate) {
-                        // Nếu endDate đã qua thì cập nhật trạng thái của item thành 'Completed'
-                        await Item.updateOne({ _id: order._id }, { status: 'Completed' });
-                    }
-                }
+            const endDate = addDaysToDate(tour.date, tour.numOfDays);
+            if(endDate >= currentDate) {
+                order.status = 'Completed';
+                await order.save();
             }
         }
         
-
-        console.log('Updated item statuses');
+        console.log('Order status update successful');
     } catch (error) {
         console.error('Error updating item statuses:', error.message);
     }
@@ -210,51 +220,56 @@ const getOrderDetails = async (req, res) => {
     }
 };
 
-// const cancelOrder = async (req, res) => {
-//     try {
-//         const userId = req.userId;
-//         const orderId = req.params.code;
+const cancelOrder = async (req, res) => {
+    try {
+        const userId = req.userId;
+        const orderId = req.params.itemId;
         
-//         const user = await User.findById(userId).populate('orders');
+        const user = await User.findById(userId).populate('orders');
         
-//         const order = user.orders.find(order => order._id.equals(orderId));
-//         if (!order) {
-//             return res.status(404).json({ message: 'Order not found' });
-//         }
+        const order = user.orders.find(order => order._id.equals(orderId));
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        if (order.status === 'Completed' || order.status === 'Cancelled') {
+            return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
+        }
 
-//         if (order.status === 'Completed' || order.status === 'Cancelled') {
-//             return res.status(400).json({ message: 'Completed or canceled orders cannot be canceled' });
-//         }
+        const tour = await Tour.findOne({ code: order.tourCode });
+        if (!tour) {
+            return res.status(404).json({ error: 'Tour not found' });
+        } 
+        tour.remainSlots += order.tickets.length;
 
-//         order.status = 'Cancelled';
-//         order.cancelDate = Date.now();
-//         await order.save();
+        order.status = 'Cancelled';
+        order.cancelDate = new Date(Date.now());
+        await order.save();
 
-//         res.status(200).json({ message: 'Order has been successfully canceled' });
+        res.status(200).json({ message: 'Order has been successfully canceled' });
 
-//         // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
-//         //     senderAccountId: webPaymentAccountId,
-//         //     recipientAccountId: userId,
-//         //     amount: order.totalPrice,
-//         //     itemId: order._id
-//         // });
+        // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+        //     senderAccountId: webPaymentAccountId,
+        //     recipientAccountId: userId,
+        //     amount: order.totalPrice,
+        //     itemId: order._id
+        // });
 
-//         // if (response.status === 400) {
-//         //     return res.status(400).json({ error: 'Insufficient balance' });
-//         // } else if (response.data.success) {
-//         //     // tạo order -> gửi mail -> trừ remain slots
-//         //     // await createAnOrder(cartItem, user, item);
-//         //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
-//         //     // tour.remainSlots -= item.tickets.length;
-//         //     // return res.json({ success: true });
-//         // } else {
-//         //     return res.status(500).json({ error: 'Payment failed' });
-//         // }
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
+        // if (response.status === 400) {
+        //     return res.status(400).json({ error: 'Insufficient balance' });
+        // } else if (response.data.success) {
+        //     // tạo order -> gửi mail -> trừ remain slots
+        //     // await createAnOrder(cartItem, user, item);
+        //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
+        //     // tour.remainSlots -= item.tickets.length;
+        //     // return res.json({ success: true });
+        // } else {
+        //     return res.status(500).json({ error: 'Payment failed' });
+        // }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
 
 const getPaymentHistoryPage = async (req, res) => {
     try {
@@ -267,42 +282,34 @@ const getPaymentHistoryPage = async (req, res) => {
 
         const paymentList = [];
         await Promise.all(userOrders.orders.map(async (item) => {
-            let paymentDetails;
             let tour = await Tour.findOne({ code: item.tourCode });
-
-            const formattedOrderDate = changeDateToString(item.orderDate);
-            const formattedCancelDate = changeDateToString(item.cancelDate);
-            itemDate = { ...tour.toObject(), orderDate: formattedOrderDate, cancelDate: formattedCancelDate };
-
             if (item.status === 'Success' || item.status === 'Completed') {
-                paymentDetails = {
+                paymentList.push({
                     name: tour.name,
-                    date: itemDate.date,
-                    totalPrice: item.totalPrice
-                };
+                    date: item.orderDate,
+                    totalPrice: item.totalPrice,
+                    refunded: false,
+                });
             } else if (item.status === 'Cancelled') {
-                paymentDetails = [
-                    {
-                        name: tour.name,
-                        date: itemDate.date,
-                        totalPrice: item.totalPrice
-                    },
-                    {
-                        name: tour.name,
-                        date: itemDate.cancelDate,
-                        totalPrice: item.totalPrice
-                    }
-                ];
-            }
-
-            if (paymentDetails) {
-                paymentList.push(paymentDetails);
+                paymentList.push({
+                    name: tour.name,
+                    date: item.orderDate,
+                    totalPrice: item.totalPrice,
+                    refunded: false,
+                });
+                paymentList.push({
+                    name: tour.name,
+                    date: item.cancelDate,
+                    totalPrice: item.totalPrice,
+                    refunded: true,
+                });
             }
         }));
-
+        
+        sortByDate(paymentList);
         const user = req.user;
-        // res.render('paymentHistory', { user, paymentList, title: 'null' });
-        res.status(200).json({ paymentList })
+
+        res.render('paymentHistory', { user, paymentList, title: 'null' });
 
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
@@ -315,7 +322,7 @@ module.exports = {
     deleteItem,
     getOrderHistoryPage,
     getOrderDetails,
-    // cancelOrder,
+    cancelOrder,
     getPaymentHistoryPage,
 
     updateItemStatus,
