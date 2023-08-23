@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
 const accountRoutes = require("./routes/accountRoutes");
 
 
@@ -41,6 +43,14 @@ app.use('/accounts', accountRoutes);
 //   }});
 // })
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+// Đường dẫn đến các tệp chứng chỉ và khóa riêng tư
+const sslOptions = {
+    key: fs.readFileSync('./certificates/key.pem'),
+    cert: fs.readFileSync('certificates/cert.pem')
+  };
+  
+  const server = https.createServer(sslOptions, app);
+
+  server.listen(port, () => {
+    console.log(`Server is running on port ${port} over HTTPS`);
+  });

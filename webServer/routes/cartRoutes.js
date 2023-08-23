@@ -19,19 +19,19 @@ router.delete('/deleteItem'
 );
 // cập nhật item ở trang đơn đăng ký tour
 
-
 router.get('/orderHistory'
     , authMiddleware.authenticateToken
     , convertUserDataMiddleware.getUserData
     , cartController.getOrderHistoryPage
 );
-// router.put('/orderHistory/:code'
-//     , authMiddleware.authenticateToken
-//     , cartController.cancelOrder
-// );
+router.put('/orderHistory/:itemId'
+    , authMiddleware.authenticateToken
+    , cartController.cancelOrder
+);
 
 router.get('/paymentHistory'
     , authMiddleware.authenticateToken
+    , convertUserDataMiddleware.getUserData
     , cartController.getPaymentHistoryPage
 );
 

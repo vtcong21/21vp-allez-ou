@@ -68,7 +68,7 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Not enough available slots for the tickets' });
     }
 
-    const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+    const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
       senderAccountId: userId,
       recipientAccountId: webPaymentAccountId,
       amount: cartItem.totalPrice,
@@ -94,7 +94,7 @@ const pay = async (req, res) => {
 
 async function fetchPaymentHistory(accountId) {
   try {
-    const response = await axios.get(`http://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
+    const response = await axios.get(`https://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -105,7 +105,6 @@ async function fetchPaymentHistory(accountId) {
 const getUserPaymentHistory = async (req, res) => {
   try {
     const accountId = req.userId;
-
     if (!accountId) {
       return res.status(400).json({ message: 'accountId is required' });
     }
@@ -141,39 +140,46 @@ const getOrderPage = async (req, res) => {
   }
 }
 
-const updateItemInfo = async (req, res) => {
-  try {
-    const itemId = req.params.itemId;
-    const updatedInfo = req.body;
+// const updateItemInfo = async (req, res) => {
+//   try {
+//     const itemId = req.params.itemId;
+//     const updatedInfo = req.body;
 
-    const item = await Item.findById(itemId);
-    if (!item) {
-      return res.status(404).json({ error: 'Item not found' });
-    }
+//     const item = await Item.findById(itemId);
+//     if (!item) {
+//       return res.status(404).json({ error: 'Item not found' });
+//     }
+//     if (!updatedInfo) {
+//       return res.status(400).json({ error: 'Data is null' });
+//     } 
 
-    if (!updatedInfo) {
-      return res.status(400).json({ error: 'Data is null' });
-    } 
+//     const tour = await Tour.findOne({ code: item.tourCode });
+//     if (!tour) {
+//       return res.status(404).json({ error: 'Tour not found' });
+//     } 
 
-    item.representer = updatedInfo.representer;
-    item.tickets = updatedInfo.tickets;
-    item.totalPrice = updatedInfo.totalPrice;
-    item.shippingAddress = updatedInfo.shippingAddress;
-    item.orderDate = Date.now();
-    item.status = 'Success';
-    item.isPaid = true;
+//     // hàm pay đã viết rồi nên ở đây không cần
+//     // tour.remainSlots -= item.tickets.length;
 
-    await item.save();
-    res.status(200).json({ message: 'Item saved successfully' });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-}
+//     item.representer = updatedInfo.representer;
+//     item.tickets = updatedInfo.tickets;
+//     item.totalPrice = updatedInfo.totalPrice;
+//     item.shippingAddress = updatedInfo.shippingAddress;
+//     item.orderDate = Date.now();
+//     item.status = 'Success';
+//     item.isPaid = true;
+
+//     await item.save();
+//     res.status(200).json({ message: 'Item saved successfully' });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Internal server error' });
+//   }
+// }
 
 module.exports = {
   getOrderPage,
   getUserInfo,
   getUserPaymentHistory,
   pay,
-  updateItemInfo,
+  // updateItemInfo,
 };

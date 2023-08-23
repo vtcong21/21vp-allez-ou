@@ -140,7 +140,7 @@ const renderAdminRolePage = async (req, res) => {
 
 async function fetchPaymentHistory(accountId) {
     try {
-        const response = await axios.get(`http://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
+        const response = await axios.get(`https://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
         return response.data;
     } catch (error) {
         console.error(error);
