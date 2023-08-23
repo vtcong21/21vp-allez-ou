@@ -232,7 +232,7 @@ const getOrderDetails = async (req, res) => {
 
 //         res.status(200).json({ message: 'Order has been successfully canceled' });
 
-//         // const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+//         // const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
 //         //     senderAccountId: webPaymentAccountId,
 //         //     recipientAccountId: userId,
 //         //     amount: order.totalPrice,

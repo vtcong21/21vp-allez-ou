@@ -71,7 +71,7 @@ const register = async (req, res) => {
 async function createPaymentAccount(userId) {
   try {
 
-    const response = await axios.post('http://localhost:5001/accounts/createPaymentAccount', {
+    const response = await axios.post('https://localhost:5001/accounts/createPaymentAccount', {
       userId: userId
     });
 

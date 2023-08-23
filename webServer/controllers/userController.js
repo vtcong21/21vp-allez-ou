@@ -68,7 +68,7 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Not enough available slots for the tickets' });
     }
 
-    const response = await axios.post('http://localhost:5001/accounts/sendMoney', {
+    const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
       senderAccountId: userId,
       recipientAccountId: webPaymentAccountId,
       amount: cartItem.totalPrice,
@@ -94,7 +94,7 @@ const pay = async (req, res) => {
 
 async function fetchPaymentHistory(accountId) {
   try {
-    const response = await axios.get(`http://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
+    const response = await axios.get(`https://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -105,7 +105,6 @@ async function fetchPaymentHistory(accountId) {
 const getUserPaymentHistory = async (req, res) => {
   try {
     const accountId = req.userId;
-
     if (!accountId) {
       return res.status(400).json({ message: 'accountId is required' });
     }

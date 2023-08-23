@@ -8,7 +8,7 @@ const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
 const updateRevenue = async () => {
     try {
         const accountId = webPaymentAccountId;
-        const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory', {
+        const response = await axios.get('https://localhost:5001/accounts/getTodayPaymentHistory', {
             params: {
                 accountId: accountId
             }
@@ -63,7 +63,7 @@ cron.schedule('0 0 * * *', () => {
 const updateTodayRevenue = async (req, res) => {
     try {
         const accountId = webPaymentAccountId;
-        const response = await axios.get('http://localhost:5001/accounts/getTodayPaymentHistory', {
+        const response = await axios.get('https://localhost:5001/accounts/getTodayPaymentHistory', {
             params: {
                 accountId: accountId
             }
