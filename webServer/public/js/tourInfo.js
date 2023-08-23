@@ -55,9 +55,15 @@ function showLoginModal() {
 }
 
 function showToast() {
-  const toastLiveExample = document.getElementById('liveToast')
-  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-  toastBootstrap.show()
+  const toastLiveExample = document.getElementById('liveToast');
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+  toastBootstrap.show();
+}
+
+function showToast2() {
+  const toastLiveExample2 = document.getElementById('liveToast2');
+  const toastBootstrap2 = bootstrap.Toast.getOrCreateInstance(toastLiveExample2);
+  toastBootstrap2.show();
 }
 
 async function addNewItem(code) {
@@ -68,16 +74,15 @@ async function addNewItem(code) {
   
     try {
       const response = await axios.post('../cart/addItem', { tourCode: tourCode });
-      
+      console.log(response.status);
       if (response.status === 200) {
         // Hiển thị thông báo toast
         console.log('thành công gửi post');
         showToast();
-      }
+      } 
     } catch (error) {
       console.log('thất bại gửi post');
-      console.error("Error:", error);
-
+      showToast2();
     }
   } else {
     showLoginModal();
