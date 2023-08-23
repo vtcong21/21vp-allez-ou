@@ -108,15 +108,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const buttonxacnhan = document.getElementById('button-xacnhan');
             buttonxacnhan.onclick = async () => {
                 try {
-                    const checkPasswordResponse = await axios.post('/auth/checkPassword', {
-                        password: xacnhanmatkhauInput
-                    });
-                    
+                  const password = xacnhanmatkhauInput; // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
+                    console.log(password);
+                  const checkPasswordResponse = await axios.post('/auth/checkPassword', {
+                    password: password // Gửi mật khẩu vào body của yêu cầu POST
+                  });
+                  if (checkPasswordResponse){
+                    alert('1');
+                  }
+                  // Xử lý kết quả trả về nếu cần
+              
                 } catch (error) {
-                    // Xử lý lỗi nếu có
-                    alert('Mật Khẩu Nhập Vào Không Đúng ' + error.message);          
+                  // Xử lý lỗi nếu có
+                  alert('Mật Khẩu Nhập Vào Không Đúng ' + error.message);
                 }
-                }
+              };
         };
 
     }
