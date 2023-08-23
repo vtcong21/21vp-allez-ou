@@ -200,15 +200,17 @@ const logout = (req, res) => {
   res.redirect('/');
 }
 
+
 const checkPassword = async (req, res) => {
   try {
-    const { userId, password } = req.body;
-    const user = await User.findOne({ userId });
+    const  password  = req.body.password;
+    const userId = req.userId;
+    const user = await User.findOne({ _id: userId });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    //console.log(password);
     const passwordMatch = await bcrypt.compare(password, user.password);
-
     if (passwordMatch) {
       return res.status(200).json({ message: 'Password is correct' });
     } else {

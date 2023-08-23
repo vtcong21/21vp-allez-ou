@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use('/accounts', accountRoutes);
 
 
-//test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
+// test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 // app.get('/test', (req, res)=>{
 //   //localhost:5000/test
 //   res.render('tourInfo', {user: {

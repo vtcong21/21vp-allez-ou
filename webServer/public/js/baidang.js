@@ -366,9 +366,9 @@ const createTour = async (currentNgay_create) => {
   const name = document.getElementById('ten-tour-input').value;
   const code = document.getElementById('ma-tour-input').value;
   const price = parseFloat(document.getElementById('gia-ve-nguoi-lon-input').value);
-//   const startPlaceCode = document.getElementById('start-place-code').value;
+  const startPlaceCode = document.getElementById('code-diem-khoi-hanh-input').value;
   const startPlaceName = document.getElementById('diem-khoi-hanh-input').value;
-//   const endPlaceCode = document.getElementById('end-place-code').value;
+  const endPlaceCode = document.getElementById('code-diem-den-input').value;
   const endPlaceName = document.getElementById('diem-den-input').value;
   const date = document.getElementById('ngay-khoi-hanh-input').value;
   const time = document.getElementById('gio-khoi-hanh-input').value;
@@ -385,13 +385,12 @@ const createTour = async (currentNgay_create) => {
   // Lấy dữ liệu từ các ô input của schedules
   const schedules = [];
 
-  for (let i = 1; i <= currentNgay_create; i++) {
+  for (let i = 1; i < currentNgay_create; i++) {
     const dayInput = document.getElementById(`ngay${i}`).value;
     const dayDetail = document.getElementById(`ngay${i}-input`).innerText;
-
     const schedule = {
-      name: dayInput,
-      schedule_detail: dayDetail
+      schedule_detail: dayDetail,
+      name: dayInput
     };
 
     schedules.push(schedule);
@@ -403,12 +402,12 @@ const createTour = async (currentNgay_create) => {
     code: code,
     price: price,
     startPlace: {
-    //   code: startPlaceCode,
+      code: startPlaceCode,
       name: startPlaceName
     },
     endPlaces: [
       {
-        // code: endPlaceCode,
+        code: endPlaceCode,
         name: endPlaceName
       }
     ],
@@ -421,17 +420,14 @@ const createTour = async (currentNgay_create) => {
     food: food,
     hotel: hotel,
     schedules: schedules,
-    isHidden: false,
-    numOfDays: currentNgay_create -1 , 
+    numOfDays: currentNgay_create -1, 
     slots : remainSlots
-
-
     // Thêm các trường dữ liệu khác vào đối tượng JSON
   };
 
   try {
     // Gửi yêu cầu tạo tour tới API
-    const response = await axios.post('/tours', tourData);
+    const response = await axios.post(`/tours`, tourData);
     console.log(response.data); // Xử lý dữ liệu phản hồi từ API (nếu cần)
   } catch (error) {
     console.error(error);

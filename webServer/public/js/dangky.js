@@ -3,8 +3,6 @@ function clearLocalStorage() {
   localStorage.clear();
 }
 
-
-
 // Gọi hàm clearLocalStorage() khi trang web được tải lên
 window.addEventListener("load", clearLocalStorage);
 function loadNewForm3() {
@@ -126,22 +124,10 @@ function loadNewForm() {
     <button type="button" class="btn btn-primary" onclick="loadNewForm3()" style="margin-left:0">Quay lại</button>
     </div>
     <div class="col-6 text-right">
-    <button type="button" class="btn btn-primary" id="button-next" onclick="if (validateForm2()) {getinfo(); SaveValues2(); registerUser();  }">Tiếp Theo</button>
+    <button type="button" class="btn btn-primary" id="button-next" onclick="if (validateForm2()) {getSelectedGender(); SaveValues2(); registerUser();  }">Tiếp Theo</button>
     </div>
 </div>
 `;
-}
-function getinfo() {
-  var gender = document.getElementsByName("gender");
-  var genders = "";
-  for (var i = 0; i < gender.length; i++) {
-    if (gender[i].checked == true) {
-      genders = gender[i].value;
-    }
-  }
-  console.log(gender);
-  console.log(genders);
-  localStorage.setItem("gender", genders);
 }
 
 function loadNewForm2() {
@@ -203,7 +189,7 @@ function loadNewForm2() {
   }
 
   // Lấy giá trị email từ localStorage
-  let email = localStorage.getItem("email");
+  let email = emailValue;
 
   let atIndex = email.indexOf("@");
   let prefix = email.substring(0, atIndex);
@@ -225,7 +211,7 @@ function loadNewForm2() {
 async function resendVerificationCodeRequest() {
   try {
     const response = await axios.post("/auth/resendVerificationCode", {
-      email: localStorage.getItem("email"),
+      email: emailValue,
     });
 
     if (response.status === 200) {
@@ -268,12 +254,12 @@ function finish() {
 async function registerUser() {
   try {
     const formData = {
-      fullName: localStorage.getItem("name"),
-      email: localStorage.getItem("email"),
-      password: localStorage.getItem("password"),
-      dateOfBirth: localStorage.getItem("dob"),
-      phoneNumber: localStorage.getItem("phone"),
-      gender: localStorage.getItem("gender"),
+      fullName: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      dateOfBirth: dobValue,
+      phoneNumber: phoneValue,
+      gender: genderValue,
     };
     console.log(formData);
     
@@ -320,7 +306,7 @@ async function sendVerificationCodeToServer() {
   try {
     const code = document.getElementById("confirm-account1").value;
     const verificationData = {
-      email: localStorage.getItem("email"),
+      email: emailValue,
       verificationCode: code,
     };
     console.log(verificationData);
@@ -411,34 +397,56 @@ function validateForm2() {
   }
   return flag;
 }
+// Khai báo biến toàn cục để lưu thông tin
+var nameValue = "";
+var emailValue = "";
+var passwordValue = "";
+var dobValue = "";
+var phoneValue = "";
+var genderValue = "";
 
 function SaveValues1() {
-  localStorage.setItem("name", document.getElementById("name").value);
-  localStorage.setItem("email", document.getElementById("email").value);
-  localStorage.setItem("password", document.getElementById("pwd").value);
+  // Lưu giá trị vào biến toàn cục
+  nameValue = document.getElementById("name").value;
+  emailValue = document.getElementById("email").value;
+  passwordValue = document.getElementById("pwd").value;
 }
-function SaveValues2() {
-  localStorage.setItem("dob", document.getElementById("dob").value);
-  localStorage.setItem("phone", document.getElementById("phone").value);
-}
-function LoadFormValues1() {
-  document.getElementById("name").value = localStorage.getItem("name");
-  document.getElementById("email").value = localStorage.getItem("email");
-  document.getElementById("pwd").value = localStorage.getItem("password");
-}
-function LoadFormValues2() {
-  document.getElementById("dob").value = localStorage.getItem("dob");
-  document.getElementById("phone").value = localStorage.getItem("phone");
 
-  // Lấy giá trị của các ô input radio trong localStorage
-  var gender = localStorage.getItem("gender");
+function SaveValues2() {
+  // Lưu giá trị vào biến toàn cục
+  dobValue = document.getElementById("dob").value;
+  phoneValue = document.getElementById("phone").value;
+  genderValue = getSelectedGender();
+}
+
+function LoadFormValues1() {
+  // Gán giá trị từ biến toàn cục vào các ô input
+  document.getElementById("name").value = nameValue;
+  document.getElementById("email").value = emailValue;
+  document.getElementById("pwd").value = passwordValue;
+}
+
+function LoadFormValues2() {
+  // Gán giá trị từ biến toàn cục vào các ô input
+  document.getElementById("dob").value = dobValue;
+  document.getElementById("phone").value = phoneValue;
 
   // Gán giá trị của các ô input radio tương ứng
-  if (gender === "Male") {
+  if (genderValue === "Male") {
     document.getElementById("Male").checked = true;
-  } else if (gender === "Female") {
+  } else if (genderValue === "Female") {
     document.getElementById("Female").checked = true;
-  } else if (gender === "Undefined") {
+  } else if (genderValue === "Undefined") {
     document.getElementById("Undefined").checked = true;
   }
+}
+function getSelectedGender() {
+  // Lấy giá trị của các ô input radio được chọn
+  const radios = document.getElementsByName("gender");
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      return radios[i].value;
+    }
+  }
+  return "";
 }

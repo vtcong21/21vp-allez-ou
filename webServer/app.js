@@ -50,6 +50,10 @@ app.use('/cart', cartRoutes);
 app.use('/user', userRoutes);
 
 
+// tự chạy ẩn tour
+const dashboardController = require('./controllers/dashboardController');
+dashboardController.updateToursState();
+
 
 //test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
 app.get('/test', (req, res)=>{
