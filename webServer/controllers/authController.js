@@ -209,7 +209,7 @@ const checkPassword = async (req, res) => {
     }
     const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (passwordMatch) {
+    if (passwordMatch == true) {
       return res.status(200).json({ message: 'Password is correct' });
     } else {
       return res.status(401).json({ error: 'Incorrect password' });
