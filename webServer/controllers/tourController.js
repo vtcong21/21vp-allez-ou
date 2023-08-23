@@ -223,6 +223,19 @@ const editTourByCode = async (req, res) => {
   }
 }
 
+const getTopSellingTours = async (req, res) => {
+  try {
+      const tours = await Tour.find({ isHidden: false })
+          .sort({ slots: -1, remainSlots: -1 })
+          .limit(6);
+      console.log(tours);
+      res.status(200).json(tours);
+  } catch (error) {
+      console.error('Error fetching top selling tours:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 module.exports = {
   getAllTours,
   createTour,
@@ -233,5 +246,6 @@ module.exports = {
   getTourInfoData,
   getTourSearchPage,
   getHiddenTours,
-  editTourByCode
+  editTourByCode,
+  getTopSellingTours
 };
