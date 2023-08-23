@@ -25,7 +25,7 @@ const tourSchema = new mongoose.Schema({
   date: { type: Date },
   time: { type: String },
   slots: {type: Number},
-  remainSlots: { type: Number, default: 0 },
+  remainSlots: { type: Number, default: function() { return this.slots; } },
   numOfDays: { type: Number},
   promoDiscount: { type: Number, default: 0 },
   kidDiscount: { type: Number, default: 0.5 },
