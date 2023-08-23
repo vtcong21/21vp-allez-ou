@@ -75,6 +75,7 @@ const getHiddenTours = async (req, res) => {
 const createTour = async (req, res) => {
   try {
     const tourData = req.body;
+    //console.log(req.body);
     const newTour = new Tour(tourData);
     const savedTour = await newTour.save();
     res.status(201).json(savedTour);
@@ -82,6 +83,7 @@ const createTour = async (req, res) => {
     res.status(500).json({ error: 'Failed to create tour' });
   }
 };
+
 
 const hideTour = async (req, res) => {
   try {
