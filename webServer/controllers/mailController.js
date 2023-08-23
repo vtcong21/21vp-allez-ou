@@ -34,7 +34,7 @@ const sendConfirmationEmail = async (user, item, tour) => {
     try {
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
-            to: email,
+            to: user.email,
             subject: 'Allez Où xác nhận đơn đặt tour',
             html: `
                     <p>Xin chào, ${user.name}</p>

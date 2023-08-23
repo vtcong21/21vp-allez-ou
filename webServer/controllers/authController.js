@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const mailController = require('../controllers/mailController');
 const axios = require('axios');
+const https = require('https');
+const agent = new https.Agent({ rejectUnauthorized: false });
 
 
 const renderRegisterPage = (req, res) => {
@@ -73,7 +75,7 @@ async function createPaymentAccount(userId) {
 
     const response = await axios.post('https://localhost:5001/accounts/createPaymentAccount', {
       userId: userId
-    });
+    }, {httpsAgent: agent});
 
     if (response.status === 201) {
       return true;
