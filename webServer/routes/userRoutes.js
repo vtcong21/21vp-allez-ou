@@ -17,7 +17,7 @@ router.get('/getUserPaymentHistory'
 // thanh toán
 router.post('/pay'
 , authMiddleware.authenticateToken
-, userController.getUserInfo
+, userController.pay
 );
 // render trang đăng ký tour
 router.get('/getOrderPage/:itemId'

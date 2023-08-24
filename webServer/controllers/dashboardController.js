@@ -2,6 +2,8 @@ const Dashboard = require('../models/dashboard');
 const Tour = require('../models/tour');
 const axios = require('axios');
 const cron = require('node-cron');
+const https = require('https');
+const agent = new https.Agent({ rejectUnauthorized: false });
 
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
@@ -14,7 +16,7 @@ const updateRevenue = async () => {
             params: {
                 accountId: accountId
             }
-        });
+        }, {httpsAgent: agent});
         const paymentHistory = response.data.paymentHistory;
         console.log(response.data);
         // Lấy ngày hôm nay
@@ -91,7 +93,7 @@ const updateTodayRevenue = async (req, res) => {
             params: {
                 accountId: accountId
             }
-        });
+        }, {httpsAgent: agent});
         const paymentHistory = response.data.paymentHistory;
         console.log(response.data);
 

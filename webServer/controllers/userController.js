@@ -2,7 +2,9 @@ const User = require('../models/user');
 const Item = require('../models/item');
 const Tour = require('../models/tour');
 const mailController = require('./mailController');
+const https = require('https');
 const axios = require('axios');
+const agent = new https.Agent({ rejectUnauthorized: false });
 
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
@@ -36,9 +38,11 @@ const createAnOrder = async (cartItem, user, item) => {
   await user.save();
 };
 
+
+
 const pay = async (req, res) => {
   try {
-    const { item } = req.body;
+    const item  = req.body;
     const userId = req.userId;
 
     const user = await User.findById(userId);
@@ -47,7 +51,7 @@ const pay = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const cartItem = await Item.findById(item._id);
+    const cartItem = await Item.findOne({ _id: item._id });
 
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
@@ -73,7 +77,7 @@ const pay = async (req, res) => {
       recipientAccountId: webPaymentAccountId,
       amount: cartItem.totalPrice,
       itemId: item._id
-    });
+    }, {httpsAgent: agent});
 
     if (response.status === 400) {
       return res.status(400).json({ error: 'Insufficient balance' });
@@ -82,7 +86,8 @@ const pay = async (req, res) => {
       await createAnOrder(cartItem, user, item);
       await mailController.sendConfirmationEmail(user, cartItem, tour);
       tour.remainSlots -= item.tickets.length;
-      return res.json({ success: true });
+      await tour.save();
+      return res.status(200).json({ success: true });
     } else {
       return res.status(500).json({ error: 'Payment failed' });
     }
@@ -124,18 +129,18 @@ const getUserPaymentHistory = async (req, res) => {
 const getOrderPage = async (req, res) => {
   if (req.userRole === 0 || req.userRole === false) {
     try {
-      const itemId = req.params.itemId; 
+      const itemId = req.params.itemId;
       const user = req.user;
 
       const item = await Item.findById(itemId);
-      const tourData = await Tour.findOne({ code: item.tourCode }); 
-    
+      const tourData = await Tour.findOne({ code: item.tourCode });
+
       res.status(200).render('dangkytour', { user, itemId, tourData, title: null });
     } catch (error) {
       console.error('Error rendering order page:', error);
       res.status(500).render('error');
     }
-  } else {  
+  } else {
     res.status(403).render('error');
   }
 }

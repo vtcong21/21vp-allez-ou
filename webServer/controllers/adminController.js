@@ -2,7 +2,8 @@ const User = require('../models/user');
 const Item = require('../models/item');
 const Tour = require('../models/tour')
 const bcrypt = require('bcrypt');
-
+const https = require('https');
+const agent = new https.Agent({ rejectUnauthorized: false });
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
 
@@ -140,7 +141,7 @@ const renderAdminRolePage = async (req, res) => {
 
 async function fetchPaymentHistory(accountId) {
     try {
-        const response = await axios.get(`https://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`);
+        const response = await axios.get(`https://localhost:5001/accounts/getPaymentHistory?accountId=${accountId}`,  {httpsAgent: agent});
         return response.data;
     } catch (error) {
         console.error(error);
