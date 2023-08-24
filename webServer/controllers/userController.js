@@ -5,6 +5,7 @@ const mailController = require('./mailController');
 const https = require('https');
 const axios = require('axios');
 const agent = new https.Agent({ rejectUnauthorized: false });
+const { ObjectId } = require('mongodb');
 
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
@@ -50,8 +51,9 @@ const pay = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
-    const cartItem = await Item.findOne({ _id: item._id });
+    console.log(item);
+    console.log(item._id);
+    const cartItem = await Item.findOne({ _id:item._id });
 
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
