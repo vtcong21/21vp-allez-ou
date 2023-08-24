@@ -70,11 +70,28 @@ function renderTourPage(page, hiddenTourDataList) {
 
     // Tạo thẻ div cho từng tour trên trang hiện tại
     currentTourDataList.forEach(tourData => {
-        const tourCode = tourData.code;
-        const tourDate = tourData.date;
-        const slots = tourData.slots;
-        const remainSlots = tourData.remainSlots;
-        const tourName = tourData.name;
+      const tourCode = tourData.code;
+      const tourDate = tourData.date;
+      const slots = tourData.slots;
+      const remainSlots = tourData.remainSlots;
+      const tourName = tourData.name;
+      const startPlace = tourData.startPlace;
+      const endPlaces = tourData.endPlaces.map(place => place.name);
+      const price = tourData.price;
+      const date = tourData.date;
+      const time = tourData.time;
+      const numOfDays = tourData.numOfDays;
+      const promoDiscount = tourData.promoDiscount;
+      const kidDiscount = tourData.kidDiscount;
+      const babyDiscount = tourData.babyDiscount;
+      const teenDiscount = tourData.teenDiscount;
+      const cardImgUrl = tourData.cardImgUrl;
+      const imgUrls = tourData.imgUrls;
+      const transport = tourData.transport;
+      const food = tourData.food;
+      const hotel = tourData.hotel;
+      const schedules = tourData.schedules;
+      const isHidden = tourData.isHidden;
 const maxLength = 80;
 
 let truncatedName = tourName;
@@ -140,6 +157,7 @@ const tourDate1 = departureDate;
     </div>
 </div>
 
+
         `;
         // Thêm thẻ div vào container
         container.appendChild(tourDiv);
@@ -153,10 +171,27 @@ const tourDate1 = departureDate;
           progressBarElement.style.width = progressbarwidth + "%";
           progressBarElement.setAttribute("aria-valuenow", remainSlots);
 
-
+          const tenTourInput = document.getElementById('ten-tour-change');
+          // Gán giá trị và placeholder từ tourData
+          tenTourInput.value = tourName;
+          tenTourInput.placeholder = tourName;
+          const pricetourInput = document.getElementById('gia-ve-nguoi-lon-change');
+          pricetourInput.value = price;
+          pricetourInput.placeholder = price;
+          const ngaykhoihanhtourInput = document.getElementById('ngay-khoi-hanh-change');
+          ngaykhoihanhtourInput.value = formattedDate;
+          ngaykhoihanhtourInput.placeholder = formattedDate;
+          const giokhoihanhtourInput = document.getElementById('gio-khoi-hanh-change');
+          giokhoihanhtourInput.value = time;
+          giokhoihanhtourInput.placeholder = time;
+          const sovetourInput = document.getElementById('so-ve-ban-change');
+          sovetourInput.value = slots;
+          sovetourInput.placeholder = slots;
     });
     // Tạo phân trang
     renderPagination();
+  
+
     
 }
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
