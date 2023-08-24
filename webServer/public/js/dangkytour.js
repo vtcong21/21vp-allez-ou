@@ -1,3 +1,4 @@
+
 var price = parseInt(tourData.price);
 var teenDiscount = parseFloat(tourData.teenDiscount);
 var kidDiscount = parseFloat(tourData.kidDiscount);
@@ -90,14 +91,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const item = {
                 tourCode: tourData.code,
                 representer: representer,
+                tickets: tickets,
+                totalPrice: totalPrice,
                 orderDate: new Date(),
                 status: 'Success',
                 shippingAddress: representer.address,
-                isPaid: true,
-                tickets: tickets,
-                totalPrice: totalPrice
+                isPaid: true
             }
-
             const button = document.getElementById('button-order-btn');
             button.dataset.bsTarget = '#exampleModalToggle';
             const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
@@ -115,10 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   });
                   if (checkPasswordResponse){
                     try {
-                        const payResponse = await axios.post('/user/pay', {
-                            item: item
-                        });
-
+                        const payResponse = await axios.post('/user/pay',item);
                         if (payResponse.status === 200) {
                             // Đã thanh toán thành công, mở cửa sổ modal thứ 3
                             modal2.hide(); // Ẩn cửa sổ modal thứ 2
