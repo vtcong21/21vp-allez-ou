@@ -37,7 +37,7 @@ const sendConfirmationEmail = async (user, item, tour) => {
             to: user.email,
             subject: 'Allez Où xác nhận đơn đặt tour',
             html: `
-                    <p>Xin chào, ${user.name}</p>
+                    <p>Xin chào, ${user.fullName}</p>
                     <p>Cảm ơn bạn đã đặt tour du lịch của chúng tôi. Chúng tôi rất vui thông báo rằng đơn đặt tour của bạn đã được xác nhận thành công.</p>
                     <p>Chi tiết đơn đặt tour:</p>
                     <ul>
@@ -65,7 +65,7 @@ const sendCancellationEmail = async (user, item, refundAmount) => {
             to: user.email,
             subject: 'Allez Où thông báo hủy đặt tour',
             html: `
-                <p>Xin chào, ${user.name}</p>
+                <p>Xin chào, ${user.fullName}</p>
                 <p>Chúng tôi xin thông báo rằng đơn đặt tour của bạn đã được hủy thành công.</p>
                 <p>Thông tin hủy đặt tour:</p>
                 <ul>

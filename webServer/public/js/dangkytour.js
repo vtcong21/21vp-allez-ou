@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tickets = getFormData();
             const totalPrice = tickets.reduce((total, ticket) => total + ticket.price, 0);
             const item = {
+                _id: itemId,
                 tourCode: tourData.code,
                 representer: representer,
                 tickets: tickets,

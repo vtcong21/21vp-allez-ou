@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="/css/dangkytour.css" />
         <script>
             var tourData = <%-JSON.stringify(tourData)%>;
+            const itemId = <%-JSON.stringify(itemId)%>;
           </script>
         <script src="/js/dangkytour.js"></script>
     </head>
@@ -363,7 +364,7 @@
                                         <div class="bodymodal" style="padding-left: 1em; padding-right: 2em; padding-top: 2em; padding-bottom: 2em;">
                                             <div class="row">
                                                 <div class="col-md-5 col-5" id="xacnhanmatkhau" >Xác nhận mật khẩu</div>
-                                                <input class="col-md-7 col-7" id="xacnhanmatkhauinput">
+                                                <input type="password" class="col-md-7 col-7" id="xacnhanmatkhauinput">
                                             </div> 
                                         </div>
                                         <div class="modalfooter">
@@ -385,7 +386,7 @@
                                             </div> 
                                         </div>
                                         <div class="modalfooter">
-                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal">Xem giỏ hàng</button>
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" data-bs-dismiss="modal" href="/cart/orderHistory">Xem giỏ hàng</button>
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,11 @@
 const User = require('../models/user');
 const Tour = require('../models/tour'); 
 const Item = require('../models/item');
+
+const mailController = require('./mailController');
+const https = require('https');
 const axios = require('axios');
+const agent = new https.Agent({ rejectUnauthorized: false });
 const cron = require('node-cron');
 
 const webPaymentAccountId = '64b79fc6896f214f7aae7ddc';
@@ -254,32 +258,26 @@ const cancelOrder = async (req, res) => {
         if (!tour) {
             return res.status(404).json({ error: 'Tour not found' });
         } 
-        tour.remainSlots += order.tickets.length;
 
-        order.status = 'Cancelled';
-        order.cancelDate = new Date(Date.now());
-        await order.save();
+        const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
+            senderAccountId: webPaymentAccountId,
+            recipientAccountId: userId,
+            amount: order.totalPrice,
+            itemId: order._id
+        });
 
-        res.status(200).json({ message: 'Order has been successfully canceled' });
-
-//         // const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
-//         //     senderAccountId: webPaymentAccountId,
-//         //     recipientAccountId: userId,
-//         //     amount: order.totalPrice,
-//         //     itemId: order._id
-//         // });
-
-        // if (response.status === 400) {
-        //     return res.status(400).json({ error: 'Insufficient balance' });
-        // } else if (response.data.success) {
-        //     // tạo order -> gửi mail -> trừ remain slots
-        //     // await createAnOrder(cartItem, user, item);
-        //     // await mailController.sendConfirmationEmail(user, cartItem, tour);
-        //     // tour.remainSlots -= item.tickets.length;
-        //     // return res.json({ success: true });
-        // } else {
-        //     return res.status(500).json({ error: 'Payment failed' });
-        // }
+        if (response.status === 400) {
+            return res.status(400).json({ error: 'Insufficient balance' });
+        } else if (response.data.success) {
+            tour.remainSlots += order.tickets.length;
+            order.status = 'Cancelled';
+            order.cancelDate = new Date(Date.now());
+            await order.save();
+            await mailController.sendCancellationEmail(user, order, order.totalPrice);
+            res.status(200).json({ message: 'Order has been successfully canceled' });
+        } else {
+            return res.status(500).json({ error: 'Payment failed' });
+        }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
