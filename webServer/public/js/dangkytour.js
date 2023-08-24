@@ -7,6 +7,21 @@ var quantities = [1, 0, 0, 0];
 var prices = [price, price * (1 - teenDiscount), price * (1 - kidDiscount), price * (1 - babyDiscount)];
 var type = ['Adult', 'Teen', 'Kid', 'Baby'];
 
+  // Lấy URL hiện tại
+  var currentURL = window.location.href;
+
+  // Tìm vị trí của dấu "/"
+  var lastSlashIndex = currentURL.lastIndexOf("/");
+
+  // Cắt chuỗi từ vị trí sau dấu "/"
+  var itemId = currentURL.substring(lastSlashIndex + 1);
+
+  // Lưu giá trị vào biến _id
+  var _id = itemId;
+
+  console.log(_id); // In giá trị của biến "_id" ra console
+  // Sử dụng biến "_id" trong các xử lý khác
+
 document.addEventListener('DOMContentLoaded', function () {
     const orderButton = document.getElementById('button-order-btn');
     function getFormData() {
@@ -89,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tickets = getFormData();
             const totalPrice = tickets.reduce((total, ticket) => total + ticket.price, 0);
             const item = {
+                _id:_id,
                 tourCode: tourData.code,
                 representer: representer,
                 tickets: tickets,

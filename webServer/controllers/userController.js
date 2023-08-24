@@ -52,7 +52,7 @@ const pay = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     console.log(item);
-    console.log(item._id);
+    console.log(req.body);
     const cartItem = await Item.findOne({ _id:item._id });
 
     if (!cartItem) {
