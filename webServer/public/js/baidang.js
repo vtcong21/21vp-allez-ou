@@ -2,30 +2,30 @@
 // Trước khi gọi API
 // document.getElementById("loading-spinner").classList.add("show");
 // Lấy các phần tử tab
-const activeTab = document.getElementById('ex1-tab-1');
-const endedTab = document.getElementById('ex1-tab-2');
+const activeTab = document.getElementById("ex1-tab-1");
+const endedTab = document.getElementById("ex1-tab-2");
 
 // Gắn sự kiện bấm vào tab "Đang hoạt động"
-activeTab.addEventListener('click', function () {
-    const navPill1 = document.getElementById('ex1-tab-1');
-    const navPill2 = document.getElementById('ex1-tab-2');
-    navPill2.classList.remove('active');
+activeTab.addEventListener("click", function () {
+    const navPill1 = document.getElementById("ex1-tab-1");
+    const navPill2 = document.getElementById("ex1-tab-2");
+    navPill2.classList.remove("active");
 
-    navPill1.classList.add('active');
+    navPill1.classList.add("active");
 
     fetchTourInformation(); // Gọi hàm để lấy danh sách tour đang hoạt động
 });
 
 // Gắn sự kiện bấm vào tab "Đã kết thúc"
-endedTab.addEventListener('click', function () {
-    const navPill1 = document.getElementById('ex1-tab-1');
-    const navPill2 = document.getElementById('ex1-tab-2');
-    navPill1.classList.remove('active');
+endedTab.addEventListener("click", function () {
+    const navPill1 = document.getElementById("ex1-tab-1");
+    const navPill2 = document.getElementById("ex1-tab-2");
+    navPill1.classList.remove("active");
 
-    navPill2.classList.add('active');
+    navPill2.classList.add("active");
     fetchHiddenToursInformation(); // Gọi hàm để lấy danh sách tour đã kết thúc
 });
-let tourDataList = [];
+var tourDataList = [];
 let currentPage = 1;
 
 async function fetchTourInformation() {
@@ -37,7 +37,7 @@ async function fetchTourInformation() {
         console.log(error);
     }
 }
-
+fetchTourInformation()
 async function fetchHiddenToursInformation() {
     try {
         const response = await axios.get(`/tours/hiddentTours`);
@@ -45,13 +45,13 @@ async function fetchHiddenToursInformation() {
         isHidden = true; // Đặt biến isHidden thành true để chỉ định đang hiển thị hidden tours
 
         console.log(hiddenTourDataList);
-        renderTourPage(currentPage,hiddenTourDataList);
+        renderTourPage(currentPage, hiddenTourDataList);
         renderPagination(true);
-
     } catch (error) {
         console.log(error);
     }
 }
+
 
 function renderTourPage(page, hiddenTourDataList) {
     // Xác định vị trí bắt đầu và kết thúc của danh sách tour trên trang hiện tại
@@ -63,49 +63,49 @@ function renderTourPage(page, hiddenTourDataList) {
         currentTourDataList = hiddenTourDataList.slice(startIndex, endIndex);
     } else {
         currentTourDataList = tourDataList.slice(startIndex, endIndex);
-    }                                                                                                                                                
+    }
     // Xóa các thẻ div tour cũ trước khi tạo lại
-    const container = document.querySelector('.row');
-    container.innerHTML = '';
+    const container = document.querySelector(".row");
+    container.innerHTML = "";
 
     // Tạo thẻ div cho từng tour trên trang hiện tại
-    currentTourDataList.forEach(tourData => {
-      const tourCode = tourData.code;
-      const tourDate = tourData.date;
-      const slots = tourData.slots;
-      const remainSlots = tourData.remainSlots;
-      const tourName = tourData.name;
-      const startPlace = tourData.startPlace;
-      const endPlaces = tourData.endPlaces.map(place => place.name);
-      const price = tourData.price;
-      const date = tourData.date;
-      const time = tourData.time;
-      const numOfDays = tourData.numOfDays;
-      const promoDiscount = tourData.promoDiscount;
-      const kidDiscount = tourData.kidDiscount;
-      const babyDiscount = tourData.babyDiscount;
-      const teenDiscount = tourData.teenDiscount;
-      const cardImgUrl = tourData.cardImgUrl;
-      const imgUrls = tourData.imgUrls;
-      const transport = tourData.transport;
-      const food = tourData.food;
-      const hotel = tourData.hotel;
-      const schedules = tourData.schedules;
-      const isHidden = tourData.isHidden;
-const maxLength = 80;
-
-let truncatedName = tourName;
-if (tourName.length > maxLength) {
-  truncatedName = tourName.substring(0, maxLength - 3) + "...";
-}
-const formattedDate = new Date(tourDate).toLocaleDateString('en-GB');
-const dateParts = formattedDate.split('/');
-const departureDate = `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
-const tourDate1 = departureDate;
+    for(let i = 0; i < currentTourDataList.length; i++){
+        tourData = currentTourDataList[i];
+        const tourCode = tourData.code;
+        const tourDate = tourData.date;
+        const slots = tourData.slots;
+        const remainSlots = tourData.remainSlots;
+        const tourName = tourData.name;
+        const startPlace = tourData.startPlace;
+        const endPlaces = tourData.endPlaces.map((place) => place.name);
+        const price = tourData.price;
+        const date = tourData.date;
+        const time = tourData.time;
+        const numOfDays = tourData.numOfDays;
+        const promoDiscount = tourData.promoDiscount;
+        const kidDiscount = tourData.kidDiscount;
+        const babyDiscount = tourData.babyDiscount;
+        const teenDiscount = tourData.teenDiscount;
+        const cardImgUrl = tourData.cardImgUrl;
+        const imgUrls = tourData.imgUrls;
+        const transport = tourData.transport;
+        const food = tourData.food;
+        const hotel = tourData.hotel;
+        const schedules = tourData.schedules;
+        const isHidden = tourData.isHidden;
+        const maxLength = 80;
+        let truncatedName = tourName;
+        if (tourName.length > maxLength) {
+            truncatedName = tourName.substring(0, maxLength - 3) + "...";
+        }
+        const formattedDate = new Date(tourDate).toLocaleDateString("en-GB");
+        const dateParts = formattedDate.split("/");
+        const departureDate = `${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+        const tourDate1 = departureDate;
 
         // Tạo thẻ div cho tour
-        const tourDiv = document.createElement('div');
-        tourDiv.classList.add('col-md-6', 'col-xxl-3');
+        const tourDiv = document.createElement("div");
+        tourDiv.classList.add("col-md-6", "col-xxl-3");
 
         // Tạo nội dung cho thẻ div
         tourDiv.innerHTML = `
@@ -126,7 +126,11 @@ const tourDate1 = departureDate;
                 </button>
                 <ul class="dropdown-menu">
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Xóa Tour</a></li>
-                <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" data-id="${tourCode}"><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
+                data-code="${tourCode}"
+                data-index="${i}"
+                onclick="showEditModal(event)"
+                ><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
                 </ul>
             </div>
                 </div>
@@ -165,34 +169,32 @@ const tourDate1 = departureDate;
             const usedSlots = slots - remainSlots;
             const progressbar = (usedSlots / slots) * 100;
             return progressbar;
-          }
-          const progressbarwidth = calculateProgressBarWidth(slots, remainSlots);
-          const progressBarElement = document.getElementById(`progressBar-${tourCode}`); // Thay "tourCode" bằng giá trị thích hợp
-          progressBarElement.style.width = progressbarwidth + "%";
-          progressBarElement.setAttribute("aria-valuenow", remainSlots);
+        }
+        const progressbarwidth = calculateProgressBarWidth(slots, remainSlots);
+        const progressBarElement = document.getElementById(`progressBar-${tourCode}`); // Thay "tourCode" bằng giá trị thích hợp
+        progressBarElement.style.width = progressbarwidth + "%";
+        progressBarElement.setAttribute("aria-valuenow", remainSlots);
 
-          const tenTourInput = document.getElementById('ten-tour-change');
-          // Gán giá trị và placeholder từ tourData
-          tenTourInput.value = tourName;
-          tenTourInput.placeholder = tourName;
-          const pricetourInput = document.getElementById('gia-ve-nguoi-lon-change');
-          pricetourInput.value = price;
-          pricetourInput.placeholder = price;
-          const ngaykhoihanhtourInput = document.getElementById('ngay-khoi-hanh-change');
-          ngaykhoihanhtourInput.value = formattedDate;
-          ngaykhoihanhtourInput.placeholder = formattedDate;
-          const giokhoihanhtourInput = document.getElementById('gio-khoi-hanh-change');
-          giokhoihanhtourInput.value = time;
-          giokhoihanhtourInput.placeholder = time;
-          const sovetourInput = document.getElementById('so-ve-ban-change');
-          sovetourInput.value = slots;
-          sovetourInput.placeholder = slots;
-    });
+        const tenTourInput = document.getElementById("ten-tour-change");
+        // Gán giá trị và placeholder từ tourData
+        tenTourInput.value = tourName;
+        tenTourInput.placeholder = tourName;
+        const pricetourInput = document.getElementById("gia-ve-nguoi-lon-change");
+        pricetourInput.value = price;
+        pricetourInput.placeholder = price;
+        const ngaykhoihanhtourInput = document.getElementById("ngay-khoi-hanh-change");
+        ngaykhoihanhtourInput.value = formattedDate;
+        ngaykhoihanhtourInput.placeholder = formattedDate;
+        const giokhoihanhtourInput = document.getElementById("gio-khoi-hanh-change");
+        giokhoihanhtourInput.value = time;
+        giokhoihanhtourInput.placeholder = time;
+        const sovetourInput = document.getElementById("so-ve-ban-change");
+        sovetourInput.value = slots;
+        sovetourInput.placeholder = slots;
+    }
+    
     // Tạo phân trang
     renderPagination();
-  
-
-    
 }
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 let tourId = null;
@@ -200,21 +202,19 @@ function getTourId(event) {
     tourId = event.currentTarget.getAttribute("data-id");
 }
 confirmDeleteButton.addEventListener("click", function () {
-    console.log(tourId);  
+    console.log(tourId);
     axios
-      .delete(`/tours/${tourId}`, {
-      })
-      .then((response) => {
-        console.log(response.data);
-        fetchTourInformation(); 
-        fetchHiddenToursInformation();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  });
+        .delete(`/tours/${tourId}`, {})
+        .then((response) => {
+            console.log(response.data);
+            fetchTourInformation();
+            fetchHiddenToursInformation();
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+});
 let isHidden = false; // Khai báo biến isHidden mặc định là false
-
 function renderPagination(hiddenTourDataList) {
     const dataList = hiddenTourDataList ? hiddenTourDataList : tourDataList;
     const totalPages = Math.ceil(dataList.length / 12);
@@ -223,7 +223,7 @@ function renderPagination(hiddenTourDataList) {
 
     if (totalPages > 1) {
         const previousLink = `<li class="page-item">
-                                <a class="page-link custom-prev-next" href="#" aria-label="Previous" onclick="changePage('previous')">
+                                <a class="page-link custom-prev-next"  aria-label="Previous" onclick="changePage('previous')">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>`;
@@ -232,13 +232,13 @@ function renderPagination(hiddenTourDataList) {
         for (let i = 1; i <= totalPages; i++) {
             const liClass = i === currentPage ? "page-item active" : "page-item";
             const link = `<li class="${liClass}">
-                            <a class="page-link custom-page-link" href="#" onclick="changePage(${i})">${i}</a>
+                            <a class="page-link custom-page-link"  onclick="changePage(${i})">${i}</a>
                           </li>`;
             pagination.insertAdjacentHTML("beforeend", link);
         }
 
         const nextLink = `<li class="page-item">
-                            <a class="page-link custom-prev-next" href="#" aria-label="Next" onclick="changePage('next')">
+                            <a class="page-link custom-prev-next"  aria-label="Next" onclick="changePage('next')">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                           </li>`;
@@ -267,207 +267,240 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTourInformation();
 });
 let currentNgay_create = 3;
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     // Lấy đối tượng button và container chứa các ngày
     const buttonThemNgay = document.getElementById("button-them-ngay");
     const ngayContainer = document.getElementById("ngay-container");
-  
+
     // Số lượng ngày hiện tại
-  
+
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
-      // Tạo phần tử div mới
-      const newNgayDiv = document.createElement("div");
-      newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
-  
-      // Tạo các phần tử con bên trong div mới
-      const newLabel = document.createElement("label");
-      newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
-      newLabel.textContent = "Ngày " + currentNgay_create;
-  
-      const newInput = document.createElement("input");
-      newInput.classList.add("form-control");
-      newInput.setAttribute("placeholder", "");
-      newInput.setAttribute("id","ngay" + currentNgay_create);
+        // Tạo phần tử div mới
+        const newNgayDiv = document.createElement("div");
+        newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
 
-  
-      const newTextInput = document.createElement("div");
-      newTextInput.classList.add("text-input");
-      newTextInput.setAttribute("contenteditable", "");
-      newTextInput.setAttribute("id", "ngay" + currentNgay_create + "-input");
-  
-      // Chèn các phần tử con vào div mới
-      newNgayDiv.appendChild(newLabel);
-      newNgayDiv.appendChild(newInput);
-      newNgayDiv.appendChild(newTextInput);
-  
-      // Chèn div mới vào container ngày
-      ngayContainer.appendChild(newNgayDiv);
-  
-      // Tăng số lượng ngày hiện tại
-      currentNgay_create++;
-      console.log(currentNgay_create);
+        // Tạo các phần tử con bên trong div mới
+        const newLabel = document.createElement("label");
+        newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
+        newLabel.textContent = "Ngày " + currentNgay_create;
+
+        const newInput = document.createElement("input");
+        newInput.classList.add("form-control");
+        newInput.setAttribute("placeholder", "");
+        newInput.setAttribute("id", "ngay" + currentNgay_create);
+
+        const newTextInput = document.createElement("div");
+        newTextInput.classList.add("text-input");
+        newTextInput.setAttribute("contenteditable", "");
+        newTextInput.setAttribute("id", "ngay" + currentNgay_create + "-input");
+
+        // Chèn các phần tử con vào div mới
+        newNgayDiv.appendChild(newLabel);
+        newNgayDiv.appendChild(newInput);
+        newNgayDiv.appendChild(newTextInput);
+
+        // Chèn div mới vào container ngày
+        ngayContainer.appendChild(newNgayDiv);
+
+        // Tăng số lượng ngày hiện tại
+        currentNgay_create++;
+        console.log(currentNgay_create);
     });
     const buttonBotNgay = document.getElementById("button-bot-ngay");
 
-// Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
-buttonBotNgay.addEventListener("click", function() {
-  // Lấy danh sách tất cả các ngày
-  const ngayDivs = document.getElementsByClassName("container-ngay");
+    // Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
+    buttonBotNgay.addEventListener("click", function () {
+        // Lấy danh sách tất cả các ngày
+        const ngayDivs = document.getElementsByClassName("container-ngay");
 
-  // Kiểm tra nếu vẫn còn ngày trong container
-  if (ngayDivs.length > 0) {
-    // Lấy ngày cuối cùng
-    const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
+        // Kiểm tra nếu vẫn còn ngày trong container
+        if (ngayDivs.length > 0) {
+            // Lấy ngày cuối cùng
+            const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
 
-    // Xóa ngày cuối cùng khỏi container
-    ngayContainer.removeChild(lastNgayDiv);
-  }
-  if(currentNgay_create >3) 
-  { 
-    currentNgay_create--;
-  } 
-  else{ 
-    alert('Số ngày tối thiểu là 2.');
-  }
+            // Xóa ngày cuối cùng khỏi container
+            ngayContainer.removeChild(lastNgayDiv);
+        }
+        if (currentNgay_create > 3) {
+            currentNgay_create--;
+        } else {
+            alert("Số ngày tối thiểu là 2.");
+        }
+    });
 });
-  });
-  let currentNgay = 3;
+let currentNgay = 3;
 
-  document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
     // Lấy đối tượng button và container chứa các ngày
     const buttonThemNgay = document.getElementById("button-them-ngay-change");
     const ngayContainer = document.getElementById("ngay-container2");
-  
+
     // Số lượng ngày hiện tại
-  
+
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
-      // Tạo phần tử div mới
-      const newNgayDiv = document.createElement("div");
-      newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
-  
-      // Tạo các phần tử con bên trong div mới
-      const newLabel = document.createElement("label");
-      newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
-      newLabel.textContent = "Ngày " + currentNgay;
-  
-      const newInput = document.createElement("input");
-      newInput.classList.add("form-control");
-      newInput.setAttribute("placeholder", "");
-      newInput.setAttribute("id","ngay" + currentNgay + "-change");
-  
-      const newTextInput = document.createElement("div");
-      newTextInput.classList.add("text-input");
-      newTextInput.setAttribute("contenteditable", "");
-      newTextInput.setAttribute("id", "ngay" + currentNgay + "-change-input");
-  
-      // Chèn các phần tử con vào div mới
-      newNgayDiv.appendChild(newLabel);
-      newNgayDiv.appendChild(newInput);
-      newNgayDiv.appendChild(newTextInput);
-  
-      // Chèn div mới vào container ngày
-      ngayContainer.appendChild(newNgayDiv);
-  
-      // Tăng số lượng ngày hiện tại
-      currentNgay++;
+        // Tạo phần tử div mới
+        const newNgayDiv = document.createElement("div");
+        newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
+
+        // Tạo các phần tử con bên trong div mới
+        const newLabel = document.createElement("label");
+        newLabel.classList.add("fs-5", "fw-semibold", "mb-2");
+        newLabel.textContent = "Ngày " + currentNgay;
+
+        const newInput = document.createElement("input");
+        newInput.classList.add("form-control");
+        newInput.setAttribute("placeholder", "");
+        newInput.setAttribute("id", "ngay" + currentNgay + "-change");
+
+        const newTextInput = document.createElement("div");
+        newTextInput.classList.add("text-input");
+        newTextInput.setAttribute("contenteditable", "");
+        newTextInput.setAttribute("id", "ngay" + currentNgay + "-change-input");
+
+        // Chèn các phần tử con vào div mới
+        newNgayDiv.appendChild(newLabel);
+        newNgayDiv.appendChild(newInput);
+        newNgayDiv.appendChild(newTextInput);
+
+        // Chèn div mới vào container ngày
+        ngayContainer.appendChild(newNgayDiv);
+
+        // Tăng số lượng ngày hiện tại
+        currentNgay++;
     });
-    
+
     const buttonBotNgay = document.getElementById("button-bot-ngay-change");
-  
+
     // Xử lý sự kiện khi bấm vào nút "Bớt Ngày"
-    buttonBotNgay.addEventListener("click", function() {
-      // Lấy danh sách tất cả các ngày
-      const ngayDivs = document.getElementsByClassName("container-ngay");
-  
-      // Kiểm tra nếu vẫn còn ngày trong container
-      if (ngayDivs.length > 0) {
-        // Lấy ngày cuối cùng
-        const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
-  
-        // Xóa ngày cuối cùng khỏi container
-        ngayContainer.removeChild(lastNgayDiv);
-      }
-      if (currentNgay > 3) { 
-        currentNgay--;
-      } else { 
-        alert('Số ngày tối thiểu là 2.');
-      }
+    buttonBotNgay.addEventListener("click", function () {
+        // Lấy danh sách tất cả các ngày
+        const ngayDivs = document.getElementsByClassName("container-ngay");
+
+        // Kiểm tra nếu vẫn còn ngày trong container
+        if (ngayDivs.length > 0) {
+            // Lấy ngày cuối cùng
+            const lastNgayDiv = ngayDivs[ngayDivs.length - 1];
+
+            // Xóa ngày cuối cùng khỏi container
+            ngayContainer.removeChild(lastNgayDiv);
+        }
+        if (currentNgay > 3) {
+            currentNgay--;
+        } else {
+            alert("Số ngày tối thiểu là 2.");
+        }
     });
 });
 const createTour = async (currentNgay_create) => {
-  // Lấy giá trị từ các ô input HTML
-  const name = document.getElementById('ten-tour-input').value;
-  const code = document.getElementById('ma-tour-input').value;
-  const price = parseFloat(document.getElementById('gia-ve-nguoi-lon-input').value);
-  const startPlaceCode = document.getElementById('code-diem-khoi-hanh-input').value;
-  const startPlaceName = document.getElementById('diem-khoi-hanh-input').value;
-  const endPlaceCode = document.getElementById('code-diem-den-input').value;
-  const endPlaceName = document.getElementById('diem-den-input').value;
-  const date = document.getElementById('ngay-khoi-hanh-input').value;
-  const time = document.getElementById('gio-khoi-hanh-input').value;
-  const remainSlots = parseInt(document.getElementById('so-ve-ban-input').value);
-  const cardImgUrl = document.getElementById('hinh1-input').value;
-  const img1Url = document.getElementById('hinh2-input').value;
-  const img2Url = document.getElementById('hinh3-input').value;
-  const img3Url = document.getElementById('hinh4-input').value;
-  const img4Url = document.getElementById('hinh5-input').value;
-  const transport = document.getElementById('phuong-tien-input').value;
-  const food = document.getElementById('am-thuc-input').value;
-  const hotel = document.getElementById('khach-san-input').value;
+    // Lấy giá trị từ các ô input HTML
+    const name = document.getElementById("ten-tour-input").value;
+    const code = document.getElementById("ma-tour-input").value;
+    const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-input").value);
+    const startPlaceCode = document.getElementById("code-diem-khoi-hanh-input").value;
+    const startPlaceName = document.getElementById("diem-khoi-hanh-input").value;
+    const endPlaceCode = document.getElementById("code-diem-den-input").value;
+    const endPlaceName = document.getElementById("diem-den-input").value;
+    const date = document.getElementById("ngay-khoi-hanh-input").value;
+    const time = document.getElementById("gio-khoi-hanh-input").value;
+    const remainSlots = parseInt(document.getElementById("so-ve-ban-input").value);
+    const cardImgUrl = document.getElementById("hinh1-input").value;
+    const img1Url = document.getElementById("hinh2-input").value;
+    const img2Url = document.getElementById("hinh3-input").value;
+    const img3Url = document.getElementById("hinh4-input").value;
+    const img4Url = document.getElementById("hinh5-input").value;
+    const transport = document.getElementById("phuong-tien-input").value;
+    const food = document.getElementById("am-thuc-input").value;
+    const hotel = document.getElementById("khach-san-input").value;
 
-  // Lấy dữ liệu từ các ô input của schedules
-  const schedules = [];
+    // Lấy dữ liệu từ các ô input của schedules
+    const schedules = [];
 
-  for (let i = 1; i < currentNgay_create; i++) {
-    const dayInput = document.getElementById(`ngay${i}`).value;
-    const dayDetail = document.getElementById(`ngay${i}-input`).innerText;
-    const schedule = {
-      schedule_detail: dayDetail,
-      name: dayInput
+    for (let i = 1; i < currentNgay_create; i++) {
+        const dayInput = document.getElementById(`ngay${i}`).value;
+        const dayDetail = document.getElementById(`ngay${i}-input`).innerText;
+        const schedule = {
+            schedule_detail: dayDetail,
+            name: dayInput,
+        };
+
+        schedules.push(schedule);
+    }
+
+    // Tạo đối tượng dữ liệu JSON
+    const tourData = {
+        name: name,
+        code: code,
+        price: price,
+        startPlace: {
+            code: startPlaceCode,
+            name: startPlaceName,
+        },
+        endPlaces: [
+            {
+                code: endPlaceCode,
+                name: endPlaceName,
+            },
+        ],
+        date: date,
+        time: time,
+        remainSlots: remainSlots,
+        cardImgUrl: cardImgUrl,
+        imgUrls: [img1Url, img2Url, img3Url, img4Url],
+        transport: transport,
+        food: food,
+        hotel: hotel,
+        schedules: schedules,
+        numOfDays: currentNgay_create - 1,
+        slots: remainSlots,
+        // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
 
-    schedules.push(schedule);
-  }
-
-  // Tạo đối tượng dữ liệu JSON
-  const tourData = {
-    name: name,
-    code: code,
-    price: price,
-    startPlace: {
-      code: startPlaceCode,
-      name: startPlaceName
-    },
-    endPlaces: [
-      {
-        code: endPlaceCode,
-        name: endPlaceName
-      }
-    ],
-    date: date,
-    time: time,
-    remainSlots: remainSlots,
-    cardImgUrl: cardImgUrl,
-    imgUrls: [img1Url, img2Url, img3Url, img4Url],
-    transport: transport,
-    food: food,
-    hotel: hotel,
-    schedules: schedules,
-    numOfDays: currentNgay_create -1, 
-    slots : remainSlots
-    // Thêm các trường dữ liệu khác vào đối tượng JSON
-  };
-
-  try {
-    // Gửi yêu cầu tạo tour tới API
-    const response = await axios.post(`/tours`, tourData);
-    console.log(response.data); // Xử lý dữ liệu phản hồi từ API (nếu cần)
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        // Gửi yêu cầu tạo tour tới API
+        const response = await axios.post(`/tours`, tourData);
+        console.log(response.data); // Xử lý dữ liệu phản hồi từ API (nếu cần)
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
-document.getElementById('done-tao-tour').addEventListener('click', () => createTour(currentNgay_create));
+document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
+
+// Show Edit tour
+function showEditModal(event) {
+    const modalIndex = event.currentTarget.getAttribute("data-index");
+    const tour = tourDataList[modalIndex];
+    document.getElementById("ten-tour-change").value = tour.name;
+    document.getElementById("gia-ve-nguoi-lon-change").value = tour.price;
+    document.getElementById("so-ve-ban-change").value = tour.slots;
+    document.getElementById("hinh1-change").value = tour.cardImgUrl;
+    document.getElementById("hinh2-change").value = tour.imgUrls[0];
+    document.getElementById("hinh3-change").value = tour.imgUrls[1] ;
+    document.getElementById("hinh4-change").value = tour.imgUrls[2];
+    document.getElementById("hinh5-change").value = tour.imgUrls[3];
+    document.getElementById("phuong-tien-change").value = tour.transport;
+    document.getElementById("am-thuc-change").value = tour.food;
+    document.getElementById("khach-san-change").value = tour.hotel;
+    showScheduleDetail(tour.schedules);
+}
+
+function showScheduleDetail(schedules){
+    const scheduleContainer = document.getElementById('ngay-container2');
+    for(let i = 0; i < schedules.length; i++){
+        scheduleRow = displayScheduleRow(schedules[i], i+1)
+        scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
+    }
+}
+
+function displayScheduleRow(schedule, index){
+    return `
+    <div class="d-flex flex-column fv-row" id="container-ngay-${index}">
+    <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-${index}">Ngày ${index}</label>
+    <input class="form-control" value="${schedule.name}" id="ngay${index}-change" />
+    <div class="text-input" contenteditable id="ngay${index}-change-input">${schedule.schedule_detail}</div>
+    </div>
+    `;
+}
