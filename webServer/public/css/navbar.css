@@ -264,6 +264,30 @@ html{
     width: 50px;
     height: 50px;
 }
+
+.setting-item {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.setting-item:focus,  .setting-item:hover{
+    background: #F14868;
+    opacity: 0.75;
+    border-radius: 7px;
+    color: #FFF;
+}
+
+.setting-style-menu {
+    background-color: #0D0C1B;
+    border-radius: 0 0 16px 16px;
+    padding: 0 2rem;
+}
+
 @media only screen and (max-width: 576px){
     .navbar-container{
         margin: 0;
@@ -295,6 +319,10 @@ html{
         max-width: var(--bs-modal-width);
         margin-right: auto;
         margin-left: auto;
+    }
+    .navbar-text, .setting-item  {
+        margin-bottom: 0.8rem !important;
+        margin-top: 0.8rem !important;
     }
 }
 
