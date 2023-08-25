@@ -493,8 +493,8 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
-    showdiemden(tour.endPlaces);
-      console.log(tour.endPlaces);
+    // showdiemden(tour.endPlaces);
+    //   console.log(tour.endPlaces);
 
 }
  let currentNgay = 0;
@@ -536,3 +536,28 @@ function showdiemden(endPlaces){
     }
 }
 
+let initialValues = ['01', '03']; // Ví dụ: An Giang và Bắc Giang
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selectElement = document.getElementById('diem-khoi-hanh-change-input');
+    const inputElement = document.getElementById('selected-values-input');
+
+    // Mảng giá trị ban đầu
+
+    // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
+    for (const option of selectElement.options) {
+        if (initialValues.includes(option.value)) {
+            option.selected = true;
+        }
+    }
+
+    // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
+    selectElement.addEventListener('change', function() {
+        const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
+        inputElement.value = selectedOptions.join(', ');
+    });
+
+    // Cập nhật nội dung ô input ban đầu
+    const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
+    inputElement.value = initialSelectedOptions.join(', ');
+});
