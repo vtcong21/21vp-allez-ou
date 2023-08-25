@@ -388,3 +388,7 @@ line-height: normal;
 .btn.btn-secondary{
     font-size: 2.4rem;
 }
+
+.btn.dropdown-toggle.btn-default{
+    display: none;
+}
