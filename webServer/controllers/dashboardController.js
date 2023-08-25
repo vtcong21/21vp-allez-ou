@@ -18,7 +18,7 @@ const updateRevenue = async () => {
             }
         }, {httpsAgent: agent});
         const paymentHistory = response.data.paymentHistory;
-        console.log(response.data);
+        //console.log(response.data);
         // Lấy ngày hôm nay
         const today = new Date();
         const yesterday = new Date(today);
