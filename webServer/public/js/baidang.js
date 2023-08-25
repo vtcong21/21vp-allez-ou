@@ -125,7 +125,7 @@ function renderTourPage(page, hiddenTourDataList) {
                 ...
                 </button>
                 <ul class="dropdown-menu">
-                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Xóa Tour</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
                 <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
                 data-code="${tourCode}"
                 data-index="${i}"
@@ -202,17 +202,17 @@ function getTourId(event) {
     tourId = event.currentTarget.getAttribute("data-id");
 }
 confirmDeleteButton.addEventListener("click", function () {
-    console.log(tourId);
-    axios
-        .delete(`/tours/${tourId}`, {})
-        .then((response) => {
-            console.log(response.data);
-            fetchTourInformation();
-            fetchHiddenToursInformation();
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
+  console.log(tourId);
+  axios
+      .put(`/hideTour/${tourId}`, {}) // Sửa thành phương thức "put" và endpoint "/hideTour"
+      .then((response) => {
+          console.log(response.data);
+          fetchTourInformation();
+          fetchHiddenToursInformation();
+      })
+      .catch((error) => {
+          console.error("Error:", error);
+      });
 });
 let isHidden = false; // Khai báo biến isHidden mặc định là false
 function renderPagination(hiddenTourDataList) {
@@ -329,7 +329,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     });
 });
-let currentNgay = 3;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     // Lấy đối tượng button và container chứa các ngày
@@ -340,6 +339,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
+          event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
         // Tạo phần tử div mới
         const newNgayDiv = document.createElement("div");
         newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
@@ -486,15 +486,15 @@ function showEditModal(event) {
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
 }
-
+let currentNgay = 0;
 function showScheduleDetail(schedules){
     const scheduleContainer = document.getElementById('ngay-container2');
-    for(let i = 0; i < schedules.length; i++){
+    for(let i = currentNgay; i < schedules.length; i++){
         scheduleRow = displayScheduleRow(schedules[i], i+1)
         scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
+        currentNgay = i + 2;
     }
 }
-
 function displayScheduleRow(schedule, index){
     return `
     <div class="d-flex flex-column fv-row" id="container-ngay-${index}">
