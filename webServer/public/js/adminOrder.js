@@ -66,7 +66,7 @@ async function getAllOrders() {
         const response = await axios.get("/admin/getAllOrders");
         if (response.status === 200) {
             let orders = response.data;
-            totalItems = orders.length;
+            groupedOrders = {}; // Reset groupedOrders
             orders.forEach((order) => {
                 const formattedOrderDate = changeDateToString(order.orderDate);
                 const formattedStatus = translateStatusToVietnamese(order.status);
@@ -76,7 +76,6 @@ async function getAllOrders() {
                     type: translateTypeToVietnamese(ticket.type),
                     dateOfBirth: changeDateToString(ticket.dateOfBirth),
                 }));
-
                 if (!groupedOrders[formattedStatus]) {
                     groupedOrders[formattedStatus] = [];
                 }
@@ -92,6 +91,12 @@ async function getAllOrders() {
             const tabCompleted = document.getElementById("tab-completed");
             const tabCancelled = document.getElementById("tab-cancelled");
 
+            totalItems = {
+                "Đặt thành công": groupedOrders["Đặt thành công"].length || 0,
+                "Hoàn thành": groupedOrders["Hoàn thành"].length || 0,
+                "Đã hủy": groupedOrders["Đã hủy"].length || 0,
+            };
+
             displayOrdersByStatus("Đặt thành công", tabSuccess, "pagination-success");
             displayOrdersByStatus("Hoàn thành", tabCompleted, "pagination-completed");
             displayOrdersByStatus("Đã hủy", tabCancelled, "pagination-cancelled");
@@ -106,13 +111,12 @@ async function getAllOrders() {
 function displayOrdersByStatus(status, orderTab, orderTabId) {
     if (groupedOrders[status]) {
         displayOrderList(groupedOrders[status], orderTab, status);
-        displayPagination(totalItems, currentPage, itemsPerPage, orderTabId);
+        displayPagination(totalItems[status], currentPage, itemsPerPage, orderTabId);
     } else {
         orderTab.innerHTML = "<p class='null-order justify-content-center'>Không có đơn hàng nào trong trạng thái này.</p>";
-        displayPagination(totalItems, currentPage, itemsPerPage, orderTabId);
+        displayPagination(totalItems[status], currentPage, itemsPerPage, orderTabId);
     }
 }
-
 function displayOrderList(orders, orderTab, orderStatus) {
     const statusClass = getStatusClass(orderStatus); // Gọi hàm getStatusClass để lấy class tương ứng với trạng thái
     orderTab.innerHTML = "";
@@ -157,7 +161,7 @@ function makeOrderRow(order, status, className, index) {
     <div class="d-flex justify-content-end mt-2">
         <a data-bs-toggle="modal" data-bs-target="#orderModal"
         data-status="${status}"
-        data-index=${index}
+        data-order-id="${order._id}"
         onclick="showOrderModal(event)"><img src="/img/admin/adminOrder/showMore.png" /></a>
     </div>
 </td>
@@ -187,48 +191,69 @@ function displayPagination(totalItems, currentPage, itemsPerPage, orderTabId) {
     if (totalPages > 1) {
         // Tạo liên kết "Previous"
         const previousLink = `<li class="page-item">
-  <a class="page-link custom-prev-next" href="#" aria-label="Previous" onclick="changePage('previous', '${orderTabId}')">
-    <span aria-hidden="true">&laquo;</span>
-  </a>
-</li>`;
+            <a class="page-link custom-prev-next" aria-label="Previous" onclick="changePage('previous', '${orderTabId}')">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>`;
         pagination.insertAdjacentHTML("beforeend", previousLink);
 
         // Tạo liên kết cho từng trang
         for (let i = 1; i <= totalPages; i++) {
             const liClass = i === currentPage ? "page-item active" : "page-item";
             const link = `<li class="${liClass}">
-<a class="page-link custom-page-link" href="#" onclick="changePage(${i}, '${orderTabId}')">${i}</a>
-</li>`;
+                <a class="page-link custom-page-link" onclick="changePage(${i}, '${orderTabId}')">${i}</a>
+            </li>`;
             pagination.insertAdjacentHTML("beforeend", link);
         }
 
         // Tạo liên kết "Next"
         const nextLink = `<li class="page-item">
-<a class="page-link custom-prev-next" href="#" aria-label="Next" onclick="changePage('next', '${orderTabId}')">
-<span aria-hidden="true">&raquo;</span>
-</a>
-</li>`;
+            <a class="page-link custom-prev-next"  aria-label="Next" onclick="changePage('next', '${orderTabId}')">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>`;
         pagination.insertAdjacentHTML("beforeend", nextLink);
+    } else {
+        // Nếu không có nhiều hơn 1 trang, không hiển thị liên kết trang
+        pagination.style.display = "none";
     }
 }
 
 // Hàm xử lý thay đổi trang
-function changePage(pageNumber, activeTab) {
+function changePage(pageNumber, orderTabId) {
     currentPage = pageNumber;
 
     // Lấy lại dữ liệu và hiển thị danh sách đơn hàng và pagination tương ứng với trang hiện tại
+    const activeTab = document.querySelector(".nav-link.active");
+    const activeContainer = activeTab.getAttribute('currentTab');
     const status = activeTab.textContent.trim();
-    displayOrdersByStatus(status, activeTab);
+    const orderTab = document.getElementById(activeContainer);
+    displayOrdersByStatus(status, orderTab, orderTabId);
 }
+
 
 // Gọi hàm để lấy và hiển thị đơn hàng
 getAllOrders();
 
+function findOrderById(orderId) {
+    for (const status in groupedOrders) {
+        if (groupedOrders.hasOwnProperty(status)) {
+            const orders = groupedOrders[status];
+            const foundOrder = orders.find(order => order._id === orderId);
+            if (foundOrder) {
+                return foundOrder;
+            }
+        }
+    }
+    return null; // Trả về null nếu không tìm thấy đơn hàng
+}
+
 function showOrderModal(event) {
     const modalElement = document.querySelector("#orderModal");
     const modalStatus = event.currentTarget.getAttribute("data-status");
-    const modalIndex = event.currentTarget.getAttribute("data-index");
-    const currentOrder = groupedOrders[modalStatus][modalIndex];
+    const modalOrderId = event.currentTarget.getAttribute("data-order-id");
+    console.log(modalOrderId);
+    const currentOrder = findOrderById(modalOrderId);
 
     modalElement.querySelector("#order-code-tour").textContent = currentOrder.tourCode;
     modalElement.querySelector("#order-representer-name").textContent = currentOrder.representer.name;
@@ -248,12 +273,12 @@ function displayTickets(tickets) {
     const ticketsContainer = document.getElementById("order-tickets__container");
     ticketsContainer.innerHTML = "";
     for (let i = 0; i < tickets.length; i++) {
-        let ticketRow = maketTicketRow(tickets[i], i + 1);
+        let ticketRow = makeTicketRow(tickets[i], i + 1);
         ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
     }
 }
 
-function maketTicketRow(ticket, index) {
+function makeTicketRow(ticket, index) {
     return `
     <ul class="list-group list-group-borderless">
     <p class="more-title">Khách hàng ${index} <span class="badge rounded-pill bg-success"> ${ticket.type}</span></p>
@@ -316,3 +341,4 @@ async function searchOrderByCodeTour() {
         console.log(error);
     }
 }
+

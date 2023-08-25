@@ -128,7 +128,7 @@ function renderTourPage(page, hiddenTourDataList) {
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
                 <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
                 data-code="${tourCode}"
-                data-index="${i}"
+                data-tour-id="${tourData._id}"
                 onclick="showEditModal(event)"
                 ><img src="/img/admin/admins-role/edit.png" />Chỉnh sửa tour</a></li>
                 </ul>
@@ -469,10 +469,18 @@ const createTour = async (currentNgay_create) => {
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
 document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
 
+
+function findTourById(tourId) {
+    const foundTour = tourDataList.find(tour => tour._id === tourId);
+    if (foundTour) {
+        return foundTour;
+    }
+    return null; // Trả về null nếu không tìm thấy đơn hàng
+}
 // Show Edit tour
 function showEditModal(event) {
-    const modalIndex = event.currentTarget.getAttribute("data-index");
-    const tour = tourDataList[modalIndex];
+    const modalTourId = event.currentTarget.getAttribute("data-tour-id");
+    const tour = findTourById(modalTourId);
     document.getElementById("ten-tour-change").value = tour.name;
     document.getElementById("gia-ve-nguoi-lon-change").value = tour.price;
     document.getElementById("so-ve-ban-change").value = tour.slots;
