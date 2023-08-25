@@ -469,6 +469,14 @@ const createTour = async (currentNgay_create) => {
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
 document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
 
+
+function findTourById(tourId) {
+    const foundTour = tourDataList.find(tour => tour._id === tourId);
+    if (foundTour) {
+        return foundTour;
+    }
+    return null; // Trả về null nếu không tìm thấy đơn hàng
+}
 // Show Edit tour
 function showEditModal(event) {
     const modalTourId = event.currentTarget.getAttribute("data-tour-id");
