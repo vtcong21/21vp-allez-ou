@@ -190,6 +190,18 @@ const getAllOrders = async (req, res) => {
     }
 }
 
+const getUncancelledOrders = async(req, res) =>{
+    try {
+        const orders = await Item.find({ isPaid: true, status: { $ne: 'Cancelled' } });
+
+        res.status(200).json(orders);
+    } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
 
 const searchOrdersByTourCode = async (req, res) => {
     try {
@@ -284,5 +296,6 @@ module.exports = {
     renderClientPage,
     renderAdminRolePage,
     searchOrdersByTourCode,
-    changePassword
+    changePassword,
+    getUncancelledOrders
 }
