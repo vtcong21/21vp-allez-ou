@@ -1,6 +1,32 @@
 // const mongoose = require('mongoose');
 const PaymentAccount = require('../models/paymentAccount');
+const mailController = require('../controllers/mail');
+const OTP = require('../models/OTP');
 
+const generateOTP = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+};
+
+const sendOTP = async (req, res) => {
+    try {
+        const { email } = req.body;
+        console.log(email);
+        // Tạo mã OTP
+        const OTPCode = generateOTP();
+
+        const otp = new OTP({
+            email: email,
+            code: OTPCode,
+            expiration: new Date(new Date().getTime() + 2 * 60000) // 2 phút sau
+        });
+        await otp.save();
+        await mailController.sendOTPEmail(email, OTPCode);
+        res.status(200).json({ success: true });
+    } catch (error) {
+        console.error('Send OTP error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 const sendMoney = async (req, res) => {
     try {
@@ -105,4 +131,4 @@ const createAccount = async (req, res) => {
 
 
 
-module.exports = { sendMoney, getPaymentHistory, getTodayPaymentHistory, createAccount };
+module.exports = { sendMoney, getPaymentHistory, getTodayPaymentHistory, createAccount, sendOTP };

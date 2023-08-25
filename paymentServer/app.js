@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const path = require("path");
+//const path = require("path");
 const cookieParser = require("cookie-parser");
-const cors = require('cors');
+//const cors = require('cors');
 const https = require('https');
 const fs = require('fs');
 const accountRoutes = require("./routes/accountRoutes");
@@ -30,27 +30,20 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(cookieParser());
 
+
 // Routes
 app.use('/accounts', accountRoutes);
 
 
-// test route, cần test thì gắn tên file view vào ngay dòng res.render mà test
-// app.get('/test', (req, res)=>{
-//   //localhost:5000/test
-//   res.render('tourInfo', {user: {
-//     fullName: 'Hello Kong ne',
-//     _id: '123456'
-//   }});
-// })
-
 // Đường dẫn đến các tệp chứng chỉ và khóa riêng tư
 const sslOptions = {
-    key: fs.readFileSync('./certificates/key.pem'),
-    cert: fs.readFileSync('certificates/cert.pem')
-  };
-  
-  const server = https.createServer(sslOptions, app);
+  key: fs.readFileSync('./certificates/key.pem'),
+  cert: fs.readFileSync('certificates/cert.pem')
+};
 
-  server.listen(port, () => {
-    console.log(`Server is running on port ${port} over HTTPS`);
-  });
+const server = https.createServer(sslOptions, app);
+
+
+server.listen(port, () => {
+  console.log(`Server is running on port ${port} over HTTPS`);
+});
