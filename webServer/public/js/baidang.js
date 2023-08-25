@@ -192,7 +192,7 @@ function renderTourPage(page, hiddenTourDataList) {
         sovetourInput.value = slots;
         sovetourInput.placeholder = slots;
     }
-    
+
     // Tạo phân trang
     renderPagination();
 }
@@ -469,7 +469,41 @@ const createTour = async (currentNgay_create) => {
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
 document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
 
-// Show Edit tour
+// // Show Edit tour
+// function showEditModal(event) {
+//     const modalIndex = event.currentTarget.getAttribute("data-index");
+//     const tour = tourDataList[modalIndex];
+//     document.getElementById("ten-tour-change").value = tour.name;
+//     document.getElementById("gia-ve-nguoi-lon-change").value = tour.price;
+//     document.getElementById("so-ve-ban-change").value = tour.slots;
+//     document.getElementById("hinh1-change").value = tour.cardImgUrl;
+//     document.getElementById("hinh2-change").value = tour.imgUrls[0];
+//     document.getElementById("hinh3-change").value = tour.imgUrls[1] ;
+//     document.getElementById("hinh4-change").value = tour.imgUrls[2];
+//     document.getElementById("hinh5-change").value = tour.imgUrls[3];
+//     document.getElementById("phuong-tien-change").value = tour.transport;
+//     document.getElementById("am-thuc-change").value = tour.food;
+//     document.getElementById("khach-san-change").value = tour.hotel;
+//     showScheduleDetail(tour.schedules);
+// }
+// let currentNgay = 0;
+// function showScheduleDetail(schedules){
+//     const scheduleContainer = document.getElementById('ngay-container2');
+//     for(let i = currentNgay; i < schedules.length; i++){
+//         scheduleRow = displayScheduleRow(schedules[i], i+1)
+//         scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
+//         currentNgay += schedules[i].length;
+//     }
+// }
+// function displayScheduleRow(schedule, index){
+//     return `
+//     <div class="d-flex flex-column fv-row" id="container-ngay-${index}">
+//     <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-${index}">Ngày ${index}</label>
+//     <input class="form-control" value="${schedule.name}" id="ngay${index}-change" />
+//     <div class="text-input" contenteditable id="ngay${index}-change-input">${schedule.schedule_detail}</div>
+//     </div>
+//     `;
+// }
 function showEditModal(event) {
     const modalIndex = event.currentTarget.getAttribute("data-index");
     const tour = tourDataList[modalIndex];
@@ -485,15 +519,29 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
+
 }
-let currentNgay = 0;
+ let currentNgay = 0;
 function showScheduleDetail(schedules){
+
     const scheduleContainer = document.getElementById('ngay-container2');
     for(let i = currentNgay; i < schedules.length; i++){
         scheduleRow = displayScheduleRow(schedules[i], i+1)
         scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
-        currentNgay = i + 2;
+        currentNgay = i+2;
     }
+
+    console.log(currentNgay);
+    const closeModalButton = document.getElementById('closeModalButton');
+closeModalButton.addEventListener('click', myFunction);
+function myFunction() {
+  // Gọi hàm xử lý sự kiện tại đây
+  currentNgay =0; 
+  console.log(currentNgay);
+  while (scheduleContainer.firstChild) {
+    scheduleContainer.firstChild.remove();
+}
+}
 }
 function displayScheduleRow(schedule, index){
     return `
@@ -504,3 +552,4 @@ function displayScheduleRow(schedule, index){
     </div>
     `;
 }
+
