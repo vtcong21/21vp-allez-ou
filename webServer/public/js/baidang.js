@@ -125,8 +125,9 @@ function renderTourPage(page, hiddenTourDataList) {
                 ...
                 </button>
                 <ul class="dropdown-menu">
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmdisplayModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Hiện Tour</a></li>
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
-                <li><a data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
+                <li><a id="edit-tour-link" data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
                 data-code="${tourCode}"
                 data-tour-id="${tourData._id}"
                 onclick="showEditModal(event)"
@@ -200,15 +201,34 @@ const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 let tourId = null;
 function getTourId(event) {
     tourId = event.currentTarget.getAttribute("data-id");
-}
+} 
+const confirmdisplayButton = document.getElementById("confirmdisplayButton"); 
+confirmdisplayButton.addEventListener("click",function() { 
+    console.log(tourId);
+    axios
+        .put(`/tours/displayTour/${tourId}`,{})
+        .then((response) => {
+            console.log(response.data);
+            fetchTourInformation();
+            fetchHiddenToursInformation();
+            alert('Hiện tour thành công, load lại trang web để gọi api');
+            location.reload(); 
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+})
+// Xóa chuyến đi
 confirmDeleteButton.addEventListener("click", function () {
   console.log(tourId);
   axios
-      .put(`/hideTour/${tourId}`, {}) // Sửa thành phương thức "put" và endpoint "/hideTour"
+      .put(`/tours/hideTour/${tourId}`, {}) // Sửa thành phương thức "put" và endpoint "/hideTour"
       .then((response) => {
           console.log(response.data);
           fetchTourInformation();
           fetchHiddenToursInformation();
+          alert('Ẩn tour thành công, load lại trang để gọi lại api'); 
+          location.reload();
       })
       .catch((error) => {
           console.error("Error:", error);
@@ -393,13 +413,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     });
 });
+
 const createTour = async (currentNgay_create) => {
     // Lấy giá trị từ các ô input HTML
     const name = document.getElementById("ten-tour-input").value;
     const code = document.getElementById("ma-tour-input").value;
     const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-input").value);
-    const startPlaceCode = document.getElementById("code-diem-khoi-hanh-input").value;
-    const startPlaceName = document.getElementById("diem-khoi-hanh-input").value;
+    const startPlaceCode = document.getElementById("diem-khoi-hanh-input").value;
+    const selectElement = document.getElementById("diem-khoi-hanh-input");
+
+// Lấy index (vị trí) của option được chọn
+const selectedIndex = selectElement.selectedIndex;
+
+// Lấy phần tử option được chọn
+const selectedOption = selectElement.options[selectedIndex];
+
+// Lấy textContent của option được chọn
+const selectedText = selectedOption.textContent;
+    const startPlaceName = selectedText;
     const endPlaceCode = document.getElementById("code-diem-den-input").value;
     const endPlaceName = document.getElementById("diem-den-input").value;
     const date = document.getElementById("ngay-khoi-hanh-input").value;
@@ -460,14 +491,29 @@ const createTour = async (currentNgay_create) => {
     try {
         // Gửi yêu cầu tạo tour tới API
         const response = await axios.post(`/tours`, tourData);
-        console.log(response.data); // Xử lý dữ liệu phản hồi từ API (nếu cần)
+        console.log(response.data); 
+        if (response.status === 201) { 
+            // Đóng modal
+            const modalElement = document.getElementById("kt_modal_new_address");
+            const bootstrapModal = new bootstrap.Modal(modalElement);
+            bootstrapModal.hide();
+    
+            // Hiển thị cảnh báo
+            alert('Tạo tour thành công, load lại trang web để lấy lại api');
+            setTimeout(function() {
+                // Tải lại trang web
+                location.reload();
+             }, 500);
+        }
     } catch (error) {
         console.error(error);
     }
+    
 };
 
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
 document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
+
 
 
 function findTourById(tourId) {
@@ -494,9 +540,9 @@ function showEditModal(event) {
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
     // showdiemden(tour.endPlaces);
-    //   console.log(tour.endPlaces);
+    document.getElementById("diem-khoi-hanh-change").value = tour.startPlace.code;
 
-}
+} 
  let currentNgay = 0;
 function showScheduleDetail(schedules){
 
@@ -513,6 +559,7 @@ closeModalButton.addEventListener('click', myFunction);
 function myFunction() {
   // Gọi hàm xử lý sự kiện tại đây
   currentNgay =0; 
+  initialValues = [];
   console.log(currentNgay);
   while (scheduleContainer.firstChild) {
     scheduleContainer.firstChild.remove();
@@ -528,36 +575,128 @@ function displayScheduleRow(schedule, index){
     </div>
     `;
 }
-function showdiemden(endPlaces){ 
-    const diemDenInput = document.getElementById('diem-den-change-input').value;
-    for (let i = 0; i < endPlaces.length; i++) { 
-        diemDenInput = endPlaces[i].name;
-        console.log(endPlaces[i].name);
+const editTour = async (currentNgay) => {
+    // Lấy giá trị từ các ô input HTML
+    const name = document.getElementById("ten-tour-change").value;
+    const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-change").value);
+    const startPlaceCode = document.getElementById("diem-khoi-hanh-change").value;
+    const selectElement = document.getElementById("diem-khoi-hanh-change");
+
+// Lấy index (vị trí) của option được chọn
+const selectedIndex = selectElement.selectedIndex;
+
+// Lấy phần tử option được chọn
+const selectedOption = selectElement.options[selectedIndex];
+
+// Lấy textContent của option được chọn
+const selectedText = selectedOption.textContent;
+    const startPlaceName = selectedText;
+    // const endPlaceCode = document.getElementById("code-diem-den-input").value;
+    // const endPlaceName = document.getElementById("diem-den-input").value;
+    const date = document.getElementById("ngay-khoi-hanh-change").value;
+    const time = document.getElementById("gio-khoi-hanh-change").value;
+    const remainSlots = parseInt(document.getElementById("so-ve-ban-change").value);
+    const cardImgUrl = document.getElementById("hinh1-change").value;
+    const img1Url = document.getElementById("hinh2-change").value;
+    const img2Url = document.getElementById("hinh3-change").value;
+    const img3Url = document.getElementById("hinh4-change").value;
+    const img4Url = document.getElementById("hinh5-change").value;
+    const transport = document.getElementById("phuong-tien-change").value;
+    const food = document.getElementById("am-thuc-change").value;
+    const hotel = document.getElementById("khach-san-change").value;
+
+    // Lấy dữ liệu từ các ô input của schedules
+    const schedules = [];
+
+    for (let i = 1; i < currentNgay; i++) {
+        const dayInput = document.getElementById(`ngay${i}-change`).value;
+        const dayDetail = document.getElementById(`ngay${i}-change-input`).innerText;
+        const schedule = {
+            schedule_detail: dayDetail,
+            name: dayInput,
+        };
+
+        schedules.push(schedule);
     }
+
+    // Tạo đối tượng dữ liệu JSON
+    const tourData = {
+        name: name,
+        code: code,
+        price: price,
+        startPlace: {
+            code: startPlaceCode,
+            name: startPlaceName,
+        },
+        endPlaces: [
+            {
+                code: endPlaceCode,
+                name: endPlaceName,
+            },
+        ],
+        date: date,
+        time: time,
+        remainSlots: remainSlots,
+        cardImgUrl: cardImgUrl,
+        imgUrls: [img1Url, img2Url, img3Url, img4Url],
+        transport: transport,
+        food: food,
+        hotel: hotel,
+        schedules: schedules,
+        numOfDays: currentNgay - 1,
+        slots: remainSlots,
+        // Thêm các trường dữ liệu khác vào đối tượng JSON
+    };
+
+    try {
+        // Gửi yêu cầu sửa tour tới API
+        const response = await axios.put(`/tours/edit/${code}`, tourData);
+        console.log(response.data); 
+        if (response.status === 200) { 
+        alert('Sửa tour thành công, load lại trang web để lấy lại api');
+        setTimeout(function() {
+        location.reload();
+    }, 500);
 }
 
-let initialValues = ['01', '03']; // Ví dụ: An Giang và Bắc Giang
-
-document.addEventListener('DOMContentLoaded', function() {
-    const selectElement = document.getElementById('diem-khoi-hanh-change-input');
-    const inputElement = document.getElementById('selected-values-input');
-
-    // Mảng giá trị ban đầu
-
-    // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
-    for (const option of selectElement.options) {
-        if (initialValues.includes(option.value)) {
-            option.selected = true;
-        }
+    } catch (error) {
+        console.error(error);
     }
+    
+};
+// let initialValues = [];
+// let initialValues = []; // Ví dụ: An Giang và Bắc Giang
+// function selectEndPlaces(initialValues){
+//     const selectElement = document.getElementById('diem-den-change-input');
+//     const inputElement = document.getElementById('selected-values-input');
 
-    // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
-    selectElement.addEventListener('change', function() {
-        const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
-        inputElement.value = selectedOptions.join(', ');
-    });
+//     // Mảng giá trị ban đầu
 
-    // Cập nhật nội dung ô input ban đầu
-    const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
-    inputElement.value = initialSelectedOptions.join(', ');
-});
+//     // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
+//     for (const option of selectElement.options) {
+//         if (initialValues.includes(option.value)) {
+//             option.selected = true;
+//         }
+//     }
+
+//     // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
+//     selectElement.addEventListener('change', function() {
+//         const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
+//         inputElement.value = selectedOptions.join(', ');
+//     });
+
+//     // Cập nhật nội dung ô input ban đầu
+//     const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
+//     inputElement.value = initialSelectedOptions.join(', ');
+//     console.log(initialValues);
+// } 
+// function showdiemden(endPlaces) {
+//     initialValues = []; // Xóa các giá trị cũ của mảng
+//     for (let i = 0; i < endPlaces.length; i++) {
+//       let code = endPlaces[i].code;
+//       initialValues.push(code);
+//       console.log(code);
+//     }
+//     console.log(initialValues);
+//     selectEndPlaces(initialValues);
+//   }
