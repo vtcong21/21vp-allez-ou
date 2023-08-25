@@ -192,7 +192,7 @@ function renderTourPage(page, hiddenTourDataList) {
         sovetourInput.value = slots;
         sovetourInput.placeholder = slots;
     }
-    
+
     // Tạo phân trang
     renderPagination();
 }
@@ -469,14 +469,6 @@ const createTour = async (currentNgay_create) => {
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
 document.getElementById("done-tao-tour").addEventListener("click", () => createTour(currentNgay_create));
 
-
-function findTourById(tourId) {
-    const foundTour = tourDataList.find(tour => tour._id === tourId);
-    if (foundTour) {
-        return foundTour;
-    }
-    return null; // Trả về null nếu không tìm thấy đơn hàng
-}
 // Show Edit tour
 function showEditModal(event) {
     const modalTourId = event.currentTarget.getAttribute("data-tour-id");
@@ -493,15 +485,29 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
+
 }
-let currentNgay = 0;
+ let currentNgay = 0;
 function showScheduleDetail(schedules){
+
     const scheduleContainer = document.getElementById('ngay-container2');
     for(let i = currentNgay; i < schedules.length; i++){
         scheduleRow = displayScheduleRow(schedules[i], i+1)
         scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
-        currentNgay = i + 2;
+        currentNgay = i+2;
     }
+
+    console.log(currentNgay);
+    const closeModalButton = document.getElementById('closeModalButton');
+closeModalButton.addEventListener('click', myFunction);
+function myFunction() {
+  // Gọi hàm xử lý sự kiện tại đây
+  currentNgay =0; 
+  console.log(currentNgay);
+  while (scheduleContainer.firstChild) {
+    scheduleContainer.firstChild.remove();
+}
+}
 }
 function displayScheduleRow(schedule, index){
     return `
@@ -512,3 +518,4 @@ function displayScheduleRow(schedule, index){
     </div>
     `;
 }
+
