@@ -1,7 +1,7 @@
 // Trước khi gọi API
 // Trước khi gọi API
 // document.getElementById("loading-spinner").classList.add("show");
-// Lấy các phần tử tab
+
 const activeTab = document.getElementById("ex1-tab-1");
 const endedTab = document.getElementById("ex1-tab-2");
 
@@ -493,6 +493,8 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
+    showdiemden(tour.endPlaces);
+      console.log(tour.endPlaces);
 
 }
  let currentNgay = 0;
@@ -525,5 +527,12 @@ function displayScheduleRow(schedule, index){
     <div class="text-input" contenteditable id="ngay${index}-change-input">${schedule.schedule_detail}</div>
     </div>
     `;
+}
+function showdiemden(endPlaces){ 
+    const diemDenInput = document.getElementById('diem-den-change-input').value;
+    for (let i = 0; i < endPlaces.length; i++) { 
+        diemDenInput = endPlaces[i].name;
+        console.log(endPlaces[i].name);
+    }
 }
 
