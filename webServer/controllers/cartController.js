@@ -264,7 +264,7 @@ const cancelOrder = async (req, res) => {
             recipientAccountId: userId,
             amount: order.totalPrice,
             itemId: order._id
-        });
+        }, {httpsAgent: agent});
 
         if (response.status === 400) {
             return res.status(400).json({ error: 'Insufficient balance' });
@@ -273,7 +273,9 @@ const cancelOrder = async (req, res) => {
             order.status = 'Cancelled';
             order.cancelDate = new Date(Date.now());
             await order.save();
-            await mailController.sendCancellationEmail(user, order, order.totalPrice);
+            const refundAmount = (order.totalPrice*80/100).toLocaleString();
+            console.log(refundAmount);
+            await mailController.sendCancellationEmail(user, order, tour, refundAmount);
             res.status(200).json({ message: 'Order has been successfully canceled' });
         } else {
             return res.status(500).json({ error: 'Payment failed' });

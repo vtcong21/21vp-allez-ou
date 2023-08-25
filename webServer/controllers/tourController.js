@@ -89,7 +89,7 @@ const hideTour = async (req, res) => {
   try {
     const code = req.params.code;
     const tour = await Tour.findOne({ code });
-
+    console.log('here');
     if (!tour) {
       return res.status(404).json({ error: 'Tour not found' });
     }
@@ -102,7 +102,7 @@ const hideTour = async (req, res) => {
 
     res.status(200).json({ message: 'Tour hidden successfully' });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to delete tour' });
+    res.status(500).json({ error: 'Failed to hide tour' });
   }
 };
 

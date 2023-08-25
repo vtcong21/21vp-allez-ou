@@ -34,12 +34,12 @@ router.get('/tourData/:code'
     , tourController.getTourInfoData);
 
 // ẩn tour, admin mới được ẩn
-router.put('hideTour/:code'
+router.put('/hideTour/:code'
     , authMiddleware.requireAdminRole
     , tourController.hideTour);
 
 // hiện tour, admin mới được hiện
-router.put('displayTour/:code'
+router.put('/displayTour/:code'
 , authMiddleware.requireAdminRole
 , tourController.displayTour);
 

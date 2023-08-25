@@ -58,7 +58,7 @@ const sendConfirmationEmail = async (user, item, tour) => {
     }
 };
 
-const sendCancellationEmail = async (user, item, refundAmount) => {
+const sendCancellationEmail = async (user, item, tour, refundAmount) => {
     try {
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
@@ -69,9 +69,9 @@ const sendCancellationEmail = async (user, item, refundAmount) => {
                 <p>Chúng tôi xin thông báo rằng đơn đặt tour của bạn đã được hủy thành công.</p>
                 <p>Thông tin hủy đặt tour:</p>
                 <ul>
-                    <li>Tour: ${item.tour.name}</li>
-                    <li>Mã tour: ${item.tour.tourCode}</li>
-                    <li>Ngày: ${item.tour.date.getDate()}/${item.tour.date.getMonth()}/${item.tour.date.getFullYear()}</li>
+                    <li>Tour: ${tour.name}</li>
+                    <li>Mã tour: ${tour.tourCode}</li>
+                    <li>Ngày: ${tour.date.getDate()}/${tour.date.getMonth()}/${tour.date.getFullYear()}</li>
                     <li>Số lượng vé: ${item.tickets.length}</li>
                     <li>Số tiền hoàn lại: ${refundAmount}</li>
                     <li>Số tài khoản: ${user._id}</li>
