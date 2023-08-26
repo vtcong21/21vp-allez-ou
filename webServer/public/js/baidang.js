@@ -635,23 +635,23 @@ const selectedText = selectedOption.textContent;
     const tourData = {
         name: name,
         code: code,
-        price: price,
         startPlace: {
             code: startPlaceCode,
             name: startPlaceName,
         },
         endPlaces: endPlaces,
+        price: price,
         date: date,
         time: time,
+        slots: remainSlots,
         remainSlots: remainSlots,
+        numOfDays: currentNgay - 1,
         cardImgUrl: cardImgUrl,
         imgUrls: [img1Url, img2Url, img3Url, img4Url],
         transport: transport,
         food: food,
         hotel: hotel,
         schedules: schedules,
-        numOfDays: currentNgay - 1,
-        slots: remainSlots,
         // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
     console.log(name); 
