@@ -58,5 +58,10 @@ router.get('/orders/search'
 router.get('/getBookingStats'
     , authMiddleware.requireAdminRole
     , adminController.getBookingStats);
-
+router.put('/changePassword'
+    , authMiddleware.requireAdminRole
+    , adminController.changePassword);
+router.get('/getUncancelledOrders'
+    , authMiddleware.requireAdminRole
+    , adminController.getUncancelledOrders);
 module.exports = router;

@@ -384,3 +384,11 @@ line-height: normal;
 #ex1-tab-2:hover{ 
     cursor: pointer;
 }
+
+.btn.btn-secondary{
+    font-size: 2.4rem;
+}
+
+.btn.dropdown-toggle.btn-default{
+    display: none;
+}

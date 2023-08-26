@@ -43,7 +43,7 @@ const createAnOrder = async (cartItem, user, item) => {
 
 const pay = async (req, res) => {
   try {
-    const item  = req.body;
+    const {item, OTPCode}  = req.body;
     const userId = req.userId;
     console.log(item);
     console.log(item._id);
@@ -53,9 +53,8 @@ const pay = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    // const cartItem = await Item.findOne({ _id:item._id });
-    const cartItem = await Item.findById(item._id);
-    console.log('Đây là cartItem'+cartItem);
+    const cartItem = await Item.findOne({ _id: item._id });
+
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
     }
@@ -76,6 +75,8 @@ const pay = async (req, res) => {
     }
 
     const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
+      email: user.email,
+      OTPCode: OTPCode,
       senderAccountId: userId,
       recipientAccountId: webPaymentAccountId,
       amount: cartItem.totalPrice,
