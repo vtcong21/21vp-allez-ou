@@ -45,15 +45,17 @@ const pay = async (req, res) => {
   try {
     const item  = req.body;
     const userId = req.userId;
-
+    console.log(item);
+    console.log(item._id);
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    const cartItem = await Item.findOne({ _id:item._id });
-
+    // const cartItem = await Item.findOne({ _id:item._id });
+    const cartItem = await Item.findById(item._id);
+    console.log('Đây là cartItem'+cartItem);
     if (!cartItem) {
       return res.status(400).json({ error: 'Item not found' });
     }
@@ -61,7 +63,7 @@ const pay = async (req, res) => {
     const isCartItemInCart = user.cart.some(cartItemId => cartItemId.toString() === cartItem._id.toString());
     if (!isCartItemInCart) {
       return res.status(400).json({ error: 'Item not found in cart' });
-    }
+    }//chỗ này cần xem lại
 
     const tour = await Tour.findOne({ code: cartItem.tourCode });
 
