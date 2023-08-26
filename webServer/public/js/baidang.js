@@ -539,9 +539,9 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
-    // showdiemden(tour.endPlaces);
+    showdiemden(tour.endPlaces);
     document.getElementById("diem-khoi-hanh-change").value = tour.startPlace.code;
-
+    // showdiemden(tour.endPlaces);
 } 
  let currentNgay = 0;
 function showScheduleDetail(schedules){
@@ -560,6 +560,7 @@ function myFunction() {
   // Gọi hàm xử lý sự kiện tại đây
   currentNgay =0; 
   initialValues = [];
+  selectedValues = [];
   console.log(currentNgay);
   while (scheduleContainer.firstChild) {
     scheduleContainer.firstChild.remove();
@@ -664,39 +665,40 @@ const selectedText = selectedOption.textContent;
     }
     
 };
-// let initialValues = [];
-// let initialValues = []; // Ví dụ: An Giang và Bắc Giang
-// function selectEndPlaces(initialValues){
-//     const selectElement = document.getElementById('diem-den-change-input');
-//     const inputElement = document.getElementById('selected-values-input');
+var initialValues = []; // Mảng giá trị ban đầu
+var selectedValues = []; // Mảng giá trị đã chọn
 
-//     // Mảng giá trị ban đầu
+function selectEndPlaces() {
+    $('#diem-den-change-input option').prop('selected', false);
+  $('#diem-den-change-input').change(function() {
+    selectedValues = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
+    
+    $(this).find('option:selected').each(function() {
+      var value = $(this).val();
+      selectedValues.push(value); // Thêm giá trị vào mảng
+    });
+    
+    console.log("Selected Values: " + selectedValues);
+  });
+  // Cập nhật giá trị value của các tùy chọn bằng mảng giá trị ban đầu
+  $('#diem-den-change-input option').each(function() {
+    var value = $(this).val();
+    
+    if (initialValues.includes(value)) {
+      $(this).prop('selected', true);
+    }
+  });
+  
+  console.log("Selected Values: " + selectedValues);
+}
 
-//     // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
-//     for (const option of selectElement.options) {
-//         if (initialValues.includes(option.value)) {
-//             option.selected = true;
-//         }
-//     }
-
-//     // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
-//     selectElement.addEventListener('change', function() {
-//         const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
-//         inputElement.value = selectedOptions.join(', ');
-//     });
-
-//     // Cập nhật nội dung ô input ban đầu
-//     const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
-//     inputElement.value = initialSelectedOptions.join(', ');
-//     console.log(initialValues);
-// } 
-// function showdiemden(endPlaces) {
-//     initialValues = []; // Xóa các giá trị cũ của mảng
-//     for (let i = 0; i < endPlaces.length; i++) {
-//       let code = endPlaces[i].code;
-//       initialValues.push(code);
-//       console.log(code);
-//     }
-//     console.log(initialValues);
-//     selectEndPlaces(initialValues);
-//   }
+function showdiemden(endPlaces) {
+  initialValues = []; // Xóa các giá trị cũ của mảng
+  for (let i = 0; i < endPlaces.length; i++) {
+    let code = endPlaces[i].code;
+    initialValues.push(code);
+    console.log(code);
+  }
+  console.log(initialValues);
+  selectEndPlaces();
+}
