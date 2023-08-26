@@ -6,6 +6,9 @@ var babyDiscount = parseFloat(tourData.babyDiscount);
 var quantities = [1, 0, 0, 0];
 var prices = [price, price * (1 - teenDiscount), price * (1 - kidDiscount), price * (1 - babyDiscount)];
 var type = ['Adult', 'Teen', 'Kid', 'Baby'];
+
+var OTPCode = '123';
+
 document.addEventListener('DOMContentLoaded', function () {
     const orderButton = document.getElementById('button-order-btn');
     function getFormData() {
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const tickets = getFormData();
             const totalPrice = tickets.reduce((total, ticket) => total + ticket.price, 0);
             const item = {
-                _id: _id,
+                _id: itemId,
                 tourCode: tourData.code,
                 representer: representer,
                 tickets: tickets,
@@ -103,43 +106,47 @@ document.addEventListener('DOMContentLoaded', function () {
             const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
             modal.show();
 
-            const modal2 = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));
-            const buttonxacnhan = document.getElementById('button-xacnhan');
-            buttonxacnhan.onclick = async () => {
-                const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
-                try {
-                  const password = xacnhanmatkhauInput; // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
-                    console.log(password);
-                  const checkPasswordResponse = await axios.post('/auth/checkPassword', {
-                    password: password // Gửi mật khẩu vào body của yêu cầu POST
-                  });
-                  if (checkPasswordResponse){
-                    try {
-                        const payResponse = await axios.post('/user/pay',item);
-                        if (payResponse.status === 200) {
-                            // Đã thanh toán thành công, mở cửa sổ modal thứ 3
-                            modal2.hide(); // Ẩn cửa sổ modal thứ 2
-                            const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
-                            modal3.show(); // Hiển thị cửa sổ modal thứ 3
-                        } else {
-                            // Xử lý lỗi nếu có
-                            alert('Đã xảy ra lỗi khi gọi API thanh toán');
-                        }
-                    } catch (error) {
-                        // Xử lý lỗi nếu có
-                        alert('Đã xảy ra lỗi khi gọi API thanh toán: ' + error.message);
-                    }
-                  }
-                  else { 
-                    alert('mat khau nhap vao khong dung');
-                  }
-                  // Xử lý kết quả trả về nếu cần
+            // Khúc này U code
+            sendEmailFunc();
+            // kết thúc U code
+
+            // const modal2 = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));
+            // const buttonxacnhan = document.getElementById('button-xacnhan');
+            // buttonxacnhan.onclick = async () => {
+            //     const xacnhanmatkhauInput = document.getElementById('xacnhanmatkhauinput').value;
+            //     try {
+            //       const password = xacnhanmatkhauInput; // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
+            //         console.log(password);
+            //       const checkPasswordResponse = await axios.post('/auth/checkPassword', {
+            //         password: password // Gửi mật khẩu vào body của yêu cầu POST
+            //       });
+            //       if (checkPasswordResponse){
+            //         try {
+            //             const payResponse = await axios.post('/user/pay',{item, OTPCode});
+            //             if (payResponse.status === 200) {
+            //                 // Đã thanh toán thành công, mở cửa sổ modal thứ 3
+            //                 modal2.hide(); // Ẩn cửa sổ modal thứ 2
+            //                 const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
+            //                 modal3.show(); // Hiển thị cửa sổ modal thứ 3
+            //             } else {
+            //                 // Xử lý lỗi nếu có
+            //                 alert('Đã xảy ra lỗi khi gọi API thanh toán');
+            //             }
+            //         } catch (error) {
+            //             // Xử lý lỗi nếu có
+            //             alert('Đã xảy ra lỗi khi gọi API thanh toán: ' + error.message);
+            //         }
+            //       }
+            //       else { 
+            //         alert('mat khau nhap vao khong dung');
+            //       }
+            //       // Xử lý kết quả trả về nếu cần
               
-                } catch (error) {
-                  // Xử lý lỗi nếu có
-                  alert('Mật Khẩu Nhập Vào Không Đúng ');
-                }
-              };
+            //     } catch (error) {
+            //       // Xử lý lỗi nếu có
+            //       alert('Mật Khẩu Nhập Vào Không Đúng ');
+            //     }
+            //   };
         };
 
     }
@@ -312,3 +319,23 @@ col2.appendChild(select);
     }
 });
 
+// Khúc này U code
+function sendEmailFunc() {
+    const emailRepresenter = document.getElementById('emailUser').textContent;
+    postEmail(emailRepresenter);
+}
+
+async function postEmail(email) {
+    try {
+        console.log(email);
+        const response = await axios.post('/user/sendOTPpayment', email );
+      
+        if (response.status === 200) {
+            alert('200');
+          } 
+    } catch (error) {
+        // console.error("Error sending resend verification code request:", error);
+        alert('!=200');
+    }
+}
+// Kết thúc U code

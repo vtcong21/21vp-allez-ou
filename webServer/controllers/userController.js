@@ -44,9 +44,11 @@ const createAnOrder = async (cartItem, user, item) => {
 const pay = async (req, res) => {
   try {
     const {item, OTPCode}  = req.body;
+    // const item  = req.body;
     const userId = req.userId;
     console.log(item);
-    console.log(item._id);
+    console.log(OTPCode);
+    // console.log("id:" + item._id);
     const user = await User.findById(userId);
 
     if (!user) {
@@ -74,27 +76,27 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Not enough available slots for the tickets' });
     }
 
-    const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
-      email: user.email,
-      OTPCode: OTPCode,
-      senderAccountId: userId,
-      recipientAccountId: webPaymentAccountId,
-      amount: cartItem.totalPrice,
-      itemId: item._id
-    }, {httpsAgent: agent});
+    // const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
+    //   email: user.email,
+    //   OTPCode: OTPCode,
+    //   senderAccountId: userId,
+    //   recipientAccountId: webPaymentAccountId,
+    //   amount: cartItem.totalPrice,
+    //   itemId: item._id
+    // }, {httpsAgent: agent});
 
-    if (response.status === 400) {
-      return res.status(400).json({ error: 'Insufficient balance' });
-    } else if (response.data.success) {
-      // tạo order -> gửi mail -> trừ remain slots
-      await createAnOrder(cartItem, user, item);
-      await mailController.sendConfirmationEmail(user, cartItem, tour);
-      tour.remainSlots -= item.tickets.length;
-      await tour.save();
-      return res.status(200).json({ success: true });
-    } else {
-      return res.status(500).json({ error: 'Payment failed' });
-    }
+    // if (response.status === 400) {
+    //   return res.status(400).json({ error: 'Insufficient balance' });
+    // } else if (response.data.success) {
+    //   // tạo order -> gửi mail -> trừ remain slots
+    //   await createAnOrder(cartItem, user, item);
+    //   await mailController.sendConfirmationEmail(user, cartItem, tour);
+    //   tour.remainSlots -= item.tickets.length;
+    //   await tour.save();
+    //   return res.status(200).json({ success: true });
+    // } else {
+    //   return res.status(500).json({ error: 'Payment failed' });
+    // }
   } catch (error) {
     console.error('Pay error:', error);
     res.status(500).json({ error: 'Internal server error' });
@@ -147,48 +149,29 @@ const getOrderPage = async (req, res) => {
   } else {
     res.status(403).render('error');
   }
-}
+};
 
-// const updateItemInfo = async (req, res) => {
-//   try {
-//     const itemId = req.params.itemId;
-//     const updatedInfo = req.body;
-
-//     const item = await Item.findById(itemId);
-//     if (!item) {
-//       return res.status(404).json({ error: 'Item not found' });
-//     }
-//     if (!updatedInfo) {
-//       return res.status(400).json({ error: 'Data is null' });
-//     } 
-
-//     const tour = await Tour.findOne({ code: item.tourCode });
-//     if (!tour) {
-//       return res.status(404).json({ error: 'Tour not found' });
-//     } 
-
-//     // hàm pay đã viết rồi nên ở đây không cần
-//     // tour.remainSlots -= item.tickets.length;
-
-//     item.representer = updatedInfo.representer;
-//     item.tickets = updatedInfo.tickets;
-//     item.totalPrice = updatedInfo.totalPrice;
-//     item.shippingAddress = updatedInfo.shippingAddress;
-//     item.orderDate = Date.now();
-//     item.status = 'Success';
-//     item.isPaid = true;
-
-//     await item.save();
-//     res.status(200).json({ message: 'Item saved successfully' });
-//   } catch (error) {
-//     res.status(500).json({ error: 'Internal server error' });
-//   }
-// }
+const sendOTPpayment = async (req, res) => {
+  try {
+    const email = req.body;
+    console.log(email);
+    const response = await axios.post('https://localhost:5001/accounts/sendOTP', {
+        email: email 
+    }, {httpsAgent: agent});
+    console.log(response);
+    
+    if (response.status === 200) {
+        res.status(200)
+    }
+} catch (error) {
+  return res.status(500);
+  }
+};
 
 module.exports = {
   getOrderPage,
   getUserInfo,
   getUserPaymentHistory,
   pay,
-  // updateItemInfo,
+  sendOTPpayment,
 };
