@@ -539,7 +539,7 @@ function showEditModal(event) {
     document.getElementById("am-thuc-change").value = tour.food;
     document.getElementById("khach-san-change").value = tour.hotel;
     showScheduleDetail(tour.schedules);
-    // showdiemden(tour.endPlaces);
+    showdiemden(tour.endPlaces);
     document.getElementById("diem-khoi-hanh-change").value = tour.startPlace.code;
 
 } 
@@ -664,39 +664,34 @@ const selectedText = selectedOption.textContent;
     }
     
 };
-// let initialValues = [];
-// let initialValues = []; // Ví dụ: An Giang và Bắc Giang
-// function selectEndPlaces(initialValues){
-//     const selectElement = document.getElementById('diem-den-change-input');
-//     const inputElement = document.getElementById('selected-values-input');
+let initialValues = []; // Ví dụ: An Giang và Bắc Giang
+function selectEndPlaces(initialValues){
+    const selectElement = document.getElementById('diem-den-change-input');
 
-//     // Mảng giá trị ban đầu
 
-//     // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
-//     for (const option of selectElement.options) {
-//         if (initialValues.includes(option.value)) {
-//             option.selected = true;
-//         }
-//     }
+    // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
+    for (const option of selectElement.options) {
+        if (initialValues.includes(option.value)) {
+            option.selected = true;
+        }
+    }
+    $('.selectpicker').selectpicker('render');
+    // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
+    selectElement.addEventListener('change', function() {
+        const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
+    });
 
-//     // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
-//     selectElement.addEventListener('change', function() {
-//         const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
-//         inputElement.value = selectedOptions.join(', ');
-//     });
-
-//     // Cập nhật nội dung ô input ban đầu
-//     const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
-//     inputElement.value = initialSelectedOptions.join(', ');
-//     console.log(initialValues);
-// } 
-// function showdiemden(endPlaces) {
-//     initialValues = []; // Xóa các giá trị cũ của mảng
-//     for (let i = 0; i < endPlaces.length; i++) {
-//       let code = endPlaces[i].code;
-//       initialValues.push(code);
-//       console.log(code);
-//     }
-//     console.log(initialValues);
-//     selectEndPlaces(initialValues);
-//   }
+    // Cập nhật nội dung ô input ban đầu
+    const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
+    console.log(initialValues);
+} 
+function showdiemden(endPlaces) {
+    initialValues = []; // Xóa các giá trị cũ của mảng
+    for (let i = 0; i < endPlaces.length; i++) {
+      let code = endPlaces[i].code;
+      initialValues.push(code);
+      console.log(code);
+    }
+    console.log(initialValues);
+    selectEndPlaces(initialValues);
+  }

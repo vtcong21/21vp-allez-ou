@@ -115,8 +115,18 @@ document.addEventListener('DOMContentLoaded', function () {
                   });
                   if (checkPasswordResponse){
                     try {
+                        Swal.showLoading();
                         const payResponse = await axios.post('/user/pay',item);
                         if (payResponse.status === 200) {
+                            Swal.close();
+                            await Swal.fire({
+                                icon: "success",
+                                title: "Sucess!",
+                                customClass: {
+                                    popup: "swal2-popup",
+                                    confirmButton: "swal2-confirm-btn btn p-3",
+                                },
+                            });
                             // Đã thanh toán thành công, mở cửa sổ modal thứ 3
                             modal2.hide(); // Ẩn cửa sổ modal thứ 2
                             const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));

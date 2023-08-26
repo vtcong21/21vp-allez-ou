@@ -257,8 +257,8 @@ const getBookingStats = async (req, res) =>{
 const changePassword = async (req, res) => {
     try {
         const { userId, currentPassword, newPassword } = req.body;
+        console.log(req.body);
         const user = await User.findById(userId);
-
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
