@@ -75,7 +75,7 @@ const getHiddenTours = async (req, res) => {
 const createTour = async (req, res) => {
   try {
     const tourData = req.body;
-    //console.log(req.body);
+    // console.log(req.body);
     const newTour = new Tour(tourData);
     const savedTour = await newTour.save();
     res.status(201).json(savedTour);
@@ -206,14 +206,14 @@ const getTourByCode = async (req, res) => {
 };
 
 const editTourByCode = async (req, res) => {
-  const tourCode = req.params.code;
-  const updatedInfo = req.body;
-
   try {
+    const tourCode = req.params.code;
+    const updatedInfo = req.body;
+    console.log(updatedInfo);
     const updatedTour = await Tour.findOneAndUpdate({ code: tourCode }, updatedInfo, {
       new: true,
     });
-
+    console.log(updatedTour);
     if (updatedTour) {
       res.status(200).json({ message: 'Tour updated successfully' });
     } else {

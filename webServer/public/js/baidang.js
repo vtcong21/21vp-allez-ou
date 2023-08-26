@@ -677,6 +677,7 @@ const selectedText = selectedOption.textContent;
 
     try {
         // Gửi yêu cầu sửa tour tới API
+        tourData.date = convertToISODate(tourData.date);
         const response = await axios.put(`/tours/edit/${code}`, tourData);
         console.log(response.data); 
         if (response.status === 200) { 
@@ -735,4 +736,18 @@ function showdiemden(endPlaces) {
   }
   console.log(initialValues);
   selectEndPlaces();
+}
+
+function convertToISODate(dateString) {
+    const parts = dateString.split('/');
+    if (parts.length !== 3) {
+        throw new Error('Invalid date format');
+    }
+
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+
+    const isoDate = new Date(`${year}-${month}-${day}T00:00:00.000Z`).toISOString();
+    return isoDate;
 }
