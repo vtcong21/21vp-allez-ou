@@ -527,6 +527,7 @@ function findTourById(tourId) {
 function showEditModal(event) {
     const modalTourId = event.currentTarget.getAttribute("data-tour-id");
     const tour = findTourById(modalTourId);
+    document.getElementById("ma-tour-change").value = tour.code;
     document.getElementById("ten-tour-change").value = tour.name;
     document.getElementById("gia-ve-nguoi-lon-change").value = tour.price;
     document.getElementById("so-ve-ban-change").value = tour.slots;
@@ -541,7 +542,7 @@ function showEditModal(event) {
     showScheduleDetail(tour.schedules);
     showdiemden(tour.endPlaces);
     document.getElementById("diem-khoi-hanh-change").value = tour.startPlace.code;
-
+    // showdiemden(tour.endPlaces);
 } 
  let currentNgay = 0;
 function showScheduleDetail(schedules){
@@ -560,6 +561,7 @@ function myFunction() {
   // Gọi hàm xử lý sự kiện tại đây
   currentNgay =0; 
   initialValues = [];
+  selectedValues = [];
   console.log(currentNgay);
   while (scheduleContainer.firstChild) {
     scheduleContainer.firstChild.remove();
@@ -575,8 +577,9 @@ function displayScheduleRow(schedule, index){
     </div>
     `;
 }
-const editTour = async (currentNgay) => {
+const editTour = async (currentNgay,selectedValues,selectedOptions) => {
     // Lấy giá trị từ các ô input HTML
+    const code = document.getElementById("ma-tour-change").value;
     const name = document.getElementById("ten-tour-change").value;
     const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-change").value);
     const startPlaceCode = document.getElementById("diem-khoi-hanh-change").value;
@@ -618,35 +621,59 @@ const selectedText = selectedOption.textContent;
 
         schedules.push(schedule);
     }
+    const endPlaces = [];
+    for (let i = 0; i < selectedValues.length; i++) {
+        const endPlace = { 
+            code: selectedValues[i], 
+            name: selectedOptions[i]
+        }; 
+        endPlaces.push(endPlace);
+    }
+    
 
     // Tạo đối tượng dữ liệu JSON
     const tourData = {
         name: name,
         code: code,
-        price: price,
         startPlace: {
             code: startPlaceCode,
             name: startPlaceName,
         },
-        endPlaces: [
-            {
-                code: endPlaceCode,
-                name: endPlaceName,
-            },
-        ],
+        endPlaces: endPlaces,
+        price: price,
         date: date,
         time: time,
+        slots: remainSlots,
         remainSlots: remainSlots,
+        numOfDays: currentNgay - 1,
         cardImgUrl: cardImgUrl,
         imgUrls: [img1Url, img2Url, img3Url, img4Url],
         transport: transport,
         food: food,
         hotel: hotel,
         schedules: schedules,
-        numOfDays: currentNgay - 1,
-        slots: remainSlots,
         // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
+    console.log(name); 
+    console.log(code); 
+    console.log(price); 
+    console.log(startPlaceCode); 
+    console.log(startPlaceName);
+    console.log(endPlaces);
+    console.log(date); 
+    console.log(time); 
+    console.log(remainSlots); 
+    console.log(cardImgUrl);
+    console.log(img1Url);
+    console.log(img2Url);
+    console.log(img3Url);
+    console.log(img4Url);
+    console.log(transport);
+    console.log(food);
+    console.log(hotel);
+    console.log(schedules);
+    console.log(currentNgay); 
+
 
     try {
         // Gửi yêu cầu sửa tour tới API
@@ -663,35 +690,49 @@ const selectedText = selectedOption.textContent;
         console.error(error);
     }
     
-};
-let initialValues = []; // Ví dụ: An Giang và Bắc Giang
-function selectEndPlaces(initialValues){
-    const selectElement = document.getElementById('diem-den-change-input');
+}; 
+document.getElementById("kt_modal_new_address_submit").addEventListener("click", () => editTour(currentNgay,selectedValues,selectedOptions));
 
+let initialValues = []; // Mảng giá trị ban đầu
+let selectedValues = []; // Mảng giá trị đã chọn
+var selectedOptions = []; // Mảng lưu trữ textContent các option đã chọn
 
-    // Thiết lập thuộc tính selected cho các tùy chọn dựa trên mảng giá trị ban đầu
-    for (const option of selectElement.options) {
-        if (initialValues.includes(option.value)) {
-            option.selected = true;
-        }
-    }
-    $('.selectpicker').selectpicker('render');
-    // Cập nhật nội dung ô input khi có sự thay đổi trong lựa chọn
-    selectElement.addEventListener('change', function() {
-        const selectedOptions = Array.from(this.selectedOptions).map(option => option.textContent);
+function selectEndPlaces() {    
+    // Thiết lập sự kiện change cho phần tử select
+    $('#diem-den-change-input').change(function() {
+      selectedValues = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
+      selectedOptions = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
+      
+      $(this).find('option:selected').each(function() {
+        var value = $(this).val();
+        var textContent = $(this).text();
+        selectedValues.push(value); // Thêm giá trị value vào mảng
+        selectedOptions.push(textContent); // Thêm textContent vào mảng
+      });
+      console.log(selectedValues); 
+      console.log(selectedOptions);
     });
+    
+    // Cập nhật giá trị value của các tùy chọn bằng mảng giá trị ban đầu
+    $('#diem-den-change-input option').each(function() {
+      var value = $(this).val();
+      
+      if (initialValues.includes(value)) {
+        $(this).prop('selected', true);
+        selectedValues.push(value); // Thêm giá trị value vào mảng
+        selectedOptions.push($(this).text()); // Thêm textContent vào mảng
+      }
+    });
+    return [selectedValues, selectedOptions];
+}
 
-    // Cập nhật nội dung ô input ban đầu
-    const initialSelectedOptions = Array.from(selectElement.selectedOptions).map(option => option.textContent);
-    console.log(initialValues);
-} 
 function showdiemden(endPlaces) {
-    initialValues = []; // Xóa các giá trị cũ của mảng
-    for (let i = 0; i < endPlaces.length; i++) {
-      let code = endPlaces[i].code;
-      initialValues.push(code);
-      console.log(code);
-    }
-    console.log(initialValues);
-    selectEndPlaces(initialValues);
+  initialValues = []; // Xóa các giá trị cũ của mảng
+  for (let i = 0; i < endPlaces.length; i++) {
+    let code = endPlaces[i].code;
+    initialValues.push(code);
+    console.log(code);
   }
+  console.log(initialValues);
+  selectEndPlaces();
+}
