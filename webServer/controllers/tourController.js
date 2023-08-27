@@ -19,11 +19,11 @@ function changeDateToString(currentTime) {
 
 function convertGenderToVietnamese(gender) {
   if (gender === "Male") {
-      return "Nam";
+    return "Nam";
   } else if (gender === "Female") {
-      return "Nữ";
+    return "Nữ";
   } else {
-      return gender;
+    return gender;
   }
 }
 
@@ -93,7 +93,7 @@ const hideTour = async (req, res) => {
     if (!tour) {
       return res.status(404).json({ error: 'Tour not found' });
     }
-    if(tour.isHidden == true) {
+    if (tour.isHidden == true) {
       return res.status(400).json({ error: 'Tour has been hidden' });
     }
 
@@ -114,7 +114,7 @@ const displayTour = async (req, res) => {
     if (!tour) {
       return res.status(404).json({ error: 'Tour not found' });
     }
-    if(tour.isHidden == false) {
+    if (tour.isHidden == false) {
       return res.status(400).json({ error: 'Tour is being displayed' });
     }
 
@@ -197,8 +197,8 @@ const getTourByCode = async (req, res) => {
       return res.status(404).json({ message: 'Tour not found' });
     }
     const formattedDate = changeDateToString(tour.date);
-    tour = { ...tour.toObject(), date: formattedDate};
-    res.render('tourInfo', { tour, user, title:'travel' })
+    tour = { ...tour.toObject(), date: formattedDate };
+    res.render('tourInfo', { tour, user, title: 'travel' })
 
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
@@ -227,16 +227,18 @@ const editTourByCode = async (req, res) => {
 
 const getTopSellingTours = async (req, res) => {
   try {
-    const tours = await Tour.find({ isHidden: false })
-      .sort((a, b) => (a.slots - a.remainSlots) - (b.slots - b.remainSlots))
-      .limit(6);
+    
+    const tours = await Tour.find({ isHidden: false });
+    const sortedTours = tours.sort((a, b) => (b.slots - b.remainSlots) - (a.slots - a.remainSlots)).slice(0, 6);
 
-    res.status(200).json(tours);
+
+    res.status(200).json(sortedTours);
   } catch (error) {
     console.error('Error fetching top selling tours:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 module.exports = {
   getAllTours,
