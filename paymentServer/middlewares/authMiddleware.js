@@ -11,7 +11,7 @@ const verifyOTP = async (req, res, next) => {
             return res.status(400).json({ error: 'Invalid OTP' });
         }
 
-        if (latestOTP.code !== OTPCode || latestOTP.expiration < new Date()) {
+        if (latestOTP.code != OTPCode || latestOTP.expiration < new Date()) {
             return res.status(400).json({ error: 'Invalid OTP' });
         }
 
