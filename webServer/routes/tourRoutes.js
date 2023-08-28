@@ -18,7 +18,6 @@ router.get('/hiddentTours'
     , authMiddleware.requireAdminRole
     , tourController.getHiddenTours);
 
-
 // tạo tour, admin mới được tạo
 router.post('/'
     , authMiddleware.requireAdminRole
