@@ -151,18 +151,35 @@ const getOrderPage = async (req, res) => {
 
 const sendOTPpayment = async (req, res) => {
   try {
-    const email = req.body;
-    console.log(email);
+    const { email } = req.body;
+
     const response = await axios.post('https://localhost:5001/accounts/sendOTP', {
         email: email 
     }, {httpsAgent: agent});
-    console.log(response);
     
     if (response.status === 200) {
-        res.status(200)
+        res.status(200).json({ success: true });
     }
 } catch (error) {
-  return res.status(500);
+  res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const checkVerifyOTP = async (req, res) => {
+  try {
+    const { email, verificationCode } = req.body;
+    console.log(req.body);
+    console.log(verificationCode);
+    const response = await axios.post('https://localhost:5001/accounts/verifyOTP', {
+        email: email,
+        OTPCode: verificationCode 
+    }, {httpsAgent: agent});
+    
+    if (response.status === 200) {
+        res.status(200).json({ valide: true });
+    }
+} catch (error) {
+  res.status(500).json({ error: 'Internal server error' });
   }
 };
 
@@ -172,4 +189,5 @@ module.exports = {
   getUserPaymentHistory,
   pay,
   sendOTPpayment,
+  checkVerifyOTP,
 };

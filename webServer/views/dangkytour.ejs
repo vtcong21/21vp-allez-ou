@@ -324,7 +324,7 @@
                                 </div>
                             </div>
                             <div class="button-order">
-                                <button id="button-order-btn">ĐẶT NGAY</button>
+                                <button id="button-order-btn" onclick="showModal1()">ĐẶT NGAY</button>
                                 <!-- <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a> -->
                             </div>
                             <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -340,7 +340,7 @@
                                                     <label for="nguoilon" style="font-weight: normal;"> Tổng hóa đơn:</label>
                                                 </div>
                                                 <div class="col-md-6 col-6">
-                                                    <div class="tongcong text-right" style="font-size: 1.92rem;">0</div>
+                                                    <div class="tongcong text-right" id="tongTien" style="font-size: 1.92rem;">0</div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -349,7 +349,7 @@
                                             </div>
                                         </div>
                                         <div class="modalfooter">
-                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Thanh Toán</button>
+                                            <button class="btn btn-primary" id="btn-thanhToan" data-bs-dismiss="modal" onclick="showModal2()">Thanh Toán</button>
                                         </div>
                                     </div>
                                 </div>
@@ -358,17 +358,22 @@
                                 <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Thanh toán</h2>
+                                            <h2 class="modal-title" id="exampleModalToggleLabel" style="font-weight: 900;">Kết nối tài khoản thanh toán</h2>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="bodymodal" style="padding-left: 1em; padding-right: 2em; padding-top: 2em; padding-bottom: 2em;">
+                                        <div class="bodymodal" style="padding-left: 2em; padding-right: 2em; padding-top: 2em; padding-bottom: 2em;">
+                                            <div>Hệ thống ngân hàng đã gửi OTP đến email của bạn, vui lòng kiểm tra và nhập tại đây. Chúng tôi sẽ thực hiện lệnh chuyển tiền sau khi xác thực thành công</div>
+                                            <div>Tài khoản nhận: CT DU LICH ALLEZ OU</div>
+                                            <div>Số tài khoản: 8767 5432 112</div>
+                                            <div>Số tiền: <span id ="soTien"></span> VNĐ</div>
+                                            <br>
                                             <div class="row">
-                                                <div class="col-md-5 col-5" id="xacnhanmatkhau" >Xác nhận mật khẩu</div>
-                                                <input type="password" class="col-md-7 col-7" id="xacnhanmatkhauinput">
+                                                <div class="col-md-4 col-4" id="xacnhanmatkhau" >Mã OTP</div>
+                                                <input type="password" class="col-md-7 col-7" id="input-otp">
                                             </div> 
                                         </div>
                                         <div class="modalfooter">
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal" id="button-xacnhan">Xác Nhận</button>
+                                            <button class="btn btn-primary" id="btn-xacnhan" data-bs-dismiss="modal" onclick="showModal3()">Xác Nhận</button>
                                         </div>
                                     </div>
                                 </div>

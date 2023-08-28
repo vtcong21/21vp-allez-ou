@@ -14,14 +14,13 @@ const sendOTPEmail = async (email, OTPCode) => {
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
             to: email,
-            subject: 'Allez Où gửi mã OTP xác nhận thanh toán',
+            subject: 'Ngân hàng XYZ gửi mã OTP xác nhận thanh toán',
             html: `
               <p>Xin chào!</p>
               <p>Dưới đây là mã xác thực của bạn:</p>
               <h2>${OTPCode}</h2>
               <p>Hãy nhập mã này trong ứng dụng để hoàn tất quá trình xác thực.</p>
               <p>Trân trọng,</p>
-              <p>Đội ngũ quản lý du lịch.</p>
           `
         };
         await transporter.sendMail(mailOptions);

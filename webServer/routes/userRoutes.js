@@ -25,9 +25,13 @@ router.get('/getOrderPage/:itemId'
 , convertUserDataMiddleware.getUserData
 , userController.getOrderPage
 );
-// lưu thông tin sau khi đăng ký tour
+// OTP
 router.post('/sendOTPpayment'
 , authMiddleware.authenticateToken
 , userController.sendOTPpayment
+);
+router.post('/checkVerifyOTP'
+, authMiddleware.authenticateToken
+, userController.checkVerifyOTP
 );
 module.exports = router;
