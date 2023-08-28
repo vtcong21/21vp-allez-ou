@@ -239,6 +239,18 @@ const getTopSellingTours = async (req, res) => {
   }
 };
 
+const previewTour = async (req, res) =>{
+  try{
+    const tour = req.body;
+    const user= req.user;
+    res.render('tourInfo', { tour, user, title: 'travel' })
+  }catch(error){
+    console.error('Error fetching top selling tours:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
 
 module.exports = {
   getAllTours,
@@ -251,5 +263,6 @@ module.exports = {
   getTourSearchPage,
   getHiddenTours,
   editTourByCode,
-  getTopSellingTours
+  getTopSellingTours,
+  previewTour
 };
