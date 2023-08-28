@@ -802,7 +802,7 @@ function convertToISODate(dateString) {
     const isoDate = new Date(`${year}-${month}-${day}T00:00:00.000Z`).toISOString();
     return isoDate;
 }
-
+// Vu Code
 document.getElementById("preview-create-tour").addEventListener("click", function () {
     const code = document.getElementById("ma-tour-change").value;
     const name = document.getElementById("ten-tour-change").value;
@@ -903,7 +903,7 @@ const selectedText = selectedOption.textContent;
 
     const form = document.createElement("form");
     form.method = "post";
-    form.action = "/render-tour";
+    form.action = "/preview";
     form.style.display = "none";
 
     // Tạo một input ẩn để lưu trữ dữ liệu tour
@@ -919,3 +919,4 @@ const selectedText = selectedOption.textContent;
     // Gửi form
     form.submit();
 });
+// Vu het code
