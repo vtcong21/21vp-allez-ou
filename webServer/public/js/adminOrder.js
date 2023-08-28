@@ -150,7 +150,7 @@ function makeOrderRow(order, status, className, index) {
     <p class="fw-normal mt-2 name">${order.tourCode}</p>
 </td>
 <td>
-    <p class="fw-normal mt-2">4</p>
+    <p class="fw-normal mt-2">${order.tickets.length}</p>
 </td>
 <td>
     <p class="fw-normal mt-2">${order.orderDate}</p>

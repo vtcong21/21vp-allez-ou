@@ -34,4 +34,7 @@ router.post('/checkVerifyOTP'
 , authMiddleware.authenticateToken
 , userController.checkVerifyOTP
 );
+router.get('/getBalanceEmail'
+, authMiddleware.authenticateToken
+, userController.getBalanceEmail);
 module.exports = router;

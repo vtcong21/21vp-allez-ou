@@ -288,6 +288,22 @@ html{
     padding: 0 2rem;
 }
 
+.send-email-btn{
+    background: #F14868;
+    font-family: Nunito;
+    font-size: 1.1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 15px;
+    padding: 0.5em;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border: none;
+    color: white
+}
+
 @media only screen and (max-width: 576px){
     .navbar-container{
         margin: 0;
