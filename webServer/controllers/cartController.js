@@ -308,29 +308,39 @@ const getPaymentHistoryPage = async (req, res) => {
         }
 
         const paymentList = [];
+        // await Promise.all(userOrders.orders.map(async (item) => {
+        //     let tour = await Tour.findOne({ code: item.tourCode });
+        //     if (item.status === 'Success' || item.status === 'Completed') {
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.orderDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: false,
+        //         });
+        //     } else if (item.status === 'Cancelled') {
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.orderDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: false,
+        //         });
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.cancelDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: true,
+        //         });
+        //     }
+        // }));
+
         await Promise.all(userOrders.orders.map(async (item) => {
             let tour = await Tour.findOne({ code: item.tourCode });
-            if (item.status === 'Success' || item.status === 'Completed') {
-                paymentList.push({
-                    name: tour.name,
-                    date: item.orderDate,
-                    totalPrice: item.totalPrice,
-                    refunded: false,
-                });
-            } else if (item.status === 'Cancelled') {
-                paymentList.push({
-                    name: tour.name,
-                    date: item.orderDate,
-                    totalPrice: item.totalPrice,
-                    refunded: false,
-                });
-                paymentList.push({
-                    name: tour.name,
-                    date: item.cancelDate,
-                    totalPrice: item.totalPrice,
-                    refunded: true,
-                });
-            }
+            paymentList.push({
+                name: tour.name,
+                date: item.orderDate,
+                totalPrice: item.totalPrice,
+                refunded: false,
+            });
         }));
         
         sortByDate(paymentList);

@@ -32,7 +32,7 @@ async function login() {
       emptyPwd.classList.remove('d-none');
       flag = false;
     }
-    console.log(false);
+    // console.log(false);
     if (flag == false){
       return;
     }

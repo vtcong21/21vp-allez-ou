@@ -217,7 +217,7 @@ function getFormData() {
             }
         }
     }
-    console.log(formData); // In ra formData để kiểm tra
+    // console.log(formData); // In ra formData để kiểm tra
     return formData;
 }
 
@@ -274,7 +274,7 @@ var resultItem;
 function showModal1() {
     const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
     resultItem = validateAndSaveOrder();
-    console.log(resultItem);
+    // console.log(resultItem);
     if(typeof resultItem === 'object'){
         modal.show();
     }
@@ -286,7 +286,7 @@ function showModal2() {
 
 function showModal3() {
     const otp = document.getElementById('input-otp').value;
-    console.log(otp);
+    // console.log(otp);
     payment(otp);
 }
 
@@ -299,7 +299,7 @@ async function postEmail(email) {
     try {
         Swal.showLoading();
         const response = await axios.post('/user/sendOTPpayment', { email: email });
-        console.log(response.data);
+        // console.log(response.data);
         Swal.close();
         if (response.status === 200) {
             const modal2 = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));

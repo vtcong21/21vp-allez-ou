@@ -5,13 +5,13 @@ function changeDateToString(date) {
     return `${day}/${month}/${year}`;
 }
 
-console.log(typeof(paymentList[0].date));
+// console.log(typeof(paymentList[0].date));
 
 function displayList() {
     const list = document.getElementById('pay-container');
     list.innerHTML = "";
   
-    console.log(paymentList);
+    // console.log(paymentList);
     for (let i = paymentList.length - 1; i >= 0; i--) {
         let payment = paymentList[i];
         let card;

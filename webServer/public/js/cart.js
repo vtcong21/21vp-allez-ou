@@ -1,6 +1,6 @@
 async function deleteItem(itemId) {
     try {
-        console.log(itemId);
+        // console.log(itemId);
         const response = await axios.delete('/cart/deleteItem', {
             data: { itemId: itemId } 
         });
