@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="/css/tourInfo.css" />
+<div class="body__container">
+    <div class="row g-5 mt-1">
+        <div class="col-sm-8 info__container">
+            <div class="container">
+                <h3 class="tour-title"><%= tour.name %></h3>
+                <p class="tour-code mt-4"><strong>Code Tour: </strong><%= tour.code %></p>
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<%= tour.imgUrls[0]%>" class="d-block w-100" alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<%= tour.imgUrls[1]%>" class="d-block w-100" alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<%= tour.imgUrls[2]%>" class="d-block w-100" alt="..." />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<%= tour.imgUrls[3]%>" class="d-block w-100" alt="..." />
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-sm-12 d-flex d-sm-block justify-content-between">
+                        <div>
+                            <p class="tour-info__text">Khởi hành: <strong><%= tour.date %>- <%= tour.schedules.length %>N<%= tour.schedules.length - 1 %>Đ - Giờ đi: <%= tour.time %></strong></p>
+                            <p class="tour-info__text">Nơi khởi hành: <strong><%= tour.startPlace.name %></strong></p>
+                            <p class="tour-info__text">Chỗ còn nhận: <strong><%= tour.remainSlots %></strong></p>
+                        </div>
+                        <!-- <div>
+                            <img src="/img/tourInfo/contact-usnew.png" class="d-block d-sm-none tour-contact__responsive" id="contact" data-bs-toggle="dropdown" aria-expanded="false">
+                            <ul class="dropdown-menu" aria-labelledby="contact">
+                            <li><a class="dropdown-item" href="#">Gọi trực tiếp</a></li>
+                            <li><a class="dropdown-item" href="#">Liên hệ tư vấn</a></li>
+                        </div> -->
+                    </div>
+                    <!-- <div class="col-sm-6">
+                        <div class="d-flex justify-content-end">
+                            <div class="d-sm-flex d-none">
+                                <a href="#" class="tour-call">Gọi trực tiếp</a>
+                                <a href="#" class="tour-contact m-0">Liên hệ tư vấn</a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="container mt-5 tour-schedule">
+                <h3 class="tour-schedule__title mb-5">Lịch trình</h3>
+                <% for(let i = 0; i < tour.schedules.length; i++) { %>
+                    <div class="tour-schedule-date">
+                        <h3 class="tour-schedule-date__title"><%= tour.schedules[i].name %></h3>
+                        <p class="tour-schedule-date__text">
+                            <%- tour.schedules[i].schedule_detail.replace(/(\n|<br>)/g,"<br><br>") %>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+            <div class="container mt-3 d-sm-none mb-5">
+                <h3 class="tour-schedule__title mb-5">Lịch trình</h3>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#date0" aria-expanded="true" >
+                              <%- tour.schedules[0].name %>
+                          </button>
+                        </h2>
+                        <div id="date0" class="accordion-collapse collapse show">
+                          <div class="accordion-body">
+                            <%- tour.schedules[0].schedule_detail.replace("<br>","<br><br>") %>
+                          </div>
+                        </div>
+                    </div>
+                    <% for(let i = 1; i < tour.schedules.length; i++) { %>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#date<%-i%>" aria-expanded="false" >
+                                  <%- tour.schedules[i].name %>
+                              </button>
+                            </h2>
+                            <div id="date<%-i%>" class="accordion-collapse collapse">
+                              <div class="accordion-body">
+                                <%- tour.schedules[i].schedule_detail.replace(/(\n|<br>)/g,"<br><br>") %>
+                              </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+              </div>
+        </div>
+        <div class="col-sm-4 d-flex flex-column">
+            <div class="tour-banner mb-4 order-sm-2 d-flex d-sm-inline justify-content-between">
+                <div class="d-flex justify-content-between mb-sm-5">
+                    <div class="tour-icon d-flex flex-column justify-content-around">
+                        <div class="d-flex mb-2">
+                            <img src="/img/tourInfo/calendar-event.png" class="m-auto" />
+                        </div>
+                        <div class="d-flex mb-1">
+                            <h3 class="m-auto">Thời gian</h3>
+                        </div>
+                        <div class="d-flex">
+                            <p class="m-auto"><%= tour.schedules.length %> ngày <%= tour.schedules.length - 1%>  đêm</p>
+                        </div>
+                    </div>
+                    <div class="tour-icon d-flex flex-column justify-content-around">
+                        <div class="d-flex mb-2">
+                            <img src="/img/tourInfo/distance.png" class="m-auto" />
+                        </div>
+                        <div class="d-flex mb-1">
+                            <h3 class="m-auto">Phương tiện</h3>
+                        </div>
+                        <div class="d-flex">
+                            <p class="m-auto"><%- tour.transport %></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="tour-icon d-flex flex-column justify-content-around">
+                        <div class="d-flex mb-2">
+                            <img src="/img/tourInfo/hotel.png" class="m-auto" />
+                        </div>
+                        <div class="d-flex mb-1">
+                            <h3 class="m-auto">Khách sạn</h3>
+                        </div>
+                        <div class="d-flex">
+                            <p class="m-auto"><%- tour.hotel %></p>
+                        </div>
+                    </div>
+                    <div class="tour-icon d-flex flex-column justify-content-around">
+                        <div class="d-flex mb-2">
+                            <img src="/img/tourInfo/dish.png" class="m-auto" />
+                        </div>
+                        <div class="d-flex mb-1">
+                            <h3 class="m-auto">Ẩm thực</h3>
+                        </div>
+                        <div class="d-flex">
+                            <p class="m-auto"><%- tour.food %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tour-table-price mb-5 mb-sm-4 order-sm-1">
+                <h3 class="tour-table-price__title">Giá tour</h3>
+                <div class="d-flex flex-column">
+                    <div class="d-flex justify-content-between mt-4">
+                        <div class="d-flex flex-column">
+                            <p class="tour-table-price__type">Người lớn</p>
+                            <p class="tour-table-price__age">(Từ 12 tuổi trở lên)</p>
+                        </div>
+                        <p class="tour-table-price__price"><%-tour.price.toLocaleString()%>đ</p>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <div class="d-flex flex-column">
+                            <p class="tour-table-price__type">Trẻ em</p>
+                            <p class="tour-table-price__age">(Từ 5-11 tuổi)</p>
+                        </div>
+                        <p class="tour-table-price__price"><%-(tour.price * (1 - 0.3)).toLocaleString()%>đ</p>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <div class="d-flex flex-column">
+                            <p class="tour-table-price__type">Trẻ nhỏ</p>
+                            <p class="tour-table-price__age">(Từ 2-4 tuổi)</p>
+                        </div>
+                        <p class="tour-table-price__price"><%-(tour.price * (1 - 0.5)).toLocaleString()%>đ</p>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <div class="d-flex flex-column">
+                            <p class="tour-table-price__type">Em bé</p>
+                            <p class="tour-table-price__age">(dưới 2 tuổi)</p>
+                        </div>
+                        <p class="tour-table-price__price"><%-(tour.price * (1 - 0.7)).toLocaleString()%>đ</p>
+                    </div>
+                </div>
+                <div class="d-flex mt-4">
+                    <button class="btn m-auto tour-table-price__button" onclick="addNewItem('<%- tour.code %>')">Thêm vào Giỏ hàng</button>
+                </div>
+            </div>
+            <div class="tour-review mb-4 order-sm-3">
+                <h3 class="tour-review__title mb-5">Tổng quan chuyến đi</h3>
+                <div class="tour-review__container">
+                    <% for(let i = 0; i < tour.schedules.length; i++) { %>
+                        <div class="position-relative">
+                            <div class="tour-review__circle d-flex">
+                                <p class="m-auto"><%= i + 1 %></p>
+                            </div>
+                            <p class="tour-review__text"><%- tour.schedules[i].name  %></p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed p-3 toast-position">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header px-3">
+        <!-- <img src="/img/logo.png" class="rounded me-2" alt="logo"> -->
+        <strong class="me-auto toast-title"><i class="bi bi-bell-fill me-2"></i>Allez òu</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body px-3">
+            Thêm vào giỏ hàng thành công!
+      </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed p-3 toast-position">
+    <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header px-3">
+        <!-- <img src="/img/logo.png" class="rounded me-2" alt="logo"> -->
+        <strong class="me-auto toast-title"><i class="bi bi-bell-fill me-2"></i>Allez òu</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body px-3">
+            Đã xảy ra lỗi! Không thể thêm vào giỏ hàng.
+      </div>
+    </div>
+</div>

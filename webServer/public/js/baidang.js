@@ -916,16 +916,11 @@ document.getElementById("preview-create-tour").addEventListener("click", functio
     .then(function (response) {
         var htmlContent = response.data; // Nội dung HTML trả về từ endpoint
         console.log(response.data);
-        // Mở cửa sổ popup và gán URL là trang HTML trống bạn đã tạo
-        var newWindow = window.open('popup.html', '_blank');
-        
-        // Đợi cho nội dung HTML của cửa sổ popup được nạp
-        newWindow.onload = function() {
-            // Gán nội dung HTML từ phản hồi vào trang HTML trống
-            newWindow.document.open();
-            newWindow.document.write(htmlContent);
-            newWindow.document.close();
-        };
+        const previewContainer = document.getElementById('preview-container');
+        previewContainer.innerHTML = htmlContent;
+        const previewModal = new bootstrap.Modal(document.getElementById('preview'));
+        $('#kt_modal_new_address').modal("hide");
+        previewModal.show();
     })
     .catch(function (error) {
         console.error(error);

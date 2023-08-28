@@ -402,3 +402,7 @@ line-height: normal;
 #confirmdisplayButton{ 
     font-weight: bolder;
 }
+
+.modal-title.fs-5{
+    font-size: 1.6rem !important;
+}
