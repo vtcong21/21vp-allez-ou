@@ -69,7 +69,7 @@ function renderTourPage(page, hiddenTourDataList) {
     container.innerHTML = "";
 
     // Tạo thẻ div cho từng tour trên trang hiện tại
-    for(let i = 0; i < currentTourDataList.length; i++){
+    for (let i = 0; i < currentTourDataList.length; i++) {
         tourData = currentTourDataList[i];
         const tourCode = tourData.code;
         const tourDate = tourData.date;
@@ -92,7 +92,6 @@ function renderTourPage(page, hiddenTourDataList) {
         const food = tourData.food;
         const hotel = tourData.hotel;
         const schedules = tourData.schedules;
-        const isHidden = tourData.isHidden;
         const maxLength = 80;
         let truncatedName = tourName;
         if (tourName.length > maxLength) {
@@ -126,7 +125,7 @@ function renderTourPage(page, hiddenTourDataList) {
                 </button>
                 <ul class="dropdown-menu">
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmdisplayModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Hiện Tour</a></li>
-                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" data-remainslots="${remainSlots}" data-slots="${slots}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
                 <li><a id="edit-tour-link" data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
                 data-code="${tourCode}"
                 data-tour-id="${tourData._id}"
@@ -199,20 +198,25 @@ function renderTourPage(page, hiddenTourDataList) {
 }
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 let tourId = null;
+let tourRemainSlots = null;
+let tourSlots = null;
 function getTourId(event) {
     tourId = event.currentTarget.getAttribute("data-id");
-} 
-const confirmdisplayButton = document.getElementById("confirmdisplayButton"); 
-confirmdisplayButton.addEventListener("click",function() { 
+    tourRemainSlots = event.currentTarget.getAttribute("data-remainslots");
+    tourSlots = event.currentTarget.getAttribute("data-slots");
+
+}
+const confirmdisplayButton = document.getElementById("confirmdisplayButton");
+confirmdisplayButton.addEventListener("click", function () {
     console.log(tourId);
     axios
-        .put(`/tours/displayTour/${tourId}`,{})
+        .put(`/tours/displayTour/${tourId}`, {})
         .then((response) => {
             console.log(response.data);
             fetchTourInformation();
             fetchHiddenToursInformation();
             alert('Hiện tour thành công, load lại trang web để gọi api');
-            location.reload(); 
+            location.reload();
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -220,19 +224,25 @@ confirmdisplayButton.addEventListener("click",function() {
 })
 // Xóa chuyến đi
 confirmDeleteButton.addEventListener("click", function () {
-  console.log(tourId);
-  axios
-      .put(`/tours/hideTour/${tourId}`, {}) // Sửa thành phương thức "put" và endpoint "/hideTour"
-      .then((response) => {
-          console.log(response.data);
-          fetchTourInformation();
-          fetchHiddenToursInformation();
-          alert('Ẩn tour thành công, load lại trang để gọi lại api'); 
-          location.reload();
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
+    console.log(tourId);
+    console.log(tourSlots);
+    console.log(tourRemainSlots);
+    if (tourSlots - tourRemainSlots == 0) {
+        axios
+            .put(`/tours/hideTour/${tourId}`, {})
+            .then((response) => {
+                console.log(response.data);
+                fetchTourInformation();
+                fetchHiddenToursInformation();
+                alert('Ẩn tour thành công, load lại trang để gọi lại API');
+                location.reload();
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    } else {
+        alert('Đã có slot(s) đặt nên không thể ẩn tour');
+    }
 });
 let isHidden = false; // Khai báo biến isHidden mặc định là false
 function renderPagination(hiddenTourDataList) {
@@ -359,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // Xử lý sự kiện khi bấm vào nút "Thêm Ngày"
     buttonThemNgay.addEventListener("click", function () {
-          event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của nút submit
         // Tạo phần tử div mới
         const newNgayDiv = document.createElement("div");
         newNgayDiv.classList.add("d-flex", "flex-column", "fv-row", "container-ngay");
@@ -416,11 +426,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 let selectvaluescreate = []; // Khai báo biến ở mức toàn cục
 let selectoptioncreate = [];
 
-$('#diem-den-input').change(function() {
+$('#diem-den-input').change(function () {
     selectvaluescreate = []; // Reset mảng khi có sự thay đổi trong phần tử select
     selectoptioncreate = [];
 
-    $(this).find('option:selected').each(function() {
+    $(this).find('option:selected').each(function () {
         var value = $(this).val();
         var textContent = $(this).text();
 
@@ -436,7 +446,7 @@ function selectMultipleValues() {
     return [selectvaluescreate, selectoptioncreate];
 }
 
-  const createTour = async (currentNgay_create) => {
+const createTour = async (currentNgay_create) => {
     // Lấy giá trị từ các ô input HTML
     const name = document.getElementById("ten-tour-input").value;
     const code = document.getElementById("ma-tour-input").value;
@@ -505,10 +515,10 @@ function selectMultipleValues() {
     const [selectvaluescreate, selectoptioncreate] = selectMultipleValues();
     const endPlaces = [];
     for (let i = 0; i < selectvaluescreate.length; i++) {
-        const endPlace = { 
-            code: selectvaluescreate[i], 
+        const endPlace = {
+            code: selectvaluescreate[i],
             name: selectoptioncreate[i]
-        }; 
+        };
         endPlaces.push(endPlace);
     }
     console.log(endPlaces);
@@ -522,7 +532,7 @@ function selectMultipleValues() {
             code: startPlaceCode,
             name: startPlaceName,
         },
-        endPlaces:endPlaces,
+        endPlaces: endPlaces,
         date: date,
         time: time,
         remainSlots: remainSlots,
@@ -540,24 +550,24 @@ function selectMultipleValues() {
     try {
         // Gửi yêu cầu tạo tour tới API
         const response = await axios.post(`/tours`, tourData);
-        console.log(response.data); 
-        if (response.status === 201) { 
+        console.log(response.data);
+        if (response.status === 201) {
             // Đóng modal
             const modalElement = document.getElementById("kt_modal_new_address");
             const bootstrapModal = new bootstrap.Modal(modalElement);
             bootstrapModal.hide();
-    
+
             // Hiển thị cảnh báo
             alert('Tạo tour thành công, load lại trang web để lấy lại api');
-            setTimeout(function() {
+            setTimeout(function () {
                 // Tải lại trang web
                 location.reload();
-             }, 500);
+            }, 500);
         }
     } catch (error) {
         console.error(error);
     }
-    
+
 };
 
 // Gọi hàm createTour và truyền giá trị của currentNgay_create khi người dùng nhấn nút "Tạo tour"
@@ -582,7 +592,7 @@ function showEditModal(event) {
     document.getElementById("so-ve-ban-change").value = tour.slots;
     document.getElementById("hinh1-change").value = tour.cardImgUrl;
     document.getElementById("hinh2-change").value = tour.imgUrls[0];
-    document.getElementById("hinh3-change").value = tour.imgUrls[1] ;
+    document.getElementById("hinh3-change").value = tour.imgUrls[1];
     document.getElementById("hinh4-change").value = tour.imgUrls[2];
     document.getElementById("hinh5-change").value = tour.imgUrls[3];
     document.getElementById("phuong-tien-change").value = tour.transport;
@@ -592,32 +602,32 @@ function showEditModal(event) {
     showdiemden(tour.endPlaces);
     document.getElementById("diem-khoi-hanh-change").value = tour.startPlace.code;
     // showdiemden(tour.endPlaces);
-} 
- let currentNgay = 0;
-function showScheduleDetail(schedules){
+}
+let currentNgay = 0;
+function showScheduleDetail(schedules) {
 
     const scheduleContainer = document.getElementById('ngay-container2');
-    for(let i = currentNgay; i < schedules.length; i++){
-        scheduleRow = displayScheduleRow(schedules[i], i+1)
+    for (let i = currentNgay; i < schedules.length; i++) {
+        scheduleRow = displayScheduleRow(schedules[i], i + 1)
         scheduleContainer.insertAdjacentHTML("beforeend", scheduleRow);
-        currentNgay = i+2;
+        currentNgay = i + 2;
     }
 
     console.log(currentNgay);
     const closeModalButton = document.getElementById('closeModalButton');
-closeModalButton.addEventListener('click', myFunction);
-function myFunction() {
-  // Gọi hàm xử lý sự kiện tại đây
-  currentNgay =0; 
-  initialValues = [];
-  selectedValues = [];
-  console.log(currentNgay);
-  while (scheduleContainer.firstChild) {
-    scheduleContainer.firstChild.remove();
+    closeModalButton.addEventListener('click', myFunction);
+    function myFunction() {
+        // Gọi hàm xử lý sự kiện tại đây
+        currentNgay = 0;
+        initialValues = [];
+        selectedValues = [];
+        console.log(currentNgay);
+        while (scheduleContainer.firstChild) {
+            scheduleContainer.firstChild.remove();
+        }
+    }
 }
-}
-}
-function displayScheduleRow(schedule, index){
+function displayScheduleRow(schedule, index) {
     return `
     <div class="d-flex flex-column fv-row" id="container-ngay-${index}">
     <label class="fs-5 fw-semibold mb-2" id="thongtintungngay-${index}">Ngày ${index}</label>
@@ -626,7 +636,7 @@ function displayScheduleRow(schedule, index){
     </div>
     `;
 }
-const editTour = async (currentNgay,selectedValues,selectedOptions) => {
+const editTour = async (currentNgay, selectedValues, selectedOptions) => {
     // Lấy giá trị từ các ô input HTML
     const code = document.getElementById("ma-tour-change").value;
     const name = document.getElementById("ten-tour-change").value;
@@ -634,14 +644,14 @@ const editTour = async (currentNgay,selectedValues,selectedOptions) => {
     const startPlaceCode = document.getElementById("diem-khoi-hanh-change").value;
     const selectElement = document.getElementById("diem-khoi-hanh-change");
 
-// Lấy index (vị trí) của option được chọn
-const selectedIndex = selectElement.selectedIndex;
+    // Lấy index (vị trí) của option được chọn
+    const selectedIndex = selectElement.selectedIndex;
 
-// Lấy phần tử option được chọn
-const selectedOption = selectElement.options[selectedIndex];
+    // Lấy phần tử option được chọn
+    const selectedOption = selectElement.options[selectedIndex];
 
-// Lấy textContent của option được chọn
-const selectedText = selectedOption.textContent;
+    // Lấy textContent của option được chọn
+    const selectedText = selectedOption.textContent;
     const startPlaceName = selectedText;
     // const endPlaceCode = document.getElementById("code-diem-den-input").value;
     // const endPlaceName = document.getElementById("diem-den-input").value;
@@ -672,10 +682,10 @@ const selectedText = selectedOption.textContent;
     }
     const endPlaces = [];
     for (let i = 0; i < selectedValues.length; i++) {
-        const endPlace = { 
-            code: selectedValues[i], 
+        const endPlace = {
+            code: selectedValues[i],
             name: selectedOptions[i]
-        }; 
+        };
         endPlaces.push(endPlace);
     }
     if (
@@ -699,7 +709,7 @@ const selectedText = selectedOption.textContent;
         alert('Vui lòng điền đầy đủ thông tin.');
         return; // Dừng thực hiện hàm nếu có giá trị rỗng
     }
-    
+
 
     // Tạo đối tượng dữ liệu JSON
     const tourData = {
@@ -724,90 +734,69 @@ const selectedText = selectedOption.textContent;
         schedules: schedules,
         // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
-    console.log(name); 
-    console.log(code); 
-    console.log(price); 
-    console.log(startPlaceCode); 
-    console.log(startPlaceName);
-    console.log(endPlaces);
-    console.log(date); 
-    console.log(time); 
-    console.log(remainSlots); 
-    console.log(cardImgUrl);
-    console.log(img1Url);
-    console.log(img2Url);
-    console.log(img3Url);
-    console.log(img4Url);
-    console.log(transport);
-    console.log(food);
-    console.log(hotel);
-    console.log(schedules);
-    console.log(currentNgay); 
-
-
     try {
         // Gửi yêu cầu sửa tour tới API
         tourData.date = convertToISODate(tourData.date);
         const response = await axios.put(`/tours/edit/${code}`, tourData);
-        console.log(response.data); 
-        if (response.status === 200) { 
-        alert('Sửa tour thành công, load lại trang web để lấy lại api');
-        setTimeout(function() {
-        location.reload();
-    }, 500);
-}
+        console.log(response.data);
+        if (response.status === 200) {
+            alert('Sửa tour thành công, load lại trang web để lấy lại api');
+            setTimeout(function () {
+                location.reload();
+            }, 500);
+        }
 
     } catch (error) {
         console.error(error);
     }
-    
-}; 
-document.getElementById("kt_modal_new_address_submit").addEventListener("click", () => editTour(currentNgay,selectedValues,selectedOptions));
+
+};
+document.getElementById("kt_modal_new_address_submit").addEventListener("click", () => editTour(currentNgay, selectedValues, selectedOptions));
 
 let initialValues = []; // Mảng giá trị ban đầu
 let selectedValues = []; // Mảng giá trị đã chọn
 var selectedOptions = []; // Mảng lưu trữ textContent các option đã chọn
 
-function selectEndPlaces() {    
+function selectEndPlaces() {
     // Thiết lập sự kiện change cho phần tử select
-    $('#diem-den-change-input').change(function() {
-      selectedValues = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
-      selectedOptions = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
-      
-      $(this).find('option:selected').each(function() {
-        var value = $(this).val();
-        var textContent = $(this).text();
-        selectedValues.push(value); // Thêm giá trị value vào mảng
-        selectedOptions.push(textContent); // Thêm textContent vào mảng
-      });
-      console.log(selectedValues); 
-      console.log(selectedOptions);
+    $('#diem-den-change-input').change(function () {
+        selectedValues = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
+        selectedOptions = []; // Đặt lại mảng khi có sự thay đổi trong phần tử select
+
+        $(this).find('option:selected').each(function () {
+            var value = $(this).val();
+            var textContent = $(this).text();
+            selectedValues.push(value); // Thêm giá trị value vào mảng
+            selectedOptions.push(textContent); // Thêm textContent vào mảng
+        });
+        console.log(selectedValues);
+        console.log(selectedOptions);
     });
     $('#diem-den-change-input option').prop('selected', false);
     // Cập nhật giá trị value của các tùy chọn bằng mảng giá trị ban đầu
-    $('#diem-den-change-input option').each(function() {
-      var value = $(this).val();
-      
-      if (initialValues.includes(value)) {
-        $(this).prop('selected', true);
-        selectedValues.push(value); // Thêm giá trị value vào mảng
-        selectedOptions.push($(this).text()); // Thêm textContent vào mảng
-      }
+    $('#diem-den-change-input option').each(function () {
+        var value = $(this).val();
+
+        if (initialValues.includes(value)) {
+            $(this).prop('selected', true);
+            selectedValues.push(value); // Thêm giá trị value vào mảng
+            selectedOptions.push($(this).text()); // Thêm textContent vào mảng
+        }
     });
     return [selectedValues, selectedOptions];
 }
 
-  
+
 
 function showdiemden(endPlaces) {
-  initialValues = []; // Xóa các giá trị cũ của mảng
-  for (let i = 0; i < endPlaces.length; i++) {
-    let code = endPlaces[i].code;
-    initialValues.push(code);
-    console.log(code);
-  }
-  console.log(initialValues);
-  selectEndPlaces();
+    initialValues = []; // Xóa các giá trị cũ của mảng
+    for (let i = 0; i < endPlaces.length; i++) {
+        let code = endPlaces[i].code;
+        initialValues.push(code);
+        console.log(code);
+    }
+    console.log(initialValues);
+    selectEndPlaces();
 }
 
 function convertToISODate(dateString) {
@@ -823,3 +812,118 @@ function convertToISODate(dateString) {
     const isoDate = new Date(`${year}-${month}-${day}T00:00:00.000Z`).toISOString();
     return isoDate;
 }
+// Vu Code
+document.getElementById("preview-create-tour").addEventListener("click", function (event) {
+    event.preventDefault()
+    const code = document.getElementById("ma-tour-input").value;
+    const name = document.getElementById("ten-tour-input").value;
+    const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-input").value);
+    const startPlaceCode = document.getElementById("diem-khoi-hanh-input").value;
+    const selectElement = document.getElementById("diem-khoi-hanh-input");
+
+    // Lấy index (vị trí) của option được chọn
+    const selectedIndex = selectElement.selectedIndex;
+
+    // Lấy phần tử option được chọn
+    const selectedOption = selectElement.options[selectedIndex];
+
+    // Lấy textContent của option được chọn
+    const selectedText = selectedOption.textContent;
+    const startPlaceName = selectedText;
+    // const endPlaceCode = document.getElementById("code-diem-den-input").value;
+    // const endPlaceName = document.getElementById("diem-den-input").value;
+    const date = document.getElementById("ngay-khoi-hanh-input").value;
+    const time = document.getElementById("gio-khoi-hanh-input").value;
+    const remainSlots = parseInt(document.getElementById("so-ve-ban-input").value);
+    const cardImgUrl = document.getElementById("hinh1-input").value;
+    const img1Url = document.getElementById("hinh2-input").value;
+    const img2Url = document.getElementById("hinh3-input").value;
+    const img3Url = document.getElementById("hinh4-input").value;
+    const img4Url = document.getElementById("hinh5-input").value;
+    const transport = document.getElementById("phuong-tien-input").value;
+    const food = document.getElementById("am-thuc-input").value;
+    const hotel = document.getElementById("khach-san-input").value;
+
+    // Lấy dữ liệu từ các ô input của schedules
+    const schedules = [];
+
+    for (let i = 1; i < currentNgay_create; i++) {
+        const dayInput = document.getElementById(`ngay${i}`).value;
+        const dayDetail = document.getElementById(`ngay${i}-input`).innerText;
+        const schedule = {
+            schedule_detail: dayDetail,
+            name: dayInput,
+        };
+
+        schedules.push(schedule);
+    }
+    const endPlaces = [];
+    for (let i = 0; i < selectedValues.length; i++) {
+        const endPlace = {
+            code: selectedValues[i],
+            name: selectedOptions[i]
+        };
+        endPlaces.push(endPlace);
+    }
+    if (
+        name === '' ||
+        code === '' ||
+        isNaN(price) ||
+        startPlaceCode === '' ||
+        date === '' ||
+        time === '' ||
+        isNaN(remainSlots) ||
+        cardImgUrl === '' ||
+        img1Url === '' ||
+        img2Url === '' ||
+        img3Url === '' ||
+        img4Url === '' ||
+        transport === '' ||
+        food === '' ||
+        hotel === ''
+    ) {
+        // Hiển thị cảnh báo
+        alert('Vui lòng điền đầy đủ thông tin.');
+        return; // Dừng thực hiện hàm nếu có giá trị rỗng
+    }
+
+
+    // Tạo đối tượng dữ liệu JSON
+    const tourData = {
+        name: name,
+        code: code,
+        startPlace: {
+            code: startPlaceCode,
+            name: startPlaceName,
+        },
+        endPlaces: endPlaces,
+        price: price,
+        date: date,
+        time: time,
+        slots: remainSlots,
+        remainSlots: remainSlots,
+        numOfDays: currentNgay - 1,
+        cardImgUrl: cardImgUrl,
+        imgUrls: [img1Url, img2Url, img3Url, img4Url],
+        transport: transport,
+        food: food,
+        hotel: hotel,
+        schedules: schedules,
+        // Thêm các trường dữ liệu khác vào đối tượng JSON
+    };
+    console.log(tourData);
+    axios.post('/tours/preview', tourData)
+    .then(function (response) {
+        var htmlContent = response.data; // Nội dung HTML trả về từ endpoint
+        console.log(response.data);
+        const previewContainer = document.getElementById('preview-container');
+        previewContainer.innerHTML = htmlContent;
+        const previewModal = new bootstrap.Modal(document.getElementById('preview'));
+        $('#kt_modal_new_address').modal("hide");
+        previewModal.show();
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+});
+// Vu het code
