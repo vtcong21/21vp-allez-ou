@@ -436,7 +436,7 @@ function selectMultipleValues() {
     return [selectvaluescreate, selectoptioncreate];
 }
 
-  const createTour = async (currentNgay_create) => {
+const createTour = async (currentNgay_create) => {
     // Lấy giá trị từ các ô input HTML
     const name = document.getElementById("ten-tour-input").value;
     const code = document.getElementById("ma-tour-input").value;
@@ -724,27 +724,6 @@ const selectedText = selectedOption.textContent;
         schedules: schedules,
         // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
-    console.log(name); 
-    console.log(code); 
-    console.log(price); 
-    console.log(startPlaceCode); 
-    console.log(startPlaceName);
-    console.log(endPlaces);
-    console.log(date); 
-    console.log(time); 
-    console.log(remainSlots); 
-    console.log(cardImgUrl);
-    console.log(img1Url);
-    console.log(img2Url);
-    console.log(img3Url);
-    console.log(img4Url);
-    console.log(transport);
-    console.log(food);
-    console.log(hotel);
-    console.log(schedules);
-    console.log(currentNgay); 
-
-
     try {
         // Gửi yêu cầu sửa tour tới API
         tourData.date = convertToISODate(tourData.date);
@@ -823,3 +802,120 @@ function convertToISODate(dateString) {
     const isoDate = new Date(`${year}-${month}-${day}T00:00:00.000Z`).toISOString();
     return isoDate;
 }
+
+document.getElementById("preview-create-tour").addEventListener("click", function () {
+    const code = document.getElementById("ma-tour-change").value;
+    const name = document.getElementById("ten-tour-change").value;
+    const price = parseFloat(document.getElementById("gia-ve-nguoi-lon-change").value);
+    const startPlaceCode = document.getElementById("diem-khoi-hanh-change").value;
+    const selectElement = document.getElementById("diem-khoi-hanh-change");
+
+// Lấy index (vị trí) của option được chọn
+const selectedIndex = selectElement.selectedIndex;
+
+// Lấy phần tử option được chọn
+const selectedOption = selectElement.options[selectedIndex];
+
+// Lấy textContent của option được chọn
+const selectedText = selectedOption.textContent;
+    const startPlaceName = selectedText;
+    // const endPlaceCode = document.getElementById("code-diem-den-input").value;
+    // const endPlaceName = document.getElementById("diem-den-input").value;
+    const date = document.getElementById("ngay-khoi-hanh-change").value;
+    const time = document.getElementById("gio-khoi-hanh-change").value;
+    const remainSlots = parseInt(document.getElementById("so-ve-ban-change").value);
+    const cardImgUrl = document.getElementById("hinh1-change").value;
+    const img1Url = document.getElementById("hinh2-change").value;
+    const img2Url = document.getElementById("hinh3-change").value;
+    const img3Url = document.getElementById("hinh4-change").value;
+    const img4Url = document.getElementById("hinh5-change").value;
+    const transport = document.getElementById("phuong-tien-change").value;
+    const food = document.getElementById("am-thuc-change").value;
+    const hotel = document.getElementById("khach-san-change").value;
+
+    // Lấy dữ liệu từ các ô input của schedules
+    const schedules = [];
+
+    for (let i = 1; i < currentNgay; i++) {
+        const dayInput = document.getElementById(`ngay${i}-change`).value;
+        const dayDetail = document.getElementById(`ngay${i}-change-input`).innerText;
+        const schedule = {
+            schedule_detail: dayDetail,
+            name: dayInput,
+        };
+
+        schedules.push(schedule);
+    }
+    const endPlaces = [];
+    for (let i = 0; i < selectedValues.length; i++) {
+        const endPlace = { 
+            code: selectedValues[i], 
+            name: selectedOptions[i]
+        }; 
+        endPlaces.push(endPlace);
+    }
+    if (
+        name === '' ||
+        code === '' ||
+        isNaN(price) ||
+        startPlaceCode === '' ||
+        date === '' ||
+        time === '' ||
+        isNaN(remainSlots) ||
+        cardImgUrl === '' ||
+        img1Url === '' ||
+        img2Url === '' ||
+        img3Url === '' ||
+        img4Url === '' ||
+        transport === '' ||
+        food === '' ||
+        hotel === ''
+    ) {
+        // Hiển thị cảnh báo
+        alert('Vui lòng điền đầy đủ thông tin.');
+        return; // Dừng thực hiện hàm nếu có giá trị rỗng
+    }
+    
+
+    // Tạo đối tượng dữ liệu JSON
+    const tourData = {
+        name: name,
+        code: code,
+        startPlace: {
+            code: startPlaceCode,
+            name: startPlaceName,
+        },
+        endPlaces: endPlaces,
+        price: price,
+        date: date,
+        time: time,
+        slots: remainSlots,
+        remainSlots: remainSlots,
+        numOfDays: currentNgay - 1,
+        cardImgUrl: cardImgUrl,
+        imgUrls: [img1Url, img2Url, img3Url, img4Url],
+        transport: transport,
+        food: food,
+        hotel: hotel,
+        schedules: schedules,
+        // Thêm các trường dữ liệu khác vào đối tượng JSON
+    };
+
+    const form = document.createElement("form");
+    form.method = "post";
+    form.action = "/render-tour";
+    form.style.display = "none";
+
+    // Tạo một input ẩn để lưu trữ dữ liệu tour
+    const dataInput = document.createElement("input");
+    dataInput.type = "hidden";
+    dataInput.name = "data";
+    dataInput.value = JSON.stringify(tourData);
+
+    // Gắn input vào form và form vào body
+    form.appendChild(dataInput);
+    document.body.appendChild(form);
+
+    // Gửi form
+    form.submit();
+});
