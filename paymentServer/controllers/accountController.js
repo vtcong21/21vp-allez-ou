@@ -153,10 +153,24 @@ const createAccount = async (req, res) => {
     }
 };
 
+const sendBalance = async (req, res)=>{
+    try{
+        const { email, userId } = req.body;
+        const account = await PaymentAccount.findById(userId);
+        if (!account) {
+            return res.status(404).json({ error: 'Payment account not found' });
+        }
+        await mailController.sendBalanceEmail(email, account.balance);
+    }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 
 
 module.exports = { 
     sendMoney, 
+    sendBalance,
     getPaymentHistory, 
     getTodayPaymentHistory, 
     createAccount, 

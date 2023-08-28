@@ -183,6 +183,25 @@ const checkVerifyOTP = async (req, res) => {
   }
 };
 
+
+const getBalanceEmail = async(req, res) =>{
+  try{
+    
+    const userId = req.userId;
+    const response = await axios.post('https://localhost:5001/accounts/sendBalanceEmail', {
+        email: email,
+        userId: userId
+    }, {httpsAgent: agent});
+    
+    if (response.status === 200) {
+        res.status(200).json({ valide: "sended" });
+    }
+  }
+  catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 module.exports = {
   getOrderPage,
   getUserInfo,
@@ -190,4 +209,5 @@ module.exports = {
   pay,
   sendOTPpayment,
   checkVerifyOTP,
+  getBalanceEmail
 };
