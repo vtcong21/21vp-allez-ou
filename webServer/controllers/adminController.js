@@ -168,16 +168,19 @@ const getWebPaymentHistory = async (req, res) => {
 
 const getTopSellingTours = async (req, res) => {
     try {
-        const tours = await Tour.find({ isHidden: false })
-            .sort({ slots: -1, remainSlots: -1 })
-            .limit(6);
+      
+      const tours = await Tour.find({ isHidden: false });
+  
+      const sortedTours = tours.sort((a, b) => (b.slots - b.remainSlots) - (a.slots - a.remainSlots)).slice(0, 6);
 
-        res.status(200).json(tours);
+  
+      res.status(200).json(sortedTours);
     } catch (error) {
-        console.error('Error fetching top selling tours:', error);
-        res.status(500).json({ error: 'Internal server error' });
+      console.error('Error fetching top selling tours:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-};
+  };
+  
 
 const getAllOrders = async (req, res) => {
     try {

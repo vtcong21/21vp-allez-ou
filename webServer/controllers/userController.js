@@ -39,8 +39,6 @@ const createAnOrder = async (cartItem, user, item) => {
   await user.save();
 };
 
-
-
 const pay = async (req, res) => {
   try {
     const {item, OTPCode}  = req.body;
