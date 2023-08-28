@@ -90,12 +90,13 @@ async function getAllOrders() {
             const tabSuccess = document.getElementById("tab-success");
             const tabCompleted = document.getElementById("tab-completed");
             const tabCancelled = document.getElementById("tab-cancelled");
-
+            console.log(groupedOrders);
             totalItems = {
-                "Đặt thành công": groupedOrders["Đặt thành công"].length || 0,
-                "Hoàn thành": groupedOrders["Hoàn thành"].length || 0,
-                "Đã hủy": groupedOrders["Đã hủy"].length || 0,
+                "Đặt thành công": groupedOrders["Đặt thành công"] ? groupedOrders["Đặt thành công"].length : 0,
+                "Hoàn thành": groupedOrders["Hoàn thành"] ? groupedOrders["Hoàn thành"].length : 0,
+                "Đã hủy": groupedOrders["Đã hủy"] ? groupedOrders["Đã hủy"].length : 0,
             };
+            
 
             displayOrdersByStatus("Đặt thành công", tabSuccess, "pagination-success");
             displayOrdersByStatus("Hoàn thành", tabCompleted, "pagination-completed");
@@ -109,7 +110,7 @@ async function getAllOrders() {
 }
 
 function displayOrdersByStatus(status, orderTab, orderTabId) {
-    if (groupedOrders[status]) {
+    if (groupedOrders[status] && groupedOrders[status].length > 0) {
         displayOrderList(groupedOrders[status], orderTab, status);
         displayPagination(totalItems[status], currentPage, itemsPerPage, orderTabId);
     } else {

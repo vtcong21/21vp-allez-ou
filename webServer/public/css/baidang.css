@@ -392,3 +392,13 @@ line-height: normal;
 .btn.dropdown-toggle.btn-default{
     display: none;
 }
+#huy{ 
+    font-size: 1rem;
+    font-weight: bolder;
+}
+#confirmDeleteButton{ 
+    font-weight: bolder;
+} 
+#confirmdisplayButton{ 
+    font-weight: bolder;
+}
