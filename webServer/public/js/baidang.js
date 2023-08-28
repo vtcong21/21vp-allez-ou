@@ -845,8 +845,8 @@ const selectedText = selectedOption.textContent;
 
     // Lấy dữ liệu từ các ô input của schedules
     const schedules = [];
-
-    for (let i = 1; i < currentNgay; i++) {
+    console.log(currentNgay_create);
+    for (let i = 1; i < currentNgay_create; i++) {
         const dayInput = document.getElementById(`ngay${i}-change`).value;
         const dayDetail = document.getElementById(`ngay${i}-change-input`).innerText;
         const schedule = {
