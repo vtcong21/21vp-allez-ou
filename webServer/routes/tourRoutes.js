@@ -5,6 +5,12 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const convertUserDataMiddleware = require('../middlewares/convertUserDataMiddleware');
 
 
+router.get('/preview',
+    convertUserDataMiddleware.getUserData,
+    authMiddleware.requireAdminRole,
+    tourController.previewTour
+);
+
 // tìm kiếm tour
 router.get('/search'
     , tourController.searchTours);
@@ -40,8 +46,8 @@ router.put('/hideTour/:code'
 
 // hiện tour, admin mới được hiện
 router.put('/displayTour/:code'
-, authMiddleware.requireAdminRole
-, tourController.displayTour);
+    , authMiddleware.requireAdminRole
+    , tourController.displayTour);
 
 // Lấy các top tour
 router.get('/getTopSellingTours'
