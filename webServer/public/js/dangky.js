@@ -68,7 +68,7 @@ function loadNewForm3() {
   document.getElementById("bank-link").style.fontWeight = "normal";
 }
 function loadNewForm() {
-  console.log("Hàm loadNewForm() đã được gọi.");
+  // console.log("Hàm loadNewForm() đã được gọi.");
 
   var personalInfoDiv = document.getElementById("personal-info");
   personalInfoDiv.innerHTML = "";
@@ -261,7 +261,7 @@ async function registerUser() {
       phoneNumber: phoneValue,
       gender: genderValue,
     };
-    console.log(formData);
+    // console.log(formData);
     
     // Hiển thị modal loading
     Swal.showLoading();
@@ -309,9 +309,9 @@ async function sendVerificationCodeToServer() {
       email: emailValue,
       verificationCode: code,
     };
-    console.log(verificationData);
+    // console.log(verificationData);
     const response = await axios.post("/auth/verify", verificationData);
-    console.log(response.data);
+    // console.log(response.data);
     window.location.href = response.data.redirectUrl;
   } catch (error) {
     const wrongOTP = document.getElementById('wrongOTP');

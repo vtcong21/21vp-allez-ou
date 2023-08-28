@@ -44,7 +44,7 @@ async function fetchHiddenToursInformation() {
         const hiddenTourDataList = response.data;
         isHidden = true; // Đặt biến isHidden thành true để chỉ định đang hiển thị hidden tours
 
-        console.log(hiddenTourDataList);
+        // console.log(hiddenTourDataList);
         renderTourPage(currentPage, hiddenTourDataList);
         renderPagination(true);
     } catch (error) {
@@ -208,11 +208,11 @@ function getTourId(event) {
 }
 const confirmdisplayButton = document.getElementById("confirmdisplayButton");
 confirmdisplayButton.addEventListener("click", function () {
-    console.log(tourId);
+    // console.log(tourId);
     axios
         .put(`/tours/displayTour/${tourId}`, {})
         .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             fetchTourInformation();
             fetchHiddenToursInformation();
             alert('Hiện tour thành công, load lại trang web để gọi api');
@@ -224,14 +224,14 @@ confirmdisplayButton.addEventListener("click", function () {
 })
 // Xóa chuyến đi
 confirmDeleteButton.addEventListener("click", function () {
-    console.log(tourId);
-    console.log(tourSlots);
-    console.log(tourRemainSlots);
+    // console.log(tourId);
+    // console.log(tourSlots);
+    // console.log(tourRemainSlots);
     if (tourSlots - tourRemainSlots == 0) {
         axios
             .put(`/tours/hideTour/${tourId}`, {})
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 fetchTourInformation();
                 fetchHiddenToursInformation();
                 alert('Ẩn tour thành công, load lại trang để gọi lại API');
@@ -335,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         // Tăng số lượng ngày hiện tại
         currentNgay_create++;
-        console.log(currentNgay_create);
+        // console.log(currentNgay_create);
     });
     const buttonBotNgay = document.getElementById("button-bot-ngay");
 
@@ -438,8 +438,8 @@ $('#diem-den-input').change(function () {
         selectoptioncreate.push(textContent);
     });
 
-    console.log(selectvaluescreate);
-    console.log(selectoptioncreate);
+    // console.log(selectvaluescreate);
+    // console.log(selectoptioncreate);
 });
 
 function selectMultipleValues() {
@@ -521,7 +521,7 @@ const createTour = async (currentNgay_create) => {
         };
         endPlaces.push(endPlace);
     }
-    console.log(endPlaces);
+    // console.log(endPlaces);
 
     // Tạo đối tượng dữ liệu JSON
     const tourData = {
@@ -550,7 +550,7 @@ const createTour = async (currentNgay_create) => {
     try {
         // Gửi yêu cầu tạo tour tới API
         const response = await axios.post(`/tours`, tourData);
-        console.log(response.data);
+        // console.log(response.data);
         if (response.status === 201) {
             // Đóng modal
             const modalElement = document.getElementById("kt_modal_new_address");
@@ -613,7 +613,7 @@ function showScheduleDetail(schedules) {
         currentNgay = i + 2;
     }
 
-    console.log(currentNgay);
+    // console.log(currentNgay);
     const closeModalButton = document.getElementById('closeModalButton');
     closeModalButton.addEventListener('click', myFunction);
     function myFunction() {
@@ -621,7 +621,7 @@ function showScheduleDetail(schedules) {
         currentNgay = 0;
         initialValues = [];
         selectedValues = [];
-        console.log(currentNgay);
+        // console.log(currentNgay);
         while (scheduleContainer.firstChild) {
             scheduleContainer.firstChild.remove();
         }
@@ -738,7 +738,7 @@ const editTour = async (currentNgay, selectedValues, selectedOptions) => {
         // Gửi yêu cầu sửa tour tới API
         tourData.date = convertToISODate(tourData.date);
         const response = await axios.put(`/tours/edit/${code}`, tourData);
-        console.log(response.data);
+        // console.log(response.data);
         if (response.status === 200) {
             alert('Sửa tour thành công, load lại trang web để lấy lại api');
             setTimeout(function () {
@@ -769,8 +769,8 @@ function selectEndPlaces() {
             selectedValues.push(value); // Thêm giá trị value vào mảng
             selectedOptions.push(textContent); // Thêm textContent vào mảng
         });
-        console.log(selectedValues);
-        console.log(selectedOptions);
+        // console.log(selectedValues);
+        // console.log(selectedOptions);
     });
     $('#diem-den-change-input option').prop('selected', false);
     // Cập nhật giá trị value của các tùy chọn bằng mảng giá trị ban đầu
@@ -793,9 +793,9 @@ function showdiemden(endPlaces) {
     for (let i = 0; i < endPlaces.length; i++) {
         let code = endPlaces[i].code;
         initialValues.push(code);
-        console.log(code);
+        // console.log(code);
     }
-    console.log(initialValues);
+    // console.log(initialValues);
     selectEndPlaces();
 }
 
@@ -911,11 +911,11 @@ document.getElementById("preview-create-tour").addEventListener("click", functio
         schedules: schedules,
         // Thêm các trường dữ liệu khác vào đối tượng JSON
     };
-    console.log(tourData);
+    // console.log(tourData);
     axios.post('/tours/preview', tourData)
     .then(function (response) {
         var htmlContent = response.data; // Nội dung HTML trả về từ endpoint
-        console.log(response.data);
+        // console.log(response.data);
         const previewContainer = document.getElementById('preview-container');
         previewContainer.innerHTML = htmlContent;
         const previewModal = new bootstrap.Modal(document.getElementById('preview'));

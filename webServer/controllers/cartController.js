@@ -243,7 +243,7 @@ const cancelOrder = async (req, res) => {
     try {
         const userId = req.userId;
         const orderId = req.params.itemId;
-        
+        console.log(req.params.itemId);
         const user = await User.findById(userId).populate('orders');
         
         const order = user.orders.find(order => order._id.equals(orderId));
@@ -259,29 +259,34 @@ const cancelOrder = async (req, res) => {
             return res.status(404).json({ error: 'Tour not found' });
         } 
 
-        const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
-            senderAccountId: webPaymentAccountId,
-            recipientAccountId: userId,
-            amount: order.totalPrice,
-            itemId: order._id
-        }, {httpsAgent: agent});
+        tour.remainSlots += order.tickets.length;
+        order.status = 'Cancelled';
+        order.cancelDate = new Date(Date.now());
+        await order.save();
+        res.status(200).json({ message: 'Order has been successfully canceled' });
+        // const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
+        //     senderAccountId: webPaymentAccountId,
+        //     recipientAccountId: userId,
+        //     amount: order.totalPrice,
+        //     itemId: order._id
+        // }, {httpsAgent: agent});
 
-        if (response.status === 400) {
-            return res.status(400).json({ error: 'Insufficient balance' });
-        } else if (response.data.success) {
-            tour.remainSlots += order.tickets.length;
-            order.status = 'Cancelled';
-            order.cancelDate = new Date(Date.now());
-            await order.save();
+        // if (response.status === 400) {
+        //     return res.status(400).json({ error: 'Insufficient balance' });
+        // } else if (response.data.success) {
+        //     tour.remainSlots += order.tickets.length;
+        //     order.status = 'Cancelled';
+        //     order.cancelDate = new Date(Date.now());
+        //     await order.save();
 
-            const refundAmount = (order.totalPrice*80/100).toLocaleString();
-            console.log(refundAmount);
-            await mailController.sendCancellationEmail(user, order, tour, refundAmount);
+        //     const refundAmount = (order.totalPrice*80/100).toLocaleString();
+        //     console.log(refundAmount);
+        //     await mailController.sendCancellationEmail(user, order, tour, refundAmount);
             
-            res.status(200).json({ message: 'Order has been successfully canceled' });
-        } else {
-            return res.status(500).json({ error: 'Payment failed' });
-        }
+        //     res.status(200).json({ message: 'Order has been successfully canceled' });
+        // } else {
+        //     return res.status(500).json({ error: 'Payment failed' });
+        // }
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal server error' });
@@ -303,29 +308,39 @@ const getPaymentHistoryPage = async (req, res) => {
         }
 
         const paymentList = [];
+        // await Promise.all(userOrders.orders.map(async (item) => {
+        //     let tour = await Tour.findOne({ code: item.tourCode });
+        //     if (item.status === 'Success' || item.status === 'Completed') {
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.orderDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: false,
+        //         });
+        //     } else if (item.status === 'Cancelled') {
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.orderDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: false,
+        //         });
+        //         paymentList.push({
+        //             name: tour.name,
+        //             date: item.cancelDate,
+        //             totalPrice: item.totalPrice,
+        //             refunded: true,
+        //         });
+        //     }
+        // }));
+
         await Promise.all(userOrders.orders.map(async (item) => {
             let tour = await Tour.findOne({ code: item.tourCode });
-            if (item.status === 'Success' || item.status === 'Completed') {
-                paymentList.push({
-                    name: tour.name,
-                    date: item.orderDate,
-                    totalPrice: item.totalPrice,
-                    refunded: false,
-                });
-            } else if (item.status === 'Cancelled') {
-                paymentList.push({
-                    name: tour.name,
-                    date: item.orderDate,
-                    totalPrice: item.totalPrice,
-                    refunded: false,
-                });
-                paymentList.push({
-                    name: tour.name,
-                    date: item.cancelDate,
-                    totalPrice: item.totalPrice,
-                    refunded: true,
-                });
-            }
+            paymentList.push({
+                name: tour.name,
+                date: item.orderDate,
+                totalPrice: item.totalPrice,
+                refunded: false,
+            });
         }));
         
         sortByDate(paymentList);

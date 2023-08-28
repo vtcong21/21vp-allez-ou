@@ -281,6 +281,16 @@ em {
     color: #4F6CFF;
     text-decoration: underline;
 }
+.modal-f {
+    font-weight: 500;
+}
+.modal-d {
+    font-weight: 600;
+    color: #55546d;
+}
+.p-45 {
+    padding: 2rem !important;
+}
 @media only screen and (max-width: 576px) {
     h5 a {
         margin-top: 5px;
@@ -310,5 +320,29 @@ em {
     }
     .modal-v2 {
         width: 95% !important;
+    }
+}
+
+.swal2-popup {
+    width: 400px;
+    font-size: 1.4rem;
+}
+
+.swal2-confirm-btn{
+    background-color: #4b60ce!important;
+}
+
+.swal2-btn__container{
+    width: 220px;
+    justify-content: space-between;
+}
+.swal2-cancelled-btn{
+    background-color: white;
+    border-color: #6C6B7B !important;
+}
+@media only screen and (max-width: 576px){
+    .swal2-popup {
+        width: 95%;
+        font-size: 1.8rem;
     }
 }

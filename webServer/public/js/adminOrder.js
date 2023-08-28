@@ -90,7 +90,7 @@ async function getAllOrders() {
             const tabSuccess = document.getElementById("tab-success");
             const tabCompleted = document.getElementById("tab-completed");
             const tabCancelled = document.getElementById("tab-cancelled");
-            console.log(groupedOrders);
+
             totalItems = {
                 "Đặt thành công": groupedOrders["Đặt thành công"] ? groupedOrders["Đặt thành công"].length : 0,
                 "Hoàn thành": groupedOrders["Hoàn thành"] ? groupedOrders["Hoàn thành"].length : 0,
@@ -125,7 +125,7 @@ function displayOrderList(orders, orderTab, orderStatus) {
     const endIndex = startIndex + itemsPerPage;
     const orderToShow = orders.slice(startIndex, endIndex);
     for (let i = 0; i < orderToShow.length; i++) {
-        console.log(orderToShow[i]);
+
         const row = makeOrderRow(orderToShow[i], orderStatus, statusClass, i);
         orderTab.insertAdjacentHTML("beforeend", row);
     }
@@ -253,7 +253,7 @@ function showOrderModal(event) {
     const modalElement = document.querySelector("#orderModal");
     const modalStatus = event.currentTarget.getAttribute("data-status");
     const modalOrderId = event.currentTarget.getAttribute("data-order-id");
-    console.log(modalOrderId);
+
     const currentOrder = findOrderById(modalOrderId);
 
     modalElement.querySelector("#order-code-tour").textContent = currentOrder.tourCode;
