@@ -7,7 +7,7 @@ const dailyRevenueSchema = new mongoose.Schema({
 
 const monthlyRevenueSchema = new mongoose.Schema({
   dailyRevenue: {
-    type: [{dailyRevenueSchema}]
+    type: [{ date: Date, revenue: Number }]
   },
   month: { type: Number, required: true },
   year: { type: Number, required: true },

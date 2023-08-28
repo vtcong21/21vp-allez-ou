@@ -15,20 +15,21 @@ const updateRevenue = async () => {
         const response = await axios.get('https://localhost:5001/accounts/getTodayPaymentHistory', {
             params: {
                 accountId: accountId
-            }
-        }, {httpsAgent: agent});
+            },
+            httpsAgent: agent
+        });
         const paymentHistory = response.data.paymentHistory;
-        //console.log(response.data);
+        
         // Lấy ngày hôm nay
         const today = new Date();
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1); // Lấy ngày hôm qua
-
+        yesterday.setUTCHours(0, 0, 0, 0);
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
-        let dashboard = await Dashboard.findOne();
+        let dashboard = await Dashboard.findOne()
         if (!dashboard) {
-            return res.status(404).json({ message: 'Cannot find dashboard' });
+            return console.error({ message: 'Cannot find dashboard' });
         }
 
         const currentMonth = dashboard.monthlyRevenue.find(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
@@ -43,20 +44,38 @@ const updateRevenue = async () => {
 
         const currentMonthIndex = dashboard.monthlyRevenue.findIndex(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
 
-        dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push({
-            date: yesterday, // Sử dụng ngày hôm qua
-            revenue: paymentHistory.reduce((total, history) => total + history.amount, 0),
+        // Kiểm tra xem đã tồn tại một bản ghi cho ngày hôm qua trong danh sách dailyRevenue chưa
+        const existingRecord = dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.find(record => {
+
+            const recordDate = new Date(record.date);
+            return recordDate.getTime() === yesterday.getTime();
         });
+        
+        if (!existingRecord) {
+            // Nếu chưa có bản ghi cho ngày hôm qua, thì thêm mới
+            console.log(1);
+            const totalAmount = paymentHistory.reduce((total, history) => total + history.amount, 0);
+            console.log(totalAmount);
+            const newDailyRevenue = {
+                date: yesterday,   // Đảm bảo bạn đã định nghĩa yesterday ở đâu đó trong mã của bạn
+                revenue: totalAmount,   // Đảm bảo bạn đã tính toán totalAmount ở đâu đó trong mã của bạn
+            };
+            
+            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push(newDailyRevenue);
+        }
+
 
         const monthRevenue = dashboard.monthlyRevenue[currentMonthIndex];
         monthRevenue.revenue = monthRevenue.dailyRevenue.reduce((total, daily) => total + daily.revenue, 0);
         await dashboard.save();
-
         console.log('Updated revenue at', yesterday);
     } catch (error) {
         console.error('Error updating revenue:', error.message);
     }
 };
+
+
+
 
 // update trạng thái ẩn, lập lịch 0:00 -----------------------------------------------------------------
 const updateToursState = async () => {
@@ -80,7 +99,7 @@ const updateToursState = async () => {
 };
 
 // Lên lịch chạy công việc cập nhật doanh thu vào lúc 0:00 hàng ngày
-cron.schedule('0 0 * * *', () => {
+cron.schedule('0 1 * * *', () => {
     updateRevenue();
     updateToursState();
 });
@@ -92,12 +111,16 @@ const updateTodayRevenue = async (req, res) => {
         const response = await axios.get('https://localhost:5001/accounts/getTodayPaymentHistory', {
             params: {
                 accountId: accountId
-            }
-        }, {httpsAgent: agent});
+            },
+            httpsAgent: agent
+        });
         const paymentHistory = response.data.paymentHistory;
-        console.log(response.data);
-
+        
+        // Lấy ngày hôm nay
         const today = new Date();
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1); // Lấy ngày hôm qua
+        yesterday.setUTCHours(0, 0, 0, 0);
         const month = today.getMonth() + 1;
         const year = today.getFullYear();
         let dashboard = await Dashboard.findOne();
@@ -117,19 +140,26 @@ const updateTodayRevenue = async (req, res) => {
 
         const currentMonthIndex = dashboard.monthlyRevenue.findIndex(monthRevenue => monthRevenue.month === month && monthRevenue.year === year);
 
-        // Kiểm tra nếu ngày hôm nay đã tồn tại trong danh sách dailyRevenue
-        const existingDayIndex = dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.findIndex(dayRevenue => dayRevenue.date === today.toISOString());
+        // Kiểm tra xem đã tồn tại một bản ghi cho ngày hôm qua trong danh sách dailyRevenue chưa
+        const existingRecord = dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.find(record => {
 
-        if (existingDayIndex !== -1) {
-            // Nếu đã tồn tại thì cập nhật lại dữ liệu doanh thu
-            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue[existingDayIndex].revenue = paymentHistory.reduce((total, history) => total + history.amount, 0);
-        } else {
-            // Nếu chưa tồn tại thì thêm dữ liệu mới
-            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push({
-                date: today,
-                revenue: paymentHistory.reduce((total, history) => total + history.amount, 0),
-            });
+            const recordDate = new Date(record.date);
+            return recordDate.getTime() === yesterday.getTime();
+        });
+        
+        if (!existingRecord) {
+            // Nếu chưa có bản ghi cho ngày hôm qua, thì thêm mới
+            console.log(1);
+            const totalAmount = paymentHistory.reduce((total, history) => total + history.amount, 0);
+            console.log(totalAmount);
+            const newDailyRevenue = {
+                date: yesterday,   // Đảm bảo bạn đã định nghĩa yesterday ở đâu đó trong mã của bạn
+                revenue: totalAmount,   // Đảm bảo bạn đã tính toán totalAmount ở đâu đó trong mã của bạn
+            };
+            
+            dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push(newDailyRevenue);
         }
+
 
         const monthRevenue = dashboard.monthlyRevenue[currentMonthIndex];
         monthRevenue.revenue = monthRevenue.dailyRevenue.reduce((total, daily) => total + daily.revenue, 0);
