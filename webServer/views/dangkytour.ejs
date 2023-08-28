@@ -7,6 +7,21 @@
         <script>
             var tourData = <%-JSON.stringify(tourData)%>;
             var itemId = <%-JSON.stringify(itemId)%>;
+            var fullDate = <%-JSON.stringify(tourData.date)%>;
+            document.addEventListener('DOMContentLoaded', function() {
+            var dateObj = new Date(fullDate);
+            var options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: '2-digit', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+                second: 'numeric' 
+            };
+            var formattedDate = dateObj.toLocaleString('en-US', options);
+            var formattedDateContainer = document.getElementById('formattedDateContainer');
+            formattedDateContainer.textContent = "Khởi Hành: " + formattedDate;
+});
           </script>
         <script src="/js/dangkytour.js"></script>
     </head>
@@ -266,7 +281,7 @@
                                 </div>
                                 <div class="detail-information">
                                     <p class="code-tour">Mã Tour: <%=tourData.code%></p>
-                                    <p class="khoihanh">Khởi Hành: <%=tourData.date%></p>
+                                    <p class="khoihanh" id="formattedDateContainer">Khởi Hành: <%=tourData.date%></p>
                                     <p class="noikhoihanh">Nơi Khởi Hành: <%=tourData.startPlace.name%></p>
                                     <p class="choconnhan">Chỗ còn nhận: <strong><%=tourData.remainSlots%></strong></p>
                                 </div>
@@ -402,6 +417,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
     </body>
     <%- include('partials/footer') %>
