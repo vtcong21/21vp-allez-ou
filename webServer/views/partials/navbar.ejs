@@ -9,9 +9,6 @@
         <ul class="d-flex order-sm-2 m-0 align-items-center">
             <% if (user.isAdmin == false) { %>
             <li class="nav-item">
-                <a class="nav-link active navbar-text navbar-text__bordered" aria-current="page" href="/auth/register">GỬI SỐ DƯ VỀ MAIL</a>
-            </li>    
-            <li class="nav-item">
                 <a href="/cart">
                     <img src="/img/navbar/shopping-cart.png" class="cart-logo" />
                 </a>
@@ -44,6 +41,11 @@
                                 <p class="info__tag col-4">Mail:</p>
                                 <p class="info__content col-8" id="emailUser"><%- user.email %></p>
                             </div>
+                            <% if (user.isAdmin == false && user) { %>
+                                <div class="mt-4 d-flex">
+                                    <button class="m-auto send-email-btn" onclick="sendBalanceToEmail()">GỬI SỐ DƯ VỀ EMAIL</button>
+                                </div>
+                            <% } %>
                         </div>
                         <div class="mt-4 d-flex">
                             <button class="m-auto logOut-btn" onclick="logOut()">Đăng xuất</button>

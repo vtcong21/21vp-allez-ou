@@ -80,3 +80,38 @@ loginButton.addEventListener('click', function (event) {
   event.preventDefault();
   login();
 });
+
+async function sendBalanceToEmail(){
+  try {
+    Swal.showLoading();
+    const response = await axios.get('/user/getBalanceEmail');
+    Swal.close();
+        await Swal.fire({
+            icon: "success",
+            title: "Đã gửi thành công",
+            customClass: {
+                popup: "swal2-popup",
+                confirmButton: "swal2-confirm-btn btn p-3",
+            },
+    });
+  } catch (error) {
+    console.error('Đã xảy ra lỗi:', error.message);
+    await Swal.fire({
+      icon: "error",
+      title: "Error!",
+      showCancelButton: true,
+      confirmButtonText: "Gửi lại",
+      cancelButtonText: "Hủy",
+      customClass: {
+          popup: "swal2-popup",
+          confirmButton: "swal2-confirm-btn btn p-3",
+          actions: "swal2-btn__container ",
+          cancelButton: "btn p-3",
+      },
+  }).then((result) => {
+      if (result.isConfirmed) {
+          sendBalanceToEmail();
+      }
+  });
+  }
+}

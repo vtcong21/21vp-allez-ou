@@ -214,4 +214,5 @@ module.exports = {
   pay,
   sendOTPpayment,
   checkVerifyOTP,
+  getBalanceEmail
 };
