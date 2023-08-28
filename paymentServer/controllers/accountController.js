@@ -118,7 +118,7 @@ const getPaymentHistory = async (req, res) => {
 
 const getTodayPaymentHistory = async (req, res) => {
     try {
-        const { accountId } = req.query;
+        const  accountId  = req.query.accountId;
         const account = await PaymentAccount.findById(accountId);
         if (!account) {
             return res.status(404).json({ error: 'Payment account not found' });

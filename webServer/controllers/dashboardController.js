@@ -53,12 +53,12 @@ const updateRevenue = async () => {
         
         if (!existingRecord) {
             // Nếu chưa có bản ghi cho ngày hôm qua, thì thêm mới
-            console.log(1);
+           
             const totalAmount = paymentHistory.reduce((total, history) => total + history.amount, 0);
-            console.log(totalAmount);
+            
             const newDailyRevenue = {
-                date: yesterday,   // Đảm bảo bạn đã định nghĩa yesterday ở đâu đó trong mã của bạn
-                revenue: totalAmount,   // Đảm bảo bạn đã tính toán totalAmount ở đâu đó trong mã của bạn
+                date: yesterday,   
+                revenue: totalAmount,   
             };
             
             dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push(newDailyRevenue);
@@ -73,7 +73,6 @@ const updateRevenue = async () => {
         console.error('Error updating revenue:', error.message);
     }
 };
-
 
 
 
@@ -153,8 +152,8 @@ const updateTodayRevenue = async (req, res) => {
             const totalAmount = paymentHistory.reduce((total, history) => total + history.amount, 0);
             console.log(totalAmount);
             const newDailyRevenue = {
-                date: yesterday,   // Đảm bảo bạn đã định nghĩa yesterday ở đâu đó trong mã của bạn
-                revenue: totalAmount,   // Đảm bảo bạn đã tính toán totalAmount ở đâu đó trong mã của bạn
+                date: yesterday,   
+                revenue: totalAmount,   
             };
             
             dashboard.monthlyRevenue[currentMonthIndex].dailyRevenue.push(newDailyRevenue);
