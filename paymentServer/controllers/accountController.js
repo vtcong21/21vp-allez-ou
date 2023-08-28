@@ -161,6 +161,7 @@ const sendBalance = async (req, res)=>{
             return res.status(404).json({ error: 'Payment account not found' });
         }
         await mailController.sendBalanceEmail(email, account.balance);
+        res.status(200).json({ success: true });
     }catch(error){
         res.status(500).json({ error: 'Internal server error' });
     }
