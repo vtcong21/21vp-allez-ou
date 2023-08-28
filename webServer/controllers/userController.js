@@ -188,13 +188,18 @@ const getBalanceEmail = async(req, res) =>{
   try{
     
     const userId = req.userId;
+    const user = await User.findById(userId).select('fullName email dateOfBirth');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
     const response = await axios.post('https://localhost:5001/accounts/sendBalanceEmail', {
-        email: email,
+        email: user.email,
         userId: userId
     }, {httpsAgent: agent});
     
     if (response.status === 200) {
-        res.status(200).json({ valide: "sended" });
+        res.status(200).json({ valide: true });
     }
   }
   catch (error) {
@@ -209,5 +214,4 @@ module.exports = {
   pay,
   sendOTPpayment,
   checkVerifyOTP,
-  getBalanceEmail
 };
