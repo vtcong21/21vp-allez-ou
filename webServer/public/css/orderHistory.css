@@ -277,9 +277,9 @@ img {
 .fs-v3 {
     font-size: 1.5rem;
 }
-small {
+em {
     color: #4F6CFF;
-    font-style: italic;
+    text-decoration: underline;
 }
 @media only screen and (max-width: 576px) {
     h5 a {

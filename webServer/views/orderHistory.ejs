@@ -434,14 +434,36 @@
         
         <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content" style="width: max-content; border-radius: 14px;">
+                <div class="modal-content" style="margin-top: 23em; width: auto; border-radius: 14px;">
                     <div class="modal-header">
-                        <h5 class="modal-title fs-v3" id="confirmDeleteModalLabel"><strong>Xác nhận Hủy chuyến</strong></h5>
+                        <h5 class="modal-title fs-v3" id="confirmDeleteModalLabel"><strong>Bạn chắc chắn muốn hủy chuyến?</strong></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body fs-v3">
-                        Bạn chắc chắn muốn hủy chuyến đi này?<br>
-                        <small>*Khi đã hủy sẽ không thể hoàn tác.</small>
+                        Khi chấp nhận hủy, số tiền đã thanh toán sẽ <em>không được hoàn lại.</em>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-secondary-v2 modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
+                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
+                        onclick="CancelOrderFunc()">Vẫn hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmDeleteModalbyPW" tabindex="-1" aria-labelledby="confirmDeleteModalbyPWLabel"aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="margin-top: 23em; width: auto; border-radius: 14px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title fs-v3" id="confirmDeleteModalLabel"><strong>Xác nhận hủy chuyến</strong></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body fs-v3">
+                        <div>Tour: <div id="nameTour"></div></div>
+                        <div>Ngày đi: <div id="dateTour"></div></div>
+                        <div>Số vé: <div id="numTicket"></div></d>
+                        <div>Tổng tiền: <div id="priceTour"></div></d>
+                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-secondary-v2 modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>

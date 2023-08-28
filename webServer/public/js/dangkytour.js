@@ -448,7 +448,7 @@ async function postEmail(email) {
         console.error("Error sending resend verification code request:", error);
         await Swal.fire({
             icon: "error",
-            title: "Error!",
+            title: "Kết nối hệ thống ngân hàng thất bại!",
             customClass: {
                 popup: "swal2-popup",
                 confirmButton: "swal2-confirm-btn btn p-3",
@@ -474,7 +474,7 @@ async function verifyOTP(email, otp) {
         console.error("Error sending resend verification code request:", error);
         await Swal.fire({
             icon: "error",
-            title: "Error!",
+            title: "Mã OTP không đúng!",
             customClass: {
                 popup: "swal2-popup",
                 confirmButton: "swal2-confirm-btn btn p-3",
@@ -485,7 +485,9 @@ async function verifyOTP(email, otp) {
 
 async function payment(OTPCode) {
     try {
+        Swal.showLoading();
         const payResponse = await axios.post('/user/pay',{ item: resultItem,  OTPCode: OTPCode});
+        Swal.close();
         if (payResponse.status === 200) {
             const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
             modal3.show();
@@ -494,7 +496,7 @@ async function payment(OTPCode) {
         console.error("Error sending resend verification code request:", error);
         await Swal.fire({
             icon: "error",
-            title: "Error!",
+            title: "Thanh toán thất bại!",
             customClass: {
                 popup: "swal2-popup",
                 confirmButton: "swal2-confirm-btn btn p-3",
