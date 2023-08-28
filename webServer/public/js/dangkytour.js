@@ -407,9 +407,12 @@ function validateAndSaveOrder() {
     return item;
 }
 
+var resultItem;
+
 function showModal1() {
     const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle'));
-    const resultItem = validateAndSaveOrder();
+    resultItem = validateAndSaveOrder();
+    console.log(resultItem);
     if(typeof resultItem === 'object'){
         modal.show();
     }
@@ -465,6 +468,25 @@ async function verifyOTP(email, otp) {
         console.log(response.data);
         Swal.close();
         if (response.status === 200) {
+            payment(otp);
+        } 
+    } catch (error) {
+        console.error("Error sending resend verification code request:", error);
+        await Swal.fire({
+            icon: "error",
+            title: "Error!",
+            customClass: {
+                popup: "swal2-popup",
+                confirmButton: "swal2-confirm-btn btn p-3",
+            },
+        });
+    }
+}
+
+async function payment(OTPCode) {
+    try {
+        const payResponse = await axios.post('/user/pay',{ item: resultItem,  OTPCode: OTPCode});
+        if (payResponse.status === 200) {
             const modal3 = new bootstrap.Modal(document.getElementById('exampleModalToggle3'));
             modal3.show();
         } 

@@ -74,27 +74,27 @@ const pay = async (req, res) => {
       return res.status(400).json({ error: 'Not enough available slots for the tickets' });
     }
 
-    // const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
-    //   email: user.email,
-    //   OTPCode: OTPCode,
-    //   senderAccountId: userId,
-    //   recipientAccountId: webPaymentAccountId,
-    //   amount: cartItem.totalPrice,
-    //   itemId: item._id
-    // }, {httpsAgent: agent});
+    const response = await axios.post('https://localhost:5001/accounts/sendMoney', {
+      email: user.email,
+      OTPCode: OTPCode,
+      senderAccountId: userId,
+      recipientAccountId: webPaymentAccountId,
+      amount: cartItem.totalPrice,
+      itemId: item._id
+    }, {httpsAgent: agent});
 
-    // if (response.status === 400) {
-    //   return res.status(400).json({ error: 'Insufficient balance' });
-    // } else if (response.data.success) {
-    //   // tạo order -> gửi mail -> trừ remain slots
-    //   await createAnOrder(cartItem, user, item);
-    //   await mailController.sendConfirmationEmail(user, cartItem, tour);
-    //   tour.remainSlots -= item.tickets.length;
-    //   await tour.save();
-    //   return res.status(200).json({ success: true });
-    // } else {
-    //   return res.status(500).json({ error: 'Payment failed' });
-    // }
+    if (response.status === 400) {
+      return res.status(400).json({ error: 'Insufficient balance' });
+    } else if (response.data.success) {
+      // tạo order -> gửi mail -> trừ remain slots
+      await createAnOrder(cartItem, user, item);
+      await mailController.sendConfirmationEmail(user, cartItem, tour);
+      tour.remainSlots -= item.tickets.length;
+      await tour.save();
+      return res.status(200).json({ success: true });
+    } else {
+      return res.status(500).json({ error: 'Payment failed' });
+    }
   } catch (error) {
     console.error('Pay error:', error);
     res.status(500).json({ error: 'Internal server error' });

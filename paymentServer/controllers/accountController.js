@@ -43,7 +43,7 @@ const verify = async (req, res) => {
         return res.status(400).json({ message: 'Incorrect verification code (expired)' });
     }
       console.log(foundOTP);
-      await OTP.deleteOne({ email: email, code: OTPCode });
+    //   await OTP.deleteOne({ email: email, code: OTPCode });
       res.status(200).json({ otpinput: true });
 
     } catch (error) {
