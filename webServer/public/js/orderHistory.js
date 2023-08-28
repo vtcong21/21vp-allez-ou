@@ -45,7 +45,6 @@ function translateTypeToVietnamese(type) {
 const myModal = new bootstrap.Modal(document.getElementById('modal_1'));
 
 function openSuccessModal(i) {
-    console.log(ordersSuccess[i]);
     
     const modalElement = document.querySelector("#modal_1");
     modalElement.querySelector("#order-img-tour").src = ordersSuccess[i].tour.cardImgUrl;
@@ -56,13 +55,12 @@ function openSuccessModal(i) {
     modalElement.querySelector("#order-start-date").textContent = ordersSuccess[i].tour.date;
     modalElement.querySelector("#order-number-ticket").textContent = ordersSuccess[i].item.tickets.length;
     modalElement.querySelector("#order-representer__email").textContent = ordersSuccess[i].item.representer.email;
-    modalElement.querySelector("#order-representer__phone").textContent = ordersSuccess[i].item.representer.phone;
+    modalElement.querySelector("#order-representer__phone").textContent = ordersSuccess[i].item.representer.phoneNumber;
     modalElement.querySelector("#order-representer__address").textContent = ordersSuccess[i].item.representer.address;
-    document.getElementById('confirmDeleteButton').setAttribute('data-id', ordersSuccess[i].item._id);
+    document.getElementById('confirmDeleteButton').setAttribute('data-index', i);
 
     const ticketsContainer = document.getElementById("order-tickets__container");
     ticketsContainer.innerHTML = "";
-    console.log(ordersSuccess[i].item.tickets);
     for (let j = 0; j < ordersSuccess[i].item.tickets.length; j++) {
         let ticketRow = maketTicketRow(ordersSuccess[i].item.tickets[j], j + 1);
         ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
@@ -74,7 +72,6 @@ function openSuccessModal(i) {
 const myModal2 = new bootstrap.Modal(document.getElementById('modal_2'));
 
 function openCompletedModal(i) {
-    console.log(ordersCompleted[i]);
     
     const modalElement = document.querySelector("#modal_2");
     modalElement.querySelector("#order-img-tour2").src = ordersCompleted[i].tour.cardImgUrl;
@@ -85,12 +82,12 @@ function openCompletedModal(i) {
     modalElement.querySelector("#order-start-date2").textContent = ordersCompleted[i].tour.date;
     modalElement.querySelector("#order-number-ticket2").textContent = ordersCompleted[i].item.tickets.length;
     modalElement.querySelector("#order-representer__email2").textContent = ordersCompleted[i].item.representer.email;
-    modalElement.querySelector("#order-representer__phone2").textContent = ordersCompleted[i].item.representer.phone;
+    modalElement.querySelector("#order-representer__phone2").textContent = ordersCompleted[i].item.representer.phoneNumber;
     modalElement.querySelector("#order-representer__address2").textContent = ordersCompleted[i].item.representer.address;
 
     const ticketsContainer = document.getElementById("order-tickets__container2");
     ticketsContainer.innerHTML = "";
-    console.log(ordersCompleted[i].item.tickets);
+  
     for (let j = 0; j < ordersCompleted[i].item.tickets.length; j++) {
         let ticketRow = maketTicketRow(ordersCompleted[i].item.tickets[j], j + 1);
         ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
@@ -102,7 +99,6 @@ function openCompletedModal(i) {
 const myModal3 = new bootstrap.Modal(document.getElementById('modal_3'));
 
 function openCancelledModal(i) {
-    console.log(ordersCancelled[i]);
     
     const modalElement = document.querySelector("#modal_3");
     modalElement.querySelector("#order-img-tour3").src = ordersCancelled[i].tour.cardImgUrl;
@@ -113,12 +109,11 @@ function openCancelledModal(i) {
     modalElement.querySelector("#order-start-date3").textContent = ordersCancelled[i].tour.date;
     modalElement.querySelector("#order-number-ticket3").textContent = ordersCancelled[i].item.tickets.length;
     modalElement.querySelector("#order-representer__email3").textContent = ordersCancelled[i].item.representer.email;
-    modalElement.querySelector("#order-representer__phone3").textContent = ordersCancelled[i].item.representer.phone;
+    modalElement.querySelector("#order-representer__phone3").textContent = ordersCancelled[i].item.representer.phoneNumber;
     modalElement.querySelector("#order-representer__address3").textContent = ordersCancelled[i].item.representer.address;
 
     const ticketsContainer = document.getElementById("order-tickets__container3");
     ticketsContainer.innerHTML = "";
-    console.log(ordersCancelled[i].item.tickets);
     for (let j = 0; j < ordersCancelled[i].item.tickets.length; j++) {
         let ticketRow = maketTicketRow(ordersCancelled[i].item.tickets[j], j + 1);
         ticketsContainer.insertAdjacentHTML("beforeend", ticketRow);
@@ -148,24 +143,81 @@ function maketTicketRow(ticket, index) {
 }
 
 
-const myDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
 
-function openDeletedModal() {
-    myDeleteModal.show();
+const mModalPW = new bootstrap.Modal(document.getElementById('confirmDeleteModalbyPW'));
+
+function callModalConfirmPW() {
+    const index = document.getElementById('confirmDeleteButton').getAttribute('data-index');
+  
+    const mName = document.getElementById('nameTour');
+    const mDate = document.getElementById('dateTour');
+    const mTicket = document.getElementById('ticketsTourLength');
+    const mPrice = document.getElementById('priceTour');
+
+    mName.textContent = ordersSuccess[index].tour.name;
+    mDate.textContent = ordersSuccess[index].tour.date;
+    mTicket.textContent = ordersSuccess[index].item.tickets.length;
+    mPrice.textContent = ordersSuccess[index].item.totalPrice;
+
+    mModalPW.show();
 }
 
 async function CancelOrderFunc() {
     try {
-        const orderId = document.getElementById('confirmDeleteButton').getAttribute('data-id');
-        const response = await axios.put(`/cart/orderHistory/${orderId}`, {
-            data: { orderId: orderId }
+        Swal.showLoading();
+        const password = document.getElementById('input-pw').value // Lấy giá trị mật khẩu từ xacnhanmatkhauInput
+  
+        const response = await axios.post('/auth/checkPassword', {
+            password: password
         });
+        Swal.close();
+        if (response){
+            putCancelTour();
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        await Swal.fire({
+            icon: "error",
+            title: "Mật khẩu không đúng!",
+            customClass: {
+                popup: "swal2-popup",
+                confirmButton: "swal2-confirm-btn btn p-3",
+            },
+        });
+    }
+              
+}
 
-        if (response.status === 200) {
+async function putCancelTour() {
+    try {
+        Swal.showLoading();
+        const index = document.getElementById('confirmDeleteButton').getAttribute('data-index');
+        const orderId = ordersSuccess[index].item._id;
+ 
+        const response = await axios.put(`/cart/orderHistory/${orderId}`);
+        Swal.close();
+
+        if (response.status == 200) {
+            await Swal.fire({
+                icon: "success",
+                title: "Hủy chuyến du lịch thành công!",
+                customClass: {
+                    popup: "swal2-popup",
+                    confirmButton: "swal2-confirm-btn btn p-3",
+                },
+            });
             location.reload();
         }
     } catch (error) {
-        console.error(error);
+        console.error("Error:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Hủy chuyến du lịch thất bại!",
+            customClass: {
+                popup: "swal2-popup",
+                confirmButton: "swal2-confirm-btn btn p-3",
+            },
+        });
     }
 }
 

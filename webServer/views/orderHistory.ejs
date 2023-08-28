@@ -266,7 +266,7 @@
 
                             <!-- Download button -->
                             <div class="d-flex my-5">
-                            <a href="#" class="btn btn-primary-v3 m-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" > <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
+                            <a class="btn btn-primary-v3 m-auto" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"> <i class="bi bi-x-octagon"></i> Hủy chuyến </a>
                             </div>
                         </ul>
                     </div>
@@ -444,31 +444,36 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-secondary-v2 modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
-                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
-                        onclick="CancelOrderFunc()">Vẫn hủy</button>
+                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" data-index=""
+                       
+                        onclick="callModalConfirmPW()">Vẫn hủy</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="modal fade" id="confirmDeleteModalbyPW" tabindex="-1" aria-labelledby="confirmDeleteModalbyPWLabel"aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" style="margin-top: 23em; width: auto; border-radius: 14px;">
+            <div class="modal-dialog modal-dialog-centered" style="width: 41.5rem;">
+                <div class="modal-content" style="margin-top: 10em; border-radius: 14px;">
                     <div class="modal-header">
                         <h5 class="modal-title fs-v3" id="confirmDeleteModalLabel"><strong>Xác nhận hủy chuyến</strong></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body fs-v3">
-                        <div>Tour: <div id="nameTour"></div></div>
-                        <div>Ngày đi: <div id="dateTour"></div></div>
-                        <div>Số vé: <div id="numTicket"></div></d>
-                        <div>Tổng tiền: <div id="priceTour"></div></d>
-                        
+                    <div class="modal-body fs-v3 p-45">
+                        <div class="modal-f">Tour: <span class="modal-d" id="nameTour"></span></div>
+                        <div class="modal-f">Ngày đi: <span class="modal-d" id="dateTour"></span></div>
+                        <div class="modal-f">Số vé: <span class="modal-d" id="ticketsTourLength"></span></div>
+                        <div class="modal-f">Tổng tiền: <span class="modal-d" id="priceTour"></span></div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-5 col-5">Xác thực mật khẩu</div>
+                            <input type="password" class="col-md-6 col-6" style="border-radius: 10px;" id="input-pw">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-secondary-v2 modal-delete-btn" data-bs-dismiss="modal">Hoàn tác</button>
-                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-id=""
-                        onclick="CancelOrderFunc()">Vẫn hủy</button>
+                        <button type="button" class="btn btn-danger btn-danger-v2 modal-delete-btn" id="confirmDeleteButton"  data-bs-dismiss="modal" aria-label="Close" data-index=""
+                        onclick="CancelOrderFunc()">Xác nhận</button>
                     </div>
                 </div>
             </div>
