@@ -369,7 +369,7 @@ function validateAndSaveOrder() {
     const ngaysinhInput = document.getElementById('ngay-sinh');
 
     const soDienThoaiPattern = /^0\d{9}$/;
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailPattern = /@.*\./;
 
     if (!hoTenInput.value || !soDienThoaiInput.value || !diaChiInput.value || !emailInput.value || !genderInput.value ||
         !hoten1Input.value || !ngaysinhInput.value) {
