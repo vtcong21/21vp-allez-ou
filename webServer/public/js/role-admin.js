@@ -25,7 +25,6 @@ function getUserId(event) {
     adminId = event.currentTarget.getAttribute("data-id");
 }
 confirmDeleteButton.addEventListener("click", function () {
-    console.log(adminId);
     const token = getCookie("token");
     //     if (!token) return;
 
@@ -37,7 +36,6 @@ confirmDeleteButton.addEventListener("click", function () {
             },
         })
         .then((response) => {
-            console.log(response.data);
             const confirmDeleteModal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
             confirmDeleteModal.hide();
             loadUsers();
@@ -262,7 +260,6 @@ updateForm.addEventListener("submit", function (event) {
         newPwdMismatchMessage.classList.remove("d-none"); // Hiển thị thông báo lỗi
     }
     const userId = updateForm.getAttribute("data-id");
-    console.log(userId);
     putChangePwd(userId, currentPwd.value, newPwdInput.value);
 });
 

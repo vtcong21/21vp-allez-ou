@@ -74,14 +74,11 @@ async function addNewItem(code) {
   
     try {
       const response = await axios.post('../cart/addItem', { tourCode: tourCode });
-      console.log(response.status);
       if (response.status === 200) {
         // Hiển thị thông báo toast
-        console.log('thành công gửi post');
         showToast();
       } 
     } catch (error) {
-      console.log('thất bại gửi post');
       showToast2();
     }
   } else {
