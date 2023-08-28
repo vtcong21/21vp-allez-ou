@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const convertUserDataMiddleware = require('../middlewares/convertUserDataMiddleware');
 
 
-router.get('/preview',
+router.post('/preview',
     convertUserDataMiddleware.getUserData,
     authMiddleware.requireAdminRole,
     tourController.previewTour
