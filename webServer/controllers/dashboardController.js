@@ -98,7 +98,7 @@ const updateToursState = async () => {
 };
 
 // Lên lịch chạy công việc cập nhật doanh thu vào lúc 0:00 hàng ngày
-cron.schedule('0 1 * * *', () => {
+cron.schedule('0 0 * * *', () => {
     updateRevenue();
     updateToursState();
 });
