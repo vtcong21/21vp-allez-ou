@@ -92,7 +92,6 @@ function renderTourPage(page, hiddenTourDataList) {
         const food = tourData.food;
         const hotel = tourData.hotel;
         const schedules = tourData.schedules;
-        const isHidden = tourData.isHidden;
         const maxLength = 80;
         let truncatedName = tourName;
         if (tourName.length > maxLength) {
@@ -126,7 +125,7 @@ function renderTourPage(page, hiddenTourDataList) {
                 </button>
                 <ul class="dropdown-menu">
                 <li><a data-bs-toggle="modal" data-bs-target="#confirmdisplayModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Hiện Tour</a></li>
-                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
+                <li><a data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" class="dropdown-item" href="#" data-id="${tourCode}" data-remainslots="${remainSlots}" data-slots="${slots}" onclick="getTourId(event)"><img src="/img/admin/admins-role/trash-bin.png" />Ẩn Tour</a></li>
                 <li><a id="edit-tour-link" data-bs-toggle="modal" data-bs-target="#chinh-sua-tour-modal" class="dropdown-item" href="#" 
                 data-code="${tourCode}"
                 data-tour-id="${tourData._id}"
@@ -199,8 +198,13 @@ function renderTourPage(page, hiddenTourDataList) {
 }
 const confirmDeleteButton = document.getElementById("confirmDeleteButton");
 let tourId = null;
+let tourRemainSlots=null; 
+let tourSlots=null;
 function getTourId(event) {
     tourId = event.currentTarget.getAttribute("data-id");
+    tourRemainSlots = event.currentTarget.getAttribute("data-remainslots");
+    tourSlots = event.currentTarget.getAttribute("data-slots");
+
 } 
 const confirmdisplayButton = document.getElementById("confirmdisplayButton"); 
 confirmdisplayButton.addEventListener("click",function() { 
@@ -221,18 +225,24 @@ confirmdisplayButton.addEventListener("click",function() {
 // Xóa chuyến đi
 confirmDeleteButton.addEventListener("click", function () {
   console.log(tourId);
-  axios
-      .put(`/tours/hideTour/${tourId}`, {}) // Sửa thành phương thức "put" và endpoint "/hideTour"
-      .then((response) => {
-          console.log(response.data);
-          fetchTourInformation();
-          fetchHiddenToursInformation();
-          alert('Ẩn tour thành công, load lại trang để gọi lại api'); 
-          location.reload();
-      })
-      .catch((error) => {
-          console.error("Error:", error);
-      });
+  console.log(tourSlots); 
+  console.log(tourRemainSlots);
+  if (tourSlots - tourRemainSlots == 0) {
+    axios
+        .put(`/tours/hideTour/${tourId}`, {})
+        .then((response) => {
+            console.log(response.data);
+            fetchTourInformation();
+            fetchHiddenToursInformation();
+            alert('Ẩn tour thành công, load lại trang để gọi lại API');
+            location.reload();
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+} else {
+    alert('Đã có slot(s) đặt nên không thể ẩn tour');
+}
 });
 let isHidden = false; // Khai báo biến isHidden mặc định là false
 function renderPagination(hiddenTourDataList) {
