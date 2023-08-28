@@ -268,3 +268,27 @@ hr:not([size]){
     padding-top: 0; 
     padding-bottom: 0;
 }
+
+.swal2-popup {
+    width: 400px;
+    font-size: 1.4rem;
+}
+
+.swal2-confirm-btn{
+    background-color: #4b60ce!important;
+}
+
+.swal2-btn__container{
+    width: 220px;
+    justify-content: space-between;
+}
+.swal2-cancelled-btn{
+    background-color: white;
+    border-color: #6C6B7B !important;
+}
+@media only screen and (max-width: 576px){
+    .swal2-popup {
+        width: 95%;
+        font-size: 1.8rem;
+    }
+}

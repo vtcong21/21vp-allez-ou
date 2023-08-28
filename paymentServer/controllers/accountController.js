@@ -28,6 +28,30 @@ const sendOTP = async (req, res) => {
     }
 }
 
+const verify = async (req, res) => {
+    try {
+      const { email, OTPCode } = req.body;
+      const foundOTP = await OTP.findOne({ email: email, code: OTPCode });
+      console.log(email);
+      console.log(OTPCode);
+      if (!foundOTP) {
+        return res.status(400).json({ message: 'Invalid verification code' });
+      }
+
+    if (foundOTP.expiration < new Date()) {
+        //await User.deleteOne({ email });
+        return res.status(400).json({ message: 'Incorrect verification code (expired)' });
+    }
+      console.log(foundOTP);
+    //   await OTP.deleteOne({ email: email, code: OTPCode });
+      res.status(200).json({ otpinput: true });
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 const sendMoney = async (req, res) => {
     try {
         const { senderAccountId, recipientAccountId, amount, itemId } = req.body;
@@ -129,6 +153,28 @@ const createAccount = async (req, res) => {
     }
 };
 
+const sendBalance = async (req, res)=>{
+    try{
+        const { email, userId } = req.body;
+        const account = await PaymentAccount.findById(userId);
+        if (!account) {
+            return res.status(404).json({ error: 'Payment account not found' });
+        }
+        await mailController.sendBalanceEmail(email, account.balance);
+        res.status(200).json({ success: true });
+    }catch(error){
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 
-module.exports = { sendMoney, getPaymentHistory, getTodayPaymentHistory, createAccount, sendOTP };
+
+module.exports = { 
+    sendMoney, 
+    sendBalance,
+    getPaymentHistory, 
+    getTodayPaymentHistory, 
+    createAccount, 
+    sendOTP,
+    verify,
+};

@@ -25,9 +25,15 @@ router.get('/getOrderPage/:itemId'
 , convertUserDataMiddleware.getUserData
 , userController.getOrderPage
 );
-// lưu thông tin sau khi đăng ký tour
-// router.put('/saveOrder/:itemId'
-// , authMiddleware.authenticateToken
-// , userController.updateItemInfo
-// );
+// OTP
+router.post('/sendOTPpayment'
+, authMiddleware.authenticateToken
+, userController.sendOTPpayment
+);
+router.post('/checkVerifyOTP'
+, authMiddleware.authenticateToken
+, userController.checkVerifyOTP
+);
+router.get('/getBalanceEmail'
+, userController.getBalanceEmail);
 module.exports = router;

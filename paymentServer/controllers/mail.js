@@ -14,14 +14,14 @@ const sendOTPEmail = async (email, OTPCode) => {
         const mailOptions = {
             from: process.env.EMAIL_USERNAME,
             to: email,
-            subject: 'Allez Où gửi mã OTP xác nhận thanh toán',
+            subject: 'Ngân hàng VCNLU gửi mã OTP xác nhận thanh toán',
             html: `
               <p>Xin chào!</p>
               <p>Dưới đây là mã xác thực của bạn:</p>
               <h2>${OTPCode}</h2>
               <p>Hãy nhập mã này trong ứng dụng để hoàn tất quá trình xác thực.</p>
               <p>Trân trọng,</p>
-              <p>Đội ngũ quản lý du lịch.</p>
+              <p>Đội ngũ nhân viên VCNLU</p>
           `
         };
         await transporter.sendMail(mailOptions);
@@ -31,4 +31,27 @@ const sendOTPEmail = async (email, OTPCode) => {
     }
 };
 
-module.exports =  {sendOTPEmail} ;
+
+const sendBalanceEmail = async (email, balance) => {
+    try {
+        const mailOptions = {
+            from: process.env.EMAIL_USERNAME,
+            to: email,
+            subject: 'Thông báo số dư tài khoản',
+            html: `
+                <p>Xin chào!</p>
+                <p>Số dư hiện tại trong tài khoản của bạn là:</p>
+                <h2>${balance} VND</h2>
+                <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
+                <p>Trân trọng,</p>
+                <p>Đội ngũ nhân viên VCNLU</p>
+            `
+        };
+        await transporter.sendMail(mailOptions);
+        console.log('Balance email sent');
+    } catch (error) {
+        console.error('Error sending balance email:', error);
+    }
+};
+
+module.exports =  {sendOTPEmail, sendBalanceEmail} ;

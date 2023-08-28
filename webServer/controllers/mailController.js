@@ -71,7 +71,7 @@ const sendCancellationEmail = async (user, item, tour, refundAmount) => {
                 <ul>
                     <li>Tour: ${tour.name}</li>
                     <li>Mã tour: ${tour.tourCode}</li>
-                    <li>Ngày: ${tour.date.getDate()}/${tour.date.getMonth()}/${tour.date.getFullYear()}</li>
+                    <li>Ngày: ${tour.date.getDate()}/${tour.date.getMonth()}/${tour.date.getFullYear() + 1900}</li>
                     <li>Số lượng vé: ${item.tickets.length}</li>
                     <li>Số tiền hoàn lại: ${refundAmount}</li>
                     <li>Số tài khoản: ${user._id}</li>
