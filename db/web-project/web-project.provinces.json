@@ -1,0 +1,441 @@
+[{
+  "_id": {
+    "$oid": "64c8b38b29198328656c2392"
+  },
+  "code": "01",
+  "name": "An Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2dd"
+  },
+  "code": "02",
+  "name": "Bà Rịa – Vũng Tàu"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2de"
+  },
+  "code": "03",
+  "name": "Bạc Liêu"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2df"
+  },
+  "code": "04",
+  "name": "Bắc Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e0"
+  },
+  "code": "05",
+  "name": "Bắc Kạn"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e1"
+  },
+  "code": "06",
+  "name": "Bắc Ninh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e2"
+  },
+  "code": "07",
+  "name": "Bến Tre"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e3"
+  },
+  "code": "08",
+  "name": "Bình Dương"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e4"
+  },
+  "code": "09",
+  "name": "Bình Định"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e5"
+  },
+  "code": "10",
+  "name": "Bình Phước"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e6"
+  },
+  "code": "11",
+  "name": "Bình Thuận"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e7"
+  },
+  "code": "12",
+  "name": "Cà Mau"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e8"
+  },
+  "code": "13",
+  "name": "Cao Bằng"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2e9"
+  },
+  "code": "14",
+  "name": "Cần Thơ"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ea"
+  },
+  "code": "15",
+  "name": "Đà Nẵng"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2eb"
+  },
+  "code": "16",
+  "name": "Đắk Lắk"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ec"
+  },
+  "code": "17",
+  "name": "Đắk Nông"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ed"
+  },
+  "code": "18",
+  "name": "Điện Biên"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ee"
+  },
+  "code": "19",
+  "name": "Đồng Nai"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ef"
+  },
+  "code": "20",
+  "name": "Đồng Tháp"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f0"
+  },
+  "code": "21",
+  "name": "Gia Lai"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f1"
+  },
+  "code": "22",
+  "name": "Hà Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f2"
+  },
+  "code": "23",
+  "name": "Hà Nam"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f3"
+  },
+  "code": "24",
+  "name": "Hà Nội"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f4"
+  },
+  "code": "25",
+  "name": "Hà Tĩnh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f5"
+  },
+  "code": "26",
+  "name": "Hải Dương"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f6"
+  },
+  "code": "27",
+  "name": "Hải Phòng"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f7"
+  },
+  "code": "28",
+  "name": "Hậu Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f8"
+  },
+  "code": "29",
+  "name": "Hòa Bình"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2f9"
+  },
+  "code": "30",
+  "name": "TP Hồ Chí Minh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2fa"
+  },
+  "code": "31",
+  "name": "Hưng Yên"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2fb"
+  },
+  "code": "32",
+  "name": "Khánh Hòa"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2fc"
+  },
+  "code": "33",
+  "name": "Kiên Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2fd"
+  },
+  "code": "34",
+  "name": "Kon Tum"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2fe"
+  },
+  "code": "35",
+  "name": "Lai Châu"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf2ff"
+  },
+  "code": "36",
+  "name": "Lạng Sơn"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf300"
+  },
+  "code": "37",
+  "name": "Lào Cai"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf301"
+  },
+  "code": "38",
+  "name": "Lâm Đồng"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf302"
+  },
+  "code": "39",
+  "name": "Long An"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf303"
+  },
+  "code": "40",
+  "name": "Nam Định"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf304"
+  },
+  "code": "41",
+  "name": "Nghệ An"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf305"
+  },
+  "code": "42",
+  "name": "Ninh Bình"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf306"
+  },
+  "code": "43",
+  "name": "Ninh Thuận"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf307"
+  },
+  "code": "44",
+  "name": "Phú Thọ"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf308"
+  },
+  "code": "45",
+  "name": "Phú Yên"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf309"
+  },
+  "code": "46",
+  "name": "Quảng Bình"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30a"
+  },
+  "code": "47",
+  "name": "Quảng Nam"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30b"
+  },
+  "code": "48",
+  "name": "Quảng Ngãi"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30c"
+  },
+  "code": "49",
+  "name": "Quảng Ninh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30d"
+  },
+  "code": "50",
+  "name": "Quảng Trị"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30e"
+  },
+  "code": "51",
+  "name": "Sóc Trăng"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf30f"
+  },
+  "code": "52",
+  "name": "Sơn La"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf310"
+  },
+  "code": "53",
+  "name": "Tây Ninh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf311"
+  },
+  "code": "54",
+  "name": "Thái Bình"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf312"
+  },
+  "code": "55",
+  "name": "Thái Nguyên"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf313"
+  },
+  "code": "56",
+  "name": "Thanh Hóa"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf314"
+  },
+  "code": "57",
+  "name": "Thừa Thiên Huế"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf315"
+  },
+  "code": "58",
+  "name": "Tiền Giang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf316"
+  },
+  "code": "59",
+  "name": "Trà Vinh"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf317"
+  },
+  "code": "60",
+  "name": "Tuyên Quang"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf318"
+  },
+  "code": "61",
+  "name": "Vĩnh Long"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf319"
+  },
+  "code": "62",
+  "name": "Vĩnh Phúc"
+},
+{
+  "_id": {
+    "$oid": "64c8b3e429198328656cf31a"
+  },
+  "code": "63",
+  "name": "Yên Bái"
+}]

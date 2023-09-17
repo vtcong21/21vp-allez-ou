@@ -1,0 +1,814 @@
+[{
+  "_id": {
+    "$oid": "64b79fc6896f214f7aae7ddc"
+  },
+  "fullName": "Admin",
+  "email": "admin111@gmail.com",
+  "password": "$2b$10$S9snQ5aj.UO/kRJGAdp2X.pc6WuiJdMpfUE9Dd70DFS/4qT.b81Ri",
+  "gender": "Undefined",
+  "dateOfBirth": {
+    "$date": "1990-01-01T00:00:00.000Z"
+  },
+  "phoneNumber": "123456789",
+  "isAdmin": true,
+  "isVerified": true,
+  "cart": [
+    {
+      "$oid": "64d746c97b12964b1b443e2c"
+    },
+    {
+      "$oid": "64d746d27b12964b1b443e3c"
+    },
+    {
+      "$oid": "64d746dd7b12964b1b443e4c"
+    },
+    {
+      "$oid": "64d746df7b12964b1b443e5c"
+    },
+    {
+      "$oid": "64d746ec7b12964b1b443e6c"
+    },
+    {
+      "$oid": "64d746fa7b12964b1b443e7c"
+    },
+    {
+      "$oid": "64d747027b12964b1b443e8c"
+    },
+    {
+      "$oid": "64d747097b12964b1b443e9c"
+    },
+    {
+      "$oid": "64d747167b12964b1b443eac"
+    },
+    {
+      "$oid": "64d7471b7b12964b1b443ebc"
+    },
+    {
+      "$oid": "64db9d4ea40565da2b69f942"
+    },
+    {
+      "$oid": "64dbaa77a40565da2b69f9e5"
+    },
+    {
+      "$oid": "64dfa1e63934c1639a261993"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64cb5acf911e418d6494ba09"
+  },
+  "fullName": "Admin2",
+  "email": "admin222@gmail.com",
+  "password": "$2b$10$S9snQ5aj.UO/kRJGAdp2X.pc6WuiJdMpfUE9Dd70DFS/4qT.b81Ri",
+  "gender": "Undefined",
+  "dateOfBirth": {
+    "$date": "1990-01-01T00:00:00.000Z"
+  },
+  "phoneNumber": "123456789",
+  "isAdmin": true,
+  "isVerified": true,
+  "cart": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64cb5ae3911e418d6494ba0a"
+  },
+  "fullName": "Admin3",
+  "email": "admin333@gmail.com",
+  "password": "$2b$10$S9snQ5aj.UO/kRJGAdp2X.pc6WuiJdMpfUE9Dd70DFS/4qT.b81Ri",
+  "gender": "Undefined",
+  "dateOfBirth": {
+    "$date": "1990-01-01T00:00:00.000Z"
+  },
+  "phoneNumber": "123456789",
+  "isAdmin": true,
+  "isVerified": true,
+  "cart": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64ccd5e662bc19ddfdfb6c1d"
+  },
+  "fullName": "Admin4",
+  "email": "Admin4@gmail.com",
+  "password": "$2b$10$X.6W.EbO9x.CQeHptC5VC.YF7BSAUdKA/IlzLTxC4YOk8d8A3/mzK",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-04T10:41:42.814Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64ccd64157ee35535fa2da11"
+  },
+  "fullName": "Admin5",
+  "email": "Admin5@gmail.com",
+  "password": "$2b$10$IT6eP/5rxRpgDiomwTMVOe6MAopLmLh3ReGBZpowxbCTgfEmLwQZy",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-04T10:43:13.456Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64ccd65657ee35535fa2da16"
+  },
+  "fullName": "Admin6",
+  "email": "Admin6@gmail.com",
+  "password": "$2b$10$keYgAsk.rLN7tCvkGvYS7OYS/iPmHPZ8/pE9aPpxd4lBOKAAgd6UO",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-04T10:43:34.034Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64cce00a30311183233191ae"
+  },
+  "fullName": "Admin7",
+  "email": "Admin7@gmail.com",
+  "password": "$2b$10$SgCyxHHruhd8jk5lC2wCa./.sl1Rc9bIsLDZGsimmUam.cXy.RHh2",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-04T11:24:58.236Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64cce04cb4233961d54268d2"
+  },
+  "fullName": "Admin8",
+  "email": "Admin8@gmail.com",
+  "password": "$2b$10$6DoB90NHAeb/GJugHmTdVOOcO3zMzHuivpGrCXg4O3VGqSH26ZRRC",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-04T11:26:04.459Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d508afccd02d68cbfab78e"
+  },
+  "fullName": "Thuy Ngan",
+  "email": "nguyentran2012002@gmail.com",
+  "password": "$2b$10$u3StkChx9xt8/8KYVA8qAOYi1.Ge4W7q2ACPQcuFiUIjYZuJxALd.",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2002-01-20T00:00:00.000Z"
+  },
+  "phoneNumber": "0901365725",
+  "cart": [
+    {
+      "$oid": "64ecbf87bf28fd340dc93624"
+    }
+  ],
+  "orders": [
+    {
+      "$oid": "64df1ce0a76f214fbcc1ace1"
+    },
+    {
+      "$oid": "64e839987ae9067b06693633"
+    },
+    {
+      "$oid": "64e83bc93c8a40e29d797440"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-10T15:56:31.007Z"
+  },
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "64d508f66ff46efeab8cc034"
+  },
+  "fullName": "Thuy Ngan",
+  "email": "bemeodangyeu2012002@gmail.com",
+  "password": "$2b$10$xKd.BGyjwO9F25kIT4AFyOzVN.noMnV4XDWfvNr3fk4P7VqL.Y4aS",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2002-01-20T00:00:00.000Z"
+  },
+  "phoneNumber": "0901365725",
+  "cart": [
+    {
+      "$oid": "64e773826efa4f4254bc2c48"
+    }
+  ],
+  "orders": [
+    {
+      "$oid": "64e746035ac38cac263f2d83"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-10T15:57:42.288Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "64d616b0ae72dd51ccfb6685"
+  },
+  "fullName": "123",
+  "email": "phivu3215@gmail.com",
+  "password": "$2b$10$6H5STtxwqNIrFkWMX.cuje8auZuOBtK6vNw3SX1yti7kt2t7AMH/.",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-23T00:00:00.000Z"
+  },
+  "phoneNumber": "0918463125",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "768497",
+  "dateCreate": {
+    "$date": "2023-08-11T11:08:32.924Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d775765be41eb4ee9b6bc1"
+  },
+  "fullName": "Vu Vo",
+  "email": "123@gmail.com",
+  "password": "$2b$10$8Cw6tOsoUpR22WK79cpVUulnSeQ7nwQ9Yw/W0j120t9lDIpeIiUfe",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-12T12:05:10.722Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d96c11cbd34b4b1cac1ceb"
+  },
+  "fullName": "cầu lông",
+  "email": "121@gmail.com",
+  "password": "$2b$10$xqOCOehPCZS6RYOytjbkNuISE3XXcgI0HywsjoJNfp6yFgGJm0QKG",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-15T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "635381",
+  "dateCreate": {
+    "$date": "2023-08-13T23:49:37.291Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d96c5c38ffff3b05b22b1b"
+  },
+  "fullName": "cầu lông",
+  "email": "2121@gmail.com",
+  "password": "$2b$10$yky3PfsgwlylolL3RZnHCuyF11JHouh8VNJ1JSeM7uMdbY3.KaRaS",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-10T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "200550",
+  "dateCreate": {
+    "$date": "2023-08-13T23:50:52.945Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d96f121fc5014125f3233e"
+  },
+  "fullName": "cầu lông",
+  "email": "aswqas@gmai.com",
+  "password": "$2b$10$CranC9Vn3F7sA6cO/jD8V.7bQqjVsZLiuuHX6wiMrT2IHoEjnR7dO",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-09T00:00:00.000Z"
+  },
+  "phoneNumber": "0918463125",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "921231",
+  "dateCreate": {
+    "$date": "2023-08-14T00:02:26.253Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d97946a2daeb93ba396eca"
+  },
+  "fullName": "212112",
+  "email": "1222221@gmail.com",
+  "password": "$2b$10$ltirfAAuCbEnhdMEo7pp9uHE8fBAzScTvCG0p4MClxIkTpo8/9b5e",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-25T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "966946",
+  "dateCreate": {
+    "$date": "2023-08-14T00:45:58.633Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d989f05426fffee6beb31f"
+  },
+  "fullName": "cầu lông",
+  "email": "323223@gmail.com",
+  "password": "$2b$10$t77NR0pHifMCUgQpglHfKu69KX6l8Vw6on.Iqvztl13TOT5LBoUiC",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-18T00:00:00.000Z"
+  },
+  "phoneNumber": "0918463125",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "635665",
+  "dateCreate": {
+    "$date": "2023-08-14T01:57:04.712Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d98b40340a28b7fd9b8405"
+  },
+  "fullName": "cầu lông",
+  "email": "sa21@gmail.com",
+  "password": "$2b$10$Xymi21W7UKTGuCo76Co7Q.d2YTNgYGYehYxR1gBnqnI7e/ll850c.",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-24T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "198573",
+  "dateCreate": {
+    "$date": "2023-08-14T02:02:40.413Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d98f14c2a268459d27364b"
+  },
+  "fullName": "cầu lông",
+  "email": "asas@gmai.com",
+  "password": "$2b$10$AFj.BIKBKUfLTg87d2Uwr.vVIs.2natFDjdMf1v0x87wg11TpeTR.",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-18T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "804297",
+  "dateCreate": {
+    "$date": "2023-08-14T02:19:00.615Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64d9ebd872a8c43d4235baac"
+  },
+  "fullName": "cầu lông",
+  "email": "xzxz@gmail.com",
+  "password": "$2b$10$4YhM0LaKyK126vT2X0MknuqcDW1QjPDiSNKBakm/E1iasfqUWOgsW",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2023-08-09T00:00:00.000Z"
+  },
+  "phoneNumber": "0913907266",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "865926",
+  "dateCreate": {
+    "$date": "2023-08-14T08:54:48.883Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64da20c7219dfdeddb394eb8"
+  },
+  "fullName": "Bảo Nguển",
+  "email": "tbnguyen21@vp.fitus.edu.vn",
+  "password": "$2b$10$TIQTwoHL24V/7rX5bbdBF.ZxxLyPx5k6jUdj3bFm/Bs6hUPmso.M2",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2002-01-20T00:00:00.000Z"
+  },
+  "phoneNumber": "0901365725",
+  "cart": [
+    {
+      "$oid": "64da61d22f4e18a42f5ad5b6"
+    },
+    {
+      "$oid": "64dbac7ca40565da2b69fa8f"
+    },
+    {
+      "$oid": "64dbad74a40565da2b69faf4"
+    },
+    {
+      "$oid": "64ddbc9ae8acb936dff1eba0"
+    },
+    {
+      "$oid": "64de2bbed73d4de5afabc971"
+    },
+    {
+      "$oid": "64df187282cf2344a47c3d93"
+    },
+    {
+      "$oid": "64e76f60e212c9d40c452477"
+    },
+    {
+      "$oid": "64e782c2a1569d7c63b16c6d"
+    }
+  ],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-14T12:40:39.638Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64dab93a4964fccd2b45bfb9"
+  },
+  "fullName": "Xuan Uyen Vu",
+  "email": "vnxuyen21@vp.fitus.edu.vn",
+  "password": "$2b$10$K90Iz5PWOQDmC8qogShYIuXAmJgD9f5Bs9TXeF82gLfvKimCIGTAa",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2023-08-14T00:00:00.000Z"
+  },
+  "phoneNumber": "0938837226",
+  "cart": [
+    {
+      "$oid": "64daba8d4964fccd2b45c002"
+    },
+    {
+      "$oid": "64e757569a78367d34d9b0e0"
+    },
+    {
+      "$oid": "64e757629a78367d34d9b114"
+    },
+    {
+      "$oid": "64e7825c1961cc44ceed1800"
+    },
+    {
+      "$oid": "64e81644fce86aaf0883c1f5"
+    },
+    {
+      "$oid": "64e81747fce86aaf0883c264"
+    }
+  ],
+  "orders": [
+    {
+      "$oid": "64d7637e747aac290be8e2e7"
+    },
+    {
+      "$oid": "64d76737747aac290be8e2e9"
+    },
+    {
+      "$oid": "64d76950747aac290be8e2ed"
+    },
+    {
+      "$oid": "64d7b4586825a1112cc7e611"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-14T23:31:06.357Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "64de645a3c7796f6df2d60c6"
+  },
+  "fullName": "Cong Vu",
+  "email": "vtcong21@vp.fitus.edu.vn",
+  "password": "$2b$10$D2XNDBhxiOZSxYX1Qjy/JeOMy6PBctlIy8VvN6uRPSToD6CLw4CuW",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2000-09-01T00:00:00.000Z"
+  },
+  "phoneNumber": "0355555555",
+  "cart": [
+    {
+      "$oid": "64ec93e08fd15621deca4057"
+    }
+  ],
+  "orders": [
+    {
+      "$oid": "64de64a63c7796f6df2d60e8"
+    },
+    {
+      "$oid": "64ec96f6d7b79306ffcc66ac"
+    },
+    {
+      "$oid": "64ed448eeaf1cf3028b53820"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-17T18:18:02.968Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "64df3abd90cc74f9d945636b"
+  },
+  "fullName": "Vũ Huyền Thiên Lý",
+  "email": "cupne@gmail.com",
+  "password": "$2b$10$QjXKXDllruQu9KKyDcMalOBfNmWOi4kkO1dHopsGAx.jzwP4AgCLq",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2002-07-15T00:00:00.000Z"
+  },
+  "phoneNumber": "1234567890",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "625974",
+  "dateCreate": {
+    "$date": "2023-08-18T09:32:45.971Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64df3ae490cc74f9d945636e"
+  },
+  "fullName": "Vũ Huyền Thiên Lý",
+  "email": "motngaykomua@gmail.com",
+  "password": "$2b$10$FHXkncGClephHip17DooTOfW6U.vRYton8s6.D47BYg9.3U9Md7Fi",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2002-07-15T00:00:00.000Z"
+  },
+  "phoneNumber": "1234567890",
+  "cart": [],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-18T09:33:24.775Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64df3c0e90cc74f9d9456383"
+  },
+  "fullName": "Vũ Huyền Thiên Lý",
+  "email": "299@gmail.com",
+  "password": "$2b$10$MC8nasn39hV7F9BJrV4n1.gNyi1G9Ipz.y2CAt2R6iWauRTHaq0tK",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "2002-07-15T00:00:00.000Z"
+  },
+  "phoneNumber": "1234567890",
+  "cart": [
+    {
+      "$oid": "64df46ef90cc74f9d945699b"
+    },
+    {
+      "$oid": "64df470f90cc74f9d94569c0"
+    },
+    {
+      "$oid": "64df473390cc74f9d94569d9"
+    },
+    {
+      "$oid": "64df476890cc74f9d9456a6a"
+    },
+    {
+      "$oid": "64df4975023f69480acc2281"
+    }
+  ],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": false,
+  "verificationCode": "148894",
+  "dateCreate": {
+    "$date": "2023-08-18T09:38:22.589Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e79567c7059c0456e47b6e"
+  },
+  "fullName": "Uyen Xuan Vu",
+  "email": "oshimakiyoko2002@gmail.com",
+  "password": "$2b$10$zOvWSe1UVuddlH6K3HY63uYDawi4unjfFSp1UEIZS07QfOAsNfG4W",
+  "gender": "Female",
+  "dateOfBirth": {
+    "$date": "1994-07-25T00:00:00.000Z"
+  },
+  "phoneNumber": "0938837226",
+  "cart": [
+    {
+      "$oid": "64e814c3fce86aaf0883c185"
+    },
+    {
+      "$oid": "64ecd39501b7456e2b37fd8c"
+    },
+    {
+      "$oid": "64ecead21bfefc85ef8803ab"
+    }
+  ],
+  "orders": [
+    {
+      "$oid": "64e7958fc7059c0456e47ba9"
+    },
+    {
+      "$oid": "64e79996954bc3a497d07963"
+    },
+    {
+      "$oid": "64e79a5cbf93a5c04fcff3e0"
+    },
+    {
+      "$oid": "64e81369b958dbeacd0b695c"
+    },
+    {
+      "$oid": "64e8115b6a6acb3c08db4f1b"
+    },
+    {
+      "$oid": "64e811d76a6acb3c08db4f63"
+    },
+    {
+      "$oid": "64ecdc480fdb01ad4f8bda00"
+    },
+    {
+      "$oid": "64ecdddc3a60d819a3a28715"
+    },
+    {
+      "$oid": "64ecd717d9781b2d7f73f736"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-24T17:37:43.095Z"
+  },
+  "__v": 11
+},
+{
+  "_id": {
+    "$oid": "64e8dc40fd9433c8080c9391"
+  },
+  "fullName": "Nhan cach 2",
+  "email": "06vucong97@gmail.com",
+  "password": "$2b$10$n5SzNXO0b2xmx5POovaFfuj..I/2.pF6bcv5echNXqsHK7y5TppCa",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2000-09-09T00:00:00.000Z"
+  },
+  "phoneNumber": "0355555555",
+  "cart": [
+    {
+      "$oid": "64e8f5d826045a900d789c17"
+    }
+  ],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-25T16:52:16.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64e9adc7e96dc0328663093c"
+  },
+  "fullName": "GPT",
+  "email": "vd21@gmail.com",
+  "password": "$2b$10$2p814kWJz7JvaHD30cpeAOLmfhhiqhaqQHa4pbT5sJ89Jah7U9tkC",
+  "cart": [],
+  "orders": [],
+  "isAdmin": true,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-26T07:46:15.336Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64eb06e84a55e352d33c660a"
+  },
+  "fullName": "Vũ",
+  "email": "vdpvu21@vp.fitus.edu.vn",
+  "password": "$2b$10$KL.laoIpK8uvnEKRPGoi2ONWucS3CFFv9AG2OKdBRZlJrMeYnF98.",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2023-08-24T00:00:00.000Z"
+  },
+  "phoneNumber": "0918463125",
+  "cart": [
+    {
+      "$oid": "64eb07094a55e352d33c6767"
+    }
+  ],
+  "orders": [],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-27T08:18:48.290Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64ecb2ca820c74b7bf5b21e3"
+  },
+  "fullName": "vnclu",
+  "email": "lisettevu2002@gmail.com",
+  "password": "$2b$10$S/645FPPsd2r9BQPGen/ieeMDbMqR.SKm9OqYEjtwWhzLrt2ClkD2",
+  "gender": "Male",
+  "dateOfBirth": {
+    "$date": "2000-09-09T00:00:00.000Z"
+  },
+  "phoneNumber": "0123456789",
+  "cart": [],
+  "orders": [
+    {
+      "$oid": "64ecb2f8820c74b7bf5b2349"
+    }
+  ],
+  "isAdmin": false,
+  "isVerified": true,
+  "dateCreate": {
+    "$date": "2023-08-28T14:44:26.185Z"
+  },
+  "__v": 1
+}]
