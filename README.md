@@ -8,7 +8,7 @@ This project is about a tour management web system.
 Inside there are two servers: a server for the web and a mini server for the payment system. 
 	
 ## Technologies
-Project is written in JavaScript with: Nodejs, MongoDB, Express.js, and EJS.
+Project is written in JavaScript with: Nodejs, MongoDB, Express.js, EJS and Bootstrap 5.
 
 ## Setup
 To run this project, you will need to add the .config file to the `server` and `payment-server` folder, here's the file:
