@@ -2,7 +2,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
-*[API Documentation](#api-documentation) 
+* [API Documentation](#api-documentation) 
 
 ## General info
 This project is about a tour management web system.
